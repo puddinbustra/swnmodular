@@ -188,6 +188,7 @@
       &:last-child {
         border-bottom: none;
         margin-bottom: -3px;
+        align-items: flex-end;
       }
 
       input.ability-score {
@@ -196,11 +197,13 @@
         margin: 0 auto;
         line-height: 32px;
         font-size: 24px;
+        align-items: flex-end;
       }
 
       .ability-modifiers {
         height: 24px;
         margin: -8px 0 0;
+        align-items: flex-end;
 
         span.ability-mod,
         span.ability-save {
@@ -209,19 +212,21 @@
           line-height: 22px;
           font-size: 16px;
           border-top: @borderGroove;
+          align-items: flex-end;
         }
 
         span.ability-mod {
-          border-right: @borderGroove;
+          border-left: @borderGroove;
+          align-items: flex-end;
         }
 
         .ability-proficiency {
           line-height: 30px;
         }
 
-        span.ability-save {
-          border-left: @borderGroove;
-        }
+        //span.ability-save {
+        //  border-left: @borderGroove;
+        //}
       }
     }
   }
