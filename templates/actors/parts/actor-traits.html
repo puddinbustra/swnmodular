@@ -1,0 +1,131 @@
+<div class="traits">
+
+<!--Ideally, this would still work for npcs, so I should see if I can add that-->
+<!--    <div class="form-group">-->
+<!--        <label>{{localize "SWNMODULAR.Size"}}</label>-->
+<!--        <select class="actor-size" name="data.traits.size">-->
+<!--            {{#select data.traits.size}}-->
+<!--            {{#each config.actorSizes as |label size|}}-->
+<!--                <option value="{{size}}">{{label}}</option>-->
+<!--            {{/each}}-->
+<!--            {{/select}}-->
+<!--        </select>-->
+<!--    </div>-->
+
+    {{#unless isVehicle}}
+    <div class="form-group">
+        <label>{{localize "SWNMODULAR.Senses"}}</label>
+        <a class="config-button" data-action="senses" title="{{localize 'SWNMODULAR.SensesConfig'}}"><i class="fas fa-cog"></i></a>
+        <ul class="traits-list">
+        {{#each senses as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+    <div class="form-group {{data.traits.languages.cssClass}}">
+        <label>{{localize "SWNMODULAR.Languages"}}</label>
+        <a class="trait-selector" data-options="languages" data-target="data.traits.languages">
+            <i class="fas fa-edit"></i>
+        </a>
+        <ul class="traits-list">
+        {{#each data.traits.languages.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+    </div>
+    {{/unless}}
+
+    <div class="form-group {{data.traits.di.cssClass}}">
+        <label>{{localize "SWNMODULAR.DamImm"}}</label>
+        <a class="trait-selector" data-options="damageResistanceTypes" data-target="data.traits.di">
+            <i class="fas fa-edit"></i>
+        </a>
+        <ul class="traits-list">
+        {{#each data.traits.di.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+    <div class="form-group {{data.traits.dr.cssClass}}">
+        <label>{{localize "SWNMODULAR.DamRes"}}</label>
+        <a class="trait-selector" data-options="damageResistanceTypes" data-target="data.traits.dr">
+            <i class="fas fa-edit"></i>
+        </a>
+        <ul class="traits-list">
+        {{#each data.traits.dr.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+    <div class="form-group {{data.traits.dv.cssClass}}">
+        <label>{{localize "SWNMODULAR.DamVuln"}}</label>
+        <a class="trait-selector" data-options="damageResistanceTypes" data-target="data.traits.dv">
+            <i class="fas fa-edit"></i>
+        </a>
+        <ul class="traits-list">
+        {{#each data.traits.dv.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+    <div class="form-group {{data.traits.ci.cssClass}}">
+        <label>{{localize "SWNMODULAR.ConImm"}}</label>
+        <a class="trait-selector" data-options="conditionTypes" data-target="data.traits.ci">
+            <i class="fas fa-edit"></i>
+        </a>
+        <ul class="traits-list">
+        {{#each data.traits.ci.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+    {{#if isCharacter}}
+    <div class="form-group {{data.traits.weaponProf.cssClass}}">
+        <label>{{localize "SWNMODULAR.TraitWeaponProf"}}</label>
+        <a class="trait-selector" data-options="weaponProficiencies" data-target="data.traits.weaponProf">
+            <i class="fas fa-edit"></i>
+        </a>
+        <ul class="traits-list">
+        {{#each data.traits.weaponProf.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+    <div class="form-group {{data.traits.armorProf.cssClass}}">
+        <label>{{localize "SWNMODULAR.TraitArmorProf"}}</label>
+        <a class="trait-selector" data-options="armorProficiencies" data-target="data.traits.armorProf">
+            <i class="fas fa-edit"></i>
+        </a>
+        <ul class="traits-list">
+        {{#each data.traits.armorProf.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+    <div class="form-group {{data.traits.toolProf.cssClass}}">
+        <label>{{localize "SWNMODULAR.TraitToolProf"}}</label>
+        <a class="trait-selector" data-options="toolProficiencies" data-target="data.traits.toolProf">
+            <i class="fas fa-edit"></i>
+        </a>
+        <ul class="traits-list">
+        {{#each data.traits.toolProf.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+
+    {{#unless isVehicle}}
+    <div class="form-group ">
+        <label>{{localize "SWNMODULAR.SpecialTraits"}}</label>
+        <a class="config-button" data-action="flags" title="{{localize 'SWNMODULAR.SpecialTraits'}}"><i class="fas fa-cog"></i></a>
+    </div>
+    {{/unless}}
+</div>

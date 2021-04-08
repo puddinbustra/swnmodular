@@ -1,0 +1,146 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SWNMODULAR.ItemName' }}"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>
+                    {{lookup config.equipmentTypes data.armor.type }}
+                </li>
+                <li>
+                    <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="{{ localize 'SWNMODULAR.Rarity' }}"/>
+                </li>
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'SWNMODULAR.Source' }}"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SWNMODULAR.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SWNMODULAR.Details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "SWNMODULAR.Effects" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/swnmodular/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">{{ localize "SWNMODULAR.ItemEquipmentDetails" }}</h3>
+
+            {{!-- Equipment Type --}}
+            <div class="form-group">
+                <label>{{ localize "SWNMODULAR.ItemEquipmentType" }}</label>
+                <select name="data.armor.type">
+                    {{#select data.armor.type}}
+                    <option value=""></option>
+                    {{#each config.equipmentTypes as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{#unless isMountable}}
+            <div class="form-group">
+                <label>{{localize "SWNMODULAR.Attunement"}}</label>
+                <select name="data.attunement" data-dtype="Number">
+                    {{selectOptions config.attunements selected=data.attunement localize=true}}
+                </select>
+            </div>
+
+            {{!-- Equipment Status --}}
+            <div class="form-group stacked">
+                <label>{{ localize "SWNMODULAR.ItemEquipmentStatus" }}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SWNMODULAR.Proficient" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SWNMODULAR.Equipped" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SWNMODULAR.Identified" }}
+                </label>
+            </div>
+            {{/unless}}
+
+            {{!-- Armor Class --}}
+            <div class="form-group">
+                <label>{{ localize "SWNMODULAR.ArmorClass" }}</label>
+                <div class="form-fields">
+                   <input type="text" name="data.armor.value" value="{{data.armor.value}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            {{#unless isMountable}}
+            {{!-- Dexterity Modifier --}}
+            <div class="form-group">
+                <label>{{ localize "SWNMODULAR.ItemEquipmentDexMod" }}</label>
+                <div class="form-fields">
+                   <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="{{ localize 'SWNMODULAR.Unlimited' }}"/>
+                </div>
+            </div>
+
+            {{!-- Required Strength --}}
+            <div class="form-group">
+                <label>{{ localize "SWNMODULAR.ItemRequiredStr" }}</label>
+                <div class="form-fields">
+                   <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="{{ localize 'SWNMODULAR.None' }}"/>
+                </div>
+            </div>
+
+            {{!-- Stealth Disadvantage --}}
+            <div class="form-group">
+                <label>{{ localize "SWNMODULAR.ItemEquipmentStealthDisav" }}</label>
+                <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>
+            </div>
+            {{/unless}}
+
+            {{#if isMountable}}
+            {{> 'systems/swnmodular/templates/items/parts/item-mountable.html'}}
+            <div class="form-group">
+                <label>{{localize 'SWNMODULAR.Speed'}}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed.value" value="{{data.speed.value}}"
+                           placeholder="0" data-dtype="Number">
+                    <span class="sep">{{localize 'SWNMODULAR.FeetAbbr'}}</span>
+                    <input type="text" name="data.speed.conditions"
+                           value="{{data.speed.conditions}}">
+                </div>
+            </div>
+            {{/if}}
+
+            <h3 class="form-header">{{ localize "SWNMODULAR.ItemEquipmentUsage" }}</h3>
+
+            {{!-- Item Activation Template --}}
+            {{> "systems/swnmodular/templates/items/parts/item-activation.html"}}
+
+            <h3 class="form-header">{{ localize "SWNMODULAR.ItemEquipmentAction" }}</h3>
+
+            {{!-- Item Action Template --}}
+            {{> "systems/swnmodular/templates/items/parts/item-action.html"}}
+        </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/swnmodular/templates/actors/parts/active-effects.html"}}
+        </div>
+    </section>
+</form>
