@@ -222,6 +222,17 @@ SWNMODULAR.equipmentTypes = {
 /* -------------------------------------------- */
 
 /**
+ * The set of Armor Proficiencies which a character may have
+ * @type {Object}
+ */
+SWNMODULAR.armorProficiencies = {
+
+};
+
+
+/* -------------------------------------------- */
+
+/**
  * Enumerate the valid consumable types which are recognized by the system
  * @type {Object}
  */
