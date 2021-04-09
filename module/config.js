@@ -80,20 +80,11 @@ SWNMODULAR.attunements = {
 
 
 SWNMODULAR.weaponProficiencies = {
-  "sim": "SWNMODULAR.WeaponSimpleProficiency",
-  "mar": "SWNMODULAR.WeaponMartialProficiency"
+
 };
 
 SWNMODULAR.toolProficiencies = {
-  "art": "SWNMODULAR.ToolArtisans",
-  "disg": "SWNMODULAR.ToolDisguiseKit",
-  "forg": "SWNMODULAR.ToolForgeryKit",
-  "game": "SWNMODULAR.ToolGamingSet",
-  "herb": "SWNMODULAR.ToolHerbalismKit",
-  "music": "SWNMODULAR.ToolMusicalInstrument",
-  "navg": "SWNMODULAR.ToolNavigators",
-  "pois": "SWNMODULAR.ToolPoisonersKit",
-  "thief": "SWNMODULAR.ToolThieves",
+
   "vehicle": "SWNMODULAR.ToolVehicle"
 };
 
@@ -225,20 +216,6 @@ SWNMODULAR.equipmentTypes = {
   "clothing": "SWNMODULAR.EquipmentClothing",
   "trinket": "SWNMODULAR.EquipmentTrinket",
   "vehicle": "SWNMODULAR.EquipmentVehicle"
-};
-
-
-/* -------------------------------------------- */
-
-/**
- * The set of Armor Proficiencies which a character may have
- * @type {Object}
- */
-SWNMODULAR.armorProficiencies = {
-  "lgt": SWNMODULAR.equipmentTypes.light,
-  "med": SWNMODULAR.equipmentTypes.medium,
-  "hvy": SWNMODULAR.equipmentTypes.heavy,
-  "shl": "SWNMODULAR.EquipmentShieldProficiency"
 };
 
 
@@ -669,19 +646,9 @@ SWNMODULAR.cover = {
 // Condition Types
 SWNMODULAR.conditionTypes = {
   "blinded": "SWNMODULAR.ConBlinded",
-  "charmed": "SWNMODULAR.ConCharmed",
   "deafened": "SWNMODULAR.ConDeafened",
-  "diseased": "SWNMODULAR.ConDiseased",
-  "exhaustion": "SWNMODULAR.ConExhaustion",
   "frightened": "SWNMODULAR.ConFrightened",
-  "grappled": "SWNMODULAR.ConGrappled",
-  "incapacitated": "SWNMODULAR.ConIncapacitated",
   "invisible": "SWNMODULAR.ConInvisible",
-  "paralyzed": "SWNMODULAR.ConParalyzed",
-  "petrified": "SWNMODULAR.ConPetrified",
-  "poisoned": "SWNMODULAR.ConPoisoned",
-  "prone": "SWNMODULAR.ConProne",
-  "restrained": "SWNMODULAR.ConRestrained",
   "stunned": "SWNMODULAR.ConStunned",
   "unconscious": "SWNMODULAR.ConUnconscious"
 };

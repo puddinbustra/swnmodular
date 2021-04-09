@@ -26,9 +26,6 @@
 /*  Flexbox                                  */
 /* ----------------------------------------- */
 /* Lofty adding to move attribute to right side... but this only does the thing inside the little box, i need to move that */
-.flexrow .ability-mod{
-  color: darkblue;
-}
 
 .flexrow {
   display: flex;
