@@ -2,7 +2,7 @@
   "name": "swnmodular",
   "title": "Stars Without Number Modular",
   "description": "A Stars Without Number system intended to be easy to modify. Base code from the DND5e sheet by Atropos.",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "author": "Lofty",
   "scripts": [],
   "esmodules": ["swnmodular.js"],
@@ -93,7 +93,7 @@
   "secondaryTokenAttribute": null,
   "minimumCoreVersion": "0.7.6",
   "compatibleCoreVersion": "0.7.9",
-  "url": "",
-  "manifest": "",
-  "download": ""
+  "url": "https://github.com/puddinbustra/swnmodular",
+  "manifest": "https://raw.githubusercontent.com/puddinbustra/swnmodular/main/system.json",
+  "download": "https://github.com/puddinbustra/swnmodular/archive/refs/heads/main.zip"
 }
