@@ -170,6 +170,7 @@
   /*  Ability Scores                           */
   /* ----------------------------------------- */
 
+
   .ability-scores {
     flex: 0 0 100px;
     height: 440px;
@@ -184,6 +185,7 @@
       height: 70px;
       text-align: center;
       border-bottom: @borderGroove;
+      color: darkblue;
 
       &:last-child {
         border-bottom: none;
@@ -199,37 +201,25 @@
       }
 
       .ability-modifiers {
-        //height: 24px;
-        //margin: -8px 0 0;
-        //text-align: right;
-        //font-size: 100px;
+        flex: 0 0 24px;
+        height: 22px;
+        line-height: 22px;
+        font-size: 16px;
+        justify-content: flex-end;
+        //border-top: @borderGroove;
+        //border-left: @borderGroove;
+        color:red;
 
-        //span.ability-mod,
-        //span.ability-save {
-        //  flex: 0 0 24px;
-        //  height: 22px;
-        //  line-height: 22px;
-        //  font-size: 16px;
-        //  border-top: @borderGroove;
-        //}
-
-        #ability-mod {
+        .ability-mod {
           flex: 0 0 24px;
           height: 22px;
           line-height: 22px;
           font-size: 16px;
-          border-top: @borderGroove;
-          border-left: @borderGroove;
-
+          justify-content: flex-end;
+          //border-top: @borderGroove;
+          //border-left: @borderGroove;
+          color:red;
         }
-
-        //.ability-proficiency {
-        //  line-height: 30px;
-        //}
-        //
-        //span.ability-save {
-        //  border-left: @borderGroove;
-        //}
       }
     }
   }

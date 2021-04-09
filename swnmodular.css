@@ -25,6 +25,11 @@
 /* ----------------------------------------- */
 /*  Flexbox                                  */
 /* ----------------------------------------- */
+/* Lofty adding to move attribute to right side... but this only does the thing inside the little box, i need to move that */
+.flexrow .ability-mod{
+  color: darkblue;
+}
+
 .flexrow {
   display: flex;
   flex-direction: row;
@@ -686,6 +691,7 @@
 .swnmodular.sheet.actor .ability-scores .ability .ability-modifiers {
   height: 24px;
   margin: -8px 0 0;
+  justify-content: flex-end;
 }
 .swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod,
 .swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
@@ -694,16 +700,19 @@
   line-height: 22px;
   font-size: 16px;
   border-top: 2px groove #eeede0;
+  align-content: center;
 }
 .swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
-  border-right: 2px groove #eeede0;
-}
-.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers .ability-proficiency {
-  line-height: 30px;
-}
-.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
   border-left: 2px groove #eeede0;
 }
+
+/*.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers .ability-proficiency {*/
+/*  line-height: 30px;*/
+/*}*/
+/*.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {*/
+/*  border-left: 2px groove #eeede0;*/
+/*}*/
+
 .swnmodular.sheet.actor .proficiency-toggle {
   color: #b5b3a4;
   font-size: 12px;
