@@ -268,8 +268,6 @@
 "SWNMODULAR.FlagsPowerfulBuildHint": "Provides increased carrying capacity.",
 "SWNMODULAR.FlagsElvenAccuracy": "Elven Accuracy",
 "SWNMODULAR.FlagsElvenAccuracyHint": "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
-"SWNMODULAR.FlagsHalflingLucky": "Halfling Lucky",
-"SWNMODULAR.FlagsHalflingLuckyHint": "Reroll ones when rolling d20 checks.",
 "SWNMODULAR.FlagsInitiativeAdv": "Advantage on Initiative",
 "SWNMODULAR.FlagsInitiativeAdvHint": "Provided by feats or magical items.",
 "SWNMODULAR.FlagsAlert": "Alert Feat",

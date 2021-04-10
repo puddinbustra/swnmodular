@@ -691,7 +691,6 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNMODULAR.SkillPromptTitle", {skill: CONFIG.SWNMODULAR.skills[skillId]}),
-      halflingLucky: this.getFlag("swnmodular", "halflingLucky"),
       reliableTalent: reliableTalent,
       messageData: {"flags.swnmodular.roll": {type: "skill", skillId }}
     });
@@ -770,7 +769,6 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNMODULAR.AbilityPromptTitle", {ability: label}),
-      halflingLucky: feats.halflingLucky,
       messageData: {"flags.swnmodular.roll": {type: "ability", abilityId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
@@ -817,7 +815,6 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNMODULAR.SavePromptTitle", {ability: label}),
-      halflingLucky: this.getFlag("swnmodular", "halflingLucky"),
       messageData: {"flags.swnmodular.roll": {type: "save", abilityId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
@@ -864,7 +861,6 @@ export default class Actor5e extends Actor {
       data: data,
       title: game.i18n.localize("SWNMODULAR.DeathSavingThrow"),
       speaker: speaker,
-      halflingLucky: this.getFlag("swnmodular", "halflingLucky"),
       targetValue: 10,
       messageData: {"flags.swnmodular.roll": {type: "death"}}
     });
