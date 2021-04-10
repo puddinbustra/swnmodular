@@ -328,36 +328,14 @@ export default class Actor5e extends Actor {
 
     // Skill modifiers
     const feats = SWNMODULAR.characterFlags;
-    // const athlete = flags.remarkableAthlete;
-    // const joat = flags.jackOfAllTrades;
+
     const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
-      skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
-      let round = Math.floor;
-
-      // // Remarkable
-      // if ( athlete && (skl.value < 0.5) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
-      //   skl.value = 0.5;
-      //   round = Math.ceil;
-      // }
-      //
-      // // Jack of All Trades
-      // if ( joat && (skl.value < 0.5) ) {
-      //   skl.value = 0.5;
-      // }
-      //
-      // // Polymorph Skill Proficiencies
-      // if ( originalSkills ) {
-      //   skl.value = Math.max(skl.value, originalSkills[id].value);
-      // }
+      skl.value = Math.clamped(Number(skl.value).toNearest(1), 0, 9) ?? 0;
 
       // Compute modifier. Right now it should just do the number you put in and save that.
-      skl.bonus = checkBonus + skillBonus;
-      skl.mod = data.abilities[skl.ability].mod;
-      skl.prof = round(skl.value * data.attributes.prof);
       skl.total = skl.value;
-      // skl.total = skl.mod + skl.prof + skl.bonus;
 
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
