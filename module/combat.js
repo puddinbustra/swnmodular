@@ -13,7 +13,6 @@ export const _getInitiativeFormula = function(combatant) {
   let nd = 1;
   let mods = "";
 
-  if (actor.getFlag("swnmodular", "halflingLucky")) mods += "r1=1";
   if (actor.getFlag("swnmodular", "initiativeAdv")) {
     nd = 2;
     mods += "kh";

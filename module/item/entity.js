@@ -852,9 +852,6 @@ export default class Item5e extends Item {
       }
     }
 
-    // Apply Halfling Lucky
-    if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
-
     // Invoke the d20 roll helper
     const roll = await d20Roll(rollConfig);
     if ( roll === false ) return null;
@@ -1099,7 +1096,6 @@ export default class Item5e extends Item {
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710,
       },
-      halflingLucky: this.actor.getFlag("swnmodular", "halflingLucky" ) || false,
       reliableTalent: (this.data.data.proficient >= 1) && this.actor.getFlag("swnmodular", "reliableTalent"),
       messageData: {"flags.swnmodular.roll": {type: "tool", itemId: this.id }}
     }, options);
