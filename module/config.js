@@ -699,6 +699,12 @@ SWNMODULAR.characterFlags = {
     section: "Racial Traits",
     type: Boolean
   },
+  "halflingLucky": {
+    name: "SWNMODULAR.FlagsHalflingLucky",
+    hint: "SWNMODULAR.FlagsHalflingLuckyHint",
+    section: "Racial Traits",
+    type: Boolean
+  },
   "initiativeAdv": {
     name: "SWNMODULAR.FlagsInitiativeAdv",
     hint: "SWNMODULAR.FlagsInitiativeAdvHint",
