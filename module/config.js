@@ -693,6 +693,12 @@ SWNMODULAR.classFeatures = ClassFeatures;
 
 // Configure Optional Character Flags
 SWNMODULAR.characterFlags = {
+  "diamondSoul": {
+    name: "SWNMODULAR.FlagsDiamondSoul",
+    hint: "SWNMODULAR.FlagsDiamondSoulHint",
+    section: "Feats",
+    type: Boolean
+  },
   "elvenAccuracy": {
     name: "SWNMODULAR.FlagsElvenAccuracy",
     hint: "SWNMODULAR.FlagsElvenAccuracyHint",

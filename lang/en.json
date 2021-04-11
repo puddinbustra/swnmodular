@@ -262,6 +262,8 @@
 "SWNMODULAR.FlagsInstructions": "Configure character features and traits which fine-tune behaviors of the DnD5e system.",
 "SWNMODULAR.FlagsSave": "Update Special Traits",
 "SWNMODULAR.FlagsTitle": "Configure Special Traits",
+"SWNMODULAR.FlagsDiamondSoul": "Diamond Soul",
+"SWNMODULAR.FlagsDiamondSoulHint": "Gain proficiency to all saving throws.",
 "SWNMODULAR.FlagsPowerfulBuild": "Powerful Build",
 "SWNMODULAR.FlagsPowerfulBuildHint": "Provides increased carrying capacity.",
 "SWNMODULAR.FlagsElvenAccuracy": "Elven Accuracy",
