@@ -656,9 +656,15 @@ export default class Actor5e extends Actor {
    * @param {Object} options      Options which configure how the skill check is rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
+
+
   rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+
+    // console.log("Starting roll logic");
+    // const hp = new Roll(2d8).roll().total;
+    // console.log(hp);
 
     // Compose roll parts and data
     const parts = ["@mod"];
@@ -694,6 +700,8 @@ export default class Actor5e extends Actor {
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
+
+
   }
 
   /* -------------------------------------------- */

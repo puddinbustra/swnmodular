@@ -717,8 +717,7 @@ SWNMODULAR.characterFlags = {
     section: "Feats",
     type: Boolean
   },
-
-  },
+  
   "powerfulBuild": {
     name: "SWNMODULAR.FlagsPowerfulBuild",
     hint: "SWNMODULAR.FlagsPowerfulBuildHint",
