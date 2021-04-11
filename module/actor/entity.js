@@ -60,8 +60,6 @@ export default class Actor5e extends Actor {
     const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
     const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
     for (let [id, abl] of Object.entries(data.abilities)) {
-      if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
-      //abl.mod = Math.floor((abl.value - 10) / 4); //Lofty changing this for SWN
       if (8 <= abl.value && abl.value <=13){
         abl.mod = 0;
       }
@@ -852,12 +850,6 @@ export default class Actor5e extends Actor {
     const parts = [];
     const data = {};
     const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
-
-    // Diamond Soul adds proficiency
-    if ( this.getFlag("swnmodular", "diamondSoul") ) {
-      parts.push("@prof");
-      data.prof = this.data.data.attributes.prof;
-    }
 
     // Include a global actor ability save bonus
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
