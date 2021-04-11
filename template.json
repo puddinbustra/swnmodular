@@ -52,11 +52,6 @@
             "walk": 30,
             "units": "ft",
             "hover": false
-          },
-          "strain": {
-            "value":0,
-            "min": 0,
-            "max": 10
           }
         },
         "details": {
@@ -303,18 +298,6 @@
           "lr": 0
         },
         "tertiary": {
-          "value": 0,
-          "max": 0,
-          "sr": 0,
-          "lr": 0
-        },
-        "quartary": {
-          "value": 0,
-          "max": 0,
-          "sr": 0,
-          "lr": 0
-        },
-        "quinary": {
           "value": 0,
           "max": 0,
           "sr": 0,

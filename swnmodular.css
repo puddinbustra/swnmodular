@@ -641,12 +641,6 @@
   font-size: 20px;
   font-weight: 700;
 }
-
-.swnmodular.sheet.actor li.attribute.resource {
-  min-width: 100px;
-}
-
-
 .swnmodular.sheet.actor ul.attributes li.attribute .attribute-value > * {
   font-weight: 400;
   font-size: 24px;
