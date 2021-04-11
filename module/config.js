@@ -717,9 +717,7 @@ SWNMODULAR.characterFlags = {
     section: "Feats",
     type: Boolean
   },
-<<<<<<< HEAD
-  
-=======
+
   "observantFeat": {
     name: "SWNMODULAR.FlagsObservant",
     hint: "SWNMODULAR.FlagsObservantHint",
@@ -727,7 +725,7 @@ SWNMODULAR.characterFlags = {
     section: "Feats",
     type: Boolean
   },
->>>>>>> parent of 0255a7a (Removed observant)
+
   "powerfulBuild": {
     name: "SWNMODULAR.FlagsPowerfulBuild",
     hint: "SWNMODULAR.FlagsPowerfulBuildHint",
