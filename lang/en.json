@@ -272,6 +272,8 @@
 "SWNMODULAR.FlagsAlertHint": "Provides +5 to Initiative.",
 "SWNMODULAR.FlagsJOAT": "Jack of All Trades",
 "SWNMODULAR.FlagsJOATHint": "Half-Proficiency to Ability Checks in which you are not already Proficient.",
+"SWNMODULAR.FlagsObservant": "Observant Feat",
+"SWNMODULAR.FlagsObservantHint": "Provides a +5 to passive Perception and Investigation.",
 "SWNMODULAR.FlagsReliableTalent": "Reliable Talent",
 "SWNMODULAR.FlagsReliableTalentHint": "Rogues Reliable Talent Feature.",
 "SWNMODULAR.FlagsRemarkableAthlete": "Remarkable Athlete.",
