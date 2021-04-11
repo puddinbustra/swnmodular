@@ -327,16 +327,16 @@ export default class Actor5e extends Actor {
     // Skill modifiers
     const feats = SWNMODULAR.characterFlags;
 
-    const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = Math.clamped(Number(skl.value).toNearest(1), 0, 9) ?? 0;
 
       // Compute modifier. Right now it should just do the number you put in and save that.
-      skl.total = skl.value;
+      const other = 0;
+      skl.mod = skl.value;
+      skl.total = skl.value + skl.passive;
 
       // Compute passive bonus
-      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
       skl.passive = 10 + skl.total + passive;
     }
   }

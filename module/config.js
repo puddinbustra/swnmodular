@@ -717,12 +717,7 @@ SWNMODULAR.characterFlags = {
     section: "Feats",
     type: Boolean
   },
-  "observantFeat": {
-    name: "SWNMODULAR.FlagsObservant",
-    hint: "SWNMODULAR.FlagsObservantHint",
-    skills: ['prc','inv'],
-    section: "Feats",
-    type: Boolean
+
   },
   "powerfulBuild": {
     name: "SWNMODULAR.FlagsPowerfulBuild",

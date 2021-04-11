@@ -246,6 +246,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     return this.actor.shortRest();
   }
 
+
   /* -------------------------------------------- */
 
   /**
