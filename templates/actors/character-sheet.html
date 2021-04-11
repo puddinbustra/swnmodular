@@ -54,7 +54,7 @@
                         <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10" data-dtype="Number"/>
                     </div>
                     <footer class="attribute-footer">
-                        <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+{{ localize 'SWNMODULAR.Temp' }}"
+                        <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+{{ localize 'SWNMODULAR.Value' }}"
                                value="{{data.attributes.hp.temp}}" data-dtype="Number"/>
                         <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+{{ localize 'SWNMODULAR.Max' }}"
                                value="{{data.attributes.hp.tempmax}}" data-dtype="Number"/>
@@ -162,9 +162,37 @@
             </ul>
 
             <section class="center-pane flexcol">
+<!--                <ul class="attributes flexrow">-->
+<!--                    &lt;!&ndash;                Lofty is making a system strain resource here&ndash;&gt;-->
+<!--                    <li class="attribute resource">-->
+<!--                        <h4 class="attribute-name box-title"> System Strain </h4>-->
+<!--                        <div class="attribute-value">-->
+<!--                            <input name="data.attributes.strain.value" type="text" value="{{data.attributes.strain.value}}"-->
+<!--                                   data-dtype="Number" placeholder= "0"/>-->
+<!--                            <span class="sep"> / </span>-->
+<!--                            <input name="data.attributes.strain.max" type="text" value="{{data.attributes.strain.max}}"-->
+<!--                                   data-dtype="Number" placeholder="0"/>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+<!--                </ul>-->
+
 
                 {{!-- Body Attributes --}}
                 <ul class="attributes flexrow">
+
+<!--                    System Strain from Lofty-->
+                    <li class="attribute resource">
+                        <h4 class="attribute-name box-title"> System Strain </h4>
+                        <div class="attribute-value">
+                            <input name="data.attributes.strain.value" type="text" value="{{data.attributes.strain.value}}"
+                                   data-dtype="Number" placeholder= "0"/>
+                            <span class="sep"> / </span>
+                            <input name="data.attributes.strain.max" type="text" value="{{data.attributes.strain.max}}"
+                                   data-dtype="Number" placeholder="0"/>
+                        </div>
+                    </li>
+
                     {{#each resources as |res|}}
                     <li class="attribute resource">
                         <h4 class="attribute-name box-title">
@@ -187,6 +215,8 @@
                     </li>
                     {{/each}}
                 </ul>
+
+
 
                 {{!-- Counters --}}
                 <div class="counters">
