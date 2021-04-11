@@ -7,7 +7,7 @@
  */
 export const _getInitiativeFormula = function(combatant) {
   const actor = combatant.actor;
-  if ( !actor ) return "1d20";
+  if ( !actor ) return "1d8";
   const init = actor.data.data.attributes.init;
 
   let nd = 1;
@@ -19,7 +19,7 @@ export const _getInitiativeFormula = function(combatant) {
     mods += "kh";
   }
 
-  const parts = [`${nd}d20${mods}`, init.mod, (init.prof !== 0) ? init.prof : null, (init.bonus !== 0) ? init.bonus : null];
+  const parts = [`${nd}d8${mods}`, init.mod, (init.prof !== 0) ? init.prof : null, (init.bonus !== 0) ? init.bonus : null];
 
   // Optionally apply Dexterity tiebreaker
   const tiebreaker = game.settings.get("swnmodular", "initiativeDexTiebreaker");
