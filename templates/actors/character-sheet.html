@@ -143,7 +143,7 @@
             {{!-- Skills --}}
             <ul class="skills-list">
             {{#each data.skills as |skill s|}}
-                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
+                <li class="skill flexrow" data-skill="{{s}}">
 <!--                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>-->
 
                     <h4 class="skill-name rollable">{{skill.label}}</h4>

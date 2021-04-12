@@ -673,7 +673,7 @@ export default class Actor5e extends Actor {
 
     // Compose roll parts and data
     const parts = ["@mod"];
-    const data = {mod: skl.mod + skl.prof};
+    const data = {mod: skl.value + skl.prof};
 
     // Ability test bonus
     if ( bonuses.check ) {
