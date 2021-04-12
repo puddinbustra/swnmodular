@@ -139,6 +139,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 
     // Prepend the d20 roll
     let formula = `${nd}d20${mods}`;
+    // let formula = `2d8`;
     if (reliableTalent) formula = `{${nd}d20${mods},10}kh`;
     parts.unshift(formula);
 

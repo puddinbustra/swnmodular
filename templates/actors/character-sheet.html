@@ -36,9 +36,6 @@
                 <li>
                     <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNMODULAR.Background' }}"/>
                 </li>
-                <li class="proficiency">
-                    <span>{{ localize "SWNMODULAR.Proficiency" }} {{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
-                </li>
             </ul>
 
             {{!-- Header Attributes --}}
@@ -131,10 +128,6 @@
                     <div class="flexrow ability-modifiers">
                         <!-- this is the ability modifier here-->
                         <span class="ability-mod" title="Modifier" id="att-mod">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-<!--                        I'm taking out this part, since SWN has no save proficiencies with attributes - lofty -->
-<!--                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>-->
-<!--                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SWNMODULAR.Proficiency' }}">{{{ability.icon}}}</a>-->
-<!--                        <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>-->
                     </div>
                 </li>
             {{/each}}
