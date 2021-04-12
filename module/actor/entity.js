@@ -70,7 +70,10 @@ export default class Actor5e extends Actor {
         abl.mod =Math.floor((abl.value - 10) / 4);
       }
 
-      abl.prof = (abl.proficient || 0) * data.attributes.prof;
+      //Here I'm trying to get rid of poroficency bonus without breaking anything - lofty
+      // abl.prof = (abl.proficient || 0) * data.attributes.prof;
+      abl.prof = 0;
+
       abl.saveBonus = saveBonus;
       abl.checkBonus = checkBonus;
       abl.save = abl.mod + abl.prof + abl.saveBonus;
@@ -146,7 +149,8 @@ export default class Actor5e extends Actor {
       }
       return obj;
     }, {});
-    data.prof = this.data.data.attributes.prof || 0;
+    // data.prof = this.data.data.attributes.prof || 0;
+    data.prof = 0;
     return data;
   }
 
@@ -268,7 +272,8 @@ export default class Actor5e extends Actor {
     data.attributes.hd = hd;
 
     // Character proficiency bonus
-    data.attributes.prof = Math.floor((level + 7) / 4);
+    // data.attributes.prof = Math.floor((level + 7) / 4);
+    data.attributes.prof = 0;
 
     // Experience required for next level
     const xp = data.details.xp;
@@ -291,8 +296,8 @@ export default class Actor5e extends Actor {
     data.details.xp.value = this.getCRExp(data.details.cr);
 
     // Proficiency
-    data.attributes.prof = Math.floor((Math.max(data.details.cr, 1) + 7) / 4);
-
+    // data.attributes.prof = Math.floor((Math.max(data.details.cr, 1) + 7) / 4);
+    data.attributes.prof = 0;
     // Spellcaster Level
     if ( data.attributes.spellcasting && !Number.isNumeric(data.details.spellLevel) ) {
       data.details.spellLevel = Math.max(data.details.cr, 1);
@@ -335,7 +340,7 @@ export default class Actor5e extends Actor {
       // Compute modifier. Right now it should just do the number you put in and save that.
       skl.bonus = checkBonus + skillBonus;
       skl.mod = data.abilities[skl.ability].mod;
-      skl.prof = round(skl.value * data.attributes.prof);
+      skl.prof = 0;
       skl.total = skl.value;
       // skl.total = skl.mod + skl.prof + skl.bonus;
 
