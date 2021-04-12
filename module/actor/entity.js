@@ -345,7 +345,7 @@ export default class Actor5e extends Actor {
       // skl.total = skl.mod + skl.prof + skl.bonus;
 
       // Compute passive bonus
-      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
+      const passive = 0;
       skl.passive = 10 + skl.total + passive;
     }
   }
@@ -700,8 +700,6 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNMODULAR.SkillPromptTitle", {skill: CONFIG.SWNMODULAR.skills[skillId]}),
-      halflingLucky: this.getFlag("swnmodular", "halflingLucky"),
-      reliableTalent: reliableTalent,
       messageData: {"flags.swnmodular.roll": {type: "skill", skillId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
@@ -759,16 +757,6 @@ export default class Actor5e extends Actor {
     const parts = ["@mod"];
     const data = {mod: abl.mod};
 
-    // Add feat-related proficiency bonuses
-    const feats = this.data.flags.swnmodular || {};
-    if ( feats.remarkableAthlete && SWNMODULAR.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
-      parts.push("@proficiency");
-      data.proficiency = Math.ceil(0.5 * this.data.data.attributes.prof);
-    }
-    else if ( feats.jackOfAllTrades ) {
-      parts.push("@proficiency");
-      data.proficiency = Math.floor(0.5 * this.data.data.attributes.prof);
-    }
 
     // Add global actor bonus
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
@@ -787,7 +775,6 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNMODULAR.AbilityPromptTitle", {ability: label}),
-      halflingLucky: feats.halflingLucky,
       messageData: {"flags.swnmodular.roll": {type: "ability", abilityId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
@@ -834,7 +821,6 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNMODULAR.SavePromptTitle", {ability: label}),
-      halflingLucky: this.getFlag("swnmodular", "halflingLucky"),
       messageData: {"flags.swnmodular.roll": {type: "save", abilityId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
@@ -875,7 +861,6 @@ export default class Actor5e extends Actor {
       data: data,
       title: game.i18n.localize("SWNMODULAR.DeathSavingThrow"),
       speaker: speaker,
-      halflingLucky: this.getFlag("swnmodular", "halflingLucky"),
       targetValue: 10,
       messageData: {"flags.swnmodular.roll": {type: "death"}}
     });
