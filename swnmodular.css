@@ -760,7 +760,14 @@
 }
 .swnmodular.sheet.actor ul.skills-list li.skill .skill-mod {
   flex: 0 0 20px;
+
 }
+
+.swnmodular.sheet.actor ul.skills-list li.skill .skill-other {
+  flex: 0 0 20px;
+
+}
+
 .swnmodular.sheet.actor ul.skills-list li.skill .skill-passive {
   flex: 0 0 26px;
   text-align: center;

@@ -335,13 +335,13 @@ export default class Actor5e extends Actor {
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = Math.clamped(Number(skl.value).toNearest(1), 0, 10) ?? 0;
+      skl.prof = Math.clamped(Number(skl.prof).toNearest(1), 0, 10) ?? 0;
       let round = Math.floor;
 
       // Compute modifier. Right now it should just do the number you put in and save that.
       skl.bonus = checkBonus + skillBonus;
       skl.mod = data.abilities[skl.ability].mod;
-      skl.prof = 0;
-      skl.total = skl.value;
+      skl.total = skl.value + skl.prof;
       // skl.total = skl.mod + skl.prof + skl.bonus;
 
       // Compute passive bonus
