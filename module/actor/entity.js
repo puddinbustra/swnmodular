@@ -326,29 +326,11 @@ export default class Actor5e extends Actor {
 
     // Skill modifiers
     const feats = SWNMODULAR.characterFlags;
-    // const athlete = flags.remarkableAthlete;
-    // const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
-      skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
+      skl.value = Math.clamped(Number(skl.value).toNearest(1), 0, 10) ?? 0;
       let round = Math.floor;
-
-      // // Remarkable
-      // if ( athlete && (skl.value < 0.5) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
-      //   skl.value = 0.5;
-      //   round = Math.ceil;
-      // }
-      //
-      // // Jack of All Trades
-      // if ( joat && (skl.value < 0.5) ) {
-      //   skl.value = 0.5;
-      // }
-      //
-      // // Polymorph Skill Proficiencies
-      // if ( originalSkills ) {
-      //   skl.value = Math.max(skl.value, originalSkills[id].value);
-      // }
 
       // Compute modifier. Right now it should just do the number you put in and save that.
       skl.bonus = checkBonus + skillBonus;
@@ -684,10 +666,6 @@ export default class Actor5e extends Actor {
     const skl = this.data.data.skills[skillId];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
 
-    // console.log("Starting roll logic");
-    // const hp = new Roll(2d8).roll().total;
-    // console.log(hp);
-
     // Compose roll parts and data
     const parts = ["@mod"];
     const data = {mod: skl.mod + skl.prof};
@@ -723,6 +701,12 @@ export default class Actor5e extends Actor {
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
+
+
+    //Lofty's roll and return. Add apostrophes if not working
+    // let total = skl.value; //soon, add skill.other modifiers
+    // let formula = `2d8${total}`;
+
 
 
   }
