@@ -36,9 +36,6 @@
                 <li>
                     <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNMODULAR.Background' }}"/>
                 </li>
-<!--                <li>-->
-<!--                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'SWNMODULAR.Alignment' }}"/>-->
-<!--                </li>-->
                 <li class="proficiency">
                     <span>{{ localize "SWNMODULAR.Proficiency" }} {{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
                 </li>
@@ -162,22 +159,6 @@
             </ul>
 
             <section class="center-pane flexcol">
-<!--                <ul class="attributes flexrow">-->
-<!--                    &lt;!&ndash;                Lofty is making a system strain resource here&ndash;&gt;-->
-<!--                    <li class="attribute resource">-->
-<!--                        <h4 class="attribute-name box-title"> System Strain </h4>-->
-<!--                        <div class="attribute-value">-->
-<!--                            <input name="data.attributes.strain.value" type="text" value="{{data.attributes.strain.value}}"-->
-<!--                                   data-dtype="Number" placeholder= "0"/>-->
-<!--                            <span class="sep"> / </span>-->
-<!--                            <input name="data.attributes.strain.max" type="text" value="{{data.attributes.strain.max}}"-->
-<!--                                   data-dtype="Number" placeholder="0"/>-->
-<!--                        </div>-->
-<!--                    </li>-->
-
-<!--                </ul>-->
-
-
                 {{!-- Body Attributes --}}
                 <ul class="attributes flexrow">
 
@@ -220,34 +201,13 @@
 
                 {{!-- Counters --}}
                 <div class="counters">
-<!--                    Death saves under this. They're not in SWN so I'm leaving them out-->
-<!--                    <div class="counter flexrow death-saves">-->
-<!--                        <h4 class="rollable" data-action="rollDeathSave">{{ localize "SWNMODULAR.DeathSave" }}</h4>-->
-<!--                        <div class="counter-value">-->
-<!--                            <i class="fas fa-check"></i>-->
-<!--                            <input name="data.attributes.death.success" type="number" placeholder="0"-->
-<!--                                   value="{{data.attributes.death.success}}"/>-->
-<!--                            <i class="fas fa-times"></i>-->
-<!--                            <input name="data.attributes.death.failure" type="number" placeholder="0"-->
-<!--                                   value="{{data.attributes.death.failure}}"/>-->
-<!--                        </div>-->
-<!--                    </div>-->
                     <div class="counter flexrow exhaustion">
-<!--                        <h4>{{ localize "SWNMODULAR.Exhaustion" }}</h4>-->
                         <h4> System Strain </h4>
                         <div class="counter-value">
                             <input name="data.attributes.exhaustion" type="number" placeholder="0"
                                    value="{{data.attributes.exhaustion}}" />
                         </div>
                     </div>
-<!--                    This is the inspiration counter. I don't value it, so I'm commenting this out.-->
-<!--                    <div class="counter flexrow inspiration">-->
-<!--                        <h4>{{ localize "SWNMODULAR.Inspiration" }}</h4>-->
-<!--                        <div class="counter-value">-->
-<!--                            <input type="checkbox" name="data.attributes.inspiration" data-dtype="Boolean"-->
-<!--                                   {{checked data.attributes.inspiration}}/>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
 
                 {{!-- Traits --}}
