@@ -56,6 +56,7 @@
                         <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
                     </div>
                     <footer class="attribute-footer">
+                        <span>{{ localize "SWNMODULAR.Proficiency" }}</span>
                         <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
                     </footer>
                 </li>
@@ -98,6 +99,7 @@
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                         <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
+                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SWNMODULAR.Proficiency' }}">{{{ability.icon}}}</a>
                         <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
                     </div>
                 </li>
@@ -109,6 +111,7 @@
             {{#each data.skills as |skill s|}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
                     <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <h4 class="skill-name rollable">{{skill.label}}</h4>
                     <span class="skill-ability">{{skill.ability}}</span>
                     <span class="skill-mod">{{numberFormat skill.total decimals=0 sign=true}}</span>
