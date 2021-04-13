@@ -643,8 +643,10 @@
   font-weight: 700;
 }
 
+/*Lofty modified*/
 .swnmodular.sheet.actor li.attribute.resource {
-  min-width: 100px;
+  min-width: 120px;
+  max-width: 150px;
 }
 
 
