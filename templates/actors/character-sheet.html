@@ -128,7 +128,7 @@
                 <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
-                    <div class="flexrow ability-modifiers">
+                    <div class="ability-modifiers flexrow">
                         <!-- this is the ability modifier here-->
                         <span class="ability-mod" title="Modifier" id="att-mod">{{numberFormat ability.mod decimals=0 sign=true}}</span>
 <!--                        I'm taking out this part, since SWN has no save proficiencies with attributes - lofty -->
@@ -150,11 +150,7 @@
                     <input class="skill-mod" name = "data.skills.{{s}}.value" value="{{skill.value}}" type="number" placeholder="0" />
                     <input class="skill-other" name = "data.skills.{{s}}.prof" value="{{skill.prof}}" type="number" placeholder="0" />
 
-                    <!--                    <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>-->
-<!--                    <span class="skill-ability">{{skill.ability}}</span>-->
-<!--                    <span class="skill-mod">{{numberFormat skill.total decimals=0 sign=true}}</span>-->
-<!--                    <input class="skill-mod" value="{{skill.total}}" type="number" placeholder="0" />-->
-<!--                    <span class="skill-passive">({{skill.passive}})</span>-->
+
                 </li>
             {{/each}}
             </ul>
@@ -176,25 +172,27 @@
                     </li>
 
                     {{#each resources as |res|}}
-                    <li class="attribute resource">
-                        <h4 class="attribute-name box-title">
-                            <input name="data.resources.{{res.name}}.label" type="text" value="{{res.label}}"
-                                   placeholder="{{res.placeholder}}" />
-                        </h4>
-                        <div class="attribute-value">
-                            <label class="recharge checkbox">
-                                {{ localize "SWNMODULAR.AbbreviationSR" }} <input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
-                            </label>
+                    <div>
+                        <li class="attribute resource">
+                            <h4 class="attribute-name box-title">
+                                <input name="data.resources.{{res.name}}.label" type="text" value="{{res.label}}"
+                                       placeholder="{{res.placeholder}}" />
+                            </h4>
+                            <div class="attribute-value">
+                                <label class="recharge checkbox">
+                                    {{ localize "SWNMODULAR.AbbreviationSR" }} <input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
+                                </label>
 
-                            <input name="data.resources.{{res.name}}.value" type="number" value="{{res.value}}" placeholder="0"/>
-                            <span class="sep"> / </span>
-                            <input name="data.resources.{{res.name}}.max" type="number" value="{{res.max}}" placeholder="0"/>
+                                <input name="data.resources.{{res.name}}.value" type="number" value="{{res.value}}" placeholder="0"/>
+                                <span class="sep"> / </span>
+                                <input name="data.resources.{{res.name}}.max" type="number" value="{{res.max}}" placeholder="0"/>
 
-                            <label class="recharge checkbox">
-                                {{ localize "SWNMODULAR.AbbreviationLR" }} <input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
-                            </label>
-                        </div>
-                    </li>
+                                <label class="recharge checkbox">
+                                    {{ localize "SWNMODULAR.AbbreviationLR" }} <input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
+                                </label>
+                            </div>
+                        </li>
+                    </div>
                     {{/each}}
                 </ul>
 

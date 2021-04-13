@@ -52,6 +52,7 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  /*flex-wrap: wrap;*/
 }
 .flexcol > * {
   flex: 1;
@@ -713,21 +714,36 @@
 /*  line-height: 30px;*/
 /*}*/
 /*.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {*/
-/*  border-left: 2px groove #eeede0;*/
+/*  border-right: 2px groove #eeede0;*/
 /*}*/
 
-.swnmodular.sheet.actor .proficiency-toggle {
-  color: #b5b3a4;
-  font-size: 12px;
-}
-.swnmodular.sheet.actor .proficient .proficiency-toggle {
-  color: #4b4a44;
-}
-.swnmodular.sheet.actor .locked .proficiency-toggle {
-  color: #b5b3a4;
-  text-shadow: none;
-  cursor: default;
-}
+/*.swnmodular.sheet.actor .proficiency-toggle {*/
+/*  color: #b5b3a4;*/
+/*  font-size: 12px;*/
+/*}*/
+/*.swnmodular.sheet.actor .proficient .proficiency-toggle {*/
+/*  color: #4b4a44;*/
+/*}*/
+/*.swnmodular.sheet.actor .locked .proficiency-toggle {*/
+/*  color: #b5b3a4;*/
+/*  text-shadow: none;*/
+/*  cursor: default;*/
+/*}*/
+
+/*This applies to each row (unless overridden by the one lower)*/
+/*.flexrow .two{*/
+/*  !*color:green;*!*/
+/*  !*background: #6e0000;*!*/
+
+/*  !*flex-flow: wrap;*!*/
+/*  !*justify-content: flex-end;*!*/
+/*  !*display: block;*!*/
+/*  !*position: center;*!*/
+/*  !*flex-direction: column;*!*/
+/*  !*overflow: scroll;*!*/
+/*}*/
+
+/*This is the big skill box*/
 .swnmodular.sheet.actor ul.skills-list {
   flex: 0 0 180px;
   height: 440px;
@@ -736,43 +752,44 @@
   padding: 3px 0 2px;
   border: 2px groove #eeede0;
   border-radius: 3px;
+
+  /*min-width: 80px;*/
+  overflow: scroll;
+  max-width: 150px;
 }
+/*This controls each line I think*/
 .swnmodular.sheet.actor ul.skills-list li.skill {
   height: 24px;
   padding: 3px 2px;
+  min-width: 120px;
 }
+
+/*Applies to every other row*/
 .swnmodular.sheet.actor ul.skills-list li.skill:nth-child(even) {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 100, 0.05);
 }
+/*The ability name. This will stretch to fill box. No I don't know how to change it. -lofty*/
 .swnmodular.sheet.actor ul.skills-list li.skill h4 {
   flex: 1px;
   margin: 0;
-  font-size: 11px;
-  line-height: 18px;
-}
-.swnmodular.sheet.actor ul.skills-list li.skill .skill-proficiency {
-  flex: 0 0 16px;
-  line-height: 18px;
-}
-.swnmodular.sheet.actor ul.skills-list li.skill .skill-ability {
-  flex: 0 0 26px;
-  text-transform: capitalize;
-}
-.swnmodular.sheet.actor ul.skills-list li.skill .skill-mod {
-  flex: 0 0 20px;
+  font-size: 13px;
+  line-height: 19px;
 
+  /*border: 2px groove green;*/
+}
+
+.swnmodular.sheet.actor ul.skills-list li.skill .skill-mod {
+  flex: 0 0 10px;
+  /*border: 2px groove blue;*/
+  /*border-radius: 2px;*/
 }
 
 .swnmodular.sheet.actor ul.skills-list li.skill .skill-other {
-  flex: 0 0 20px;
-
+  flex: 0 0 10px;
+  /*border: 2px groove orange;*/
 }
 
-.swnmodular.sheet.actor ul.skills-list li.skill .skill-passive {
-  flex: 0 0 26px;
-  text-align: center;
-  color: #7a7971;
-}
+
 .swnmodular.sheet.actor .counters {
   flex: none;
   padding: 5px 0;
