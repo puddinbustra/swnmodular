@@ -334,6 +334,9 @@ export default class Actor5e extends Actor {
     const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
+
+      // console.log("skl.ability is ", skl.ability);
+
       skl.value = Math.clamped(Number(skl.value).toNearest(1), 0, 9) ?? 0;
       skl.prof = Math.clamped(Number(skl.prof).toNearest(1), -9, 9) ?? 0;
       let round = Math.floor;
@@ -657,7 +660,6 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-
   /**
    * Choose which attribute to roll a skill with, then roll it.
    * Prompt the user for input on which attribute to use. Also this method is all by Lofty.
@@ -665,42 +667,91 @@ export default class Actor5e extends Actor {
    * @param {Object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollSkill(skillId, options={}) {
+
+    // console.log("Str.value is",this.data.data.abilities["str"].value)
+    console.log("SKILLID IS ", skillId);
+    console.log("SkillPromptTitle for shoot is ",[SWNMODULAR.SkillPrc]);
+
     const label = CONFIG.SWNMODULAR.skills[skillId];
     new Dialog({
       title: game.i18n.format("SWNMODULAR.SkillPromptTitle", {skill: label}),
       content: `<p>${game.i18n.format("SWNMODULAR.SkillPromptText", {skill: label})}</p>`,
-      buttons: {
-        test: {
-          label: game.i18n.localize("SWNMODULAR.ActionAbil"),
-          callback: () => this.rollAbilityTest(skillId, options)
-        },
-        save: {
-          label: game.i18n.localize("SWNMODULAR.ActionSave"),
-          callback: () => this.rollSkillFull(skillId, options)
+        buttons: {
+          str: {
+            label: game.i18n.localize("STR"),
+            callback: () => this.rollSkillFull(skillId, options, this.getAbilityMod("str"))
+          },
+          con: {
+            label: game.i18n.localize("CON"),
+            callback: () => this.rollSkillFull(skillId, options,this.getAbilityMod("con"))
+          },
+          dex: {
+            label: game.i18n.localize("DEX"),
+            callback: () => this.rollSkillFull(skillId, options, this.getAbilityMod("dex"))
+          },
+          int: {
+            label: game.i18n.localize("INT"),
+            callback: () => this.rollSkillFull(skillId, options, this.getAbilityMod("int"))
+          },
+          wis: {
+            label: game.i18n.localize("WIS"),
+            callback: () => this.rollSkillFull(skillId, options, this.getAbilityMod("wis"))
+          },
+          cha: {
+            label: game.i18n.localize("CHA"),
+            callback: () => this.rollSkillFull(skillId, options, this.getAbilityMod("cha"))
+          },
+          none: {
+            label: game.i18n.localize("NONE"),
+            callback: () => this.rollSkillFull(skillId, options, 0)
+          }
         }
-      }
+
     }).render(true);
   }
 
   /* -------------------------------------------- */
 
   /**
+   * Return the modifier for an ability. Also this method is all by Lofty.
+   * @param {String}abilityId
+   */
+  getAbilityMod(abl){
+    const choice = this.data.data.abilities[abl].value
+    console.log("HERE'S THE getAbilityMod choice",choice);
+
+    if (8 <= choice && choice <=13){
+      console.log("Choice is between 8 and 13 and is of type", typeof(choice));
+      return 0;
+    }
+    else if(choice <= 7){
+      console.log("Attribute is 7 or below");
+      return Math.floor((choice-8)/4);
+
+    }
+    else{
+      return Math.floor((choice - 10) / 4);
+    }
+  }
+
+  /**
    * Roll a Skill Check
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {Object} options      Options which configure how the skill check is rolled
+   * @param {int} options      Options which configure how the skill check is rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+   * Lofty has renamed this method from rollSkill in order to add another parameter
    */
 
 
-  rollSkillFull(skillId, options={}) {
+  rollSkillFull(skillId, options={}, attr) {
+    console.log("ATTR IS ", attr)
     const skl = this.data.data.skills[skillId];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
-
     // Compose roll parts and data
     const parts = ["@mod"];
-    const data = {mod: skl.value + skl.prof};
-
+    const data = {mod: skl.value + skl.prof + attr};
     // Ability test bonus
     if ( bonuses.check ) {
       data["checkBonus"] = bonuses.check;
@@ -726,9 +777,11 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNMODULAR.SkillPromptTitle", {skill: CONFIG.SWNMODULAR.skills[skillId]}),
+      fastForward: true,
       messageData: {"flags.swnmodular.roll": {type: "skill", skillId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
+
     return d20Roll(rollData);
 
 
