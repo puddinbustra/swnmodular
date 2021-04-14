@@ -220,6 +220,13 @@
 <!--                                   value="{{data.attributes.exhaustion}}" />-->
 <!--                        </div>-->
 <!--                    </div>-->
+                    <div class="counter flexrow exhaustion">
+                        <h4> System Strain </h4>
+                        <div class="counter-value">
+                            <input name="data.attributes.exhaustion" type="number" placeholder="0"
+                                   value="{{data.attributes.exhaustion}}" />
+                        </div>
+                    </div>
                 </div>
 
                 {{!-- Traits --}}
@@ -258,6 +265,8 @@
                 <textarea name="data.details.ideal">{{data.details.ideal}}</textarea>
                 <label>{{ localize "SWNMODULAR.Bonds" }}</label>
                 <textarea name="data.details.bond">{{data.details.bond}}</textarea>
+                <label>{{ localize "SWNMODULAR.Flaws" }}</label>
+                <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>
             </div>
             <div class="biography">
                 {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
