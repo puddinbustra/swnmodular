@@ -566,11 +566,11 @@
   height: 24px;
   line-height: 24px;
 }
-.swnmodular.sheet.actor .sheet-header .summary saves{
-  display: block;
-  height: 24px;
-  line-height: 24px;
-}
+/*.swnmodular.sheet.actor .sheet-header .summary saves{*/
+/*  display: block;*/
+/*  height: 24px;*/
+/*  line-height: 24px;*/
+/*}*/
 
 
 .swnmodular.sheet.actor .sheet-header .attributes {

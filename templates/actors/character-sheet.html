@@ -36,12 +36,12 @@
                         <span class="sep"> / </span>
                         <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10" data-dtype="Number"/>
                     </div>
-                    <footer class="attribute-footer">
-                        <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+{{ localize 'SWNMODULAR.Value' }}"
-                               value="{{data.attributes.hp.temp}}" data-dtype="Number"/>
-                        <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+{{ localize 'SWNMODULAR.Max' }}"
-                               value="{{data.attributes.hp.tempmax}}" data-dtype="Number"/>
-                    </footer>
+<!--                    <footer class="attribute-footer">-->
+<!--                        <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+{{ localize 'SWNMODULAR.Value' }}"-->
+<!--                               value="{{data.attributes.hp.temp}}" data-dtype="Number"/>-->
+<!--                        <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+{{ localize 'SWNMODULAR.Max' }}"-->
+<!--                               value="{{data.attributes.hp.tempmax}}" data-dtype="Number"/>-->
+<!--                    </footer>-->
                 </li>
 
                 <li class="attribute">
@@ -60,9 +60,9 @@
                     <div class="attribute-value">
                         <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
                     </div>
-                    <footer class="attribute-footer">
-                        <span class="spell-dc">{{localize "SWNMODULAR.SpellDC"}} {{data.attributes.spelldc}}</span>
-                    </footer>
+<!--                    <footer class="attribute-footer">-->
+<!--                        <span class="spell-dc">{{localize "SWNMODULAR.SpellDC"}} {{data.attributes.spelldc}}</span>-->
+<!--                    </footer>-->
                 </li>
 
                 <li class="attribute movement">
@@ -83,11 +83,12 @@
                     <div class="attribute-value">
                         <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
                     </div>
-                    <footer class="attribute-footer">
-                        <span>{{ localize "SWNMODULAR.Modifier" }}</span>
-                        <input name="data.attributes.init.value" type="text" data-dtype="Number" placeholder="0"
-                               value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
-                    </footer>
+<!--                    <footer class="attribute-footer">-->
+<!--                        I'm removing this for now, to make room for possible save buttons. -Lofty -->
+<!--                        <span>{{ localize "SWNMODULAR.Modifier" }}</span>-->
+<!--                        <input name="data.attributes.init.value" type="text" data-dtype="Number" placeholder="0"-->
+<!--                               value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>-->
+<!--                    </footer>-->
                 </li>
             </ul>
 
@@ -100,9 +101,9 @@
                 <li>
                     <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNMODULAR.Background' }}"/>
                 </li>
-                <li>
-                    <input class="saves" name="data.abilities.{'str'}.value" type="number" value="{str.value}"/>
-                </li>
+<!--                <li>-->
+<!--                    <input class="saves" name="data.abilities.{'str'}.value" type="number" value="{str.value}"/>-->
+<!--                </li>-->
                 <li class="proficiency">
                     <span>{{ localize "SWNMODULAR.Proficiency" }} {{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
                 </li>
@@ -212,15 +213,6 @@
 
 
                         {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
-
-
-<!--                    <div class="counter flexrow exhaustion">-->
-<!--                        <h4> System Strain </h4>-->
-<!--                        <div class="counter-value">-->
-<!--                            <input name="data.attributes.exhaustion" type="number" placeholder="0"-->
-<!--                                   value="{{data.attributes.exhaustion}}" />-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
 
                 {{!-- Traits --}}
