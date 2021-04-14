@@ -659,6 +659,32 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Choose which attribute to roll a skill with, then roll it.
+   * Prompt the user for input on which attribute to use. Also this method is all by Lofty.
+   * @param {String}skillId     The ability id (e.g. "str")
+   * @param {Object} options      Options which configure how ability tests or saving throws are rolled
+   */
+  rollSkill(skillId, options={}) {
+    const label = CONFIG.SWNMODULAR.skills[skillId];
+    new Dialog({
+      title: game.i18n.format("SWNMODULAR.SkillPromptTitle", {skill: label}),
+      content: `<p>${game.i18n.format("SWNMODULAR.SkillPromptText", {skill: label})}</p>`,
+      buttons: {
+        test: {
+          label: game.i18n.localize("SWNMODULAR.ActionAbil"),
+          callback: () => this.rollAbilityTest(skillId, options)
+        },
+        save: {
+          label: game.i18n.localize("SWNMODULAR.ActionSave"),
+          callback: () => this.rollSkillFull(skillId, options)
+        }
+      }
+    }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Roll a Skill Check
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
@@ -667,7 +693,7 @@ export default class Actor5e extends Actor {
    */
 
 
-  rollSkill(skillId, options={}) {
+  rollSkillFull(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
 

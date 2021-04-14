@@ -500,6 +500,7 @@
 "SWNMODULAR.SkillSte": "Talk",
 "SWNMODULAR.SkillSur": "Trade",
 "SWNMODULAR.SkillWor": "Work",
+"SWNMODULAR.SkillPromptText": "Roll {skill} With Which Attribute?",
 "SWNMODULAR.SkillPromptTitle": "{skill} Skill Check",
 "SWNMODULAR.Source": "Source",
 "SWNMODULAR.Special": "Special",
