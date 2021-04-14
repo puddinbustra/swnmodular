@@ -204,8 +204,11 @@
                 {{!-- Counters --}}
                 <div class="counters">
 <!--                    <label></label>-->
-                    <h4> {{ localize "SWNMODULAR.Flaws" }}</h4>
-                    <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>
+<!--                    <h4> {{ localize "SWNMODULAR.Flaws" }}</h4>-->
+<!--                    <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>-->
+
+
+                        {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
 
 
 <!--                    <div class="counter flexrow exhaustion">-->
