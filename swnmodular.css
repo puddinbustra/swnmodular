@@ -566,6 +566,13 @@
   height: 24px;
   line-height: 24px;
 }
+.swnmodular.sheet.actor .sheet-header .summary saves{
+  display: block;
+  height: 24px;
+  line-height: 24px;
+}
+
+
 .swnmodular.sheet.actor .sheet-header .attributes {
   flex: 0 0 100%;
   margin: 0;
@@ -758,6 +765,7 @@
 
   /*min-width: 80px;*/
   overflow: scroll;
+  scrollbar-base-color: #3E209B;
   max-width: 150px;
 }
 /*This controls each line I think*/
@@ -813,7 +821,7 @@
 /*.swnmodular.sheet.actor .counters .counter .counter-value {*/
 /*  flex: none;*/
 /*  text-align: right;*/
-}
+
 /*.swnmodular.sheet.actor .counters .counter .counter-value > * {*/
 /*  display: inline;*/
 /*}*/
