@@ -334,8 +334,8 @@ export default class Actor5e extends Actor {
     const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
-      skl.value = Math.clamped(Number(skl.value).toNearest(1), 0, 10) ?? 0;
-      skl.prof = Math.clamped(Number(skl.prof).toNearest(1), 0, 10) ?? 0;
+      skl.value = Math.clamped(Number(skl.value).toNearest(1), 0, 9) ?? 0;
+      skl.prof = Math.clamped(Number(skl.prof).toNearest(1), -9, 9) ?? 0;
       let round = Math.floor;
 
       // Compute modifier. Right now it should just do the number you put in and save that.

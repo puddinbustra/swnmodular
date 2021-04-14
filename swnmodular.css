@@ -794,7 +794,7 @@
 
 
 .swnmodular.sheet.actor .counters {
-  flex: none;
+  flex: auto;
   padding: 5px 0;
   margin: 0;
   border-bottom: 2px groove #eeede0;
@@ -810,28 +810,29 @@
   font-weight: bold;
   color: #4b4a44;
 }
-.swnmodular.sheet.actor .counters .counter .counter-value {
-  flex: none;
-  text-align: right;
+/*.swnmodular.sheet.actor .counters .counter .counter-value {*/
+/*  flex: none;*/
+/*  text-align: right;*/
 }
-.swnmodular.sheet.actor .counters .counter .counter-value > * {
-  display: inline;
-}
+/*.swnmodular.sheet.actor .counters .counter .counter-value > * {*/
+/*  display: inline;*/
+/*}*/
 .swnmodular.sheet.actor .counters .counter input[type="text"],
 .swnmodular.sheet.actor .counters .counter input[type="number"] {
   height: 20px;
   max-width: 20px;
   margin: 0;
   padding: 0;
-  text-align: center;
+  text-align: left;
 }
-.swnmodular.sheet.actor .counters .counter input[type="checkbox"] {
-  position: relative;
-  width: 16px;
-  height: 16px;
-  margin: 0;
-  top: 4px;
-}
+/*.swnmodular.sheet.actor .counters .counter input[type="checkbox"] {*/
+/*  position: relative;*/
+/*  width: 16px;*/
+/*  height: 16px;*/
+/*  margin: 0;*/
+/*  top: 4px;*/
+/*}*/
+
 .swnmodular.sheet.actor .counters .counter span.sep {
   font-size: 12px;
 }
