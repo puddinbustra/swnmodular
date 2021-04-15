@@ -30,6 +30,9 @@
           }
         },
         "attributes": {
+          "level": {
+            "value": 0
+          },
           "ac": {
             "value": 10
           },

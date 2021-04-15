@@ -11,7 +11,9 @@
 
             <aside class="header-exp flexcol">
                 <div class="charlevel" title="{{multiclassLabels}}">
-                    <label>{{ localize "SWNMODULAR.Level" }} {{data.details.level}}</label>
+<!--                    <label>{{ localize "SWNMODULAR.Level" }} {{data.details.level}}</label>-->
+                    <label> {{ localize "SWNMODULAR.Level" }} </label>
+                    <input name = "data.attributes.level.value" type = "number" value = "{{data.attributes.level.value}}" placeholder="0" data-dtype="Number"/>
                     <span class="levels">{{classLabels}}</span>
                 </div>
 
@@ -214,9 +216,6 @@
 
                         {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
                 </div>
-
-                {{!-- Traits --}}
-                {{> "systems/swnmodular/templates/actors/parts/actor-traits.html"}}
             </section>
         </div>
 
@@ -238,6 +237,10 @@
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
             {{> "systems/swnmodular/templates/actors/parts/active-effects.html"}}
+
+            {{!-- Traits --}}
+            {{> "systems/swnmodular/templates/actors/parts/actor-traits.html"}}
+
         </div>
 
         {{!-- Biography Tab --}}
