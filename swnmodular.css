@@ -1425,6 +1425,9 @@
   color: #7a7971;
   white-space: nowrap;
 }
+.swnmodular.sheet.actor.character .sheet-header .charlevel .levelInput{
+  width: 10px;
+}
 .swnmodular.sheet.actor.character .sheet-header .experience {
   flex: 0 0 32px;
   margin-bottom: -5px;
