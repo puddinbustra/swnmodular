@@ -812,7 +812,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     console.log("SAVE EVENT IS", event);
     //I don't think save is the right variable, do I have to do inidividually for each? -lofty
-    const save = event.currentTarget.parentElement.dataset.saves;
+    const save = event.currentTarget.dataset.saves;
     console.log("SAVE IS", save);
     this.actor.rollSaveSwn(save, {event: event});
   }

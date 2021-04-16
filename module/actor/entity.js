@@ -866,8 +866,9 @@ export default class Actor5e extends Actor {
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollSaveSwn(saveType, options={}){
-    const label = CONFIG.SWNMODULAR.attributes[saveType];
-    const type = this.data.data.attributes[saveType];
+    console.log("ROLLSAVESWN function savetype is",saveType)
+
+    const type = saveType
     // Construct parts
     const parts = ["@mod"];
     const data = {mod: type};
