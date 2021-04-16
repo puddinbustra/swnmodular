@@ -88,10 +88,10 @@ export default class Actor5e extends Actor {
 
     // Set save bonus
     const level = data.attributes.level.value
+
     data.attributes.psave = 16 - level - Math.max(data.abilities.str.mod, data.abilities.con.mod);
     data.attributes.esave = 16 - level - Math.max(data.abilities.dex.mod, data.abilities.int.mod);
     data.attributes.msave = 16 - level - Math.max(data.abilities.wis.mod, data.abilities.cha.mod);
-
 
     // Inventory encumbrance
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
@@ -342,8 +342,6 @@ export default class Actor5e extends Actor {
     const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
-
-      // console.log("skl.ability is ", skl.ability);
 
       skl.value = Math.clamped(Number(skl.value).toNearest(1), 0, 9) ?? 0;
       skl.prof = Math.clamped(Number(skl.prof).toNearest(1), -9, 9) ?? 0;
@@ -676,10 +674,6 @@ export default class Actor5e extends Actor {
    */
   rollSkill(skillId, options={}) {
 
-    // console.log("Str.value is",this.data.data.abilities["str"].value)
-    console.log("SKILLID IS ", skillId);
-    console.log("SkillPromptTitle for shoot is ",[SWNMODULAR.SkillPrc]);
-
     const label = CONFIG.SWNMODULAR.skills[skillId];
     new Dialog({
       title: game.i18n.format("SWNMODULAR.SkillPromptTitle", {skill: label}),
@@ -726,14 +720,11 @@ export default class Actor5e extends Actor {
    */
   getAbilityMod(abl){
     const choice = this.data.data.abilities[abl].value
-    console.log("HERE'S THE getAbilityMod choice",choice);
 
     if (8 <= choice && choice <=13){
-      console.log("Choice is between 8 and 13 and is of type", typeof(choice));
       return 0;
     }
     else if(choice <= 7){
-      console.log("Attribute is 7 or below");
       return Math.floor((choice-8)/4);
 
     }
@@ -754,7 +745,6 @@ export default class Actor5e extends Actor {
 
 
   rollSkillFull(skillId, options={}, attr) {
-    console.log("ATTR IS ", attr)
     const skl = this.data.data.skills[skillId];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
     // Compose roll parts and data
@@ -869,7 +859,43 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+  /**
+   * Roll an Ability Saving Throw for SWN, function by Lofty
+   * @param {String} saveType
+   * @param {Object} options      Options which configure how ability tests are rolled
+   * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+   */
+  rollSaveSwn(saveType, options={}){
+    const label = CONFIG.SWNMODULAR.attributes[saveType];
+    const type = this.data.data.attributes[saveType];
+    // Construct parts
+    const parts = ["@mod"];
+    const data = {mod: type};
 
+    // Include a global actor ability save bonus
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    if ( bonuses.save ) {
+      parts.push("@saveBonus");
+      data.saveBonus = bonuses.save;
+    }
+
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if (options.parts?.length > 0) {
+      parts.push(...options.parts);
+    }
+
+    // Roll and return
+    const rollData = mergeObject(options, {
+      parts: parts,
+      data: data,
+      title: game.i18n.format("SWNMODULAR.SavePromptTitle", {ability: label}),
+      messageData: {"flags.swnmodular.roll": {type: "save", abilityId }}
+    });
+    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
+    return d20Roll(rollData);
+  }
+
+  /* -------------------------------------------- */
   /**
    * Roll an Ability Saving Throw
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus

@@ -61,14 +61,10 @@
             "min": 0,
             "max": 10
           },
-          "psave": {
-            "value": 16
-          },
-          "esave": {
-            "value": 16
-          },
-          "msave": {
-            "value": 16
+          "saves": {
+            "psave": 16,
+            "esave": 16,
+            "msave": 16
           }
         },
         "details": {

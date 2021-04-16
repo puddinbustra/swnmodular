@@ -37,7 +37,18 @@ SWNMODULAR.abilityAbbreviations = {
 };
 
 /* -------------------------------------------- */
+/**
+ * The set of saves used within the system, added by Lofty
+ * @type {Object}
+ */
+  SWNMODULAR.saves = {
+    "psave": "SWNMODULAR.pSave",
+    "esave": "SWNMODULAR.eSave",
+    "msave": "SWNMODULAR.mSave"
+  }
 
+
+/* -------------------------------------------- */
 /**
  * Character alignment options
  * @type {Object}
