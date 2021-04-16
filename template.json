@@ -60,6 +60,15 @@
             "value":0,
             "min": 0,
             "max": 10
+          },
+          "psave": {
+            "value": 16
+          },
+          "esave": {
+            "value": 16
+          },
+          "msave": {
+            "value": 16
           }
         },
         "details": {

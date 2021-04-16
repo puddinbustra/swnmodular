@@ -59,6 +59,7 @@ export default class Actor5e extends Actor {
     const dcBonus = Number.isNumeric(data.bonuses?.spell?.dc) ? parseInt(data.bonuses.spell.dc) : 0;
     const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
     const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
+    //Compute ability bonus -Lofty
     for (let [id, abl] of Object.entries(data.abilities)) {
       if (8 <= abl.value && abl.value <=13){
         abl.mod = 0;
@@ -76,14 +77,21 @@ export default class Actor5e extends Actor {
 
       abl.saveBonus = saveBonus;
       abl.checkBonus = checkBonus;
-      abl.save = abl.mod + abl.prof + abl.saveBonus;
+      // abl.save = abl.mod + abl.prof + abl.saveBonus;
       abl.dc = 8 + abl.mod + data.attributes.prof + dcBonus;
 
-      // If we merged saves when transforming, take the highest bonus here.
-      if (originalSaves && abl.proficient) {
-        abl.save = Math.max(abl.save, originalSaves[id].save);
-      }
+      // // If we merged saves when transforming, take the highest bonus here.
+      // if (originalSaves && abl.proficient) {
+      //   abl.save = Math.max(abl.save, originalSaves[id].save);
+      // }
     }
+
+    // Set save bonus
+    const level = data.attributes.level.value
+    data.attributes.psave = 16 - level - Math.max(data.abilities.str.mod, data.abilities.con.mod);
+    data.attributes.esave = 16 - level - Math.max(data.abilities.dex.mod, data.abilities.int.mod);
+    data.attributes.msave = 16 - level - Math.max(data.abilities.wis.mod, data.abilities.cha.mod);
+
 
     // Inventory encumbrance
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
