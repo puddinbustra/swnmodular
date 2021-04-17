@@ -866,12 +866,16 @@ export default class Actor5e extends Actor {
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollSaveSwn(saveType, options={}){
-    console.log("ROLLSAVESWN function savetype is",saveType)
 
-    const type = saveType
+
+    const stype = CONFIG.SWNMODULAR.saves[saveType];
+    const saveLabel = game.i18n.localize(`${stype}`);
+    console.log("STYPE IS ",stype);
+    console.log("saveLabel is",saveLabel);
+    const label = saveType;
     // Construct parts
-    const parts = ["@mod"];
-    const data = {mod: type};
+    const parts = [0];  //["@mod"];
+    const data = {0:0};   //{mod: type};
 
     // Include a global actor ability save bonus
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
@@ -889,8 +893,8 @@ export default class Actor5e extends Actor {
     const rollData = mergeObject(options, {
       parts: parts,
       data: data,
-      title: game.i18n.format("SWNMODULAR.SavePromptTitle", {ability: label}),
-      messageData: {"flags.swnmodular.roll": {type: "save", abilityId }}
+      title: game.i18n.format("SWNMODULAR.SavePromptTitle", {ability: saveLabel}),
+      messageData: {"flags.swnmodular.roll": {type: "save", saveLabel}}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);

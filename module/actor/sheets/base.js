@@ -794,9 +794,7 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onRollSkillCheck(event) {
     event.preventDefault();
-    console.log("SKILL EVENT IS", event);
     const skill = event.currentTarget.parentElement.dataset.skill;
-    console.log("SKILL IS", skill);
     this.actor.rollSkill(skill, {event: event});
   }
 
@@ -810,10 +808,8 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onRollAbilitySave(event) {
     event.preventDefault();
-    console.log("SAVE EVENT IS", event);
     //I don't think save is the right variable, do I have to do inidividually for each? -lofty
     const save = event.currentTarget.dataset.saves;
-    console.log("SAVE IS", save);
     this.actor.rollSaveSwn(save, {event: event});
   }
 
