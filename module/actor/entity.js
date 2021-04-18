@@ -869,13 +869,15 @@ export default class Actor5e extends Actor {
 
 
     const stype = CONFIG.SWNMODULAR.saves[saveType];
+    const sval = this.data.data.attributes[saveType];
     const saveLabel = game.i18n.localize(`${stype}`);
-    console.log("STYPE IS ",stype);
-    console.log("saveLabel is",saveLabel);
+    console.log("SVAL IS ",sval);
+    console.log("savetype is",saveType);
     const label = saveType;
     // Construct parts
     const parts = [0];  //["@mod"];
     const data = {0:0};   //{mod: type};
+
 
     // Include a global actor ability save bonus
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
@@ -893,6 +895,9 @@ export default class Actor5e extends Actor {
     const rollData = mergeObject(options, {
       parts: parts,
       data: data,
+      fastForward: true,
+      //Right now, sval doesn't include +/- extra modifiers. To do that, just add those in here also - Lofty
+      isSave: sval,
       title: game.i18n.format("SWNMODULAR.SavePromptTitle", {ability: saveLabel}),
       messageData: {"flags.swnmodular.roll": {type: "save", saveLabel}}
     });

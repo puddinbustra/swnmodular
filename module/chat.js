@@ -25,6 +25,13 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
     if ( roll.total >= d.options.target ) html.find(".dice-total").addClass("success");
     else html.find(".dice-total").addClass("failure");
   }
+
+  //Indicate if a save has succeeded or failed, so css can highlight the background -Lofty
+  if(d.total >= d.options.isSave) {
+    //Find the background, then addClass saveFail or saveSuccess (i need to add these to css, and put the color adjustments in there too)
+    html.find();
+  }
+
 };
 
 /* -------------------------------------------- */

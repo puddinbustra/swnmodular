@@ -89,6 +89,7 @@ function _isUnsupportedTerm(term) {
  * @param {boolean} elvenAccuracy   Allow Elven Accuracy to modify this roll?
  * @param {boolean} halflingLucky   Allow Halfling Luck to modify this roll?
  * @param {boolean} reliableTalent  Allow Reliable Talent to modify this roll?
+ * @param {save} save            Is this a save? - Lofty
  * @param {boolean} chatMessage     Automatically create a Chat Message for the result of this roll
  * @param {object} messageData      Additional data which is applied to the created Chat Message, if any
  *
@@ -97,7 +98,7 @@ function _isUnsupportedTerm(term) {
 export async function d20Roll({parts=[], data={}, event={}, rollMode=null, template=null, title=null, speaker=null,
   flavor=null, fastForward=null, dialogOptions,
   advantage=null, disadvantage=null, critical=20, fumble=1, targetValue=null,
-  elvenAccuracy=false, halflingLucky=false, reliableTalent=false,
+  elvenAccuracy=false, halflingLucky=false, reliableTalent=false, isSave=null,
   chatMessage=true, messageData={}}={}) {
 
   // Prepare Message Data
@@ -175,6 +176,9 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
       if (d.faces === 20) {
         d.options.critical = critical;
         d.options.fumble = fumble;
+        if(isSave != null){
+          d.options.isSave = isSave;
+        }
         if ( adv === 1 ) d.options.advantage = true;
         else if ( adv === -1 ) d.options.disadvantage = true;
         if (targetValue) d.options.target = targetValue;
