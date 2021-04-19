@@ -71,6 +71,12 @@
           "biography": {
             "value": "",
             "public": ""
+          },
+          "info": {
+            "value": ""
+          },
+          "scars": {
+            "value": ""
           }
         },
         "traits": {
@@ -286,6 +292,7 @@
       },
       "details": {
         "background": "",
+        "focus": "",
         "xp": {
           "value": 0,
           "min": 0,

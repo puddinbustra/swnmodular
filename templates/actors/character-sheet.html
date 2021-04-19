@@ -30,6 +30,25 @@
             </aside>
 
             {{!-- Header Attributes --}}
+
+            {{!-- Character Summary --}}
+            <ul class="summary flexrow">
+                <!--                Use this as a template to add things to the upper header line if needed-->
+                <!--                <li>-->
+                <!--                    <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="{{ localize 'SWNMODULAR.Race' }}"/>-->
+                <!--                </li>-->
+                <li>
+                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNMODULAR.Background' }}"/>
+                </li>
+                <!--                <li>-->
+                <!--                    <input class="saves" name="data.abilities.{'str'}.value" type="number" value="{str.value}"/>-->
+                <!--                </li>-->
+                <li>
+                    <input type="text" name="data.details.focus" value="{{data.details.focus}}" placeholder="{{ localize 'SWNMODULAR.Focus' }}"/>
+                </li>
+            </ul>
+
+
             <ul class="attributes flexrow">
                 <li class="attribute health">
                     <h4 class="attribute-name box-title">{{ localize "SWNMODULAR.HitPoints" }}</h4>
@@ -49,7 +68,7 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "SWNMODULAR.HitDice" }}</h4>
                     <div class="attribute-value multiple">
-                        <label class="hit-dice">{{data.attributes.hd}} <span class="sep"> / </span> {{data.details.level}}</label>
+                        <label class="hit-dice">{{data.attributes.level.value}} D6 + {{data.abilities.con.mod}}</span></label>
                     </div>
 <!--                    <footer class="attribute-footer">-->
 <!--                        <a class="rest short-rest">{{ localize "SWNMODULAR.RestS" }}</a>-->
@@ -91,23 +110,6 @@
 <!--                        <input name="data.attributes.init.value" type="text" data-dtype="Number" placeholder="0"-->
 <!--                               value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>-->
 <!--                    </footer>-->
-                </li>
-            </ul>
-
-            {{!-- Character Summary --}}
-            <ul class="summary flexrow">
-                <!--                Use this as a template to add things to the upper header line if needed-->
-                <!--                <li>-->
-                <!--                    <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="{{ localize 'SWNMODULAR.Race' }}"/>-->
-                <!--                </li>-->
-                <li>
-                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNMODULAR.Background' }}"/>
-                </li>
-<!--                <li>-->
-<!--                    <input class="saves" name="data.abilities.{'str'}.value" type="number" value="{str.value}"/>-->
-<!--                </li>-->
-                <li class="proficiency">
-                    <span>{{ localize "SWNMODULAR.Proficiency" }} {{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
                 </li>
             </ul>
 
@@ -168,27 +170,30 @@
                 <ul class="attributes flexrow">
 
                     <!--                    Save buttons from Lofty-->
+                <div>
                     <li class="ability-save attribute resource" data-saves = "psave">
                         <h4 class="attribute-name box-title rollable"> Physical Save </h4>
                         <div class="attribute-value">
                             <span name="data.attributes.saves.psave" type="text"> vs {{data.attributes.psave}} </span>
                         </div>
                     </li>
-
+                </div>
+                <div>
                     <li class="ability-save attribute resource" data-saves = "esave">
                         <h4 class="attribute-name box-title rollable"> Evasion Save </h4>
                         <div class="attribute-value">
                             <span name="data.attributes.saves.esave" type="text"> vs {{data.attributes.esave}} </span>
                         </div>
                     </li>
-
+                </div>
+                <div>
                     <li class="ability-save attribute resource" data-saves = "msave">
                         <h4 class="attribute-name box-title rollable"> Mental Save </h4>
                         <div class="attribute-value">
                             <span name="data.attributes.saves.msave" type="text"> vs {{data.attributes.msave}} </span>
                         </div>
                     </li>
-
+                </div>
 
                 </ul>
 
@@ -196,17 +201,19 @@
                 <ul class="attributes flexrow">
 
 <!--                    System Strain from Lofty-->
-                    <li class="attribute resource">
-                        <h4 class="attribute-name box-title"> System Strain </h4>
-                        <div class="attribute-value">
-                            <input name="data.attributes.strain.value" type="text" value="{{data.attributes.strain.value}}"
-                                   data-dtype="Number" placeholder= "0"/>
-                            <span class="sep"> / </span>
-                            <input name="data.attributes.strain.max" type="text" value="{{data.attributes.strain.max}}"
-                                   data-dtype="Number" placeholder="0"/>
-                        </div>
-                    </li>
-
+                    <div>
+                        <li class="attribute resource">
+                            <h4 class="attribute-name box-title"> System Strain </h4>
+                            <div class="attribute-value">
+                                <input name="data.attributes.strain.value" type="text" value="{{data.attributes.strain.value}}"
+                                       data-dtype="Number" placeholder= "0"/>
+                                <span class="sep"> / </span>
+                                <span> {{data.abilities.con.value}} </span>
+    <!--                            <input name="data.attributes.strain.max" type="text" value="{{data.attributes.strain.max}}"-->
+    <!--                                   data-dtype="Number" placeholder="0"/>-->
+                            </div>
+                        </li>
+                    </div>
                     {{#each resources as |res|}}
                     <div>
                         <li class="attribute resource">
@@ -215,17 +222,9 @@
                                        placeholder="{{res.placeholder}}" />
                             </h4>
                             <div class="attribute-value">
-<!--                                <label class="recharge checkbox">-->
-<!--                                    {{ localize "SWNMODULAR.AbbreviationSR" }} <input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>-->
-<!--                                </label>-->
-
                                 <input name="data.resources.{{res.name}}.value" type="number" value="{{res.value}}" placeholder="0"/>
                                 <span class="sep"> / </span>
                                 <input name="data.resources.{{res.name}}.max" type="number" value="{{res.max}}" placeholder="0"/>
-
-<!--                                <label class="recharge checkbox">-->
-<!--                                    {{ localize "SWNMODULAR.AbbreviationLR" }} <input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>-->
-<!--                                </label>-->
                             </div>
                         </li>
                     </div>
@@ -240,8 +239,12 @@
 <!--                    <h4> {{ localize "SWNMODULAR.Flaws" }}</h4>-->
 <!--                    <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>-->
 
-
-                        {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
+                    <div class = "info">
+                        {{editor content=data.details.info.value target="data.details.info.value" button=true owner=owner editable=editable}}
+                    </div>
+                    <div class = "scars">
+                        {{editor content=data.details.scars.value target="data.details.scars.value" button=true owner=owner editable=editable}}
+                    </div>
                 </div>
             </section>
         </div>

@@ -566,12 +566,6 @@
   height: 24px;
   line-height: 24px;
 }
-/*.swnmodular.sheet.actor .sheet-header .summary saves{*/
-/*  display: block;*/
-/*  height: 24px;*/
-/*  line-height: 24px;*/
-/*}*/
-
 
 .swnmodular.sheet.actor .sheet-header .attributes {
   flex: 0 0 100%;
@@ -709,12 +703,13 @@
 }
 .swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod,
 .swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
-  flex: 0 0 24px;
+  flex: 0 0 25%;
   height: 22px;
   line-height: 22px;
   font-size: 16px;
   border-top: 2px groove #eeede0;
   align-content: center;
+  position: relative;
 }
 .swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
   border-left: 2px groove #eeede0;
@@ -1466,9 +1461,11 @@
 .swnmodular.sheet.actor.character .sheet-header .attributes .hit-dice {
   font-size: 24px;
 }
-.swnmodular.sheet.actor.character .sheet-header .attributes .initiative .attribute-footer input {
-  width: 32px;
-}
+
+/*.swnmodular.sheet.actor.character .sheet-header .attributes .initiative .attribute-footer input {*/
+/*  width: 15px;*/
+/*}*/
+
 .swnmodular.sheet.actor.character .sheet-header .summary .proficiency {
   text-align: right;
   padding-right: 5px;
@@ -1476,20 +1473,20 @@
 .swnmodular.sheet.actor.character .resource .attribute-value input {
   flex: 0 0 25%;
 }
-.swnmodular.sheet.actor.character .resource .attribute-value label.recharge {
-  height: 32px;
-  position: relative;
-  font-family: "Signika", sans-serif;
-  font-size: 11px;
-  text-align: center;
-  color: #4b4a44;
-}
-.swnmodular.sheet.actor.character .resource .attribute-value label.recharge input[type="checkbox"] {
-  height: 14px;
-  width: 14px;
-  margin: 0;
-  top: -6px;
-}
+/*.swnmodular.sheet.actor.character .resource .attribute-value label.recharge {*/
+/*  height: 32px;*/
+/*  position: relative;*/
+/*  font-family: "Signika", sans-serif;*/
+/*  font-size: 11px;*/
+/*  text-align: center;*/
+/*  color: #4b4a44;*/
+/*}*/
+/*.swnmodular.sheet.actor.character .resource .attribute-value label.recharge input[type="checkbox"] {*/
+/*  height: 14px;*/
+/*  width: 14px;*/
+/*  margin: 0;*/
+/*  top: -6px;*/
+/*}*/
 .swnmodular.sheet.actor.character ul.skills-list {
   flex: 0 0 212px;
 }
