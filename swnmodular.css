@@ -602,14 +602,14 @@
 .swnmodular.sheet.actor .sheet-header .attributes input.temphp {
   width: 48%;
 }
+/*This targets all the titles of boxes- including in resources, header, and attributes*/
 .swnmodular.sheet.actor h4.box-title {
   height: 18px;
   line-height: 16px;
   margin: 4px 8px 2px;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
-  font-size: 18px;
   color: #4b4a44;
   border-bottom: 1px solid #c9c7b8;
   white-space: nowrap;
@@ -617,6 +617,7 @@
 .swnmodular.sheet.actor .tab.attributes {
   overflow: hidden;
 }
+/*This targets the larger container, where the boxes themselves are, not contents, of all the stuff below*/
 .swnmodular.sheet.actor ul.attributes {
   flex: 0 0 60px;
   list-style: none;
@@ -624,23 +625,24 @@
   padding: 0;
   border-top: 2px groove #eeede0;
 }
-.swnmodular.sheet.actor ul.attributes {
-  flex: 0 0 60px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 2px groove #eeede0;
-}
+
+/*Applies to Resources, saves, and the header -Lofty*/
 .swnmodular.sheet.actor ul.attributes li.attribute {
   height: 60px;
   margin: 0 5px 0 0;
-  border: 2px groove #eeede0;
-  border-radius: 4px;
+  border: 2px groove rgb(116, 116, 116);
+  border-radius: 6px;
   text-align: center;
+  padding-top: 2px;
+}
+/*Applies to header only -Lofty*/
+.swnmodular.sheet.actor ul.attributes div.no-sub{
+  padding-top: 7px;
 }
 .swnmodular.sheet.actor ul.attributes li.attribute:last-child {
   margin: 0;
 }
+/*This one targets all of the values in attributes*/
 .swnmodular.sheet.actor ul.attributes li.attribute .attribute-value {
   display: flex;
   justify-content: center;
@@ -718,6 +720,10 @@
   align-content: center;
   position: relative;
 }
+.swnmodular.sheet.actor li.save-box{
+  background-color: rgba(142, 30, 30, 0.22);;
+}
+
 .swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
   border-left: 2px groove #eeede0;
 }
@@ -725,9 +731,11 @@
 .swnmodular.sheet.actor .info {
   border: 2px groove #eeede0;
   flex: 1 0 25%;
-  height: 255px;
+  /*height: 255px;*/
+  max-height: 315px;
+
   min-width: 200px;
-  max-width: 221px;
+  max-width: 200px;
 
 }
 

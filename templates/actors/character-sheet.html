@@ -50,9 +50,9 @@
 
 
             <ul class="attributes flexrow">
-                <li class="attribute health">
+                <li class="attribute health no-sub">
                     <h4 class="attribute-name box-title">{{ localize "SWNMODULAR.HitPoints" }}</h4>
-                    <div class="attribute-value multiple">
+                    <div class="attribute-value multiple no-sub">
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10" data-dtype="Number"/>
                         <span class="sep"> / </span>
                         <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10" data-dtype="Number"/>
@@ -67,7 +67,7 @@
 
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "SWNMODULAR.HitDice" }}</h4>
-                    <div class="attribute-value multiple">
+                    <div class="attribute-value multiple no-sub">
                         <label class="hit-dice">{{data.attributes.level.value}} D6 + {{data.abilities.con.mod}}</span></label>
                     </div>
 <!--                    <footer class="attribute-footer">-->
@@ -101,7 +101,7 @@
 
                 <li class="attribute initiative">
                     <h4 class="attribute-name box-title rollable" data-action="rollInitiative">{{ localize "SWNMODULAR.Initiative" }}</h4>
-                    <div class="attribute-value">
+                    <div class="attribute-value no-sub">
                         <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
                     </div>
 <!--                    <footer class="attribute-footer">-->
@@ -171,24 +171,24 @@
 
                     <!--                    Save buttons from Lofty-->
                 <div>
-                    <li class="ability-save attribute resource" data-saves = "psave">
-                        <h4 class="attribute-name box-title rollable"> Physical Save </h4>
+                    <li class="attribute resource save-box">
+                        <h4 class="save-click attribute-name box-title rollable" data-saves = "psave"> Physical Save </h4>
                         <div class="attribute-value">
                             <span name="data.attributes.saves.psave" type="text"> vs {{data.attributes.psave}} </span>
                         </div>
                     </li>
                 </div>
                 <div>
-                    <li class="ability-save attribute resource" data-saves = "esave">
-                        <h4 class="attribute-name box-title rollable"> Evasion Save </h4>
+                    <li class="attribute resource save-box">
+                        <h4 class="save-click attribute-name box-title rollable" data-saves = "esave"> Evasion Save </h4>
                         <div class="attribute-value">
                             <span name="data.attributes.saves.esave" type="text"> vs {{data.attributes.esave}} </span>
                         </div>
                     </li>
                 </div>
                 <div>
-                    <li class="ability-save attribute resource" data-saves = "msave">
-                        <h4 class="attribute-name box-title rollable"> Mental Save </h4>
+                    <li class="attribute resource save-box">
+                        <h4 class="save-click attribute-name box-title rollable" data-saves = "msave"> Mental Save </h4>
                         <div class="attribute-value">
                             <span name="data.attributes.saves.msave" type="text"> vs {{data.attributes.msave}} </span>
                         </div>

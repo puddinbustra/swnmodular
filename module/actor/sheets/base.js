@@ -437,7 +437,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
 
       // Roll Ability Saves - Lofty
-      html.find('.ability-save').click(this._onRollAbilitySave.bind(this));
+      html.find('.save-click').click(this._onRollAbilitySave.bind(this));
 
       // Item Rolling
       html.find('.item .item-image').click(event => this._onItemRoll(event));
@@ -808,7 +808,6 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onRollAbilitySave(event) {
     event.preventDefault();
-    //I don't think save is the right variable, do I have to do inidividually for each? -lofty
     const save = event.currentTarget.dataset.saves;
     this.actor.rollSaveSwn(save, {event: event});
   }
