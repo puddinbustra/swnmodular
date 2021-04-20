@@ -2,7 +2,7 @@
   "name": "swnmodular",
   "title": "Stars Without Number Modular",
   "description": "A Stars Without Number system intended to be easy to modify. Base code from the DND5e sheet by Atropos.",
-  "version": "0.0.49",
+  "version": "0.0.50",
   "author": "Lofty",
   "scripts": [],
   "esmodules": ["swnmodular.js"],

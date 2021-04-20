@@ -97,12 +97,12 @@
 .swnmodular input[type="text"]:focus,
 .swnmodular input[type="number"]:focus {
   border: 1px solid #111;
-  box-shadow: 0 0 8px red;
+  box-shadow: 0 0 8px #2301a3;
 }
 .swnmodular input:disabled,
 .swnmodular select:disabled,
 .swnmodular textarea:disabled {
-  color: #4b4a44;
+  color: #2a2a26;
 }
 .swnmodular input:disabled:hover,
 .swnmodular select:disabled:hover,
@@ -115,7 +115,7 @@
   outline: none !important;
 }
 .swnmodular button {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.27);
   border: 2px groove #eeede0;
 }
 .swnmodular label.checkbox {
@@ -266,7 +266,7 @@
 .swnmodular.sheet .editable h4.rollable:hover,
 .swnmodular.sheet .editable .rollable:hover > h4 {
   color: #000;
-  text-shadow: 0 0 10px red;
+  text-shadow: 0 0 10px #2301a3;
 }
 .swnmodular.sheet span.sep {
   flex: none;
@@ -351,7 +351,7 @@
   border-bottom: 3px solid #b5b3a4;
 }
 .swnmodular.sheet .sheet-navigation .item.active {
-  border-bottom: 3px solid #44191A;
+  border-bottom: 3px solid #2301a3;
 }
 .swnmodular.sheet .sheet-body {
   flex: 1;
@@ -381,11 +381,11 @@
   margin: 0;
 }
 .swnmodular.sheet .filter-list .filter-item:hover {
-  text-shadow: 0 0 4px red;
+  text-shadow: 0 0 4px #2301a3;
   border-bottom: 3px solid #7a7971;
 }
 .swnmodular.sheet .filter-list .filter-item.active {
-  border-bottom: 3px solid #44191A;
+  border-bottom: 3px solid #2301a3;
 }
 .swnmodular.sheet .traits {
   margin: 5px 0 0;
@@ -570,12 +570,14 @@
 .swnmodular.sheet.actor .sheet-header .attributes {
   flex: 0 0 100%;
   margin: 0;
+  background-color: rgba(36, 69, 231, 0.14);
 }
 .swnmodular.sheet.actor .sheet-header .attributes .attribute {
   height: 70px;
   margin: 0;
   border: none;
   border-right: 2px groove #eeede0;
+  border-top: 2px groove #eeede0;
   border-radius: 0;
 }
 .swnmodular.sheet.actor .sheet-header .attributes .attribute:last-child {
@@ -623,7 +625,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 2px groove #eeede0;
+  /*border-top: 2px groove #eeede0;*/
 }
 
 /*Applies to Resources, saves, and the header -Lofty*/
@@ -660,7 +662,6 @@
   max-width: 150px;
 }
 
-
 .swnmodular.sheet.actor ul.attributes li.attribute .attribute-value > * {
   font-weight: 400;
   font-size: 24px;
@@ -688,6 +689,7 @@
   font-weight: 700;
   border: 2px groove #eeede0;
   border-radius: 3px;
+  background-color: rgba(36, 69, 231, 0.14);
 }
 .swnmodular.sheet.actor .ability-scores .ability {
   height: 70px;
@@ -731,12 +733,11 @@
 .swnmodular.sheet.actor .info {
   border: 2px groove #eeede0;
   flex: 1 0 25%;
+  font-size: 13px;
   /*height: 255px;*/
   max-height: 315px;
-
   min-width: 200px;
   max-width: 200px;
-
 }
 
 /*.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers .ability-proficiency {*/
@@ -897,7 +898,7 @@
 }
 .swnmodular.sheet.actor .traits i.fas:hover {
   color: #111;
-  text-shadow: 0 0 10px red;
+  text-shadow: 0 0 10px #2301a3;
 }
 .swnmodular.sheet.actor .traits .inactive {
   color: #7a7971;
@@ -1353,7 +1354,7 @@
 }
 .swnmodular.chat-card .card-header h3:hover {
   color: #111;
-  text-shadow: 0 0 10px red;
+  text-shadow: 0 0 10px #2301a3;
 }
 .swnmodular.chat-card .card-content {
   margin: 5px 0;
@@ -1486,9 +1487,12 @@
   font-size: 24px;
 }
 
-/*.swnmodular.sheet.actor.character .sheet-header .attributes .initiative .attribute-footer input {*/
-/*  width: 15px;*/
-/*}*/
+.swnmodular.sheet.actor.character .sheet-header .attributes .initiative{
+  border-right: 2px groove #eeede0;
+}
+.swnmodular.sheet.actor.character .sheet-header .attributes .health{
+  border-left: 2px groove #eeede0;
+}
 
 /*.swnmodular.sheet.actor.character .sheet-header .summary .proficiency {*/
 /*  text-align: right;*/
