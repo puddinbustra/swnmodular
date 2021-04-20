@@ -275,7 +275,8 @@
         }
       }
     },
-    "htmlFields": ["details.biography.value", "details.biography.public"],
+    "htmlFields": ["details.biography.value", "details.biography.public", "details.scars.value",
+    "details.info.value"],
     "character": {
       "templates": ["common", "creature"],
       "attributes": {

@@ -234,16 +234,18 @@
 
 
                 {{!-- Counters --}}
-                <div class="counters">
+                <div class="flexrow">
 <!--                    <label></label>-->
 <!--                    <h4> {{ localize "SWNMODULAR.Flaws" }}</h4>-->
 <!--                    <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>-->
 
-                    <div class = "info">
+                    <div class = "info biography">
                         {{editor content=data.details.info.value target="data.details.info.value" button=true owner=owner editable=editable}}
+
                     </div>
-                    <div class = "scars">
+                    <div class = "info biography">
                         {{editor content=data.details.scars.value target="data.details.scars.value" button=true owner=owner editable=editable}}
+
                     </div>
                 </div>
             </section>
