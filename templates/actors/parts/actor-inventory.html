@@ -2,16 +2,13 @@
 
     {{#unless isNPC}}
     <ol class="currency flexrow">
-        <h3>
-            {{localize "SWNMODULAR.Currency"}}
-            <a class="currency-convert rollable" data-action="convertCurrency" title="Convert Currency">
-                <i class="fas fa-coins"></i>
-            </a>
-        </h3>
-        {{#each data.currency as |v k|}}
-        <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>
-        <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
-        {{/each}}
+<!--        <h3>-->
+            <label> {{localize "SWNMODULAR.CurrencyCredits"}}</label>
+            <input class = "money-box" type="text" name="data.currency.credits" value="{{data.currency.credits}}" data-dtype="Number"/></h3>
+<!--        {{#each data.currency as |v k|}}-->
+<!--        <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>-->
+<!--        <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>-->
+<!--        {{/each}}-->
     </ol>
     {{/unless}}
 

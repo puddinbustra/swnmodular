@@ -265,11 +265,7 @@ SWNMODULAR.consumableTypes = {
  * @type {Object}
  */
 SWNMODULAR.currencies = {
-  "pp": "SWNMODULAR.CurrencyPP",
-  "gp": "SWNMODULAR.CurrencyGP",
-  "ep": "SWNMODULAR.CurrencyEP",
-  "sp": "SWNMODULAR.CurrencySP",
-  "cp": "SWNMODULAR.CurrencyCP",
+  "credits": "SWNMODULAR.CurrencyCredits",
 };
 
 
@@ -278,10 +274,7 @@ SWNMODULAR.currencies = {
  * @type {{string, object}}
  */
 SWNMODULAR.currencyConversion = {
-  cp: {into: "sp", each: 10},
-  sp: {into: "ep", each: 5 },
-  ep: {into: "gp", each: 2 },
-  gp: {into: "pp", each: 10}
+  credits: {into: "credits", each: 1},
 };
 
 /* -------------------------------------------- */
@@ -352,7 +345,7 @@ for ( let [k, v] of Object.entries(SWNMODULAR.movementUnits) ) {
  * @type {Object}
  */
 SWNMODULAR.encumbrance = {
-  currencyPerWeight: 50,
+  currencyPerWeight: 0,
   strMultiplier: 15,
   vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
 };

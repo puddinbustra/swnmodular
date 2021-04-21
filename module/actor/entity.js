@@ -464,12 +464,13 @@ export default class Actor5e extends Actor {
       return weight + (q * w);
     }, 0);
 
-    // [Optional] add Currency Weight (for non-transformed actors)
-    if ( game.settings.get("swnmodular", "currencyWeight") && actorData.data.currency ) {
-      const currency = actorData.data.currency;
-      const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
-      weight += numCoins / CONFIG.SWNMODULAR.encumbrance.currencyPerWeight;
-    }
+    // // [Optional] add Currency Weight (for non-transformed actors)
+    // //I'm removing this for now, since it's not needed with credits. But if another currency is added, maybe this can be used. -Lofty
+    // if ( game.settings.get("swnmodular", "currencyWeight") && actorData.data.currency ) {
+    //   const currency = actorData.data.currency;
+    //   const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
+    //   weight += numCoins / CONFIG.SWNMODULAR.encumbrance.currencyPerWeight;
+    // }
 
     // Determine the encumbrance size class
     let mod = {
@@ -1304,24 +1305,6 @@ export default class Actor5e extends Actor {
       updateItems: updateItems,
       newDay: newDay
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Convert all carried currency to the highest possible denomination to reduce the number of raw coins being
-   * carried by an Actor.
-   * @return {Promise<Actor5e>}
-   */
-  convertCurrency() {
-    const curr = duplicate(this.data.data.currency);
-    const convert = CONFIG.SWNMODULAR.currencyConversion;
-    for ( let [c, t] of Object.entries(convert) ) {
-      let change = Math.floor(curr[c] / t.each);
-      curr[c] -= (change * t.each);
-      curr[t.into] += change;
-    }
-    return this.update({"data.currency": curr});
   }
 
   /* -------------------------------------------- */
