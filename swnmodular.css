@@ -337,7 +337,7 @@
 .swnmodular.sheet .sheet-header .summary li:last-child {
   border-right: none;
 }
-.swnmodular.sheet .sheet-navigation {
+.swnmodular.sheet .sheet-navigation{
   flex: 0 0 30px;
   margin-bottom: 5px;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
@@ -350,8 +350,12 @@
   margin: 0 24px;
   border-bottom: 3px solid #b5b3a4;
 }
+.swnmodular.sheet .sheet-navigation .item:hover {
+  text-shadow: 0 0 10px #2301a3;
+}
 .swnmodular.sheet .sheet-navigation .item.active {
-  border-bottom: 3px solid #2301a3;
+  border-bottom: 3px solid rgba(56, 45, 161, 0.62);
+  text-shadow: 0 0 10px #2301a3;
 }
 .swnmodular.sheet .sheet-body {
   flex: 1;
@@ -613,7 +617,7 @@
   font-size: 19px;
   font-weight: 700;
   color: #4b4a44;
-  border-bottom: 1px solid #c9c7b8;
+  border-bottom: 1px solid #727076;
   white-space: nowrap;
 }
 .swnmodular.sheet.actor .tab.attributes {
@@ -655,7 +659,6 @@
   font-size: 20px;
   font-weight: 700;
 }
-
 /*Lofty modified*/
 .swnmodular.sheet.actor li.attribute.resource {
   min-width: 120px;
@@ -738,7 +741,13 @@
   max-height: 315px;
   min-width: 200px;
   max-width: 200px;
+  overflow: hidden;
 }
+.swnmodular.sheet.actor .front-info{
+  margin-top: 5px;
+  overflow: hidden;
+}
+
 
 /*.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers .ability-proficiency {*/
 /*  line-height: 30px;*/
@@ -782,11 +791,13 @@
   padding: 3px 0 2px;
   border: 2px groove #eeede0;
   border-radius: 3px;
+  max-width: 150px;
 
   /*min-width: 80px;*/
   overflow: scroll;
+  /*I'm trying to change scrollbar color, but I don't see a way to. These lines have no effect I think. -Lofty*/
   scrollbar-base-color: #3E209B;
-  max-width: 150px;
+  scrollbar-color: blue green;
 }
 /*This controls each line I think*/
 .swnmodular.sheet.actor ul.skills-list li.skill {
@@ -934,7 +945,7 @@
   text-align: center;
   margin-left: 8px;
   /*border-bottom: 2px groove rgba(71, 75, 71, 0.46);*/
-  min-width: 80px;
+  min-width: 90px;
   font-size: 95%;
 }
 .swnmodular.sheet.actor .inventory-list {
@@ -1497,28 +1508,34 @@
 .swnmodular.sheet.actor.character .sheet-header .attributes .health{
   border-left: 2px groove #eeede0;
 }
-
-/*.swnmodular.sheet.actor.character .sheet-header .summary .proficiency {*/
-/*  text-align: right;*/
-/*  padding-right: 5px;*/
-/*}*/
 .swnmodular.sheet.actor.character .resource .attribute-value input {
   flex: 0 0 25%;
+
 }
-/*.swnmodular.sheet.actor.character .resource .attribute-value label.recharge {*/
-/*  height: 32px;*/
-/*  position: relative;*/
-/*  font-family: "Signika", sans-serif;*/
-/*  font-size: 11px;*/
-/*  text-align: center;*/
-/*  color: #4b4a44;*/
-/*}*/
-/*.swnmodular.sheet.actor.character .resource .attribute-value label.recharge input[type="checkbox"] {*/
-/*  height: 14px;*/
-/*  width: 14px;*/
-/*  margin: 0;*/
-/*  top: -6px;*/
-/*}*/
+.swnmodular.sheet.actor.character .custom-resource{
+  flex: 0 0 25%;
+  height: 21px;
+}
+.swnmodular.sheet.actor.character .custom-resource input{
+  height: 18px;
+  line-height: 16px;
+  margin: 4px 8px 2px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #4b4a44;
+  border-bottom: 1px solid #727076;
+  white-space: nowrap;
+  max-width: 130px;
+}
+/*This is me making custom resource VALUES format to match everything else -Lofty*/
+.swnmodular.sheet.actor.character .custom-value{
+  height: 20px;
+  line-height: 20px;
+  padding-top: 0;
+  margin-top: -5px;
+  /*background-color: #6e0000;*/
+}
 .swnmodular.sheet.actor.character ul.skills-list {
   flex: 0 0 212px;
 }

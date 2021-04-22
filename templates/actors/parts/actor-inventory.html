@@ -41,6 +41,7 @@
         {{/if}}
 
         {{#if ../owner}}
+<!--        This anchor looks like it's missing a closing carat. But, putting it in breaks everything, so idk. -Lofty-->
         <div class="item-controls flexrow">
             <a class="item-control item-create" title='{{localize "SWNMODULAR.ItemCreate"}}'
                {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
