@@ -95,6 +95,7 @@ export default class Actor5e extends Actor {
 
     // Inventory encumbrance
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
+    data.attributes.readied = this._computeReadied(actorData)
 
     // Prepare skills
     this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
@@ -464,14 +465,6 @@ export default class Actor5e extends Actor {
       return weight + (q * w);
     }, 0);
 
-    // // [Optional] add Currency Weight (for non-transformed actors)
-    // //I'm removing this for now, since it's not needed with credits. But if another currency is added, maybe this can be used. -Lofty
-    // if ( game.settings.get("swnmodular", "currencyWeight") && actorData.data.currency ) {
-    //   const currency = actorData.data.currency;
-    //   const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
-    //   weight += numCoins / CONFIG.SWNMODULAR.encumbrance.currencyPerWeight;
-    // }
-
     // Determine the encumbrance size class
     let mod = {
       tiny: 0.5,
@@ -486,6 +479,35 @@ export default class Actor5e extends Actor {
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
     const max = actorData.data.abilities.str.value * CONFIG.SWNMODULAR.encumbrance.strMultiplier * mod;
+    const pct = Math.clamped((weight * 100) / max, 0, 100);
+    return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute the level and percentage of encumbrance for an Actor.
+   *
+   * Optionally include the weight of carried currency across all denominations by applying the standard rule
+   * from the PHB pg. 143
+   * @param {Object} actorData      The data object for the Actor being rendered
+   * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
+   * @private
+   */
+  _computeReadied(actorData) {
+    //TODO: From Lofty
+    // Get the total weight from readied items.
+    const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
+    let weight = actorData.items.reduce((weight, i) => {
+      if ( !physicalItems.includes(i.type) ) return weight;
+      const q = i.data.quantity || 0;
+      const w = i.data.weight || 0;
+      return weight + (q * w);
+    }, 0);
+
+    // Compute Encumbrance percentage
+    weight = weight.toNearest(0.1);
+    const max = Math.floor((actorData.data.abilities.str.value * CONFIG.SWNMODULAR.encumbrance.strMultiplier)/2);
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
   }
@@ -874,7 +896,6 @@ export default class Actor5e extends Actor {
     const saveLabel = game.i18n.localize(`${stype}`);
     console.log("SVAL IS ",sval);
     console.log("savetype is",saveType);
-    const label = saveType;
     // Construct parts
     const parts = [0];  //["@mod"];
     const data = {0:0};   //{mod: type};
@@ -899,7 +920,7 @@ export default class Actor5e extends Actor {
       fastForward: true,
       //Right now, sval doesn't include +/- extra modifiers. To do that, just add those in here also - Lofty
       isSave: sval,
-      title: game.i18n.format("SWNMODULAR.SavePromptTitle", {ability: saveLabel}),
+      title: game.i18n.format("SWNMODULAR.SavePromptTitleVS", {ability: saveLabel, dc: sval}),
       messageData: {"flags.swnmodular.roll": {type: "save", saveLabel}}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});

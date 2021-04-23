@@ -1028,9 +1028,18 @@
   position: absolute;
   top: 1px;
   left: 1px;
-  background: #6c8aa5;
+  background: #89acd0;
   height: 8px;
-  border: 1px solid #cde4ff;
+  border: 1px solid #435fd7;
+  border-radius: 2px;
+}
+.swnmodular.sheet.actor .encumbrance .readied{
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  background: #56bd6c;
+  height: 8px;
+  border: 1px solid #435fd7;
   border-radius: 2px;
 }
 .swnmodular.sheet.actor .encumbrance .encumbrance-label {

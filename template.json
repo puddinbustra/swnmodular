@@ -284,6 +284,10 @@
           "value": null,
           "max": null
         },
+        "readied": {
+          "value": null,
+          "max": null
+        },
         "exhaustion": 0,
         "inspiration": 0
       },

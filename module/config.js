@@ -218,9 +218,9 @@ SWNMODULAR.limitedUsePeriods = {
  * @type {Object}
  */
 SWNMODULAR.equipmentTypes = {
-  "light": "SWNMODULAR.EquipmentLight",
-  "medium": "SWNMODULAR.EquipmentMedium",
-  "heavy": "SWNMODULAR.EquipmentHeavy",
+  // "light": "SWNMODULAR.EquipmentLight",
+  // "medium": "SWNMODULAR.EquipmentMedium",
+  // "heavy": "SWNMODULAR.EquipmentHeavy",
   "bonus": "SWNMODULAR.EquipmentBonus",
   "natural": "SWNMODULAR.EquipmentNatural",
   "shield": "SWNMODULAR.EquipmentShield",
@@ -346,8 +346,10 @@ for ( let [k, v] of Object.entries(SWNMODULAR.movementUnits) ) {
  */
 SWNMODULAR.encumbrance = {
   currencyPerWeight: 0,
-  strMultiplier: 15,
-  vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
+  // strMultiplier: 15,
+  // vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
+  strMultiplier: 1,
+  vehicleWeightMultiplier: 1
 };
 
 /* -------------------------------------------- */

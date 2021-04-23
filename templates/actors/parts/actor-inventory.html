@@ -3,8 +3,11 @@
     {{#unless isNPC}}
     <ol class="currency flexrow">
 <!--        <h3>-->
-            <label> {{localize "SWNMODULAR.CurrencyCredits"}}</label>
-            <input class = "money-box" type="text" name="data.currency.credits" value="{{data.currency.credits}}" data-dtype="Number"/></h3>
+
+<!--            <label> {{localize "SWNMODULAR.CurrencyCredits"}}</label>-->
+<!--            <input class = "money-box" type="text" name="data.currency.credits" value="{{data.currency.credits}}" data-dtype="Number"/></h3>-->
+
+
 <!--        {{#each data.currency as |v k|}}-->
 <!--        <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>-->
 <!--        <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>-->
@@ -90,7 +93,7 @@
                     <div class="item-detail item-weight">
                         {{#if item.totalWeight}}
                             <div class="item-detail">
-                                {{ item.totalWeight }} {{localize "SWNMODULAR.AbbreviationLbs"}}
+                                {{ item.totalWeight }}
                             </div>
                         {{/if}}
                     </div>
@@ -127,6 +130,19 @@
 {{/each}}
 </ol>
 
+<!--This is Lofty's bar of readied encumbrance-->
+{{#unless isNPC}}
+{{#with data.attributes.readied}}
+<div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
+    <span class="readied" style="width:{{pct}}%"></span>
+    <span class="encumbrance-label">{{value}} / {{max}}</span>
+    <i class="encumbrance-breakpoint encumbrance-33 arrow-up"></i>
+    <i class="encumbrance-breakpoint encumbrance-33 arrow-down"></i>
+    <i class="encumbrance-breakpoint encumbrance-66 arrow-up"></i>
+    <i class="encumbrance-breakpoint encumbrance-66 arrow-down"></i>
+</div>
+{{/with}}
+{{/unless}}
 
 {{#unless isNPC}}
 {{#with data.attributes.encumbrance}}
