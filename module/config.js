@@ -493,6 +493,17 @@ SWNMODULAR.spellScalingModes = {
 
 /* -------------------------------------------- */
 
+/**
+ * Define the set of locations an item can be stored -Lofty
+ * @type {Object}
+ */
+SWNMODULAR.equipmentLocation = {
+  "readied": "SWNMODULAR.Readied",
+  "equipped": "SWNMODULAR.Equipped",
+  "stored": "SWNMODULAR.Stored",
+};
+
+/* -------------------------------------------- */
 
 /**
  * Define the set of types which a weapon item can take

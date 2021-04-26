@@ -132,7 +132,7 @@
 
 <!--This is Lofty's bar of readied encumbrance-->
 {{#unless isNPC}}
-{{#with data.attributes.readied}}
+{{#with data.attributes.readiedEnc}}
 <div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
     <span class="readied" style="width:{{pct}}%"></span>
     <span class="encumbrance-label">{{value}} / {{max}}</span>

@@ -284,7 +284,7 @@
           "value": null,
           "max": null
         },
-        "readied": {
+        "readiedEnc": {
           "value": null,
           "max": null
         },
@@ -452,6 +452,7 @@
         "attuned": false,
         "attunement": 0,
         "equipped": false,
+        "location": "",
         "rarity": "",
         "identified": true
       },

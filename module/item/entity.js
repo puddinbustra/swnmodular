@@ -159,6 +159,23 @@ export default class Item5e extends Item {
       data.levels = Math.clamped(data.levels, 1, 20);
     }
 
+    //Ok, this was an old, worse way I was trying to track whether something is equipped. Delete if there's no immediate problems because of it.
+
+    // if(data.location === "readied"){
+    //    data.readied = true;
+    //    data.equipped = true;
+    // }
+    // else if(data.location === "equipped"){
+    //   data.readied = false;
+    //   data.equipped = true;
+    // }
+    // else if(data.location === "stored"){
+    //   data.readied = false;
+    //   data.equipped = false;
+    // }
+
+
+
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
       data.preparation.mode = data.preparation.mode || "prepared";

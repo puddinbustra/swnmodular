@@ -95,7 +95,9 @@ export default class Actor5e extends Actor {
 
     // Inventory encumbrance
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
-    data.attributes.readied = this._computeReadied(actorData)
+    data.attributes.readiedEnc = this._computeReadied(actorData);
+    // console.log("normal enc- ",data.attributes.encumbrance)
+    // console.log("readied enc- ",data.attributes.readiedEnc)
 
     // Prepare skills
     this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
@@ -460,25 +462,31 @@ export default class Actor5e extends Actor {
     const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
     let weight = actorData.items.reduce((weight, i) => {
       if ( !physicalItems.includes(i.type) ) return weight;
-      const q = i.data.quantity || 0;
-      const w = i.data.weight || 0;
+      //If item is equipped or readied -Lofty
+      let q = 0;
+      let w = 0;
+
+      if (i.data.location === "readied" || i.data.location === "equipped"){
+        q += i.data.quantity || 0;
+        w += i.data.weight || 0;
+      }
       return weight + (q * w);
     }, 0);
 
-    // Determine the encumbrance size class
-    let mod = {
-      tiny: 0.5,
-      sm: 1,
-      med: 1,
-      lg: 2,
-      huge: 4,
-      grg: 8
-    }[actorData.data.traits.size] || 1;
-    if ( this.getFlag("swnmodular", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
+    // // Determine the encumbrance size class
+    // let mod = {
+    //   tiny: 0.5,
+    //   sm: 1,
+    //   med: 1,
+    //   lg: 2,
+    //   huge: 4,
+    //   grg: 8
+    // }[actorData.data.traits.size] || 1;
+    // if ( this.getFlag("swnmodular", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
 
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
-    const max = actorData.data.abilities.str.value * CONFIG.SWNMODULAR.encumbrance.strMultiplier * mod;
+    const max = actorData.data.abilities.str.value * CONFIG.SWNMODULAR.encumbrance.strMultiplier;
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
   }
@@ -486,10 +494,8 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Compute the level and percentage of encumbrance for an Actor.
+   * Compute the level and percentage of readied items for an Actor.
    *
-   * Optionally include the weight of carried currency across all denominations by applying the standard rule
-   * from the PHB pg. 143
    * @param {Object} actorData      The data object for the Actor being rendered
    * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
    * @private
@@ -497,11 +503,20 @@ export default class Actor5e extends Actor {
   _computeReadied(actorData) {
     //TODO: From Lofty
     // Get the total weight from readied items.
+    //So yes, I know it's bad form, but I'm not sure where else to put it and this is easy to find later
+    //Set the items status in template, since I'm not sure how to set multiple things directly from the html
+    // actorData.data.
+
+
     const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
     let weight = actorData.items.reduce((weight, i) => {
       if ( !physicalItems.includes(i.type) ) return weight;
-      const q = i.data.quantity || 0;
-      const w = i.data.weight || 0;
+      let q = 0;
+      let w = 0;
+      if (i.data.location === "readied"){
+        q += i.data.quantity || 0;
+        w += i.data.weight || 0;
+      }
       return weight + (q * w);
     }, 0);
 
