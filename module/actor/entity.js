@@ -118,6 +118,10 @@ export default class Actor5e extends Actor {
     data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
 
+    //Set base AC -lofty
+    data.attributes.base = 10 + data.abilities.dex.mod;
+    console.log("BASE AC ATTEMPT IS", data.attributes.base);
+
     // Compute owned item attributes which depend on prepared Actor data
     this.items.forEach(item => {
       item.getSaveDC();

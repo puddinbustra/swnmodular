@@ -34,7 +34,8 @@
             "value": 0
           },
           "ac": {
-            "value": 10
+            "value": 10,
+            "base": 10
           },
           "hp": {
             "value": 10,
