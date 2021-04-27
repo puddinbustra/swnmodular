@@ -454,7 +454,8 @@
         "equipped": false,
         "location": "",
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "pcondition": false
       },
       "activatedEffect": {
         "activation": {
@@ -612,7 +613,8 @@
       "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
       "weaponType": "simpleM",
       "properties": {},
-      "proficient": true
+      "proficient": true,
+      "magsize": 0
     }
   }
 }

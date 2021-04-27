@@ -70,39 +70,47 @@
 </div>
 {{/if}}
 
-{{!-- Other Formula --}}
+<!--{{!&#45;&#45; Other Formula &#45;&#45;}}-->
+<!--<div class="form-group">-->
+<!--    <label>{{ localize "SWNMODULAR.OtherFormula" }}</label>-->
+<!--    <div class="form-fields">-->
+<!--        <input type="text" name="data.formula" value="{{data.formula}}" placeholder="{{ localize 'SWNMODULAR.Formula' }}"/>-->
+<!--    </div>-->
+<!--</div>-->
+
+{{!-- Shock Damage Formula, currently using variables from 'other formula' --}}
 <div class="form-group">
-    <label>{{ localize "SWNMODULAR.OtherFormula" }}</label>
+    <label> Shock Damage (not automated) </label>
     <div class="form-fields">
         <input type="text" name="data.formula" value="{{data.formula}}" placeholder="{{ localize 'SWNMODULAR.Formula' }}"/>
     </div>
 </div>
 
-{{!-- Saving Throw --}}
-<div class="form-group input-select">
-    <label>{{ localize "SWNMODULAR.ActionSave" }}</label>
-    <div class="form-fields">
-        <select name="data.save.ability">
-            {{#select data.save.ability}}
-            <option value=""></option>
-            {{#each config.abilities as |ability a|}}
-            <option value="{{a}}">{{ability}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-        <span>{{ localize "SWNMODULAR.VsDC" }}</span>
-        <input type="text" name="data.save.dc" value="{{#if data.save.dc}}{{data.save.dc}}{{/if}}" data-dtype="Number" placeholder="{{ localize 'SWNMODULAR.AbbreviationDC' }}" {{#unless isFlatDC}}disabled{{/unless}}/>
-        <select name="data.save.scaling">
-            {{#select data.save.scaling}}
-            <option value="spell">{{ localize "SWNMODULAR.Spellcasting" }}</option>
-            {{#each config.abilities as |ability a|}}
-            <option value="{{a}}">{{ability}}</option>
-            {{/each}}
-            <option value="flat">{{ localize "SWNMODULAR.Flat" }}</option>
-            {{/select}}
-        </select>
-    </div>
-</div>
+<!--{{!&#45;&#45; Saving Throw &#45;&#45;}}-->
+<!--<div class="form-group input-select">-->
+<!--    <label>{{ localize "SWNMODULAR.ActionSave" }}</label>-->
+<!--    <div class="form-fields">-->
+<!--        <select name="data.save.ability">-->
+<!--            {{#select data.save.ability}}-->
+<!--            <option value=""></option>-->
+<!--            {{#each config.abilities as |ability a|}}-->
+<!--            <option value="{{a}}">{{ability}}</option>-->
+<!--            {{/each}}-->
+<!--            {{/select}}-->
+<!--        </select>-->
+<!--        <span>{{ localize "SWNMODULAR.VsDC" }}</span>-->
+<!--        <input type="text" name="data.save.dc" value="{{#if data.save.dc}}{{data.save.dc}}{{/if}}" data-dtype="Number" placeholder="{{ localize 'SWNMODULAR.AbbreviationDC' }}" {{#unless isFlatDC}}disabled{{/unless}}/>-->
+<!--        <select name="data.save.scaling">-->
+<!--            {{#select data.save.scaling}}-->
+<!--            <option value="spell">{{ localize "SWNMODULAR.Spellcasting" }}</option>-->
+<!--            {{#each config.abilities as |ability a|}}-->
+<!--            <option value="{{a}}">{{ability}}</option>-->
+<!--            {{/each}}-->
+<!--            <option value="flat">{{ localize "SWNMODULAR.Flat" }}</option>-->
+<!--            {{/select}}-->
+<!--        </select>-->
+<!--    </div>-->
+<!--</div>-->
 
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">
