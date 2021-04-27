@@ -129,14 +129,15 @@ SWNMODULAR.timePeriods = {
 SWNMODULAR.abilityActivationTypes = {
   "none": "SWNMODULAR.None",
   "action": "SWNMODULAR.Action",
-  "bonus": "SWNMODULAR.BonusAction",
-  "reaction": "SWNMODULAR.Reaction",
+  "move": "SWNMODULAR.MoveAction",
+  "onturn": "SWNMODULAR.OnTurnAction",
+  "instant": "SWNMODULAR.InstantAction",
   "minute": SWNMODULAR.timePeriods.minute,
   "hour": SWNMODULAR.timePeriods.hour,
   "day": SWNMODULAR.timePeriods.day,
   "special": SWNMODULAR.timePeriods.spec,
-  "legendary": "SWNMODULAR.LegAct",
-  "lair": "SWNMODULAR.LairAct",
+  // "legendary": "SWNMODULAR.LegAct",
+  // "lair": "SWNMODULAR.LairAct",
   "crew": "SWNMODULAR.VehicleCrewAction"
 };
 
@@ -183,9 +184,9 @@ SWNMODULAR.itemActionTypes = {
   "rwak": "SWNMODULAR.ActionRWAK",
   "msak": "SWNMODULAR.ActionMSAK",
   "rsak": "SWNMODULAR.ActionRSAK",
+  "abil": "SWNMODULAR.ActionAbil",
   "save": "SWNMODULAR.ActionSave",
   "heal": "SWNMODULAR.ActionHeal",
-  "abil": "SWNMODULAR.ActionAbil",
   "util": "SWNMODULAR.ActionUtil",
   "other": "SWNMODULAR.ActionOther"
 };
@@ -511,12 +512,8 @@ SWNMODULAR.equipmentLocation = {
  */
 SWNMODULAR.weaponTypes = {
   "simpleM": "SWNMODULAR.WeaponSimpleM",
-  "simpleR": "SWNMODULAR.WeaponSimpleR",
-  "martialM": "SWNMODULAR.WeaponMartialM",
-  "martialR": "SWNMODULAR.WeaponMartialR",
-  "natural": "SWNMODULAR.WeaponNatural",
-  "improv": "SWNMODULAR.WeaponImprov",
-  "siege": "SWNMODULAR.WeaponSiege"
+  "simpleR": "SWNMODULAR.WeaponSimpleR"
+  // "siege": "SWNMODULAR.WeaponSiege"
 };
 
 
@@ -524,19 +521,22 @@ SWNMODULAR.weaponTypes = {
 
 /**
  * Define the set of weapon property flags which can exist on a weapon
+ * Lofty has moved imrpov and natural from weaponTypes to weaponProperties
  * @type {Object}
  */
 SWNMODULAR.weaponProperties = {
-  "ada": "SWNMODULAR.WeaponPropertiesAda",
+  // "ada": "SWNMODULAR.WeaponPropertiesAda",
   "amm": "SWNMODULAR.WeaponPropertiesAmm",
-  "fin": "SWNMODULAR.WeaponPropertiesFin",
-  "fir": "SWNMODULAR.WeaponPropertiesFir",
-  "foc": "SWNMODULAR.WeaponPropertiesFoc",
-  "hvy": "SWNMODULAR.WeaponPropertiesHvy",
-  "lgt": "SWNMODULAR.WeaponPropertiesLgt",
-  "lod": "SWNMODULAR.WeaponPropertiesLod",
-  "mgc": "SWNMODULAR.WeaponPropertiesMgc",
-  "rch": "SWNMODULAR.WeaponPropertiesRch",
+  // "fin": "SWNMODULAR.WeaponPropertiesFin",
+  // "fir": "SWNMODULAR.WeaponPropertiesFir",
+  // "foc": "SWNMODULAR.WeaponPropertiesFoc",
+  // "hvy": "SWNMODULAR.WeaponPropertiesHvy",
+  "imp": "SWNMODULAR.WeaponImprov",
+  // "lgt": "SWNMODULAR.WeaponPropertiesLgt",
+  // "lod": "SWNMODULAR.WeaponPropertiesLod",
+  // "mgc": "SWNMODULAR.WeaponPropertiesMgc",
+  "nat": "SWNMODULAR.WeaponNatural",
+  // "rch": "SWNMODULAR.WeaponPropertiesRch",
   "rel": "SWNMODULAR.WeaponPropertiesRel",
   "ret": "SWNMODULAR.WeaponPropertiesRet",
   "sil": "SWNMODULAR.WeaponPropertiesSil",

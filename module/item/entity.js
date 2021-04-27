@@ -36,7 +36,7 @@ export default class Item5e extends Item {
         const wt = itemData.weaponType;
 
         // Melee weapons - Str or Dex if Finesse (PHB pg. 147)
-        if ( ["simpleM", "martialM"].includes(wt) ) {
+        if ( ["simpleM"].includes(wt) ) {
           if (itemData.properties.fin === true) {   // Finesse weapons
             return (actorData.abilities["dex"].mod >= actorData.abilities["str"].mod) ? "dex" : "str";
           }
@@ -44,7 +44,7 @@ export default class Item5e extends Item {
         }
 
         // Ranged weapons - Dex (PH p.194)
-        else if ( ["simpleR", "martialR"].includes(wt) ) return "dex";
+        else if ( ["simpleR"].includes(wt) ) return "dex";
       }
       return "str";
     }

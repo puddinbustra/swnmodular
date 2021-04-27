@@ -18,9 +18,10 @@
     {{#unless isVehicle}}
     <ul class="filter-list flexrow" data-filter="inventory">
         <li class="filter-item" data-filter="action">{{localize "SWNMODULAR.Action"}}</li>
-        <li class="filter-item" data-filter="bonus">{{localize "SWNMODULAR.BonusAction"}}</li>
-        <li class="filter-item" data-filter="reaction">{{localize "SWNMODULAR.Reaction"}}</li>
+        <li class="filter-item" data-filter="move">{{localize "SWNMODULAR.MoveAction"}}</li>
+        <li class="filter-item" data-filter="onturn">{{localize "SWNMODULAR.OnTurnAction"}}</li>
         <li class="filter-item" data-filter="equipped">{{localize "SWNMODULAR.Equipped"}}</li>
+        <li class="filter-item" data-filter="instant">{{localize "SWNMODULAR.InstantAction"}}</li>
     </ul>
     {{/unless}}
 </div>
@@ -115,9 +116,10 @@
 
             {{#if ../../owner}}
             <div class="item-controls flexrow">
-                {{#unless @root.isVehicle}}
-                <a class="item-control item-toggle {{item.toggleClass}}" title='{{item.toggleTitle}}'><i class="fas fa-shield-alt"></i></a>
-                {{/unless}}
+<!--                This is the equipped button. It doesn't work properly now, but making into a readied/equipped button would be nice -Lofty-->
+<!--                {{#unless @root.isVehicle}}-->
+<!--                <a class="item-control item-toggle {{item.toggleClass}}" title='{{item.toggleTitle}}'><i class="fas fa-shield-alt"></i></a>-->
+<!--                {{/unless}}-->
                 {{#unless section.editableName}}
                 <a class="item-control item-edit" title='{{localize "SWNMODULAR.ItemEdit"}}'><i class="fas fa-edit"></i></a>
                 {{/unless}}

@@ -155,7 +155,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       reactions: {
         label: game.i18n.localize('SWNMODULAR.ReactionPl'),
         items: [],
-        dataset: {type: 'feat', 'activation.type': 'reaction'}
+        dataset: {type: 'feat', 'activation.type': 'onturn'}
       },
       weapons: {
         label: game.i18n.localize('SWNMODULAR.ItemTypeWeaponPl'),
@@ -219,7 +219,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         if (!item.data.activation.type || item.data.activation.type === 'none') {
           features.passive.items.push(item);
         }
-        else if (item.data.activation.type === 'reaction') features.reactions.items.push(item);
+        else if (item.data.activation.type === 'onturn') features.reactions.items.push(item);
         else features.actions.items.push(item);
       }
     }

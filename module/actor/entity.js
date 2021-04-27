@@ -610,8 +610,6 @@ export default class Actor5e extends Actor {
               "natural": true,
               "simpleM": "sim",
               "simpleR": "sim",
-              "martialM": "mar",
-              "martialR": "mar"
             }[itemData.data?.weaponType];         // Player characters check proficiency
             const actorWeaponProfs = this.data.data.traits?.weaponProf?.value || [];
             const hasWeaponProf = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
