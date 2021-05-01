@@ -106,12 +106,13 @@
                 </div>
             </div>
 
-            {{!-- Stealth Disadvantage --}}
-            <div class="form-group">
-                <label>{{ localize "SWNMODULAR.ItemEquipmentStealthDisav" }}</label>
-                <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>
-            </div>
-            {{/unless}}
+<!--            First, SWN doesn't have disadvantage RAW, second it's not yet connected to the right stats, so -->
+<!--            {{!&#45;&#45; Stealth Disadvantage &#45;&#45;}}-->
+<!--            <div class="form-group">-->
+<!--                <label>{{ localize "SWNMODULAR.ItemEquipmentStealthDisav" }}</label>-->
+<!--                <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>-->
+<!--            </div>-->
+<!--            {{/unless}}-->
 
             {{#if isMountable}}
             {{> 'systems/swnmodular/templates/items/parts/item-mountable.html'}}

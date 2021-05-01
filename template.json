@@ -546,7 +546,7 @@
     },
     "consumable": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
-      "consumableType": "potion",
+      "consumableType": "drug",
       "uses": {
         "autoDestroy": false
       }

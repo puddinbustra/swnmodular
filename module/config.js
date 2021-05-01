@@ -250,12 +250,12 @@ SWNMODULAR.armorProficiencies = {
  */
 SWNMODULAR.consumableTypes = {
   "ammo": "SWNMODULAR.ConsumableAmmunition",
-  "potion": "SWNMODULAR.ConsumablePotion",
-  "poison": "SWNMODULAR.ConsumablePoison",
+  "drug": "SWNMODULAR.ConsumablePotion",
+  // "poison": "SWNMODULAR.ConsumablePoison",
   "food": "SWNMODULAR.ConsumableFood",
-  "scroll": "SWNMODULAR.ConsumableScroll",
-  "wand": "SWNMODULAR.ConsumableWand",
-  "rod": "SWNMODULAR.ConsumableRod",
+  // "scroll": "SWNMODULAR.ConsumableScroll",
+  // "wand": "SWNMODULAR.ConsumableWand",
+  // "rod": "SWNMODULAR.ConsumableRod",
   "trinket": "SWNMODULAR.ConsumableTrinket"
 };
 
@@ -463,7 +463,7 @@ SWNMODULAR.skills = {
 
 SWNMODULAR.spellPreparationModes = {
   "prepared": "SWNMODULAR.SpellPrepPrepared",
-  "pact": "SWNMODULAR.PactMagic",
+  // "pact": "SWNMODULAR.PactMagic",
   "always": "SWNMODULAR.SpellPrepAlways",
   "atwill": "SWNMODULAR.SpellPrepAtWill",
   "innate": "SWNMODULAR.SpellPrepInnate"
@@ -473,11 +473,11 @@ SWNMODULAR.spellUpcastModes = ["always", "pact", "prepared"];
 
 SWNMODULAR.spellProgression = {
   "none": "SWNMODULAR.SpellNone",
-  "full": "SWNMODULAR.SpellProgFull",
   "half": "SWNMODULAR.SpellProgHalf",
-  "third": "SWNMODULAR.SpellProgThird",
-  "pact": "SWNMODULAR.SpellProgPact",
-  "artificer": "SWNMODULAR.SpellProgArt"
+  "full": "SWNMODULAR.SpellProgFull"
+  // "third": "SWNMODULAR.SpellProgThird",
+  // "pact": "SWNMODULAR.SpellProgPact",
+  // "artificer": "SWNMODULAR.SpellProgArt"
 };
 
 /* -------------------------------------------- */
