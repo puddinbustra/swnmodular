@@ -75,21 +75,21 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Partition items by category
     let [items, spells, feats, classes] = data.items.reduce((arr, item) => {
 
-      // Item details
-      item.img = item.img || DEFAULT_TOKEN;
-      item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
-      item.attunement = {
-        [CONFIG.SWNMODULAR.attunementTypes.REQUIRED]: {
-          icon: "fa-sun",
-          cls: "not-attuned",
-          title: "SWNMODULAR.AttunementRequired"
-        },
-        [CONFIG.SWNMODULAR.attunementTypes.ATTUNED]: {
-          icon: "fa-sun",
-          cls: "attuned",
-          title: "SWNMODULAR.AttunementAttuned"
-        }
-      }[item.data.attunement];
+      // // Item details
+      // item.img = item.img || DEFAULT_TOKEN;
+      // item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
+      // item.attunement = {
+      //   [CONFIG.SWNMODULAR.attunementTypes.REQUIRED]: {
+      //     icon: "fa-sun",
+      //     cls: "not-attuned",
+      //     title: "SWNMODULAR.AttunementRequired"
+      //   },
+      //   [CONFIG.SWNMODULAR.attunementTypes.ATTUNED]: {
+      //     icon: "fa-sun",
+      //     cls: "attuned",
+      //     title: "SWNMODULAR.AttunementAttuned"
+      //   }
+      // }[item.data.attunement];
 
       // Item usage
       item.hasUses = item.data.uses && (item.data.uses.max > 0);

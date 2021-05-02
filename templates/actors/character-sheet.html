@@ -164,7 +164,7 @@
                     <input class="skill-mod" name = "data.skills.{{s}}.value" value="{{skill.value}}"
                            title = "Level" type="number" placeholder="0" />
                     <input class="skill-other" name = "data.skills.{{s}}.prof" value="{{skill.prof}}"
-                           title = "Other" type="number" placeholder="0" />
+                           title = "Other" type="number" placeholder="-1" />
 
 
                 </li>
@@ -273,10 +273,12 @@
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "systems/swnmodular/templates/actors/parts/active-effects.html"}}
-
             {{!-- Traits --}}
             {{> "systems/swnmodular/templates/actors/parts/actor-traits.html"}}
+
+            {{> "systems/swnmodular/templates/actors/parts/active-effects.html"}}
+
+
 
         </div>
 

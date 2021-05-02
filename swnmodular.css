@@ -997,17 +997,30 @@
 .swnmodular.sheet.actor .inventory-list .item-detail.item-action {
   flex: 0 0 100px;
 }
-.swnmodular.sheet.actor .inventory-list .item-detail.attunement {
-  flex: 0 0 24px;
-}
+/*.swnmodular.sheet.actor .inventory-list .item-detail.attunement {*/
+/*  flex: 0 0 24px;*/
+/*}*/
 .swnmodular.sheet.actor .inventory-list .item-weight {
   flex: 0 0 60px;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
 }
+.swnmodular.sheet.actor .inventory-list .item-location-inv{
+  flex: 0 0 100px;
+  border-left: 1px solid #c9c7b8;
+  border-right: none;
+  background-color: #07aa09;
+  text-align: center;
+  min-width: 60px;
+  max-width: 100px;
+}
 .swnmodular.sheet.actor .inventory-list .item-controls {
   flex: 0 0 44px;
 }
+/*Right now, this below will target the trash and inventory icons in inventory. I'm not sure how to move them closer tho. -Lofty*/
+/*.swnmodular.sheet.actor .inventory-list .inventory-icons i{*/
+/*  background-color: #2a2a26;*/
+/*}*/
 .swnmodular.sheet.actor .inventory-list .item-summary {
   flex: 0 0 100%;
   font-size: 12px;
@@ -1223,6 +1236,9 @@
   margin: 5px 5px 5px 0;
   padding-right: 5px;
   border-right: 2px groove #eeede0;
+}
+.swnmodular.sheet.item .sheet-body .item-properties .item-location{
+  text-align: center;
 }
 .swnmodular.sheet.item .sheet-body .item-properties .form-group {
   margin: 0;

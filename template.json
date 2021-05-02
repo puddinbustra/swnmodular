@@ -121,15 +121,15 @@
         "skills": {
           "acr": {
             "value": 0,
-            "ability": "dex"
+            "ability": "str"
           },
           "ani": {
             "value": 0,
-            "ability": "wis"
+            "ability": "str"
           },
           "arc": {
             "value": 0,
-            "ability": "int"
+            "ability": "str"
           },
           "ath": {
             "value": 0,
@@ -137,63 +137,63 @@
           },
           "dec": {
             "value": 0,
-            "ability": "cha"
+            "ability": "str"
           },
           "his": {
             "value": 0,
-            "ability": "int"
+            "ability": "str"
           },
           "ins": {
             "value": 0,
-            "ability": "wis"
+            "ability": "str"
           },
           "itm": {
             "value": 0,
-            "ability": "cha"
+            "ability": "str"
           },
           "inv": {
             "value": 0,
-            "ability": "int"
+            "ability": "str"
           },
           "med": {
             "value": 0,
-            "ability": "wis"
+            "ability": "str"
           },
           "nat": {
             "value": 0,
-            "ability": "int"
+            "ability": "str"
           },
           "prc": {
             "value": 0,
-            "ability": "wis"
+            "ability": "str"
           },
           "prf": {
             "value": 0,
-            "ability": "cha"
+            "ability": "str"
           },
           "per": {
             "value": 0,
-            "ability": "cha"
+            "ability": "str"
           },
           "rel": {
             "value": 0,
-            "ability": "int"
+            "ability": "str"
           },
           "slt": {
             "value": 0,
-            "ability": "dex"
+            "ability": "str"
           },
           "ste": {
             "value": 0,
-            "ability": "dex"
+            "ability": "str"
           },
           "sur": {
             "value": 0,
-            "ability": "wis"
+            "ability": "str"
           },
           "wor": {
             "value": 0,
-            "ability": "wis"
+            "ability": "str"
           }
         },
         "traits": {

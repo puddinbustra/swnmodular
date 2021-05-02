@@ -342,27 +342,45 @@ export default class Actor5e extends Actor {
     if (actorData.type === 'vehicle') return;
 
     const data = actorData.data;
-    const flags = actorData.flags.swnmodular || {};
+    // const flags = actorData.flags.swnmodular || {};
 
     // Skill modifiers
-    const feats = SWNMODULAR.characterFlags;
-    const observant = flags.observantFeat;
+    // const feats = SWNMODULAR.characterFlags;
+    // const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
 
-      skl.value = Math.clamped(Number(skl.value).toNearest(1), 0, 9) ?? 0;
-      skl.prof = Math.clamped(Number(skl.prof).toNearest(1), -9, 9) ?? 0;
-      let round = Math.floor;
+      skl.value = Math.clamped(Number(skl.value).toNearest(1), -1, 9) ?? -1;
+      //Fill in all the 'other' category with -1 as default
+      if (skl.prof == null){
+        skl.prof = -1;
+      }
+      //Yes I know it's bad, but I'm redoing the skill ability attribute to be a flag because it's convenient
+      //I've placed all of the default values to be 'str', so when someone gets a level, it checks if it's 0
+      //And if it's not, it adds to the 'other' if the flag is 'str', and changes the flag so it only happens once ever
+      if((skl.ability === "str")&&(skl.value > 0)){
+        skl.prof = skl.prof +1;
+        skl.ability = "dex";
+      }
+
+
+      console.log("SKILL ABILITY IS ", skl.ability);
+
+      // skl.prof = Math.clamped(Number(skl.prof).toNearest(1), -9, 9) ?? -1;
+
+      // let round = Math.floor;
 
       // Compute modifier. Right now it should just do the number you put in and save that.
       skl.bonus = checkBonus + skillBonus;
-      skl.mod = data.abilities[skl.ability].mod;
       skl.total = skl.value + skl.prof;
+
+
+      // skl.mod = data.abilities[skl.ability].mod;
       // skl.total = skl.mod + skl.prof + skl.bonus;
 
       // Compute passive bonus
-      const passive = 0;
-      skl.passive = 10 + skl.total + passive;
+      // const passive = 0;
+      // skl.passive = 10 + skl.total + passive;
     }
   }
 
@@ -477,17 +495,6 @@ export default class Actor5e extends Actor {
       return weight + (q * w);
     }, 0);
 
-    // // Determine the encumbrance size class
-    // let mod = {
-    //   tiny: 0.5,
-    //   sm: 1,
-    //   med: 1,
-    //   lg: 2,
-    //   huge: 4,
-    //   grg: 8
-    // }[actorData.data.traits.size] || 1;
-    // if ( this.getFlag("swnmodular", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
-
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
     const max = actorData.data.abilities.str.value * CONFIG.SWNMODULAR.encumbrance.strMultiplier;
@@ -505,10 +512,8 @@ export default class Actor5e extends Actor {
    * @private
    */
   _computeReadied(actorData) {
-    //TODO: From Lofty
-    // Get the total weight from readied items.
     //So yes, I know it's bad form, but I'm not sure where else to put it and this is easy to find later
-    //Set the items status in template, since I'm not sure how to set multiple things directly from the html
+    //Set the items status in template, since I'm not sure how to set multiple things directly from the html -lofty
     // actorData.data.
 
 
