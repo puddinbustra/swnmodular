@@ -182,8 +182,8 @@ SWNMODULAR.tokenSizes = {
 SWNMODULAR.itemActionTypes = {
   "mwak": "SWNMODULAR.ActionMWAK",
   "rwak": "SWNMODULAR.ActionRWAK",
-  "msak": "SWNMODULAR.ActionMSAK",
-  "rsak": "SWNMODULAR.ActionRSAK",
+  // "msak": "SWNMODULAR.ActionMSAK",
+  // "rsak": "SWNMODULAR.ActionRSAK",
   "abil": "SWNMODULAR.ActionAbil",
   "save": "SWNMODULAR.ActionSave",
   "heal": "SWNMODULAR.ActionHeal",
@@ -488,7 +488,7 @@ SWNMODULAR.spellProgression = {
  */
 SWNMODULAR.spellScalingModes = {
   "none": "SWNMODULAR.SpellNone",
-  "cantrip": "SWNMODULAR.SpellCantrip",
+  // "cantrip": "SWNMODULAR.SpellCantrip",
   "level": "SWNMODULAR.SpellLevel"
 };
 
@@ -556,14 +556,20 @@ SWNMODULAR.spellComponents = {
 
 // Spell Schools
 SWNMODULAR.spellSchools = {
-  "abj": "SWNMODULAR.SchoolAbj",
-  "con": "SWNMODULAR.SchoolCon",
-  "div": "SWNMODULAR.SchoolDiv",
-  "enc": "SWNMODULAR.SchoolEnc",
-  "evo": "SWNMODULAR.SchoolEvo",
-  "ill": "SWNMODULAR.SchoolIll",
-  "nec": "SWNMODULAR.SchoolNec",
-  "trs": "SWNMODULAR.SchoolTrs"
+  // "abj": "SWNMODULAR.SchoolAbj",
+  // "con": "SWNMODULAR.SchoolCon",
+  // "div": "SWNMODULAR.SchoolDiv",
+  // "enc": "SWNMODULAR.SchoolEnc",
+  // "evo": "SWNMODULAR.SchoolEvo",
+  // "ill": "SWNMODULAR.SchoolIll",
+  // "nec": "SWNMODULAR.SchoolNec",
+  // "trs": "SWNMODULAR.SchoolTrs"
+  "bio": "SWNMODULAR.SchoolBio",
+  "met": "SWNMODULAR.SchoolMet",
+  "pre": "SWNMODULAR.SchoolPre",
+  "tek": "SWNMODULAR.SchoolTek",
+  "tep": "SWNMODULAR.SchoolTap",
+  "tor": "SWNMODULAR.SchoolTep"
 };
 
 // Spell Levels
@@ -572,12 +578,12 @@ SWNMODULAR.spellLevels = {
   1: "SWNMODULAR.SpellLevel1",
   2: "SWNMODULAR.SpellLevel2",
   3: "SWNMODULAR.SpellLevel3",
-  4: "SWNMODULAR.SpellLevel4",
-  5: "SWNMODULAR.SpellLevel5",
-  6: "SWNMODULAR.SpellLevel6",
-  7: "SWNMODULAR.SpellLevel7",
-  8: "SWNMODULAR.SpellLevel8",
-  9: "SWNMODULAR.SpellLevel9"
+  4: "SWNMODULAR.SpellLevel4"
+  // 5: "SWNMODULAR.SpellLevel5",
+  // 6: "SWNMODULAR.SpellLevel6",
+  // 7: "SWNMODULAR.SpellLevel7",
+  // 8: "SWNMODULAR.SpellLevel8",
+  // 9: "SWNMODULAR.SpellLevel9"
 };
 
 // Spell Scroll Compendium UUIDs

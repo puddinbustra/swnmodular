@@ -1,20 +1,23 @@
 <div class="inventory-filters spellbook-filters flexrow">
     <div class="form-group spellcasting-ability">
-        {{#unless isNPC}}
-        <label>{{localize "SWNMODULAR.SpellAbility"}}</label>
-        {{else}}
-        <label>{{localize "SWNMODULAR.Level"}}</label>
-        <input class="spellcasting-level" type="text" name="data.details.spellLevel"
-               value="{{data.details.spellLevel}}" data-dtype="Number" placeholder="0"/>
-        {{/unless}}
-        <select name="data.attributes.spellcasting" data-type="String">
-            {{#select data.attributes.spellcasting}}
-            <option value="">{{localize "SWNMODULAR.None"}}</option>
-            {{#each data.abilities as |abl a|}}
-            <option value="{{a}}">{{abl.label}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
+<!--        {{#unless isNPC}}-->
+        <label>Effort</label>
+<!--        Let's add the max effort and current effort, and duplicate the system strain values here for convenient manipulation -Lofty -->
+
+
+<!--        {{else}}-->
+<!--        <label>{{localize "SWNMODULAR.Level"}}</label>-->
+<!--        <input class="spellcasting-level" type="text" name="data.details.spellLevel"-->
+<!--               value="{{data.details.spellLevel}}" data-dtype="Number" placeholder="0"/>-->
+<!--        {{/unless}}-->
+<!--        <select name="data.attributes.spellcasting" data-type="String">-->
+<!--            {{#select data.attributes.spellcasting}}-->
+<!--            <option value="">{{localize "SWNMODULAR.None"}}</option>-->
+<!--            {{#each data.abilities as |abl a|}}-->
+<!--            <option value="{{a}}">{{abl.label}}</option>-->
+<!--            {{/each}}-->
+<!--            {{/select}}-->
+<!--        </select>-->
 <!--        <span>{{localize "SWNMODULAR.AbbreviationDC"}} {{data.attributes.spelldc}}</span>-->
     </div>
 
@@ -25,7 +28,7 @@
         <li class="filter-item" data-filter="instant">{{localize "SWNMODULAR.InstantAction"}}</li>
         <li class="filter-item" data-filter="concentration">{{localize "SWNMODULAR.AbbreviationConc"}}</li>
         <li class="filter-item" data-filter="ritual">{{localize "SWNMODULAR.Ritual"}}</li>
-        <li class="filter-item" data-filter="prepared">{{localize "SWNMODULAR.Prepared"}}{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>
+<!--        <li class="filter-item" data-filter="prepared">{{localize "SWNMODULAR.Prepared"}}{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>-->
     </ul>
 </div>
 
