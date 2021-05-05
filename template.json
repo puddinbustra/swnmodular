@@ -564,7 +564,8 @@
       },
       "strength": 0,
       "stealth": false,
-      "proficient": true
+      "proficient": true,
+      "vulnresist": ""
     },
     "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],

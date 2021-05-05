@@ -32,7 +32,6 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "SWNMODULAR.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "SWNMODULAR.Details" }}</a>
-        <a class="item" data-tab="effects">{{ localize "SWNMODULAR.Effects" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -90,11 +89,6 @@
 
             {{!-- Item Action Template --}}
             {{> "systems/swnmodular/templates/items/parts/item-action.html"}}
-        </div>
-
-        {{!-- Effects Tab --}}
-        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "systems/swnmodular/templates/actors/parts/active-effects.html"}}
         </div>
     </section>
 </form>
