@@ -147,13 +147,13 @@
             {{#if ../../owner}}
             <div class="item-controls inventory-icons flexrow">
 <!--                This is the equipped button. It doesn't work properly now, but making into a readied/equipped button would be nice -Lofty-->
-<!--                {{#unless @root.isVehicle}}-->
-<!--                <a class="item-control item-toggle {{item.toggleClass}}" title='{{item.toggleTitle}}'><i class="fas fa-shield-alt"></i></a>-->
-<!--                {{/unless}}-->
                 {{#unless section.editableName}}
                 <a class="item-control item-edit" title='{{localize "SWNMODULAR.ItemEdit"}}'><i class="fas fa-edit"></i></a>
                 {{/unless}}
-                <a class="item-control item-delete" title='{{localize "SWNMODULAR.ItemDelete"}}'><i class="fas fa-trash"></i></a>
+                {{#unless @root.isVehicle}}
+                <a class="item-control"><i class="fas "></i></a>
+                {{/unless}}
+                <a class = "item-delete item-control" title='{{localize "SWNMODULAR.ItemDelete"}}'><i class="fas fa-trash " ></i></a>
             </div>
             {{/if}}
         </li>
