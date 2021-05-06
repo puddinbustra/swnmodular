@@ -99,6 +99,37 @@ export default class Actor5e extends Actor {
     // console.log("normal enc- ",data.attributes.encumbrance)
     // console.log("readied enc- ",data.attributes.readiedEnc)
 
+    //Effort Bonus
+    // actorData.data.spells
+    let spellMax = 0;
+    // if (data.spells.spell1.value === 4){
+    //   spellMax = 4;
+    //
+    // }
+    // else if (data.spells.spell1.value === 3){
+    //   spellMax = 3;
+    // }
+    // else if (data.spells.spell1.value === 2){
+    //   spellMax = 2;
+    // }
+    // else if (data.spells.spell1.value === 1){
+    //   spellMax = 1;
+    // }
+    //Notes for tomorrow - This will let me iterate through every item, feature and spell and find the highest leve, but it's super inefficient to do this repeatedely
+    //Instead, I should do this - only when the sheet is opened or closed, a spell card is closed (or once for init and then also check when spell is added)
+    //Ideally, I'll ONLY do it when a new spell is added.
+    //I could leave it for players to manually fill in
+    //Or I could check every item anything happens... no i shouldnt do that
+    //
+    console.log("ENTITY JS ITEMS- ",actorData.items)
+    // actorData.items
+
+    console.log("Spells are ", actorData.data.spells)
+    console.log("Spell max IS ", spellMax);
+
+    //For whatever reason, the console refuses to print the value for max effort, oh well, it seems to at least hold the values right
+    data.attributes.effort.max = 1 + Math.max(data.abilities.wis.mod, data.abilities.con.mod);
+
     // Prepare skills
     this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
 
@@ -362,9 +393,6 @@ export default class Actor5e extends Actor {
         skl.prof = skl.prof +1;
         skl.ability = "dex";
       }
-
-
-      console.log("SKILL ABILITY IS ", skl.ability);
 
       // skl.prof = Math.clamped(Number(skl.prof).toNearest(1), -9, 9) ?? -1;
 

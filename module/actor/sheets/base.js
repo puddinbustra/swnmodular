@@ -292,6 +292,12 @@ export default class ActorSheet5e extends ActorSheet {
       let s = spell.data.level || 0;
       const sl = `spell${s}`;
 
+      // console.log("TOPPSI IS ",this.actor.data);
+      //Let's find the highest level spell the player has -Lofty
+      // if(sl > this.actor.data.attributes.effort.toppsi){
+      //   this.actor.data.attributes.effort.toppsi = sl;
+      // }
+
       // Specialized spellcasting modes (if they exist)
       if ( mode in sections ) {
         s = sections[mode];

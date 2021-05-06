@@ -1,9 +1,26 @@
 <div class="inventory-filters spellbook-filters flexrow">
     <div class="form-group spellcasting-ability">
 <!--        {{#unless isNPC}}-->
-        <label>Effort</label>
+        <label>{{localize "SWNMODULAR.Effort"}}: &nbsp; </label>
+        <div class="">
+            <input name="data.attributes.effort.value" type="text" class = "effort-box"
+                   value="{{data.attributes.effort.value}}" data-dtype="Number" placeholder= "0"/>
+<!--            <span> 0</span>-->
+            <span class="sep"> /&nbsp; </span>
+            <span> {{data.attributes.effort.max}} </span>
+        </div>
 <!--        Let's add the max effort and current effort, and duplicate the system strain values here for convenient manipulation -Lofty -->
 
+
+
+        <label> {{localize "SWNMODULAR.Strain"}}: &nbsp; </label>
+        <div class="">
+            <span> {{data.attributes.strain.value}}</span>
+<!--            <input name="data.attributes.strain.value" type="text" class = "strain-box"-->
+<!--                   value="{{data.attributes.strain.value}}" data-dtype="Number" placeholder= "0"/>-->
+            <span class="sep"> /&nbsp; </span>
+            <span> {{data.abilities.con.value}} </span>
+        </div>
 
 <!--        {{else}}-->
 <!--        <label>{{localize "SWNMODULAR.Level"}}</label>-->
@@ -97,9 +114,7 @@
             {{#if ../../owner}}
             <div class="item-controls flexrow">
                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-
-                <a class="item-control" ></a>
-
+                <a></a>
                 <a class="item-control" ><i class="fas fa-trash item-delete" title="Delete Item"></i></a>
             </div>
             {{/if}}
