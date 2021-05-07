@@ -111,6 +111,7 @@
 "SWNMODULAR.Bonuses": "Global Bonuses",
 "SWNMODULAR.BonusesHint": "Define global bonuses as formulas which are added to certain rolls. For example: 1d4 + 2",
 "SWNMODULAR.BonusesInstructions": "Configure character bonuses which are added to the appropriate dice roll",
+"SWNMODULAR.BowsProf": "Bows",
 "SWNMODULAR.ChallengeRating": "Challenge Rating",
 "SWNMODULAR.Charged": "Charged",
 "SWNMODULAR.Charges": "Charges",

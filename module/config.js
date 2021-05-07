@@ -91,7 +91,7 @@ SWNMODULAR.attunements = {
 
 
 SWNMODULAR.weaponProficiencies = {
-
+  "bows": "SWNMODULAR.BowsProf"
 };
 
 SWNMODULAR.toolProficiencies = {
