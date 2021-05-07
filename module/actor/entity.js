@@ -23,10 +23,10 @@ export default class Actor5e extends Actor {
     switch ( this.data.type ) {
       case "character":
         return this._prepareCharacterData(this.data);
-      // case "npc":
-      //   return this._prepareNPCData(this.data);
-      // case "vehicle":
-      //   return this._prepareVehicleData(this.data);
+      case "npc":
+        return this._prepareNPCData(this.data);
+      case "vehicle":
+        return this._prepareVehicleData(this.data);
     }
   }
 
