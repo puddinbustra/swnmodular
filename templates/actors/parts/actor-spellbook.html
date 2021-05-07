@@ -6,21 +6,19 @@
             <input name="data.attributes.effort.value" type="text" class = "effort-box"
                    value="{{data.attributes.effort.value}}" data-dtype="Number" placeholder= "0"/>
 <!--            <span> 0</span>-->
-            <span class="sep">/</span>
-            <input name="data.attributes.effort.max" type="text" class = "effort-box"
-                   value="{{data.attributes.effort.max}}" data-dtype="Number" placeholder= "0"/>
-<!--            <span> {{data.attributes.effort.max}} </span>-->
+            <span class="sep"> /&nbsp; </span>
+            <span> {{data.attributes.effort.max}} </span>
         </div>
 <!--        Let's add the max effort and current effort, and duplicate the system strain values here for convenient manipulation -Lofty -->
 
 
 
-        <label> {{localize "SWNMODULAR.Strain"}}: &nbsp; &nbsp; </label>
+        <label> {{localize "SWNMODULAR.Strain"}}: &nbsp; </label>
         <div class="">
             <span> {{data.attributes.strain.value}}</span>
 <!--            <input name="data.attributes.strain.value" type="text" class = "strain-box"-->
 <!--                   value="{{data.attributes.strain.value}}" data-dtype="Number" placeholder= "0"/>-->
-            <span class="sep"> &nbsp; /&nbsp; </span>
+            <span class="sep"> /&nbsp; </span>
             <span> {{data.abilities.con.value}} </span>
         </div>
 
@@ -45,8 +43,8 @@
         <li class="filter-item" data-filter="move">{{localize "SWNMODULAR.MoveAction"}}</li>
         <li class="filter-item" data-filter="onturn">{{localize "SWNMODULAR.OnTurnAction"}}</li>
         <li class="filter-item" data-filter="instant">{{localize "SWNMODULAR.InstantAction"}}</li>
-<!--        <li class="filter-item" data-filter="concentration">{{localize "SWNMODULAR.AbbreviationConc"}}</li>-->
-<!--        <li class="filter-item" data-filter="ritual">{{localize "SWNMODULAR.Ritual"}}</li>-->
+        <li class="filter-item" data-filter="concentration">{{localize "SWNMODULAR.AbbreviationConc"}}</li>
+        <li class="filter-item" data-filter="ritual">{{localize "SWNMODULAR.Ritual"}}</li>
 <!--        <li class="filter-item" data-filter="prepared">{{localize "SWNMODULAR.Prepared"}}{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>-->
     </ul>
 </div>

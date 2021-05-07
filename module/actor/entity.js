@@ -23,10 +23,10 @@ export default class Actor5e extends Actor {
     switch ( this.data.type ) {
       case "character":
         return this._prepareCharacterData(this.data);
-      // case "npc":
-      //   return this._prepareNPCData(this.data);
-      // case "vehicle":
-      //   return this._prepareVehicleData(this.data);
+      case "npc":
+        return this._prepareNPCData(this.data);
+      case "vehicle":
+        return this._prepareVehicleData(this.data);
     }
   }
 
@@ -101,23 +101,34 @@ export default class Actor5e extends Actor {
 
     //Effort Bonus
     // actorData.data.spells
-    // let spellMax = 0;
-
-    // //So below is my work so far on automating the max effort. However, I'm having trouble referencing the level -Lofty
-    // console.log("ENTITY JS ITEMS- ",actorData.items);
+    let spellMax = 0;
+    // if (data.spells.spell1.value === 4){
+    //   spellMax = 4;
     //
-    // //Check all items, if they're a spell, see if they're a higher level than our current spells, if so replace that
-    // for (let item in actorData.items){
-    //   console.log("SPELLMAX IS ",actorData.items[item].data);
-    //   if( item.type === "spell"){
-    //     if(spellMax < item.data.level){
-    //       spellMax = item.data.level;
-    //
-    //     }
-    //   }
     // }
-    // //For whatever reason, the console refuses to print the value for max effort, oh well, it seems to at least hold the values right
-    // data.attributes.effort.max = 1 + Math.max(data.abilities.wis.mod, data.abilities.con.mod);
+    // else if (data.spells.spell1.value === 3){
+    //   spellMax = 3;
+    // }
+    // else if (data.spells.spell1.value === 2){
+    //   spellMax = 2;
+    // }
+    // else if (data.spells.spell1.value === 1){
+    //   spellMax = 1;
+    // }
+    //Notes for tomorrow - This will let me iterate through every item, feature and spell and find the highest leve, but it's super inefficient to do this repeatedely
+    //Instead, I should do this - only when the sheet is opened or closed, a spell card is closed (or once for init and then also check when spell is added)
+    //Ideally, I'll ONLY do it when a new spell is added.
+    //I could leave it for players to manually fill in
+    //Or I could check every item anything happens... no i shouldnt do that
+    //
+    console.log("ENTITY JS ITEMS- ",actorData.items)
+    // actorData.items
+
+    console.log("Spells are ", actorData.data.spells)
+    console.log("Spell max IS ", spellMax);
+
+    //For whatever reason, the console refuses to print the value for max effort, oh well, it seems to at least hold the values right
+    data.attributes.effort.max = 1 + Math.max(data.abilities.wis.mod, data.abilities.con.mod);
 
     // Prepare skills
     this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
