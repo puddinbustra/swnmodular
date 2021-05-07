@@ -1113,8 +1113,6 @@
 }
 .swnmodular.sheet.actor .effort-box{
   max-width: 20px;
-  padding: 0;
-  margin: 0;
 }
 /*.swnmodular.sheet.actor .strain-box{*/
 /*  max-width: 15px;*/
@@ -1122,8 +1120,6 @@
 .swnmodular.sheet.actor .spellcasting-ability {
   flex: 0 0 240px;
   margin: 0;
-  min-width: 260px;
-
 }
 .swnmodular.sheet.actor .spellcasting-ability label,
 .swnmodular.sheet.actor .spellcasting-ability span {
