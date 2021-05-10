@@ -2,7 +2,7 @@
 
 
 # Contact
-If you have any other feedback, be it suggestions or support, send me a message on discord - lofty#8637, or an email at kvrosevelt@gmail.com. Seriously, if you like the sheet, let me know somehow. If people are enjoying it, I'll see more reason to add features. If you have any features you'd like to see, let me know.
+If you have any other feedback, be it suggestions or support, send me a message on discord - lofty#8637, or an email at kvrosevelt@gmail.com. Seriously, if you like the sheet, let me know somehow. If people are enjoying it, I'll see more reason to add features. If you don't like something, I'll consider the feedback.
 
 # Support
 [Buy me a coffee ☕](https://www.buymeacoffee.com/lofty)
