@@ -921,11 +921,14 @@
   text-align: right;
   color: #999;
 }
-.swnmodular.sheet.actor .traits i.fas:hover {
+.swnmodular.sheet.actor i.fas:hover {
   color: #111;
   text-shadow: 0 0 10px #2301a3;
 }
-
+.swnmodular.sheet a:hover{
+  color: #111;
+  text-shadow: 0 0 10px #2301a3;
+}
 .swnmodular.sheet.actor .traits .inactive {
   color: #7a7971;
 }
@@ -1514,6 +1517,28 @@
   max-width: 160px;
   height: 160px;
 }
+.swnmodular.sheet.actor.character .sheet-header .feedback{
+  position: relative;
+  text-align: left;
+  font-size: 12px;
+  font-weight: normal;
+  font-family: "Signika", sans-serif;
+  float: right;
+  color: rgba(56, 56, 52, 0.49);
+  /*text-shadow: rgba(62, 32, 155, 0.45);*/
+  min-width: 0px;
+  max-width: 90px;
+  max-height: 17px;
+  line-height: 17px;
+  margin-bottom: 25px;
+  margin-left: 63px;
+  /*background-color: #435fd7;*/
+  /*left: 300px;*/
+}
+/*.swnmodular.sheet.actor.character .sheet-header .feedback:hover{*/
+/*  color: #2a2a26;*/
+/*  text-shadow: rgba(62, 32, 155, 0.45); !important*/
+/*}*/
 .swnmodular.sheet.actor.character .sheet-header .charlevel {
   flex: 0 0 20px;
   height: 20px;
@@ -1574,7 +1599,7 @@
 .swnmodular.sheet.actor.character .sheet-header .currencylist{
   /*background-color: #56bd6c;*/
   min-width: 0px;
-  max-width: 160px;
+  max-width: 150px;
   border-right: none;
 }
 .swnmodular.sheet.actor.character .sheet-header .currencyimage{
@@ -1641,7 +1666,7 @@
 }
 .swnmodular.sheet.actor.character .inventory .item-controls .item-toggle.fixed,
 .swnmodular.sheet.actor.character .spellbook .item-controls .item-toggle.fixed {
-  color: #44191A;
+  color: #193844;
 }
 .swnmodular.sheet.actor.character .inventory .item-controls .item-toggle.fixed:hover,
 .swnmodular.sheet.actor.character .spellbook .item-controls .item-toggle.fixed:hover {
