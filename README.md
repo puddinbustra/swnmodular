@@ -25,7 +25,7 @@ Since this is mostly based off of the 5e character sheet, so some of those modul
 
 
 
-# Things That Could Be Added
+# Possible Additions
 - Vehicles
 - Ships
 - Global modifiers, like melee attack bonus, or encumbrance bonus
