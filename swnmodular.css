@@ -324,6 +324,10 @@
   list-style: none;
   border-top: 2px groove #eeede0;
   border-bottom: none;
+
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
 }
 .swnmodular.sheet .sheet-header .summary li {
   height: calc(100% - 6px);
@@ -921,6 +925,7 @@
   color: #111;
   text-shadow: 0 0 10px #2301a3;
 }
+
 .swnmodular.sheet.actor .traits .inactive {
   color: #7a7971;
 }
@@ -1558,7 +1563,27 @@
 }
 .swnmodular.sheet.actor.character .resource .attribute-value input {
   flex: 0 0 25%;
+}
+.swnmodular.sheet.actor.character .sheet-header .currency{
+  /*background-color: #56bd6c;*/
+  /*min-width: 0;*/
+  /*max-width: 100px;*/
+  /*position: relative;*/
+}
 
+.swnmodular.sheet.actor.character .sheet-header .currencylist{
+  /*background-color: #56bd6c;*/
+  min-width: 0px;
+  max-width: 160px;
+  border-right: none;
+}
+.swnmodular.sheet.actor.character .sheet-header .currencyimage{
+  min-width: 0px;
+  max-width: 27px;
+  padding-left: 1px;
+  padding-bottom: 6px;
+  border-left: none;
+  line-height: 150%;
 }
 .swnmodular.sheet.actor.character .custom-resource{
   flex: 0 0 25%;

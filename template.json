@@ -105,7 +105,7 @@
           }
         },
         "currency": {
-          "credits": 0
+          "credits": ""
         }
       },
       "creature": {
@@ -599,7 +599,8 @@
         "somatic": false,
         "material": false,
         "ritual": false,
-        "concentration": false
+        "concentration": false,
+        "other": false
       },
       "materials": {
         "value": "",
