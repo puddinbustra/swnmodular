@@ -1,2 +1,2 @@
- - Felix Müller <felix.mueller.86@web.de>
-   - Work from his [polymorpher](https://github.com/syl3r86/polymorpher) module adapted for use with express permission and under the terms of the [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).
+- Contributors to the [Atropos character sheet](https://gitlab.com/foundrynet/dnd5e), as of version 1.2.4
+- 
