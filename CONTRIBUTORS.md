@@ -1,2 +1,2 @@
-- Contributors to the [Atropos character sheet](https://gitlab.com/foundrynet/dnd5e), as of version 1.2.4
+- Contributors to the [Atropos character sheet](https://gitlab.com/foundrynet/dnd5e), as of version 1.2.4 of that sheet
 - 
