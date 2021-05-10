@@ -1,34 +1,13 @@
 {
   "name": "swnmodular",
   "title": "Stars Without Number Modular",
-  "description": "A Stars Without Number system intended to be easy to modify. Base code from the DND5e sheet by Atropos.",
-  "version": "0.0.67",
+  "description": "A Stars Without Number:Revised system designed for convenience and aesthetics. Base code from the DND5e sheet by Atropos.",
+  "version": "0.0.68",
   "author": "Lofty",
   "scripts": [],
   "esmodules": ["swnmodular.js"],
   "styles": ["swnmodular.css"],
   "packs": [
-    {
-      "name": "items",
-      "label": "Items (SRD)",
-      "system": "swnmodular",
-      "path": "./packs/items.db",
-      "entity": "Item"
-    },
-    {
-      "name": "tradegoods",
-      "label": "Trade Goods (SRD)",
-      "system": "swnmodular",
-      "path": "./packs/tradegoods.db",
-      "entity": "Item"
-    },
-    {
-      "name": "spells",
-      "label": "Spells (SRD)",
-      "system": "swnmodular",
-      "path": "./packs/spells.db",
-      "entity": "Item"
-    }
   ],
   "languages": [
     {
