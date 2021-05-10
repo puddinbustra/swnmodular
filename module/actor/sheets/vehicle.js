@@ -12,7 +12,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
    */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["swnmodular", "sheet", "actor", "vehicle"],
+      classes: ["swnpretty", "sheet", "actor", "vehicle"],
       width: 605,
       height: 680
     });
@@ -43,10 +43,10 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     // Compute currency weight
     const totalCoins = Object.values(actorData.data.currency).reduce((acc, denom) => acc + denom, 0);
-    totalWeight += totalCoins / CONFIG.SWNMODULAR.encumbrance.currencyPerWeight;
+    totalWeight += totalCoins / CONFIG.SWNPRETTY.encumbrance.currencyPerWeight;
 
     // Vehicle weights are an order of magnitude greater.
-    totalWeight /= CONFIG.SWNMODULAR.encumbrance.vehicleWeightMultiplier;
+    totalWeight /= CONFIG.SWNPRETTY.encumbrance.vehicleWeightMultiplier;
 
     // Compute overall encumbrance
     const max = actorData.data.attributes.capacity.cargo;
@@ -73,12 +73,12 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     // Determine crewed status
     const isCrewed = item.data.crewed;
     item.toggleClass = isCrewed ? 'active' : '';
-    item.toggleTitle = game.i18n.localize(`SWNMODULAR.${isCrewed ? 'Crewed' : 'Uncrewed'}`);
+    item.toggleTitle = game.i18n.localize(`SWNPRETTY.${isCrewed ? 'Crewed' : 'Uncrewed'}`);
 
     // Handle crew actions
     if (item.type === 'feat' && item.data.activation.type === 'crew') {
       item.crew = item.data.activation.cost;
-      item.cover = game.i18n.localize(`SWNMODULAR.${item.data.cover ? 'CoverTotal' : 'None'}`);
+      item.cover = game.i18n.localize(`SWNPRETTY.${item.data.cover ? 'CoverTotal' : 'None'}`);
       if (item.data.cover === .5) item.cover = '½';
       else if (item.data.cover === .75) item.cover = '¾';
       else if (item.data.cover === null) item.cover = '—';
@@ -99,66 +99,66 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
    */
   _prepareItems(data) {
     const cargoColumns = [{
-      label: game.i18n.localize('SWNMODULAR.Quantity'),
+      label: game.i18n.localize('SWNPRETTY.Quantity'),
       css: 'item-qty',
       property: 'quantity',
       editable: 'Number'
     }];
 
     const equipmentColumns = [{
-      label: game.i18n.localize('SWNMODULAR.Quantity'),
+      label: game.i18n.localize('SWNPRETTY.Quantity'),
       css: 'item-qty',
       property: 'data.quantity'
     }, {
-      label: game.i18n.localize('SWNMODULAR.AC'),
+      label: game.i18n.localize('SWNPRETTY.AC'),
       css: 'item-ac',
       property: 'data.armor.value'
     }, {
-      label: game.i18n.localize('SWNMODULAR.HP'),
+      label: game.i18n.localize('SWNPRETTY.HP'),
       css: 'item-hp',
       property: 'data.hp.value',
       editable: 'Number'
     }, {
-      label: game.i18n.localize('SWNMODULAR.Threshold'),
+      label: game.i18n.localize('SWNPRETTY.Threshold'),
       css: 'item-threshold',
       property: 'threshold'
     }];
 
     const features = {
       actions: {
-        label: game.i18n.localize('SWNMODULAR.ActionPl'),
+        label: game.i18n.localize('SWNPRETTY.ActionPl'),
         items: [],
         crewable: true,
         dataset: {type: 'feat', 'activation.type': 'crew'},
         columns: [{
-          label: game.i18n.localize('SWNMODULAR.VehicleCrew'),
+          label: game.i18n.localize('SWNPRETTY.VehicleCrew'),
           css: 'item-crew',
           property: 'crew'
         }, {
-          label: game.i18n.localize('SWNMODULAR.Cover'),
+          label: game.i18n.localize('SWNPRETTY.Cover'),
           css: 'item-cover',
           property: 'cover'
         }]
       },
       equipment: {
-        label: game.i18n.localize('SWNMODULAR.ItemTypeEquipment'),
+        label: game.i18n.localize('SWNPRETTY.ItemTypeEquipment'),
         items: [],
         crewable: true,
         dataset: {type: 'equipment', 'armor.type': 'vehicle'},
         columns: equipmentColumns
       },
       passive: {
-        label: game.i18n.localize('SWNMODULAR.Features'),
+        label: game.i18n.localize('SWNPRETTY.Features'),
         items: [],
         dataset: {type: 'feat'}
       },
       reactions: {
-        label: game.i18n.localize('SWNMODULAR.ReactionPl'),
+        label: game.i18n.localize('SWNPRETTY.ReactionPl'),
         items: [],
         dataset: {type: 'feat', 'activation.type': 'onturn'}
       },
       weapons: {
-        label: game.i18n.localize('SWNMODULAR.ItemTypeWeaponPl'),
+        label: game.i18n.localize('SWNPRETTY.ItemTypeWeaponPl'),
         items: [],
         crewable: true,
         dataset: {type: 'weapon', 'weapon-type': 'siege'},
@@ -168,7 +168,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     const cargo = {
       crew: {
-        label: game.i18n.localize('SWNMODULAR.VehicleCrew'),
+        label: game.i18n.localize('SWNPRETTY.VehicleCrew'),
         items: data.data.cargo.crew,
         css: 'cargo-row crew',
         editableName: true,
@@ -176,7 +176,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         columns: cargoColumns
       },
       passengers: {
-        label: game.i18n.localize('SWNMODULAR.VehiclePassengers'),
+        label: game.i18n.localize('SWNPRETTY.VehiclePassengers'),
         items: data.data.cargo.passengers,
         css: 'cargo-row passengers',
         editableName: true,
@@ -184,21 +184,21 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         columns: cargoColumns
       },
       cargo: {
-        label: game.i18n.localize('SWNMODULAR.VehicleCargo'),
+        label: game.i18n.localize('SWNPRETTY.VehicleCargo'),
         items: [],
         dataset: {type: 'loot'},
         columns: [{
-          label: game.i18n.localize('SWNMODULAR.Quantity'),
+          label: game.i18n.localize('SWNPRETTY.Quantity'),
           css: 'item-qty',
           property: 'data.quantity',
           editable: 'Number'
         }, {
-          label: game.i18n.localize('SWNMODULAR.Price'),
+          label: game.i18n.localize('SWNPRETTY.Price'),
           css: 'item-price',
           property: 'data.price',
           editable: 'Number'
         }, {
-          label: game.i18n.localize('SWNMODULAR.Weight'),
+          label: game.i18n.localize('SWNPRETTY.Weight'),
           css: 'item-weight',
           property: 'data.weight',
           editable: 'Number'

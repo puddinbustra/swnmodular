@@ -1,10 +1,10 @@
 {{#unless isVehicle}}
 <div class="inventory-filters flexrow">
     <ul class="filter-list flexrow" data-filter="features">
-        <li class="filter-item" data-filter="action">{{localize "SWNMODULAR.Action"}}</li>
-        <li class="filter-item" data-filter="move">{{localize "SWNMODULAR.MoveAction"}}</li>
-        <li class="filter-item" data-filter="onturn">{{localize "SWNMODULAR.OnTurnAction"}}</li>
-        <li class="filter-item" data-filter="instant">{{localize "SWNMODULAR.InstantAction"}}</li>
+        <li class="filter-item" data-filter="action">{{localize "SWNPRETTY.Action"}}</li>
+        <li class="filter-item" data-filter="move">{{localize "SWNPRETTY.MoveAction"}}</li>
+        <li class="filter-item" data-filter="onturn">{{localize "SWNPRETTY.OnTurnAction"}}</li>
+        <li class="filter-item" data-filter="instant">{{localize "SWNPRETTY.InstantAction"}}</li>
     </ul>
 </div>
 {{/unless}}
@@ -15,8 +15,8 @@
         <h3 class="item-name flexrow">{{localize section.label}}</h3>
 
         {{#if section.hasActions}}
-        <div class="item-detail item-uses">{{localize "SWNMODULAR.Uses"}}</div>
-        <div class="item-detail item-action">{{localize "SWNMODULAR.Usage"}}</div>
+        <div class="item-detail item-uses">{{localize "SWNPRETTY.Uses"}}</div>
+        <div class="item-detail item-action">{{localize "SWNPRETTY.Usage"}}</div>
         {{/if}}
 
         {{#if section.columns}}
@@ -27,8 +27,8 @@
 
         {{#if ../owner}}
         <div class="item-controls flexrow">
-            <a class="item-control item-create" title="{{localize 'SWNMODULAR.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> {{localize "SWNMODULAR.Add"}}
+            <a class="item-control item-create" title="{{localize 'SWNPRETTY.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-plus"></i> {{localize "SWNPRETTY.Add"}}
             </a>
         </div>
         {{/if}}
@@ -47,7 +47,7 @@
                 {{#if item.isOnCooldown}}
                 <a class="item-recharge rollable">{{item.labels.recharge}}</a>
                 {{else if item.data.recharge.value}}
-                {{localize "SWNMODULAR.Charged"}}
+                {{localize "SWNPRETTY.Charged"}}
 
                 {{else if item.hasUses}}
                 <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}

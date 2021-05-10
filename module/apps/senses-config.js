@@ -7,8 +7,8 @@ export default class ActorSensesConfig extends BaseEntitySheet {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-      classes: ["swnmodular"],
-      template: "systems/swnmodular/templates/apps/senses-config.html",
+      classes: ["swnpretty"],
+      template: "systems/swnpretty/templates/apps/senses-config.html",
       width: 300,
       height: "auto"
     });
@@ -18,7 +18,7 @@ export default class ActorSensesConfig extends BaseEntitySheet {
 
   /** @override */
   get title() {
-    return `${game.i18n.localize("SWNMODULAR.SensesConfig")}: ${this.entity.name}`;
+    return `${game.i18n.localize("SWNPRETTY.SensesConfig")}: ${this.entity.name}`;
   }
 
   /* -------------------------------------------- */
@@ -29,9 +29,9 @@ export default class ActorSensesConfig extends BaseEntitySheet {
     const data = {
       senses: {},
       special: senses.special ?? "",
-      units: senses.units, movementUnits: CONFIG.SWNMODULAR.movementUnits
+      units: senses.units, movementUnits: CONFIG.SWNPRETTY.movementUnits
     };
-    for ( let [name, label] of Object.entries(CONFIG.SWNMODULAR.senses) ) {
+    for ( let [name, label] of Object.entries(CONFIG.SWNPRETTY.senses) ) {
       const v = senses[name];
       data.senses[name] = {
         label: game.i18n.localize(label),

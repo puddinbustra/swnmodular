@@ -1,7 +1,7 @@
 import { d20Roll, damageRoll } from "../dice.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
-import {SWNMODULAR} from '../config.js';
+import {SWNPRETTY} from '../config.js';
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -13,7 +13,7 @@ export default class Actor5e extends Actor {
    * @return {boolean}
    */
   get isPolymorphed() {
-    return this.getFlag("swnmodular", "isPolymorphed") || false;
+    return this.getFlag("swnpretty", "isPolymorphed") || false;
   }
 
   /* -------------------------------------------- */
@@ -36,15 +36,15 @@ export default class Actor5e extends Actor {
   prepareDerivedData() {
     const actorData = this.data;
     const data = actorData.data;
-    const flags = actorData.flags.swnmodular || {};
+    const flags = actorData.flags.swnpretty || {};
     const bonuses = getProperty(data, "bonuses.abilities") || {};
 
     // Retrieve data for polymorphed actors
     let originalSaves = null;
     let originalSkills = null;
     if (this.isPolymorphed) {
-      const transformOptions = this.getFlag('swnmodular', 'transformOptions');
-      const original = game.actors?.get(this.getFlag('swnmodular', 'originalActor'));
+      const transformOptions = this.getFlag('swnpretty', 'transformOptions');
+      const original = game.actors?.get(this.getFlag('swnpretty', 'originalActor'));
       if (original) {
         if (transformOptions.mergeSaves) {
           originalSaves = original.data.data.abilities;
@@ -157,7 +157,7 @@ export default class Actor5e extends Actor {
    * @return {Number}       The XP required
    */
   getLevelExp(level) {
-    const levels = CONFIG.SWNMODULAR.CHARACTER_EXP_LEVELS;
+    const levels = CONFIG.SWNPRETTY.CHARACTER_EXP_LEVELS;
     return levels[Math.min(level, levels.length - 1)];
   }
 
@@ -170,7 +170,7 @@ export default class Actor5e extends Actor {
    */
   getCRExp(cr) {
     if (cr < 1.0) return Math.max(200 * cr, 10);
-    return CONFIG.SWNMODULAR.CR_EXP_LEVELS[cr];
+    return CONFIG.SWNPRETTY.CR_EXP_LEVELS[cr];
   }
 
   /* -------------------------------------------- */
@@ -204,7 +204,7 @@ export default class Actor5e extends Actor {
     subclassName = subclassName.slugify();
 
     // Get the configuration of features which may be added
-    const clsConfig = CONFIG.SWNMODULAR.classFeatures[className];
+    const clsConfig = CONFIG.SWNPRETTY.classFeatures[className];
     if (!clsConfig) return [];
 
     // Acquire class features
@@ -362,10 +362,10 @@ export default class Actor5e extends Actor {
     if (actorData.type === 'vehicle') return;
 
     const data = actorData.data;
-    // const flags = actorData.flags.swnmodular || {};
+    // const flags = actorData.flags.swnpretty || {};
 
     // Skill modifiers
-    // const feats = SWNMODULAR.characterFlags;
+    // const feats = SWNPRETTY.characterFlags;
     // const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
@@ -458,7 +458,7 @@ export default class Actor5e extends Actor {
 
     // Look up the number of slots per level from the progression table
     const levels = Math.clamped(progression.slot, 0, 20);
-    const slots = SWNMODULAR.SPELL_SLOT_TABLE[levels - 1] || [];
+    const slots = SWNPRETTY.SPELL_SLOT_TABLE[levels - 1] || [];
     for ( let [n, lvl] of Object.entries(spells) ) {
       let i = parseInt(n.slice(-1));
       if ( Number.isNaN(i) ) continue;
@@ -514,7 +514,7 @@ export default class Actor5e extends Actor {
 
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
-    const max = actorData.data.abilities.str.value * CONFIG.SWNMODULAR.encumbrance.strMultiplier;
+    const max = actorData.data.abilities.str.value * CONFIG.SWNPRETTY.encumbrance.strMultiplier;
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
   }
@@ -548,7 +548,7 @@ export default class Actor5e extends Actor {
 
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
-    const max = Math.floor((actorData.data.abilities.str.value * CONFIG.SWNMODULAR.encumbrance.strMultiplier)/2);
+    const max = Math.floor((actorData.data.abilities.str.value * CONFIG.SWNPRETTY.encumbrance.strMultiplier)/2);
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
   }
@@ -580,7 +580,7 @@ export default class Actor5e extends Actor {
     // Apply changes in Actor size to Token width/height
     const newSize = getProperty(data, "data.traits.size");
     if ( newSize && (newSize !== getProperty(this.data, "data.traits.size")) ) {
-      let size = CONFIG.SWNMODULAR.tokenSizes[newSize];
+      let size = CONFIG.SWNPRETTY.tokenSizes[newSize];
       if ( this.isToken ) this.token.update({height: size, width: size});
       else if ( !data["token.width"] && !hasProperty(data, "token.width") ) {
         data["token.height"] = size;
@@ -736,10 +736,10 @@ export default class Actor5e extends Actor {
    */
   rollSkill(skillId, options={}) {
 
-    const label = CONFIG.SWNMODULAR.skills[skillId];
+    const label = CONFIG.SWNPRETTY.skills[skillId];
     new Dialog({
-      title: game.i18n.format("SWNMODULAR.SkillPromptTitle", {skill: label}),
-      content: `<p>${game.i18n.format("SWNMODULAR.SkillPromptText", {skill: label})}</p>`,
+      title: game.i18n.format("SWNPRETTY.SkillPromptTitle", {skill: label}),
+      content: `<p>${game.i18n.format("SWNPRETTY.SkillPromptText", {skill: label})}</p>`,
         buttons: {
           str: {
             label: game.i18n.localize("STR"),
@@ -830,15 +830,15 @@ export default class Actor5e extends Actor {
     }
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("swnmodular", "reliableTalent"));
+    const reliableTalent = (skl.value >= 1 && this.getFlag("swnpretty", "reliableTalent"));
 
     // Roll and return
     const rollData = mergeObject(options, {
       parts: parts,
       data: data,
-      title: game.i18n.format("SWNMODULAR.SkillPromptTitle", {skill: CONFIG.SWNMODULAR.skills[skillId]}),
+      title: game.i18n.format("SWNPRETTY.SkillPromptTitle", {skill: CONFIG.SWNPRETTY.skills[skillId]}),
       fastForward: true,
-      messageData: {"flags.swnmodular.roll": {type: "skill", skillId }}
+      messageData: {"flags.swnpretty.roll": {type: "skill", skillId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
@@ -862,17 +862,17 @@ export default class Actor5e extends Actor {
    * @param {Object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollAbility(abilityId, options={}) {
-    const label = CONFIG.SWNMODULAR.abilities[abilityId];
+    const label = CONFIG.SWNPRETTY.abilities[abilityId];
     new Dialog({
-      title: game.i18n.format("SWNMODULAR.AbilityPromptTitle", {ability: label}),
-      content: `<p>${game.i18n.format("SWNMODULAR.AbilityPromptText", {ability: label})}</p>`,
+      title: game.i18n.format("SWNPRETTY.AbilityPromptTitle", {ability: label}),
+      content: `<p>${game.i18n.format("SWNPRETTY.AbilityPromptText", {ability: label})}</p>`,
       buttons: {
         test: {
-          label: game.i18n.localize("SWNMODULAR.ActionAbil"),
+          label: game.i18n.localize("SWNPRETTY.ActionAbil"),
           callback: () => this.rollAbilityTest(abilityId, options)
         },
         save: {
-          label: game.i18n.localize("SWNMODULAR.ActionSave"),
+          label: game.i18n.localize("SWNPRETTY.ActionSave"),
           callback: () => this.rollAbilitySave(abilityId, options)
         }
       }
@@ -889,7 +889,7 @@ export default class Actor5e extends Actor {
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollAbilityTest(abilityId, options={}) {
-    const label = CONFIG.SWNMODULAR.abilities[abilityId];
+    const label = CONFIG.SWNPRETTY.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
 
     // Construct parts
@@ -913,8 +913,8 @@ export default class Actor5e extends Actor {
     const rollData = mergeObject(options, {
       parts: parts,
       data: data,
-      title: game.i18n.format("SWNMODULAR.AbilityPromptTitle", {ability: label}),
-      messageData: {"flags.swnmodular.roll": {type: "ability", abilityId }}
+      title: game.i18n.format("SWNPRETTY.AbilityPromptTitle", {ability: label}),
+      messageData: {"flags.swnpretty.roll": {type: "ability", abilityId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
@@ -930,7 +930,7 @@ export default class Actor5e extends Actor {
   rollSaveSwn(saveType, options={}){
 
 
-    const stype = CONFIG.SWNMODULAR.saves[saveType];
+    const stype = CONFIG.SWNPRETTY.saves[saveType];
     const sval = this.data.data.attributes[saveType];
     const saveLabel = game.i18n.localize(`${stype}`);
     console.log("SVAL IS ",sval);
@@ -959,8 +959,8 @@ export default class Actor5e extends Actor {
       fastForward: true,
       //Right now, sval doesn't include +/- extra modifiers. To do that, just add those in here also - Lofty
       isSave: sval,
-      title: game.i18n.format("SWNMODULAR.SavePromptTitleVS", {ability: saveLabel, dc: sval}),
-      messageData: {"flags.swnmodular.roll": {type: "save", saveLabel}}
+      title: game.i18n.format("SWNPRETTY.SavePromptTitleVS", {ability: saveLabel, dc: sval}),
+      messageData: {"flags.swnpretty.roll": {type: "save", saveLabel}}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
@@ -975,7 +975,7 @@ export default class Actor5e extends Actor {
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollAbilitySave(abilityId, options={}) {
-    const label = CONFIG.SWNMODULAR.abilities[abilityId];
+    const label = CONFIG.SWNPRETTY.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
 
     // Construct parts
@@ -1004,8 +1004,8 @@ export default class Actor5e extends Actor {
     const rollData = mergeObject(options, {
       parts: parts,
       data: data,
-      title: game.i18n.format("SWNMODULAR.SavePromptTitle", {ability: label}),
-      messageData: {"flags.swnmodular.roll": {type: "save", abilityId }}
+      title: game.i18n.format("SWNPRETTY.SavePromptTitle", {ability: label}),
+      messageData: {"flags.swnpretty.roll": {type: "save", abilityId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
@@ -1023,7 +1023,7 @@ export default class Actor5e extends Actor {
     // Display a warning if we are not at zero HP or if we already have reached 3
     const death = this.data.data.attributes.death;
     if ( (this.data.data.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3)) {
-      ui.notifications.warn(game.i18n.localize("SWNMODULAR.DeathSaveUnnecessary"));
+      ui.notifications.warn(game.i18n.localize("SWNPRETTY.DeathSaveUnnecessary"));
       return null;
     }
 
@@ -1043,10 +1043,10 @@ export default class Actor5e extends Actor {
     const rollData = mergeObject(options, {
       parts: parts,
       data: data,
-      title: game.i18n.localize("SWNMODULAR.DeathSavingThrow"),
+      title: game.i18n.localize("SWNPRETTY.DeathSavingThrow"),
       speaker: speaker,
       targetValue: 10,
-      messageData: {"flags.swnmodular.roll": {type: "death"}}
+      messageData: {"flags.swnpretty.roll": {type: "death"}}
     });
     rollData.speaker = speaker;
     const roll = await d20Roll(rollData);
@@ -1067,7 +1067,7 @@ export default class Actor5e extends Actor {
           "data.attributes.death.failure": 0,
           "data.attributes.hp.value": 1
         });
-        await ChatMessage.create({content: game.i18n.format("SWNMODULAR.DeathSaveCriticalSuccess", {name: this.name}), speaker});
+        await ChatMessage.create({content: game.i18n.format("SWNPRETTY.DeathSaveCriticalSuccess", {name: this.name}), speaker});
       }
 
       // 3 Successes = survive and reset checks
@@ -1076,7 +1076,7 @@ export default class Actor5e extends Actor {
           "data.attributes.death.success": 0,
           "data.attributes.death.failure": 0
         });
-        await ChatMessage.create({content: game.i18n.format("SWNMODULAR.DeathSaveSuccess", {name: this.name}), speaker});
+        await ChatMessage.create({content: game.i18n.format("SWNPRETTY.DeathSaveSuccess", {name: this.name}), speaker});
       }
 
       // Increment successes
@@ -1088,7 +1088,7 @@ export default class Actor5e extends Actor {
       let failures = (death.failure || 0) + (d20 === 1 ? 2 : 1);
       await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
       if ( failures >= 3 ) {  // 3 Failures = death
-        await ChatMessage.create({content: game.i18n.format("SWNMODULAR.DeathSaveFailure", {name: this.name}), speaker});
+        await ChatMessage.create({content: game.i18n.format("SWNPRETTY.DeathSaveFailure", {name: this.name}), speaker});
       }
     }
 
@@ -1125,13 +1125,13 @@ export default class Actor5e extends Actor {
 
     // If no class is available, display an error notification
     if ( !cls ) {
-      ui.notifications.error(game.i18n.format("SWNMODULAR.HitDiceWarn", {name: this.name, formula: denomination}));
+      ui.notifications.error(game.i18n.format("SWNPRETTY.HitDiceWarn", {name: this.name, formula: denomination}));
       return null;
     }
 
     // Prepare roll data
     const parts = [`1${denomination}`, "@abilities.con.mod"];
-    const title = game.i18n.localize("SWNMODULAR.HitDiceRoll");
+    const title = game.i18n.localize("SWNPRETTY.HitDiceRoll");
     const rollData = duplicate(this.data.data);
 
     // Call the roll helper utility
@@ -1144,7 +1144,7 @@ export default class Actor5e extends Actor {
       allowcritical: false,
       fastForward: !dialog,
       dialogOptions: {width: 350},
-      messageData: {"flags.swnmodular.roll": {type: "hitDie"}}
+      messageData: {"flags.swnpretty.roll": {type: "hitDie"}}
     });
     if ( !roll ) return null;
 
@@ -1225,15 +1225,15 @@ export default class Actor5e extends Actor {
 
       // Summarize the rest duration
       let restFlavor;
-      switch (game.settings.get("swnmodular", "restVariant")) {
-        case 'normal': restFlavor = game.i18n.localize("SWNMODULAR.ShortRestNormal"); break;
-        case 'gritty': restFlavor = game.i18n.localize(newDay ? "SWNMODULAR.ShortRestOvernight" : "SWNMODULAR.ShortRestGritty"); break;
-        case 'epic':  restFlavor = game.i18n.localize("SWNMODULAR.ShortRestEpic"); break;
+      switch (game.settings.get("swnpretty", "restVariant")) {
+        case 'normal': restFlavor = game.i18n.localize("SWNPRETTY.ShortRestNormal"); break;
+        case 'gritty': restFlavor = game.i18n.localize(newDay ? "SWNPRETTY.ShortRestOvernight" : "SWNPRETTY.ShortRestGritty"); break;
+        case 'epic':  restFlavor = game.i18n.localize("SWNPRETTY.ShortRestEpic"); break;
       }
 
       // Summarize the health effects
-      let srMessage = "SWNMODULAR.ShortRestResultShort";
-      if ((dhd !== 0) && (dhp !== 0)) srMessage = "SWNMODULAR.ShortRestResult";
+      let srMessage = "SWNPRETTY.ShortRestResultShort";
+      if ((dhd !== 0) && (dhp !== 0)) srMessage = "SWNPRETTY.ShortRestResult";
 
       // Create a chat message
       ChatMessage.create({
@@ -1337,18 +1337,18 @@ export default class Actor5e extends Actor {
 
     // Display a Chat Message summarizing the rest effects
     let restFlavor;
-    switch (game.settings.get("swnmodular", "restVariant")) {
-      case 'normal': restFlavor = game.i18n.localize(newDay ? "SWNMODULAR.LongRestOvernight" : "SWNMODULAR.LongRestNormal"); break;
-      case 'gritty': restFlavor = game.i18n.localize("SWNMODULAR.LongRestGritty"); break;
-      case 'epic':  restFlavor = game.i18n.localize("SWNMODULAR.LongRestEpic"); break;
+    switch (game.settings.get("swnpretty", "restVariant")) {
+      case 'normal': restFlavor = game.i18n.localize(newDay ? "SWNPRETTY.LongRestOvernight" : "SWNPRETTY.LongRestNormal"); break;
+      case 'gritty': restFlavor = game.i18n.localize("SWNPRETTY.LongRestGritty"); break;
+      case 'epic':  restFlavor = game.i18n.localize("SWNPRETTY.LongRestEpic"); break;
     }
 
     // Determine the chat message to display
     if ( chat ) {
-      let lrMessage = "SWNMODULAR.LongRestResultShort";
-      if((dhp !== 0) && (dhd !== 0)) lrMessage = "SWNMODULAR.LongRestResult";
-      else if ((dhp !== 0) && (dhd === 0)) lrMessage = "SWNMODULAR.LongRestResultHitPoints";
-      else if ((dhp === 0) && (dhd !== 0)) lrMessage = "SWNMODULAR.LongRestResultHitDice";
+      let lrMessage = "SWNPRETTY.LongRestResultShort";
+      if((dhp !== 0) && (dhd !== 0)) lrMessage = "SWNPRETTY.LongRestResult";
+      else if ((dhp !== 0) && (dhd === 0)) lrMessage = "SWNPRETTY.LongRestResultHitPoints";
+      else if ((dhp === 0) && (dhd !== 0)) lrMessage = "SWNPRETTY.LongRestResultHitDice";
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
@@ -1392,15 +1392,15 @@ export default class Actor5e extends Actor {
     keepItems=false, keepBio=false, keepVision=false, transformTokens=true}={}) {
 
     // Ensure the player is allowed to polymorph
-    const allowed = game.settings.get("swnmodular", "allowPolymorphing");
+    const allowed = game.settings.get("swnpretty", "allowPolymorphing");
     if ( !allowed && !game.user.isGM ) {
-      return ui.notifications.warn(game.i18n.localize("SWNMODULAR.PolymorphWarn"));
+      return ui.notifications.warn(game.i18n.localize("SWNPRETTY.PolymorphWarn"));
     }
 
     // Get the original Actor data and the new source data
     const o = duplicate(this.toJSON());
-    o.flags.swnmodular = o.flags.swnmodular || {};
-    o.flags.swnmodular.transformOptions = {mergeSkills, mergeSaves};
+    o.flags.swnpretty = o.flags.swnpretty || {};
+    o.flags.swnpretty.transformOptions = {mergeSkills, mergeSaves};
     const source = duplicate(target.toJSON());
 
     // Prepare new data to merge from the source
@@ -1475,7 +1475,7 @@ export default class Actor5e extends Actor {
     if (!keepClass && d.data.details.cr) {
       d.items.push({
         type: 'class',
-        name: game.i18n.localize('SWNMODULAR.PolymorphTmpClass'),
+        name: game.i18n.localize('SWNPRETTY.PolymorphTmpClass'),
         data: { levels: d.data.details.cr }
       });
     }
@@ -1487,8 +1487,8 @@ export default class Actor5e extends Actor {
     if (keepVision) d.data.traits.senses = o.data.traits.senses;
 
     // Set new data flags
-    if ( !this.isPolymorphed || !d.flags.swnmodular.originalActor ) d.flags.swnmodular.originalActor = this.id;
-    d.flags.swnmodular.isPolymorphed = true;
+    if ( !this.isPolymorphed || !d.flags.swnpretty.originalActor ) d.flags.swnpretty.originalActor = this.id;
+    d.flags.swnpretty.isPolymorphed = true;
 
     // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
     if (this.isToken) {
@@ -1500,7 +1500,7 @@ export default class Actor5e extends Actor {
 
     // Update regular Actors by creating a new Actor with the Polymorphed data
     await this.sheet.close();
-    Hooks.callAll('swnmodular.transformActor', this, target, d, {
+    Hooks.callAll('swnpretty.transformActor', this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
       keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
     });
@@ -1529,7 +1529,7 @@ export default class Actor5e extends Actor {
   async revertOriginalForm() {
     if ( !this.isPolymorphed ) return;
     if ( !this.owner ) {
-      return ui.notifications.warn(game.i18n.localize("SWNMODULAR.PolymorphRevertWarn"));
+      return ui.notifications.warn(game.i18n.localize("SWNPRETTY.PolymorphRevertWarn"));
     }
 
     // If we are reverting an unlinked token, simply replace it with the base actor prototype
@@ -1541,7 +1541,7 @@ export default class Actor5e extends Actor {
     }
 
     // Obtain a reference to the original actor
-    const original = game.actors.get(this.getFlag('swnmodular', 'originalActor'));
+    const original = game.actors.get(this.getFlag('swnpretty', 'originalActor'));
     if ( !original ) return;
 
     // Get the Tokens which represent this actor
@@ -1572,14 +1572,14 @@ export default class Actor5e extends Actor {
    */
   static addDirectoryContextOptions(html, entryOptions) {
     entryOptions.push({
-      name: 'SWNMODULAR.PolymorphRestoreTransformation',
+      name: 'SWNPRETTY.PolymorphRestoreTransformation',
       icon: '<i class="fas fa-backward"></i>',
       callback: li => {
         const actor = game.actors.get(li.data('entityId'));
         return actor.revertOriginalForm();
       },
       condition: li => {
-        const allowed = game.settings.get("swnmodular", "allowPolymorphing");
+        const allowed = game.settings.get("swnpretty", "allowPolymorphing");
         if ( !allowed && !game.user.isGM ) return false;
         const actor = game.actors.get(li.data('entityId'));
         return actor && actor.isPolymorphed;
@@ -1592,7 +1592,7 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * @deprecated since swnmodular 0.97
+   * @deprecated since swnpretty 0.97
    */
   getSpellDC(ability) {
     console.warn(`The Actor5e#getSpellDC(ability) method has been deprecated in favor of Actor5e#data.data.abilities[ability].dc`);
@@ -1605,7 +1605,7 @@ export default class Actor5e extends Actor {
    * Cast a Spell, consuming a spell slot of a certain level
    * @param {Item5e} item   The spell being cast by the actor
    * @param {Event} event   The originating user interaction which triggered the cast
-   * @deprecated since swnmodular 1.2.0
+   * @deprecated since swnpretty 1.2.0
    */
   async useSpell(item, {configureDialog=true}={}) {
     console.warn(`The Actor5e#useSpell method has been deprecated in favor of Item5e#roll`);

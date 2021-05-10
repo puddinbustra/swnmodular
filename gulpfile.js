@@ -5,9 +5,9 @@ const less = require('gulp-less');
 /*  Compile LESS
 /* ----------------------------------------- */
 
-const SWNMODULAR_LESS = ["less/*.less"];
+const SWNPRETTY_LESS = ["less/*.less"];
 function compileLESS() {
-  return gulp.src("less/swnmodular.less")
+  return gulp.src("less/swnpretty.less")
     .pipe(less())
     .pipe(gulp.dest("./"))
 }
@@ -18,7 +18,7 @@ const css = gulp.series(compileLESS);
 /* ----------------------------------------- */
 
 function watchUpdates() {
-  gulp.watch(SWNMODULAR_LESS, css);
+  gulp.watch(SWNPRETTY_LESS, css);
 }
 
 /* ----------------------------------------- */

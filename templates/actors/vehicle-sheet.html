@@ -5,29 +5,29 @@
         <section class="header-details flexrow">
             <h1 class="charnam">
                 <input name="name" type="text" value="{{actor.name}}"
-                       placeholder="{{localize 'SWNMODULAR.Name'}}">
+                       placeholder="{{localize 'SWNPRETTY.Name'}}">
             </h1>
             <ul class="summary flexrow">
                 <li>
                     <span>{{lookup config.actorSizes data.traits.size}}</span>
                 </li>
                 <li>
-                    <span>{{localize 'SWNMODULAR.Vehicle'}}</span>
+                    <span>{{localize 'SWNPRETTY.Vehicle'}}</span>
                 </li>
                 <li>
                     <input type="text" name="data.traits.dimensions"
                            value="{{data.traits.dimensions}}"
-                           placeholder="{{localize 'SWNMODULAR.Dimensions'}}">
+                           placeholder="{{localize 'SWNPRETTY.Dimensions'}}">
                 </li>
                 <li>
                     <input type="text" name="data.details.source"
                            value="{{data.details.source}}"
-                           placeholder="{{localize 'SWNMODULAR.Source'}}">
+                           placeholder="{{localize 'SWNPRETTY.Source'}}">
                 </li>
             </ul>
             <ul class="attributes flexrow">
                 <li class="attribute health">
-                    <h4 class="attribute-name box-title">{{localize 'SWNMODULAR.HitPoints'}}</h4>
+                    <h4 class="attribute-name box-title">{{localize 'SWNPRETTY.HitPoints'}}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.hp.value" type="text" placeholder="&mdash;"
                                value="{{data.attributes.hp.value}}" data-dtype="Number">
@@ -37,15 +37,15 @@
                     </div>
                     <footer class="attribute-footer">
                         <input name="data.attributes.hp.dt" type="text" class="temphp"
-                               placeholder="{{localize 'SWNMODULAR.Threshold'}}"
+                               placeholder="{{localize 'SWNPRETTY.Threshold'}}"
                                value="{{data.attributes.hp.dt}}" data-dtype="Number">
                         <input name="data.attributes.hp.mt" type="text" class="temphp"
-                               placeholder="{{localize 'SWNMODULAR.VehicleMishap'}}"
+                               placeholder="{{localize 'SWNPRETTY.VehicleMishap'}}"
                                value="{{data.attributes.hp.mt}}" data-dtype="Number">
                     </footer>
                 </li>
                 <li class="attribute">
-                    <h4 class="attribute-name box-title">{{localize 'SWNMODULAR.ArmorClass'}}</h4>
+                    <h4 class="attribute-name box-title">{{localize 'SWNPRETTY.ArmorClass'}}</h4>
                     <div class="attribute-value">
                         <input name="data.attributes.ac.value" type="text" placeholder="&mdash;"
                                value="{{data.attributes.ac.value}}" data-dtype="Number">
@@ -57,8 +57,8 @@
                 </li>
                 <li class="attribute movement">
                     <h4 class="attribute-name box-title">
-                        {{ localize "SWNMODULAR.Movement" }}
-                        <a class="config-button" data-action="movement" title="{{localize 'SWNMODULAR.MovementConfig'}}"><i class="fas fa-cog"></i></a>
+                        {{ localize "SWNPRETTY.Movement" }}
+                        <a class="config-button" data-action="movement" title="{{localize 'SWNPRETTY.MovementConfig'}}"><i class="fas fa-cog"></i></a>
                     </h4>
                     <div class="attribute-value">
                         <span>{{movement.primary}}</span>
@@ -72,10 +72,10 @@
     </header>
 
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="attributes">{{localize 'SWNMODULAR.Attributes'}}</a>
-        <a class="item" data-tab="features">{{localize 'SWNMODULAR.Features'}}</a>
-        <a class="item" data-tab="cargo">{{localize 'SWNMODULAR.VehicleCargoCrew'}}</a>
-        <a class="item" data-tab="biography">{{localize 'SWNMODULAR.Description'}}</a>
+        <a class="item active" data-tab="attributes">{{localize 'SWNPRETTY.Attributes'}}</a>
+        <a class="item" data-tab="features">{{localize 'SWNPRETTY.Features'}}</a>
+        <a class="item" data-tab="cargo">{{localize 'SWNPRETTY.VehicleCargoCrew'}}</a>
+        <a class="item" data-tab="biography">{{localize 'SWNPRETTY.Description'}}</a>
     </nav>
 
     <section class="sheet-body">
@@ -87,7 +87,7 @@
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="text"
                            value="{{ability.value}}" data-dtype="Number" placeholder="0">
                     <div class="ability-modifiers flexrow">
-                        <span class="ability-mod" title="{{localize 'SWNMODULAR.Modifier'}}">
+                        <span class="ability-mod" title="{{localize 'SWNPRETTY.Modifier'}}">
                             {{numberFormat ability.mod decimals=0 sign=true}}
                         </span>
                     </div>
@@ -97,7 +97,7 @@
             <section class="center-pane flexcol">
                 <div class="counters">
                     <div class="counter flexrow creature-cap">
-                        <h4>{{localize 'SWNMODULAR.VehicleCreatureCapacity'}}</h4>
+                        <h4>{{localize 'SWNPRETTY.VehicleCreatureCapacity'}}</h4>
                         <div class="counter-value">
                             <input type="text" placeholder="&mdash;"
                                    name="data.attributes.capacity.creature"
@@ -105,14 +105,14 @@
                         </div>
                     </div>
                     <div class="counter flexrow cargo-cap">
-                        <h4>{{localize 'SWNMODULAR.VehicleCargoCapacity'}}</h4>
+                        <h4>{{localize 'SWNPRETTY.VehicleCargoCapacity'}}</h4>
                         <div class="counter-value">
                             <input type="text" name="data.attributes.capacity.cargo" placeholder="0"
                                    data-dtype="Number" value="{{data.attributes.capacity.cargo}}">
                         </div>
                     </div>
                     <div class="counter flexrow stations">
-                        <h4>{{localize 'SWNMODULAR.VehicleActionStations'}}</h4>
+                        <h4>{{localize 'SWNPRETTY.VehicleActionStations'}}</h4>
                         <div class="counter-value">
                             <input name="data.attributes.actions.stations" type="checkbox"
                                    data-dtype="Boolean" value="{{data.attributes.actions.stations}}"
@@ -120,14 +120,14 @@
                         </div>
                     </div>
                     <div class="counter flexrow actions">
-                        <h4>{{localize 'SWNMODULAR.ActionPl'}}</h4>
+                        <h4>{{localize 'SWNPRETTY.ActionPl'}}</h4>
                         <div class="counter-value">
                             <input type="text" name="data.attributes.actions.value" placeholder="0"
                                    data-dtype="Number" value="{{data.attributes.actions.value}}">
                         </div>
                     </div>
                     <div class="counter flexrow action-thresholds">
-                        <h4>{{localize 'SWNMODULAR.VehicleActionThresholds'}}</h4>
+                        <h4>{{localize 'SWNPRETTY.VehicleActionThresholds'}}</h4>
                         <div class="counter-value">
                             <span class="sep">&lt;</span>
                             <input type="text" placeholder="&mdash;" data-dtype="Number"
@@ -144,16 +144,16 @@
                         </div>
                     </div>
                 </div>
-                {{> 'systems/swnmodular/templates/actors/parts/actor-traits.html'}}
+                {{> 'systems/swnpretty/templates/actors/parts/actor-traits.html'}}
             </section>
         </div>
 
         <div class="tab features flexcol" data-group="primary" data-tab="features">
-            {{> 'systems/swnmodular/templates/actors/parts/actor-features.html' sections=features}}
+            {{> 'systems/swnpretty/templates/actors/parts/actor-features.html' sections=features}}
         </div>
 
         <div class="tab cargo flexcol" data-group="primary" data-tab="cargo">
-            {{> 'systems/swnmodular/templates/actors/parts/actor-inventory.html' sections=cargo}}
+            {{> 'systems/swnpretty/templates/actors/parts/actor-inventory.html' sections=cargo}}
         </div>
 
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">

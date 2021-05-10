@@ -5,15 +5,15 @@
         <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
         <section class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'SWNMODULAR.Name' }}"/>
+                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'SWNPRETTY.Name' }}"/>
             </h1>
-<!--            <a class = "feedback" href = "https://github.com/puddinbustra/swnmodular">Sheet Feedback?</a>-->
+<!--            <a class = "feedback" href = "https://github.com/puddinbustra/swnpretty">Sheet Feedback?</a>-->
             <aside class="header-exp flexcol">
-                <a class = "feedback" href = "https://github.com/puddinbustra/swnmodular">Sheet Feedback?</a>
+                <a class = "feedback" href = "https://github.com/puddinbustra/swnpretty">Sheet Feedback?</a>
                 <div class="charlevel" title="{{multiclassLabels}}">
-<!--                    <label>{{ localize "SWNMODULAR.Level" }} {{data.details.level}}</label>-->
+<!--                    <label>{{ localize "SWNPRETTY.Level" }} {{data.details.level}}</label>-->
 
-                    <label> {{ localize "SWNMODULAR.Level" }} </label>
+                    <label> {{ localize "SWNPRETTY.Level" }} </label>
                     <input class = "levelInput" name = "data.attributes.level.value" type = "number" value = "{{data.attributes.level.value}}" placeholder="0" data-dtype="Number"/>
                     <span class="levels">{{classLabels}}</span>
                 </div>
@@ -36,22 +36,22 @@
             <ul class="summary flexrow">
                 <!--                Use this as a template to add things to the upper header line if needed-->
                 <!--                <li>-->
-                <!--                    <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="{{ localize 'SWNMODULAR.Race' }}"/>-->
+                <!--                    <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="{{ localize 'SWNPRETTY.Race' }}"/>-->
                 <!--                </li>-->
                 <li>
-                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNMODULAR.Background' }}"/>
+                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNPRETTY.Background' }}"/>
                 </li>
                 <!--                <li>-->
                 <!--                    <input class="saves" name="data.abilities.{'str'}.value" type="number" value="{str.value}"/>-->
                 <!--                </li>-->
                 <li>
-                    <input type="text" name="data.details.focus" value="{{data.details.focus}}" placeholder="{{ localize 'SWNMODULAR.Focus' }}"/>
+                    <input type="text" name="data.details.focus" value="{{data.details.focus}}" placeholder="{{ localize 'SWNPRETTY.Focus' }}"/>
                 </li>
                 <li class="currencylist">
-<!--                    <label> {{localize "SWNMODULAR.CurrencyCredits"}}</label>-->
+<!--                    <label> {{localize "SWNPRETTY.CurrencyCredits"}}</label>-->
 <!--                    <label>-->
                         <input class = "currency" type="text" name="data.currency.credits" value="{{data.currency.credits}}"
-                               placeholder="{{localize 'SWNMODULAR.CurrencyCredits'}}"/>
+                               placeholder="{{localize 'SWNPRETTY.CurrencyCredits'}}"/>
 
 
 <!--                    </label>-->
@@ -64,45 +64,45 @@
 
             <ul class="attributes flexrow">
                 <li class="attribute health no-sub">
-                    <h4 class="attribute-name box-title">{{ localize "SWNMODULAR.HitPoints" }}</h4>
+                    <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.HitPoints" }}</h4>
                     <div class="attribute-value multiple no-sub">
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10" data-dtype="Number"/>
                         <span class="sep"> / </span>
                         <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10" data-dtype="Number"/>
                     </div>
 <!--                    <footer class="attribute-footer">-->
-<!--                        <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+{{ localize 'SWNMODULAR.Value' }}"-->
+<!--                        <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+{{ localize 'SWNPRETTY.Value' }}"-->
 <!--                               value="{{data.attributes.hp.temp}}" data-dtype="Number"/>-->
-<!--                        <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+{{ localize 'SWNMODULAR.Max' }}"-->
+<!--                        <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+{{ localize 'SWNPRETTY.Max' }}"-->
 <!--                               value="{{data.attributes.hp.tempmax}}" data-dtype="Number"/>-->
 <!--                    </footer>-->
                 </li>
 
                 <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "SWNMODULAR.HitDice" }}</h4>
+                    <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.HitDice" }}</h4>
                     <div class="attribute-value multiple no-sub">
                         <label class="hit-dice">{{data.attributes.level.value}} D6 + {{data.abilities.con.mod}}</span></label>
                     </div>
 <!--                    <footer class="attribute-footer">-->
-<!--                        <a class="rest short-rest">{{ localize "SWNMODULAR.RestS" }}</a>-->
-<!--                        <a class="rest long-rest">{{ localize "SWNMODULAR.RestL" }}</a>-->
+<!--                        <a class="rest short-rest">{{ localize "SWNPRETTY.RestS" }}</a>-->
+<!--                        <a class="rest long-rest">{{ localize "SWNPRETTY.RestL" }}</a>-->
 <!--                    </footer>-->
                 </li>
 
                 <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "SWNMODULAR.ArmorClass" }}</h4>
+                    <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.ArmorClass" }}</h4>
                     <div class="attribute-value">
                         <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
                     </div>
                     <footer class="attribute-footer">
-                        <span class="spell-dc">{{localize "SWNMODULAR.BaseAC"}}: {{data.attributes.base}}</span>
+                        <span class="spell-dc">{{localize "SWNPRETTY.BaseAC"}}: {{data.attributes.base}}</span>
                     </footer>
                 </li>
 
                 <li class="attribute movement">
                     <h4 class="attribute-name box-title">
-                        {{ localize "SWNMODULAR.Movement" }}
-                        <a class="config-button" data-action="movement" title="{{localize 'SWNMODULAR.MovementConfig'}}"><i class="fas fa-cog"></i></a>
+                        {{ localize "SWNPRETTY.Movement" }}
+                        <a class="config-button" data-action="movement" title="{{localize 'SWNPRETTY.MovementConfig'}}"><i class="fas fa-cog"></i></a>
                     </h4>
                     <div class="attribute-value">
                         <span>{{movement.primary}}</span>
@@ -113,13 +113,13 @@
                 </li>
 
                 <li class="attribute initiative">
-                    <h4 class="attribute-name box-title rollable" data-action="rollInitiative">{{ localize "SWNMODULAR.Initiative" }}</h4>
+                    <h4 class="attribute-name box-title rollable" data-action="rollInitiative">{{ localize "SWNPRETTY.Initiative" }}</h4>
                     <div class="attribute-value no-sub">
                         <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
                     </div>
 <!--                    <footer class="attribute-footer">-->
 <!--                        I'm removing this for now, to make room for possible save buttons. -Lofty -->
-<!--                        <span>{{ localize "SWNMODULAR.Modifier" }}</span>-->
+<!--                        <span>{{ localize "SWNPRETTY.Modifier" }}</span>-->
 <!--                        <input name="data.attributes.init.value" type="text" data-dtype="Number" placeholder="0"-->
 <!--                               value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>-->
 <!--                    </footer>-->
@@ -131,13 +131,13 @@
 
     {{!-- Character Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="attributes">{{ localize "SWNMODULAR.Attributes" }}</a>
-        <a class="item" data-tab="inventory">{{ localize "SWNMODULAR.Inventory" }}</a>
+        <a class="item active" data-tab="attributes">{{ localize "SWNPRETTY.Attributes" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "SWNPRETTY.Inventory" }}</a>
         <!--        I've renamed spellbook to psionics. Just the name has changed. -Lofty-->
-        <a class="item" data-tab="spellbook">{{ localize "SWNMODULAR.Spellbook" }}</a>
-        <a class="item" data-tab="features">{{ localize "SWNMODULAR.Features" }}</a>
-        <a class="item" data-tab="effects">{{ localize "SWNMODULAR.Effects" }}</a>
-        <a class="item" data-tab="biography">{{ localize "SWNMODULAR.Biography" }}</a>
+        <a class="item" data-tab="spellbook">{{ localize "SWNPRETTY.Spellbook" }}</a>
+        <a class="item" data-tab="features">{{ localize "SWNPRETTY.Features" }}</a>
+        <a class="item" data-tab="effects">{{ localize "SWNPRETTY.Effects" }}</a>
+        <a class="item" data-tab="biography">{{ localize "SWNPRETTY.Biography" }}</a>
     </nav>
 
     {{!-- Character Sheet Body --}}
@@ -156,7 +156,7 @@
                         <span class="ability-mod" title="Modifier" id="att-mod">{{numberFormat ability.mod decimals=0 sign=true}}</span>
 <!--                        I'm taking out this part, since SWN has no save proficiencies with attributes - lofty -->
 <!--                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>-->
-<!--                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SWNMODULAR.Proficiency' }}">{{{ability.icon}}}</a>-->
+<!--                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SWNPRETTY.Proficiency' }}">{{{ability.icon}}}</a>-->
 <!--                        <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>-->
                     </div>
                 </li>
@@ -248,7 +248,7 @@
                 {{!-- Counters --}}
                 <div class="flexrow front-info">
 <!--                    <label></label>-->
-<!--                    <h4> {{ localize "SWNMODULAR.Flaws" }}</h4>-->
+<!--                    <h4> {{ localize "SWNPRETTY.Flaws" }}</h4>-->
 <!--                    <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>-->
 
                     <div class = "info biography">
@@ -265,25 +265,25 @@
 
         {{!-- Inventory Tab --}}
         <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
-            {{> "systems/swnmodular/templates/actors/parts/actor-inventory.html" sections=inventory}}
+            {{> "systems/swnpretty/templates/actors/parts/actor-inventory.html" sections=inventory}}
         </div>
 
         {{!-- Features Tab --}}
         <div class="tab features flexcol" data-group="primary" data-tab="features">
-            {{> "systems/swnmodular/templates/actors/parts/actor-features.html" sections=features}}
+            {{> "systems/swnpretty/templates/actors/parts/actor-features.html" sections=features}}
         </div>
 
         {{!-- Psionics Tab --}}
         <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
-            {{> "systems/swnmodular/templates/actors/parts/actor-spellbook.html"}}
+            {{> "systems/swnpretty/templates/actors/parts/actor-spellbook.html"}}
         </div>
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
             {{!-- Traits --}}
-            {{> "systems/swnmodular/templates/actors/parts/actor-traits.html"}}
+            {{> "systems/swnpretty/templates/actors/parts/actor-traits.html"}}
 
-            {{> "systems/swnmodular/templates/actors/parts/active-effects.html"}}
+            {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}
 
 
 
@@ -292,13 +292,13 @@
         {{!-- Biography Tab --}}
         <div class="tab flexrow" data-group="primary" data-tab="biography">
             <div class="characteristics flexcol">
-                <label>{{ localize "SWNMODULAR.Appearance" }}</label>
+                <label>{{ localize "SWNPRETTY.Appearance" }}</label>
                 <textarea name="data.details.appearance">{{data.details.appearance}}</textarea>
-                <label>{{ localize "SWNMODULAR.Ideals" }}</label>
+                <label>{{ localize "SWNPRETTY.Ideals" }}</label>
                 <textarea name="data.details.ideal">{{data.details.ideal}}</textarea>
-                <label>{{ localize "SWNMODULAR.PersonalityTraits" }}</label>
+                <label>{{ localize "SWNPRETTY.PersonalityTraits" }}</label>
                 <textarea name="data.details.trait">{{data.details.trait}}</textarea>
-                <label>{{ localize "SWNMODULAR.Bonds" }}</label>
+                <label>{{ localize "SWNPRETTY.Bonds" }}</label>
                 <textarea name="data.details.bond">{{data.details.bond}}</textarea>
             </div>
             <div class="biography">

@@ -14,7 +14,7 @@ export const migrateWorld = async function() {
         await a.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
-      err.message = `Failed swnmodular system migration for Actor ${a.name}: ${err.message}`;
+      err.message = `Failed swnpretty system migration for Actor ${a.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -28,7 +28,7 @@ export const migrateWorld = async function() {
         await i.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
-      err.message = `Failed swnmodular system migration for Item ${i.name}: ${err.message}`;
+      err.message = `Failed swnpretty system migration for Item ${i.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -42,7 +42,7 @@ export const migrateWorld = async function() {
         await s.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
-      err.message = `Failed swnmodular system migration for Scene ${s.name}: ${err.message}`;
+      err.message = `Failed swnpretty system migration for Scene ${s.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -55,7 +55,7 @@ export const migrateWorld = async function() {
   }
 
   // Set the migration as complete
-  game.settings.set("swnmodular", "systemMigrationVersion", game.system.data.version);
+  game.settings.set("swnpretty", "systemMigrationVersion", game.system.data.version);
   ui.notifications.info(`DnD5E System Migration to version ${game.system.data.version} completed!`, {permanent: true});
 };
 
@@ -103,7 +103,7 @@ export const migrateCompendium = async function(pack) {
 
     // Handle migration failures
     catch(err) {
-      err.message = `Failed swnmodular system migration for entity ${ent.name} in pack ${pack.collection}: ${err.message}`;
+      err.message = `Failed swnpretty system migration for entity ${ent.name} in pack ${pack.collection}: ${err.message}`;
       console.error(err);
     }
   }
@@ -170,12 +170,12 @@ function cleanActorData(actorData) {
   actorData.data = filterObject(actorData.data, model);
 
   // Scrub system flags
-  const allowedFlags = CONFIG.SWNMODULAR.allowedActorFlags.reduce((obj, f) => {
+  const allowedFlags = CONFIG.SWNPRETTY.allowedActorFlags.reduce((obj, f) => {
     obj[f] = null;
     return obj;
   }, {});
-  if ( actorData.flags.swnmodular ) {
-    actorData.flags.swnmodular = filterObject(actorData.flags.swnmodular, allowedFlags);
+  if ( actorData.flags.swnpretty ) {
+    actorData.flags.swnpretty = filterObject(actorData.flags.swnpretty, allowedFlags);
   }
 
   // Return the scrubbed data
@@ -274,7 +274,7 @@ function _migrateActorSenses(actor, updateData) {
     const match = s.match(pattern);
     if ( !match ) continue;
     const type = match[1].toLowerCase();
-    if ( type in CONFIG.SWNMODULAR.senses ) {
+    if ( type in CONFIG.SWNPRETTY.senses ) {
       updateData[`data.attributes.senses.${type}`] = Number(match[2]).toNearest(0.5);
       wasMatched = true;
     }
@@ -298,7 +298,7 @@ function _migrateActorSenses(actor, updateData) {
  */
 function _migrateItemAttunement(item, updateData) {
   if ( item.data.attuned === undefined ) return;
-  updateData["data.attunement"] = CONFIG.SWNMODULAR.attunementTypes.NONE;
+  updateData["data.attunement"] = CONFIG.SWNPRETTY.attunementTypes.NONE;
   updateData["data.-=attuned"] = null;
   return updateData;
 }
@@ -313,8 +313,8 @@ function _migrateItemAttunement(item, updateData) {
  */
 export async function purgeFlags(pack) {
   const cleanFlags = (flags) => {
-    const flags5e = flags.swnmodular || null;
-    return flags5e ? {swnmodular: flags5e} : {};
+    const flags5e = flags.swnpretty || null;
+    return flags5e ? {swnpretty: flags5e} : {};
   };
   await pack.configure({locked: false});
   const content = await pack.getContent();

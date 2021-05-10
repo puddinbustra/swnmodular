@@ -123,7 +123,7 @@ export default class Item5e extends Item {
    */
   get hasAreaTarget() {
     const target = this.data.data.target;
-    return target && (target.type in CONFIG.SWNMODULAR.areaTargetTypes);
+    return target && (target.type in CONFIG.SWNPRETTY.areaTargetTypes);
   }
 
   /* -------------------------------------------- */
@@ -151,7 +151,7 @@ export default class Item5e extends Item {
     // Get the Item's data
     const itemData = this.data;
     const data = itemData.data;
-    const C = CONFIG.SWNMODULAR;
+    const C = CONFIG.SWNPRETTY;
     const labels = this.labels = {};
 
     // Classes
@@ -192,15 +192,15 @@ export default class Item5e extends Item {
     // Feat Items
     else if ( itemData.type === "feat" ) {
       const act = data.activation;
-      if ( act && (act.type === C.abilityActivationTypes.legendary) ) labels.featType = game.i18n.localize("SWNMODULAR.LegendaryActionLabel");
-      else if ( act && (act.type === C.abilityActivationTypes.lair) ) labels.featType = game.i18n.localize("SWNMODULAR.LairActionLabel");
-      else if ( act && act.type ) labels.featType = game.i18n.localize(data.damage.length ? "SWNMODULAR.Attack" : "SWNMODULAR.Action");
-      else labels.featType = game.i18n.localize("SWNMODULAR.Passive");
+      if ( act && (act.type === C.abilityActivationTypes.legendary) ) labels.featType = game.i18n.localize("SWNPRETTY.LegendaryActionLabel");
+      else if ( act && (act.type === C.abilityActivationTypes.lair) ) labels.featType = game.i18n.localize("SWNPRETTY.LairActionLabel");
+      else if ( act && act.type ) labels.featType = game.i18n.localize(data.damage.length ? "SWNPRETTY.Attack" : "SWNPRETTY.Action");
+      else labels.featType = game.i18n.localize("SWNPRETTY.Passive");
     }
 
     // Equipment Items
     else if ( itemData.type === "equipment" ) {
-      labels.armor = data.armor.value ? `${data.armor.value} ${game.i18n.localize("SWNMODULAR.AC")}` : "";
+      labels.armor = data.armor.value ? `${data.armor.value} ${game.i18n.localize("SWNPRETTY.AC")}` : "";
     }
 
     // Activated Items
@@ -234,7 +234,7 @@ export default class Item5e extends Item {
 
       // Recharge Label
       let chg = data.recharge || {};
-      labels.recharge = `${game.i18n.localize("SWNMODULAR.Recharge")} [${chg.value}${parseInt(chg.value) < 6 ? "+" : ""}]`;
+      labels.recharge = `${game.i18n.localize("SWNPRETTY.Recharge")} [${chg.value}${parseInt(chg.value) < 6 ? "+" : ""}]`;
     }
 
     // Item Actions
@@ -288,8 +288,8 @@ export default class Item5e extends Item {
     }
 
     // Update labels
-    const abl = CONFIG.SWNMODULAR.abilities[save.ability];
-    this.labels.save = game.i18n.format("SWNMODULAR.SaveDC", {dc: save.dc || "", ability: abl});
+    const abl = CONFIG.SWNPRETTY.abilities[save.ability];
+    this.labels.save = game.i18n.format("SWNPRETTY.SaveDC", {dc: save.dc || "", ability: abl});
     return save.dc;
   }
 
@@ -382,7 +382,7 @@ export default class Item5e extends Item {
     const recharge = id.recharge || {};       // Recharge mechanic
     const uses = id?.uses ?? {};              // Limited uses
     const isSpell = this.type === "spell";    // Does the item require a spell slot?
-    const requireSpellSlot = isSpell && (id.level > 0) && CONFIG.SWNMODULAR.spellUpcastModes.includes(id.preparation.mode);
+    const requireSpellSlot = isSpell && (id.level > 0) && CONFIG.SWNPRETTY.spellUpcastModes.includes(id.preparation.mode);
 
     // Define follow-up actions resulting from the item usage
     let createMeasuredTemplate = hasArea;       // Trigger a template creation
@@ -433,7 +433,7 @@ export default class Item5e extends Item {
 
     // Initiate measured template creation
     if ( createMeasuredTemplate ) {
-      const template = game.swnmodular.canvas.AbilityTemplate.fromItem(item);
+      const template = game.swnpretty.canvas.AbilityTemplate.fromItem(item);
       if ( template ) template.drawPreview();
     }
 
@@ -466,7 +466,7 @@ export default class Item5e extends Item {
     if ( consumeRecharge ) {
       const recharge = id.recharge || {};
       if ( recharge.charged === false ) {
-        ui.notifications.warn(game.i18n.format("SWNMODULAR.ItemNoUses", {name: this.name}));
+        ui.notifications.warn(game.i18n.format("SWNPRETTY.ItemNoUses", {name: this.name}));
         return false;
       }
       itemUpdates["data.recharge.charged"] = false;
@@ -483,8 +483,8 @@ export default class Item5e extends Item {
       const level = this.actor?.data.data.spells[consumeSpellSlot];
       const spells = Number(level?.value ?? 0);
       if ( spells === 0 ) {
-        const label = game.i18n.localize(consumeSpellSlot === "pact" ? "SWNMODULAR.SpellProgPact" : `SWNMODULAR.SpellLevel${id.level}`);
-        ui.notifications.warn(game.i18n.format("SWNMODULAR.SpellCastNoSlots", {name: this.name, level: label}));
+        const label = game.i18n.localize(consumeSpellSlot === "pact" ? "SWNPRETTY.SpellProgPact" : `SWNPRETTY.SpellLevel${id.level}`);
+        ui.notifications.warn(game.i18n.format("SWNPRETTY.SpellCastNoSlots", {name: this.name, level: label}));
         return false;
       }
       actorUpdates[`data.spells.${consumeSpellSlot}.value`] = Math.max(spells - 1, 0);
@@ -515,7 +515,7 @@ export default class Item5e extends Item {
 
       // If the item was not used, return a warning
       if ( !used ) {
-        ui.notifications.warn(game.i18n.format("SWNMODULAR.ItemNoUses", {name: this.name}));
+        ui.notifications.warn(game.i18n.format("SWNPRETTY.ItemNoUses", {name: this.name}));
         return false;
       }
     }
@@ -541,9 +541,9 @@ export default class Item5e extends Item {
     if ( !consume.type ) return;
 
     // No consumed target
-    const typeLabel = CONFIG.SWNMODULAR.abilityConsumptionTypes[consume.type];
+    const typeLabel = CONFIG.SWNPRETTY.abilityConsumptionTypes[consume.type];
     if ( !consume.target ) {
-      ui.notifications.warn(game.i18n.format("SWNMODULAR.ConsumeWarningNoResource", {name: this.name, type: typeLabel}));
+      ui.notifications.warn(game.i18n.format("SWNPRETTY.ConsumeWarningNoResource", {name: this.name, type: typeLabel}));
       return false;
     }
 
@@ -575,14 +575,14 @@ export default class Item5e extends Item {
 
     // Verify that a consumed resource is available
     if ( !resource ) {
-      ui.notifications.warn(game.i18n.format("SWNMODULAR.ConsumeWarningNoSource", {name: this.name, type: typeLabel}));
+      ui.notifications.warn(game.i18n.format("SWNPRETTY.ConsumeWarningNoSource", {name: this.name, type: typeLabel}));
       return false;
     }
 
     // Verify that the required quantity is available
     let remaining = quantity - amount;
     if ( remaining < 0 ) {
-      ui.notifications.warn(game.i18n.format("SWNMODULAR.ConsumeWarningNoQuantity", {name: this.name, type: typeLabel}));
+      ui.notifications.warn(game.i18n.format("SWNPRETTY.ConsumeWarningNoQuantity", {name: this.name, type: typeLabel}));
       return false;
     }
 
@@ -634,7 +634,7 @@ export default class Item5e extends Item {
 
     // Render the chat card template
     const templateType = ["tool"].includes(this.data.type) ? this.data.type : "item";
-    const template = `systems/swnmodular/templates/chat/${templateType}-card.html`;
+    const template = `systems/swnpretty/templates/chat/${templateType}-card.html`;
     const html = await renderTemplate(template, templateData);
 
     // Create the ChatMessage data object
@@ -649,7 +649,7 @@ export default class Item5e extends Item {
 
     // If the Item was destroyed in the process of displaying its card - embed the item data in the chat message
     if ( (this.data.type === "consumable") && !this.actor.items.has(this.id) ) {
-      chatData.flags["swnmodular.itemData"] = this.data;
+      chatData.flags["swnpretty.itemData"] = this.data;
     }
 
     // Apply the roll mode to adjust message visibility
@@ -682,10 +682,10 @@ export default class Item5e extends Item {
 
     // Equipment properties
     if ( data.hasOwnProperty("equipped") && !["loot", "tool"].includes(this.data.type) ) {
-      if ( data.attunement === CONFIG.SWNMODULAR.attunementTypes.REQUIRED ) props.push(game.i18n.localize(CONFIG.SWNMODULAR.attunements[CONFIG.SWNMODULAR.attunementTypes.REQUIRED]));
+      if ( data.attunement === CONFIG.SWNPRETTY.attunementTypes.REQUIRED ) props.push(game.i18n.localize(CONFIG.SWNPRETTY.attunements[CONFIG.SWNPRETTY.attunementTypes.REQUIRED]));
       props.push(
-        game.i18n.localize(data.equipped ? "SWNMODULAR.Equipped" : "SWNMODULAR.Unequipped"),
-        game.i18n.localize(data.proficient ? "SWNMODULAR.Proficient" : "SWNMODULAR.NotProficient"),
+        game.i18n.localize(data.equipped ? "SWNPRETTY.Equipped" : "SWNPRETTY.Unequipped"),
+        game.i18n.localize(data.proficient ? "SWNPRETTY.Proficient" : "SWNPRETTY.NotProficient"),
       );
     }
 
@@ -712,9 +712,9 @@ export default class Item5e extends Item {
    */
   _equipmentChatData(data, labels, props) {
     props.push(
-      CONFIG.SWNMODULAR.equipmentTypes[data.armor.type],
+      CONFIG.SWNPRETTY.equipmentTypes[data.armor.type],
       labels.armor || null,
-      data.stealth.value ? game.i18n.localize("SWNMODULAR.StealthDisadvantage") : null
+      data.stealth.value ? game.i18n.localize("SWNPRETTY.StealthDisadvantage") : null
     );
   }
 
@@ -726,7 +726,7 @@ export default class Item5e extends Item {
    */
   _weaponChatData(data, labels, props) {
     props.push(
-      CONFIG.SWNMODULAR.weaponTypes[data.weaponType],
+      CONFIG.SWNPRETTY.weaponTypes[data.weaponType],
     );
   }
 
@@ -738,8 +738,8 @@ export default class Item5e extends Item {
    */
   _consumableChatData(data, labels, props) {
     props.push(
-      CONFIG.SWNMODULAR.consumableTypes[data.consumableType],
-      data.uses.value + "/" + data.uses.max + " " + game.i18n.localize("SWNMODULAR.Charges")
+      CONFIG.SWNPRETTY.consumableTypes[data.consumableType],
+      data.uses.value + "/" + data.uses.max + " " + game.i18n.localize("SWNPRETTY.Charges")
     );
     data.hasCharges = data.uses.value >= 0;
   }
@@ -752,8 +752,8 @@ export default class Item5e extends Item {
    */
   _toolChatData(data, labels, props) {
     props.push(
-      CONFIG.SWNMODULAR.abilities[data.ability] || null,
-      CONFIG.SWNMODULAR.proficiencyLevels[data.proficient || 0]
+      CONFIG.SWNPRETTY.abilities[data.ability] || null,
+      CONFIG.SWNPRETTY.proficiencyLevels[data.proficient || 0]
     );
   }
 
@@ -765,8 +765,8 @@ export default class Item5e extends Item {
    */
   _lootChatData(data, labels, props) {
     props.push(
-      game.i18n.localize("SWNMODULAR.ItemTypeLoot"),
-      data.weight ? data.weight + " " + game.i18n.localize("SWNMODULAR.AbbreviationLbs") : null
+      game.i18n.localize("SWNPRETTY.ItemTypeLoot"),
+      data.weight ? data.weight + " " + game.i18n.localize("SWNPRETTY.AbbreviationLbs") : null
     );
   }
 
@@ -807,11 +807,11 @@ export default class Item5e extends Item {
    */
   async rollAttack(options={}) {
     const itemData = this.data.data;
-    const flags = this.actor.data.flags.swnmodular || {};
+    const flags = this.actor.data.flags.swnpretty || {};
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
-    let title = `${this.name} - ${game.i18n.localize("SWNMODULAR.AttackRoll")}`;
+    let title = `${this.name} - ${game.i18n.localize("SWNPRETTY.AttackRoll")}`;
 
     // get the parts and rollData for this item's attack
     const {parts, rollData} = this.getAttackToHit();
@@ -851,7 +851,7 @@ export default class Item5e extends Item {
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710
       },
-      messageData: {"flags.swnmodular.roll": {type: "attack", itemId: this.id }}
+      messageData: {"flags.swnpretty.roll": {type: "attack", itemId: this.id }}
     }, options);
     rollConfig.event = options.event;
 
@@ -897,7 +897,7 @@ export default class Item5e extends Item {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
-    const messageData = {"flags.swnmodular.roll": {type: "damage", itemId: this.id }};
+    const messageData = {"flags.swnpretty.roll": {type: "damage", itemId: this.id }};
 
     // Get roll data
     const parts = itemData.damage.parts.map(d => d[0]);
@@ -905,7 +905,7 @@ export default class Item5e extends Item {
     if ( spellLevel ) rollData.item.level = spellLevel;
 
     // Configure the damage roll
-    const actionFlavor = game.i18n.localize(itemData.actionType === "heal" ? "SWNMODULAR.Healing" : "SWNMODULAR.DamageRoll");
+    const actionFlavor = game.i18n.localize(itemData.actionType === "heal" ? "SWNPRETTY.Healing" : "SWNPRETTY.DamageRoll");
     const title = `${this.name} - ${actionFlavor}`;
     const rollConfig = {
       actor: this.actor,
@@ -928,7 +928,7 @@ export default class Item5e extends Item {
     // Adjust damage from versatile usage
     if ( versatile && itemData.damage.versatile ) {
       parts[0] = itemData.damage.versatile;
-      messageData["flags.swnmodular.roll"].versatile = true;
+      messageData["flags.swnpretty.roll"].versatile = true;
     }
 
     // Scale damage from up-casting spells
@@ -962,7 +962,7 @@ export default class Item5e extends Item {
 
     // Scale melee critical hit damage
     if ( itemData.actionType === "mwak" ) {
-      rollConfig.criticalBonusDice = this.actor.getFlag("swnmodular", "meleeCriticalDamageDice") ?? 0;
+      rollConfig.criticalBonusDice = this.actor.getFlag("swnpretty", "meleeCriticalDamageDice") ?? 0;
     }
 
     // Call the roll helper utility
@@ -1050,7 +1050,7 @@ export default class Item5e extends Item {
     // Define Roll Data
     const rollData = this.getRollData();
     if ( options.spellLevel ) rollData.item.level = options.spellLevel;
-    const title = `${this.name} - ${game.i18n.localize("SWNMODULAR.OtherFormula")}`;
+    const title = `${this.name} - ${game.i18n.localize("SWNPRETTY.OtherFormula")}`;
 
     // Invoke the roll and submit it to chat
     const roll = new Roll(rollData.item.formula, rollData).roll();
@@ -1058,7 +1058,7 @@ export default class Item5e extends Item {
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: title,
       rollMode: game.settings.get("core", "rollMode"),
-      messageData: {"flags.swnmodular.roll": {type: "other", itemId: this.id }}
+      messageData: {"flags.swnpretty.roll": {type: "other", itemId: this.id }}
     });
     return roll;
   }
@@ -1079,7 +1079,7 @@ export default class Item5e extends Item {
 
     // Display a Chat Message
     const promises = [roll.toMessage({
-      flavor: `${game.i18n.format("SWNMODULAR.ItemRechargeCheck", {name: this.name})} - ${game.i18n.localize(success ? "SWNMODULAR.ItemRechargeSuccess" : "SWNMODULAR.ItemRechargeFailure")}`,
+      flavor: `${game.i18n.format("SWNPRETTY.ItemRechargeCheck", {name: this.name})} - ${game.i18n.localize(success ? "SWNPRETTY.ItemRechargeSuccess" : "SWNPRETTY.ItemRechargeFailure")}`,
       speaker: ChatMessage.getSpeaker({actor: this.actor, token: this.actor.token})
     })];
 
@@ -1101,13 +1101,13 @@ export default class Item5e extends Item {
     // Prepare roll data
     let rollData = this.getRollData();
     const parts = [`@mod`, "@prof"];
-    const title = `${this.name} - ${game.i18n.localize("SWNMODULAR.ToolCheck")}`;
+    const title = `${this.name} - ${game.i18n.localize("SWNPRETTY.ToolCheck")}`;
 
     // Compose the roll data
     const rollConfig = mergeObject({
       parts: parts,
       data: rollData,
-      template: "systems/swnmodular/templates/chat/tool-roll-dialog.html",
+      template: "systems/swnpretty/templates/chat/tool-roll-dialog.html",
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: title,
@@ -1116,9 +1116,9 @@ export default class Item5e extends Item {
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710,
       },
-      halflingLucky: this.actor.getFlag("swnmodular", "halflingLucky" ) || false,
-      reliableTalent: (this.data.data.proficient >= 1) && this.actor.getFlag("swnmodular", "reliableTalent"),
-      messageData: {"flags.swnmodular.roll": {type: "tool", itemId: this.id }}
+      halflingLucky: this.actor.getFlag("swnpretty", "halflingLucky" ) || false,
+      reliableTalent: (this.data.data.proficient >= 1) && this.actor.getFlag("swnpretty", "reliableTalent"),
+      messageData: {"flags.swnpretty.roll": {type: "tool", itemId: this.id }}
     }, options);
     rollConfig.event = options.event;
 
@@ -1187,10 +1187,10 @@ export default class Item5e extends Item {
     if ( !actor ) return;
 
     // Get the Item from stored flag data or by the item ID on the Actor
-    const storedData = message.getFlag("swnmodular", "itemData");
+    const storedData = message.getFlag("swnpretty", "itemData");
     const item = storedData ? this.createOwned(storedData, actor) : actor.getOwnedItem(card.dataset.itemId);
     if ( !item ) {
-      return ui.notifications.error(game.i18n.format("SWNMODULAR.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name}))
+      return ui.notifications.error(game.i18n.format("SWNPRETTY.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name}))
     }
     const spellLevel = parseInt(card.dataset.spellLevel) || null;
 
@@ -1219,7 +1219,7 @@ export default class Item5e extends Item {
       case "toolCheck":
         await item.rollToolCheck({event}); break;
       case "placeTemplate":
-        const template = game.swnmodular.canvas.AbilityTemplate.fromItem(item);
+        const template = game.swnpretty.canvas.AbilityTemplate.fromItem(item);
         if ( template ) template.drawPreview();
         break;
     }
@@ -1281,7 +1281,7 @@ export default class Item5e extends Item {
   static _getChatCardTargets(card) {
     let targets = canvas.tokens.controlled.filter(t => !!t.actor);
     if ( !targets.length && game.user.character ) targets = targets.concat(game.user.character.getActiveTokens());
-    if ( !targets.length ) ui.notifications.warn(game.i18n.localize("SWNMODULAR.ActionWarningNoToken"));
+    if ( !targets.length ) ui.notifications.warn(game.i18n.localize("SWNPRETTY.ActionWarningNoToken"));
     return targets;
   }
 
@@ -1302,7 +1302,7 @@ export default class Item5e extends Item {
     const {actionType, description, source, activation, duration, target, range, damage, save, level} = itemData.data;
 
     // Get scroll data
-    const scrollUuid = CONFIG.SWNMODULAR.spellScrollIds[level];
+    const scrollUuid = CONFIG.SWNPRETTY.spellScrollIds[level];
     const scrollItem = await fromUuid(scrollUuid);
     const scrollData = scrollItem.data;
     delete scrollData._id;
@@ -1319,7 +1319,7 @@ export default class Item5e extends Item {
 
     // Create the spell scroll data
     const spellScrollData = mergeObject(scrollData, {
-      name: `${game.i18n.localize("SWNMODULAR.SpellScroll")}: ${itemData.name}`,
+      name: `${game.i18n.localize("SWNPRETTY.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
       data: {
         "description.value": desc.trim(),

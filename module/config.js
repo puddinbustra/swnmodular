@@ -1,10 +1,10 @@
 import {ClassFeatures} from "./classFeatures.js"
 
 // Namespace Configuration Values
-export const SWNMODULAR = {};
+export const SWNPRETTY = {};
 
 // ASCII Artwork
-SWNMODULAR.ASCII = `_______________________________
+SWNPRETTY.ASCII = `_______________________________
 ______      ______ _____ _____
 |  _  \\___  |  _  \\  ___|  ___|
 | | | ( _ ) | | | |___ \\| |__
@@ -18,22 +18,22 @@ _______________________________`;
  * The set of Ability Scores used within the system
  * @type {Object}
  */
-SWNMODULAR.abilities = {
-  "str": "SWNMODULAR.AbilityStr",
-  "dex": "SWNMODULAR.AbilityDex",
-  "con": "SWNMODULAR.AbilityCon",
-  "int": "SWNMODULAR.AbilityInt",
-  "wis": "SWNMODULAR.AbilityWis",
-  "cha": "SWNMODULAR.AbilityCha"
+SWNPRETTY.abilities = {
+  "str": "SWNPRETTY.AbilityStr",
+  "dex": "SWNPRETTY.AbilityDex",
+  "con": "SWNPRETTY.AbilityCon",
+  "int": "SWNPRETTY.AbilityInt",
+  "wis": "SWNPRETTY.AbilityWis",
+  "cha": "SWNPRETTY.AbilityCha"
 };
 
-SWNMODULAR.abilityAbbreviations = {
-  "str": "SWNMODULAR.AbilityStrAbbr",
-  "dex": "SWNMODULAR.AbilityDexAbbr",
-  "con": "SWNMODULAR.AbilityConAbbr",
-  "int": "SWNMODULAR.AbilityIntAbbr",
-  "wis": "SWNMODULAR.AbilityWisAbbr",
-  "cha": "SWNMODULAR.AbilityChaAbbr"
+SWNPRETTY.abilityAbbreviations = {
+  "str": "SWNPRETTY.AbilityStrAbbr",
+  "dex": "SWNPRETTY.AbilityDexAbbr",
+  "con": "SWNPRETTY.AbilityConAbbr",
+  "int": "SWNPRETTY.AbilityIntAbbr",
+  "wis": "SWNPRETTY.AbilityWisAbbr",
+  "cha": "SWNPRETTY.AbilityChaAbbr"
 };
 
 /* -------------------------------------------- */
@@ -41,10 +41,10 @@ SWNMODULAR.abilityAbbreviations = {
  * The set of saves used within the system, added by Lofty
  * @type {Object}
  */
-  SWNMODULAR.saves = {
-    "psave": "SWNMODULAR.pSave",
-    "esave": "SWNMODULAR.eSave",
-    "msave": "SWNMODULAR.mSave"
+  SWNPRETTY.saves = {
+    "psave": "SWNPRETTY.pSave",
+    "esave": "SWNPRETTY.eSave",
+    "msave": "SWNPRETTY.mSave"
   }
 
 
@@ -53,16 +53,16 @@ SWNMODULAR.abilityAbbreviations = {
  * Character alignment options
  * @type {Object}
  */
-SWNMODULAR.alignments = {
-  'lg': "SWNMODULAR.AlignmentLG",
-  'ng': "SWNMODULAR.AlignmentNG",
-  'cg': "SWNMODULAR.AlignmentCG",
-  'ln': "SWNMODULAR.AlignmentLN",
-  'tn': "SWNMODULAR.AlignmentTN",
-  'cn': "SWNMODULAR.AlignmentCN",
-  'le': "SWNMODULAR.AlignmentLE",
-  'ne': "SWNMODULAR.AlignmentNE",
-  'ce': "SWNMODULAR.AlignmentCE"
+SWNPRETTY.alignments = {
+  'lg': "SWNPRETTY.AlignmentLG",
+  'ng': "SWNPRETTY.AlignmentNG",
+  'cg': "SWNPRETTY.AlignmentCG",
+  'ln': "SWNPRETTY.AlignmentLN",
+  'tn': "SWNPRETTY.AlignmentTN",
+  'cn': "SWNPRETTY.AlignmentCN",
+  'le': "SWNPRETTY.AlignmentLE",
+  'ne': "SWNPRETTY.AlignmentNE",
+  'ce': "SWNPRETTY.AlignmentCE"
 };
 
 /* -------------------------------------------- */
@@ -71,7 +71,7 @@ SWNMODULAR.alignments = {
  * An enumeration of item attunement types
  * @enum {number}
  */
-SWNMODULAR.attunementTypes = {
+SWNPRETTY.attunementTypes = {
   NONE: 0,
   REQUIRED: 1,
   ATTUNED: 2,
@@ -81,22 +81,22 @@ SWNMODULAR.attunementTypes = {
  * An enumeration of item attunement states
  * @type {{"0": string, "1": string, "2": string}}
  */
-SWNMODULAR.attunements = {
-  0: "SWNMODULAR.AttunementNone",
-  1: "SWNMODULAR.AttunementRequired",
-  2: "SWNMODULAR.AttunementAttuned"
+SWNPRETTY.attunements = {
+  0: "SWNPRETTY.AttunementNone",
+  1: "SWNPRETTY.AttunementRequired",
+  2: "SWNPRETTY.AttunementAttuned"
 };
 
 /* -------------------------------------------- */
 
 
-SWNMODULAR.weaponProficiencies = {
-  "bows": "SWNMODULAR.BowsProf"
+SWNPRETTY.weaponProficiencies = {
+  "bows": "SWNPRETTY.BowsProf"
 };
 
-SWNMODULAR.toolProficiencies = {
+SWNPRETTY.toolProficiencies = {
 
-  "vehicle": "SWNMODULAR.ToolVehicle"
+  "vehicle": "SWNPRETTY.ToolVehicle"
 };
 
 
@@ -106,17 +106,17 @@ SWNMODULAR.toolProficiencies = {
  * This Object defines the various lengths of time which can occur
  * @type {Object}
  */
-SWNMODULAR.timePeriods = {
-  "inst": "SWNMODULAR.TimeInst",
-  "turn": "SWNMODULAR.TimeTurn",
-  "round": "SWNMODULAR.TimeRound",
-  "minute": "SWNMODULAR.TimeMinute",
-  "hour": "SWNMODULAR.TimeHour",
-  "day": "SWNMODULAR.TimeDay",
-  "month": "SWNMODULAR.TimeMonth",
-  "year": "SWNMODULAR.TimeYear",
-  "perm": "SWNMODULAR.TimePerm",
-  "spec": "SWNMODULAR.Special"
+SWNPRETTY.timePeriods = {
+  "inst": "SWNPRETTY.TimeInst",
+  "turn": "SWNPRETTY.TimeTurn",
+  "round": "SWNPRETTY.TimeRound",
+  "minute": "SWNPRETTY.TimeMinute",
+  "hour": "SWNPRETTY.TimeHour",
+  "day": "SWNPRETTY.TimeDay",
+  "month": "SWNPRETTY.TimeMonth",
+  "year": "SWNPRETTY.TimeYear",
+  "perm": "SWNPRETTY.TimePerm",
+  "spec": "SWNPRETTY.Special"
 };
 
 
@@ -126,45 +126,45 @@ SWNMODULAR.timePeriods = {
  * This describes the ways that an ability can be activated
  * @type {Object}
  */
-SWNMODULAR.abilityActivationTypes = {
-  "none": "SWNMODULAR.None",
-  "action": "SWNMODULAR.Action",
-  "move": "SWNMODULAR.MoveAction",
-  "onturn": "SWNMODULAR.OnTurnAction",
-  "instant": "SWNMODULAR.InstantAction",
-  "minute": SWNMODULAR.timePeriods.minute,
-  "hour": SWNMODULAR.timePeriods.hour,
-  "day": SWNMODULAR.timePeriods.day,
-  "special": SWNMODULAR.timePeriods.spec,
-  // "legendary": "SWNMODULAR.LegAct",
-  // "lair": "SWNMODULAR.LairAct",
-  "crew": "SWNMODULAR.VehicleCrewAction"
+SWNPRETTY.abilityActivationTypes = {
+  "none": "SWNPRETTY.None",
+  "action": "SWNPRETTY.Action",
+  "move": "SWNPRETTY.MoveAction",
+  "onturn": "SWNPRETTY.OnTurnAction",
+  "instant": "SWNPRETTY.InstantAction",
+  "minute": SWNPRETTY.timePeriods.minute,
+  "hour": SWNPRETTY.timePeriods.hour,
+  "day": SWNPRETTY.timePeriods.day,
+  "special": SWNPRETTY.timePeriods.spec,
+  // "legendary": "SWNPRETTY.LegAct",
+  // "lair": "SWNPRETTY.LairAct",
+  "crew": "SWNPRETTY.VehicleCrewAction"
 };
 
 /* -------------------------------------------- */
 
 
-SWNMODULAR.abilityConsumptionTypes = {
-  "ammo": "SWNMODULAR.ConsumeAmmunition",
-  "attribute": "SWNMODULAR.ConsumeAttribute",
-  "material": "SWNMODULAR.ConsumeMaterial",
-  "charges": "SWNMODULAR.ConsumeCharges"
+SWNPRETTY.abilityConsumptionTypes = {
+  "ammo": "SWNPRETTY.ConsumeAmmunition",
+  "attribute": "SWNPRETTY.ConsumeAttribute",
+  "material": "SWNPRETTY.ConsumeMaterial",
+  "charges": "SWNPRETTY.ConsumeCharges"
 };
 
 
 /* -------------------------------------------- */
 
 // Creature Sizes
-SWNMODULAR.actorSizes = {
-  "tiny": "SWNMODULAR.SizeTiny",
-  "sm": "SWNMODULAR.SizeSmall",
-  "med": "SWNMODULAR.SizeMedium",
-  "lg": "SWNMODULAR.SizeLarge",
-  "huge": "SWNMODULAR.SizeHuge",
-  "grg": "SWNMODULAR.SizeGargantuan"
+SWNPRETTY.actorSizes = {
+  "tiny": "SWNPRETTY.SizeTiny",
+  "sm": "SWNPRETTY.SizeSmall",
+  "med": "SWNPRETTY.SizeMedium",
+  "lg": "SWNPRETTY.SizeLarge",
+  "huge": "SWNPRETTY.SizeHuge",
+  "grg": "SWNPRETTY.SizeGargantuan"
 };
 
-SWNMODULAR.tokenSizes = {
+SWNPRETTY.tokenSizes = {
   "tiny": 1,
   "sm": 1,
   "med": 1,
@@ -179,23 +179,23 @@ SWNMODULAR.tokenSizes = {
  * Classification types for item action types
  * @type {Object}
  */
-SWNMODULAR.itemActionTypes = {
-  "mwak": "SWNMODULAR.ActionMWAK",
-  "rwak": "SWNMODULAR.ActionRWAK",
-  // "msak": "SWNMODULAR.ActionMSAK",
-  // "rsak": "SWNMODULAR.ActionRSAK",
-  "abil": "SWNMODULAR.ActionAbil",
-  "save": "SWNMODULAR.ActionSave",
-  "heal": "SWNMODULAR.ActionHeal",
-  "util": "SWNMODULAR.ActionUtil",
-  "other": "SWNMODULAR.ActionOther"
+SWNPRETTY.itemActionTypes = {
+  "mwak": "SWNPRETTY.ActionMWAK",
+  "rwak": "SWNPRETTY.ActionRWAK",
+  // "msak": "SWNPRETTY.ActionMSAK",
+  // "rsak": "SWNPRETTY.ActionRSAK",
+  "abil": "SWNPRETTY.ActionAbil",
+  "save": "SWNPRETTY.ActionSave",
+  "heal": "SWNPRETTY.ActionHeal",
+  "util": "SWNPRETTY.ActionUtil",
+  "other": "SWNPRETTY.ActionOther"
 };
 
 /* -------------------------------------------- */
 
-SWNMODULAR.itemCapacityTypes = {
-  "items": "SWNMODULAR.ItemContainerCapacityItems",
-  "weight": "SWNMODULAR.ItemContainerCapacityWeight"
+SWNPRETTY.itemCapacityTypes = {
+  "items": "SWNPRETTY.ItemContainerCapacityItems",
+  "weight": "SWNPRETTY.ItemContainerCapacityWeight"
 };
 
 /* -------------------------------------------- */
@@ -204,11 +204,11 @@ SWNMODULAR.itemCapacityTypes = {
  * Enumerate the lengths of time over which an item can have limited use ability
  * @type {Object}
  */
-SWNMODULAR.limitedUsePeriods = {
-  "sr": "SWNMODULAR.ShortRest",
-  "lr": "SWNMODULAR.LongRest",
-  "day": "SWNMODULAR.Day",
-  "charges": "SWNMODULAR.Charges"
+SWNPRETTY.limitedUsePeriods = {
+  "sr": "SWNPRETTY.ShortRest",
+  "lr": "SWNPRETTY.LongRest",
+  "day": "SWNPRETTY.Day",
+  "charges": "SWNPRETTY.Charges"
 };
 
 
@@ -218,16 +218,16 @@ SWNMODULAR.limitedUsePeriods = {
  * The set of equipment types for armor, clothing, and other objects which can ber worn by the character
  * @type {Object}
  */
-SWNMODULAR.equipmentTypes = {
-  // "light": "SWNMODULAR.EquipmentLight",
-  // "medium": "SWNMODULAR.EquipmentMedium",
-  // "heavy": "SWNMODULAR.EquipmentHeavy",
-  "bonus": "SWNMODULAR.EquipmentBonus",
-  "natural": "SWNMODULAR.EquipmentNatural",
-  "shield": "SWNMODULAR.EquipmentShield",
-  "clothing": "SWNMODULAR.EquipmentClothing",
-  "trinket": "SWNMODULAR.EquipmentTrinket",
-  "vehicle": "SWNMODULAR.EquipmentVehicle"
+SWNPRETTY.equipmentTypes = {
+  // "light": "SWNPRETTY.EquipmentLight",
+  // "medium": "SWNPRETTY.EquipmentMedium",
+  // "heavy": "SWNPRETTY.EquipmentHeavy",
+  "bonus": "SWNPRETTY.EquipmentBonus",
+  "natural": "SWNPRETTY.EquipmentNatural",
+  "shield": "SWNPRETTY.EquipmentShield",
+  "clothing": "SWNPRETTY.EquipmentClothing",
+  "trinket": "SWNPRETTY.EquipmentTrinket",
+  "vehicle": "SWNPRETTY.EquipmentVehicle"
 };
 
 
@@ -237,7 +237,7 @@ SWNMODULAR.equipmentTypes = {
  * The set of Armor Proficiencies which a character may have
  * @type {Object}
  */
-SWNMODULAR.armorProficiencies = {
+SWNPRETTY.armorProficiencies = {
 
 };
 
@@ -248,15 +248,15 @@ SWNMODULAR.armorProficiencies = {
  * Enumerate the valid consumable types which are recognized by the system
  * @type {Object}
  */
-SWNMODULAR.consumableTypes = {
-  "ammo": "SWNMODULAR.ConsumableAmmunition",
-  "drug": "SWNMODULAR.ConsumablePotion",
-  // "poison": "SWNMODULAR.ConsumablePoison",
-  "food": "SWNMODULAR.ConsumableFood",
-  // "scroll": "SWNMODULAR.ConsumableScroll",
-  // "wand": "SWNMODULAR.ConsumableWand",
-  // "rod": "SWNMODULAR.ConsumableRod",
-  "trinket": "SWNMODULAR.ConsumableTrinket"
+SWNPRETTY.consumableTypes = {
+  "ammo": "SWNPRETTY.ConsumableAmmunition",
+  "drug": "SWNPRETTY.ConsumablePotion",
+  // "poison": "SWNPRETTY.ConsumablePoison",
+  "food": "SWNPRETTY.ConsumableFood",
+  // "scroll": "SWNPRETTY.ConsumableScroll",
+  // "wand": "SWNPRETTY.ConsumableWand",
+  // "rod": "SWNPRETTY.ConsumableRod",
+  "trinket": "SWNPRETTY.ConsumableTrinket"
 };
 
 /* -------------------------------------------- */
@@ -265,8 +265,8 @@ SWNMODULAR.consumableTypes = {
  * The valid currency denominations supported by the 5e system
  * @type {Object}
  */
-SWNMODULAR.currencies = {
-  "credits": "SWNMODULAR.CurrencyCredits",
+SWNPRETTY.currencies = {
+  "credits": "SWNPRETTY.CurrencyCredits",
 };
 
 
@@ -274,7 +274,7 @@ SWNMODULAR.currencies = {
  * Define the upwards-conversion rules for registered currency types
  * @type {{string, object}}
  */
-SWNMODULAR.currencyConversion = {
+SWNPRETTY.currencyConversion = {
   credits: {into: "credits", each: 1},
 };
 
@@ -282,18 +282,18 @@ SWNMODULAR.currencyConversion = {
 
 
 // Damage Types
-SWNMODULAR.damageTypes = {
-  "acid": "SWNMODULAR.DamageAcid",
-  "electrical": "SWNMODULAR.DamageElectrical",
-  "cold": "SWNMODULAR.DamageCold",
-  "heat": "SWNMODULAR.DamageHeat",
-  "physical": "SWNMODULAR.DamagePhysical",
-  "psychic": "SWNMODULAR.DamagePsychic",
+SWNPRETTY.damageTypes = {
+  "acid": "SWNPRETTY.DamageAcid",
+  "electrical": "SWNPRETTY.DamageElectrical",
+  "cold": "SWNPRETTY.DamageCold",
+  "heat": "SWNPRETTY.DamageHeat",
+  "physical": "SWNPRETTY.DamagePhysical",
+  "psychic": "SWNPRETTY.DamagePsychic",
 };
 
 // Damage Resistance Types
-SWNMODULAR.damageResistanceTypes = mergeObject(duplicate(SWNMODULAR.damageTypes), {
-  "physical": "SWNMODULAR.DamagePhysical"
+SWNPRETTY.damageResistanceTypes = mergeObject(duplicate(SWNPRETTY.damageTypes), {
+  "physical": "SWNPRETTY.DamagePhysical"
 });
 
 
@@ -304,12 +304,12 @@ SWNMODULAR.damageResistanceTypes = mergeObject(duplicate(SWNMODULAR.damageTypes)
  * By default this uses the imperial units of feet and miles.
  * @type {Object<string,string>}
  */
-SWNMODULAR.movementTypes = {
-  "burrow": "SWNMODULAR.MovementBurrow",
-  "climb": "SWNMODULAR.MovementClimb",
-  "fly": "SWNMODULAR.MovementFly",
-  "swim": "SWNMODULAR.MovementSwim",
-  "walk": "SWNMODULAR.MovementWalk",
+SWNPRETTY.movementTypes = {
+  "burrow": "SWNPRETTY.MovementBurrow",
+  "climb": "SWNPRETTY.MovementClimb",
+  "fly": "SWNPRETTY.MovementFly",
+  "swim": "SWNPRETTY.MovementSwim",
+  "walk": "SWNPRETTY.MovementWalk",
 }
 
 /**
@@ -317,25 +317,25 @@ SWNMODULAR.movementTypes = {
  * By default this uses the imperial units of feet and miles.
  * @type {Object<string,string>}
  */
-SWNMODULAR.movementUnits = {
-  "ft": "SWNMODULAR.DistFt",
-  "mi": "SWNMODULAR.DistMi"
+SWNPRETTY.movementUnits = {
+  "ft": "SWNPRETTY.DistFt",
+  "mi": "SWNPRETTY.DistMi"
 }
 
 /**
  * The valid units of measure for the range of an action or effect.
- * This object automatically includes the movement units from SWNMODULAR.movementUnits
+ * This object automatically includes the movement units from SWNPRETTY.movementUnits
  * @type {Object<string,string>}
  */
-SWNMODULAR.distanceUnits = {
-  "none": "SWNMODULAR.None",
-  "self": "SWNMODULAR.DistSelf",
-  "touch": "SWNMODULAR.DistTouch",
-  "spec": "SWNMODULAR.Special",
-  "any": "SWNMODULAR.DistAny"
+SWNPRETTY.distanceUnits = {
+  "none": "SWNPRETTY.None",
+  "self": "SWNPRETTY.DistSelf",
+  "touch": "SWNPRETTY.DistTouch",
+  "spec": "SWNPRETTY.Special",
+  "any": "SWNPRETTY.DistAny"
 };
-for ( let [k, v] of Object.entries(SWNMODULAR.movementUnits) ) {
-  SWNMODULAR.distanceUnits[k] = v;
+for ( let [k, v] of Object.entries(SWNPRETTY.movementUnits) ) {
+  SWNPRETTY.distanceUnits[k] = v;
 }
 
 /* -------------------------------------------- */
@@ -345,7 +345,7 @@ for ( let [k, v] of Object.entries(SWNMODULAR.movementUnits) ) {
  * Configure aspects of encumbrance calculation so that it could be configured by modules
  * @type {Object}
  */
-SWNMODULAR.encumbrance = {
+SWNPRETTY.encumbrance = {
   currencyPerWeight: 0,
   // strMultiplier: 15,
   // vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
@@ -359,22 +359,22 @@ SWNMODULAR.encumbrance = {
  * This Object defines the types of single or area targets which can be applied
  * @type {Object}
  */
-SWNMODULAR.targetTypes = {
-  "none": "SWNMODULAR.None",
-  "self": "SWNMODULAR.TargetSelf",
-  "creature": "SWNMODULAR.TargetCreature",
-  "ally": "SWNMODULAR.TargetAlly",
-  "enemy": "SWNMODULAR.TargetEnemy",
-  "object": "SWNMODULAR.TargetObject",
-  "space": "SWNMODULAR.TargetSpace",
-  "radius": "SWNMODULAR.TargetRadius",
-  "sphere": "SWNMODULAR.TargetSphere",
-  "cylinder": "SWNMODULAR.TargetCylinder",
-  "cone": "SWNMODULAR.TargetCone",
-  "square": "SWNMODULAR.TargetSquare",
-  "cube": "SWNMODULAR.TargetCube",
-  "line": "SWNMODULAR.TargetLine",
-  "wall": "SWNMODULAR.TargetWall"
+SWNPRETTY.targetTypes = {
+  "none": "SWNPRETTY.None",
+  "self": "SWNPRETTY.TargetSelf",
+  "creature": "SWNPRETTY.TargetCreature",
+  "ally": "SWNPRETTY.TargetAlly",
+  "enemy": "SWNPRETTY.TargetEnemy",
+  "object": "SWNPRETTY.TargetObject",
+  "space": "SWNPRETTY.TargetSpace",
+  "radius": "SWNPRETTY.TargetRadius",
+  "sphere": "SWNPRETTY.TargetSphere",
+  "cylinder": "SWNPRETTY.TargetCylinder",
+  "cone": "SWNPRETTY.TargetCone",
+  "square": "SWNPRETTY.TargetSquare",
+  "cube": "SWNPRETTY.TargetCube",
+  "line": "SWNPRETTY.TargetLine",
+  "wall": "SWNPRETTY.TargetWall"
 };
 
 
@@ -383,10 +383,10 @@ SWNMODULAR.targetTypes = {
 
 /**
  * Map the subset of target types which produce a template area of effect
- * The keys are SWNMODULAR target types and the values are MeasuredTemplate shape types
+ * The keys are SWNPRETTY target types and the values are MeasuredTemplate shape types
  * @type {Object}
  */
-SWNMODULAR.areaTargetTypes = {
+SWNPRETTY.areaTargetTypes = {
   cone: "cone",
   cube: "rect",
   cylinder: "circle",
@@ -401,9 +401,9 @@ SWNMODULAR.areaTargetTypes = {
 /* -------------------------------------------- */
 
 // Healing Types
-SWNMODULAR.healingTypes = {
-  "healing": "SWNMODULAR.Healing",
-  "temphp": "SWNMODULAR.HealingTemp"
+SWNPRETTY.healingTypes = {
+  "healing": "SWNPRETTY.Healing",
+  "temphp": "SWNPRETTY.HealingTemp"
 };
 
 
@@ -414,7 +414,7 @@ SWNMODULAR.healingTypes = {
  * Enumerate the denominations of hit dice which can apply to classes
  * @type {Array.<string>}
  */
-SWNMODULAR.hitDieTypes = ["d6", "d8", "d10", "d12"];
+SWNPRETTY.hitDieTypes = ["d6", "d8", "d10", "d12"];
 
 
 /* -------------------------------------------- */
@@ -423,11 +423,11 @@ SWNMODULAR.hitDieTypes = ["d6", "d8", "d10", "d12"];
  * The set of possible sensory perception types which an Actor may have
  * @type {object}
  */
-SWNMODULAR.senses = {
-  "heatvision": "SWNMODULAR.SenseHeatvision",
-  "darkvision": "SWNMODULAR.SenseDarkvision",
-  "tremorsense": "SWNMODULAR.SenseTremorsense",
-  "truesight": "SWNMODULAR.SenseTruesight"
+SWNPRETTY.senses = {
+  "heatvision": "SWNPRETTY.SenseHeatvision",
+  "darkvision": "SWNPRETTY.SenseDarkvision",
+  "tremorsense": "SWNPRETTY.SenseTremorsense",
+  "truesight": "SWNPRETTY.SenseTruesight"
 };
 
 /* -------------------------------------------- */
@@ -436,48 +436,48 @@ SWNMODULAR.senses = {
  * The set of skill which can be trained
  * @type {Object}
  */
-SWNMODULAR.skills = {
-  "acr": "SWNMODULAR.SkillAcr",
-  "ani": "SWNMODULAR.SkillAni",
-  "arc": "SWNMODULAR.SkillArc",
-  "ath": "SWNMODULAR.SkillAth",
-  "dec": "SWNMODULAR.SkillDec",
-  "his": "SWNMODULAR.SkillHis",
-  "ins": "SWNMODULAR.SkillIns",
-  "itm": "SWNMODULAR.SkillItm",
-  "inv": "SWNMODULAR.SkillInv",
-  "med": "SWNMODULAR.SkillMed",
-  "nat": "SWNMODULAR.SkillNat",
-  "prc": "SWNMODULAR.SkillPrc",
-  "prf": "SWNMODULAR.SkillPrf",
-  "per": "SWNMODULAR.SkillPer",
-  "rel": "SWNMODULAR.SkillRel",
-  "slt": "SWNMODULAR.SkillSlt",
-  "ste": "SWNMODULAR.SkillSte",
-  "sur": "SWNMODULAR.SkillSur",
-  "wor": "SWNMODULAR.SkillWor"
+SWNPRETTY.skills = {
+  "acr": "SWNPRETTY.SkillAcr",
+  "ani": "SWNPRETTY.SkillAni",
+  "arc": "SWNPRETTY.SkillArc",
+  "ath": "SWNPRETTY.SkillAth",
+  "dec": "SWNPRETTY.SkillDec",
+  "his": "SWNPRETTY.SkillHis",
+  "ins": "SWNPRETTY.SkillIns",
+  "itm": "SWNPRETTY.SkillItm",
+  "inv": "SWNPRETTY.SkillInv",
+  "med": "SWNPRETTY.SkillMed",
+  "nat": "SWNPRETTY.SkillNat",
+  "prc": "SWNPRETTY.SkillPrc",
+  "prf": "SWNPRETTY.SkillPrf",
+  "per": "SWNPRETTY.SkillPer",
+  "rel": "SWNPRETTY.SkillRel",
+  "slt": "SWNPRETTY.SkillSlt",
+  "ste": "SWNPRETTY.SkillSte",
+  "sur": "SWNPRETTY.SkillSur",
+  "wor": "SWNPRETTY.SkillWor"
 };
 
 
 /* -------------------------------------------- */
 
-SWNMODULAR.spellPreparationModes = {
-  "prepared": "SWNMODULAR.SpellPrepPrepared",
-  // "pact": "SWNMODULAR.PactMagic",
-  "always": "SWNMODULAR.SpellPrepAlways",
-  "atwill": "SWNMODULAR.SpellPrepAtWill",
-  "innate": "SWNMODULAR.SpellPrepInnate"
+SWNPRETTY.spellPreparationModes = {
+  "prepared": "SWNPRETTY.SpellPrepPrepared",
+  // "pact": "SWNPRETTY.PactMagic",
+  "always": "SWNPRETTY.SpellPrepAlways",
+  "atwill": "SWNPRETTY.SpellPrepAtWill",
+  "innate": "SWNPRETTY.SpellPrepInnate"
 };
 
-SWNMODULAR.spellUpcastModes = ["always", "pact", "prepared"];
+SWNPRETTY.spellUpcastModes = ["always", "pact", "prepared"];
 
-SWNMODULAR.spellProgression = {
-  "none": "SWNMODULAR.SpellNone",
-  "half": "SWNMODULAR.SpellProgHalf",
-  "full": "SWNMODULAR.SpellProgFull"
-  // "third": "SWNMODULAR.SpellProgThird",
-  // "pact": "SWNMODULAR.SpellProgPact",
-  // "artificer": "SWNMODULAR.SpellProgArt"
+SWNPRETTY.spellProgression = {
+  "none": "SWNPRETTY.SpellNone",
+  "half": "SWNPRETTY.SpellProgHalf",
+  "full": "SWNPRETTY.SpellProgFull"
+  // "third": "SWNPRETTY.SpellProgThird",
+  // "pact": "SWNPRETTY.SpellProgPact",
+  // "artificer": "SWNPRETTY.SpellProgArt"
 };
 
 /* -------------------------------------------- */
@@ -486,10 +486,10 @@ SWNMODULAR.spellProgression = {
  * The available choices for how spell damage scaling may be computed
  * @type {Object}
  */
-SWNMODULAR.spellScalingModes = {
-  "none": "SWNMODULAR.SpellNone",
-  // "cantrip": "SWNMODULAR.SpellCantrip",
-  "level": "SWNMODULAR.SpellLevel"
+SWNPRETTY.spellScalingModes = {
+  "none": "SWNPRETTY.SpellNone",
+  // "cantrip": "SWNPRETTY.SpellCantrip",
+  "level": "SWNPRETTY.SpellLevel"
 };
 
 /* -------------------------------------------- */
@@ -498,10 +498,10 @@ SWNMODULAR.spellScalingModes = {
  * Define the set of locations an item can be stored -Lofty
  * @type {Object}
  */
-SWNMODULAR.equipmentLocation = {
-  "readied": "SWNMODULAR.Readied",
-  "equipped": "SWNMODULAR.Equipped",
-  "stored": "SWNMODULAR.Stored",
+SWNPRETTY.equipmentLocation = {
+  "readied": "SWNPRETTY.Readied",
+  "equipped": "SWNPRETTY.Equipped",
+  "stored": "SWNPRETTY.Stored",
 };
 
 /* -------------------------------------------- */
@@ -510,10 +510,10 @@ SWNMODULAR.equipmentLocation = {
  * Define the set of types which a weapon item can take
  * @type {Object}
  */
-SWNMODULAR.weaponTypes = {
-  "simpleM": "SWNMODULAR.WeaponSimpleM",
-  "simpleR": "SWNMODULAR.WeaponSimpleR"
-  // "siege": "SWNMODULAR.WeaponSiege"
+SWNPRETTY.weaponTypes = {
+  "simpleM": "SWNPRETTY.WeaponSimpleM",
+  "simpleR": "SWNPRETTY.WeaponSimpleR"
+  // "siege": "SWNPRETTY.WeaponSiege"
 };
 
 
@@ -524,80 +524,80 @@ SWNMODULAR.weaponTypes = {
  * Lofty has moved imrpov and natural from weaponTypes to weaponProperties
  * @type {Object}
  */
-SWNMODULAR.weaponProperties = {
-  // "ada": "SWNMODULAR.WeaponPropertiesAda",
-  "amm": "SWNMODULAR.WeaponPropertiesAmm",
-  // "fin": "SWNMODULAR.WeaponPropertiesFin",
-  // "fir": "SWNMODULAR.WeaponPropertiesFir",
-  // "foc": "SWNMODULAR.WeaponPropertiesFoc",
-  // "hvy": "SWNMODULAR.WeaponPropertiesHvy",
-  "imp": "SWNMODULAR.WeaponImprov",
-  // "lgt": "SWNMODULAR.WeaponPropertiesLgt",
-  // "lod": "SWNMODULAR.WeaponPropertiesLod",
-  // "mgc": "SWNMODULAR.WeaponPropertiesMgc",
-  "nat": "SWNMODULAR.WeaponNatural",
-  // "rch": "SWNMODULAR.WeaponPropertiesRch",
-  "rel": "SWNMODULAR.WeaponPropertiesRel",
-  "ret": "SWNMODULAR.WeaponPropertiesRet",
-  "sil": "SWNMODULAR.WeaponPropertiesSil",
-  "spc": "SWNMODULAR.WeaponPropertiesSpc",
-  "thr": "SWNMODULAR.WeaponPropertiesThr",
-  "two": "SWNMODULAR.WeaponPropertiesTwo",
-  "ver": "SWNMODULAR.WeaponPropertiesVer"
+SWNPRETTY.weaponProperties = {
+  // "ada": "SWNPRETTY.WeaponPropertiesAda",
+  "amm": "SWNPRETTY.WeaponPropertiesAmm",
+  // "fin": "SWNPRETTY.WeaponPropertiesFin",
+  // "fir": "SWNPRETTY.WeaponPropertiesFir",
+  // "foc": "SWNPRETTY.WeaponPropertiesFoc",
+  // "hvy": "SWNPRETTY.WeaponPropertiesHvy",
+  "imp": "SWNPRETTY.WeaponImprov",
+  // "lgt": "SWNPRETTY.WeaponPropertiesLgt",
+  // "lod": "SWNPRETTY.WeaponPropertiesLod",
+  // "mgc": "SWNPRETTY.WeaponPropertiesMgc",
+  "nat": "SWNPRETTY.WeaponNatural",
+  // "rch": "SWNPRETTY.WeaponPropertiesRch",
+  "rel": "SWNPRETTY.WeaponPropertiesRel",
+  "ret": "SWNPRETTY.WeaponPropertiesRet",
+  "sil": "SWNPRETTY.WeaponPropertiesSil",
+  "spc": "SWNPRETTY.WeaponPropertiesSpc",
+  "thr": "SWNPRETTY.WeaponPropertiesThr",
+  "two": "SWNPRETTY.WeaponPropertiesTwo",
+  "ver": "SWNPRETTY.WeaponPropertiesVer"
 };
 
 
 // Spell Components
-SWNMODULAR.spellComponents = {
-  "V": "SWNMODULAR.ComponentVerbal",
-  "S": "SWNMODULAR.ComponentSomatic",
-  "M": "SWNMODULAR.ComponentMaterial"
+SWNPRETTY.spellComponents = {
+  "V": "SWNPRETTY.ComponentVerbal",
+  "S": "SWNPRETTY.ComponentSomatic",
+  "M": "SWNPRETTY.ComponentMaterial"
 };
 
 // Spell Schools
-SWNMODULAR.spellSchools = {
-  // "abj": "SWNMODULAR.SchoolAbj",
-  // "con": "SWNMODULAR.SchoolCon",
-  // "div": "SWNMODULAR.SchoolDiv",
-  // "enc": "SWNMODULAR.SchoolEnc",
-  // "evo": "SWNMODULAR.SchoolEvo",
-  // "ill": "SWNMODULAR.SchoolIll",
-  // "nec": "SWNMODULAR.SchoolNec",
-  // "trs": "SWNMODULAR.SchoolTrs"
-  "bio": "SWNMODULAR.SchoolBio",
-  "met": "SWNMODULAR.SchoolMet",
-  "pre": "SWNMODULAR.SchoolPre",
-  "tek": "SWNMODULAR.SchoolTek",
-  "tep": "SWNMODULAR.SchoolTap",
-  "tor": "SWNMODULAR.SchoolTep"
+SWNPRETTY.spellSchools = {
+  // "abj": "SWNPRETTY.SchoolAbj",
+  // "con": "SWNPRETTY.SchoolCon",
+  // "div": "SWNPRETTY.SchoolDiv",
+  // "enc": "SWNPRETTY.SchoolEnc",
+  // "evo": "SWNPRETTY.SchoolEvo",
+  // "ill": "SWNPRETTY.SchoolIll",
+  // "nec": "SWNPRETTY.SchoolNec",
+  // "trs": "SWNPRETTY.SchoolTrs"
+  "bio": "SWNPRETTY.SchoolBio",
+  "met": "SWNPRETTY.SchoolMet",
+  "pre": "SWNPRETTY.SchoolPre",
+  "tek": "SWNPRETTY.SchoolTek",
+  "tep": "SWNPRETTY.SchoolTap",
+  "tor": "SWNPRETTY.SchoolTep"
 };
 
 // Spell Levels
-SWNMODULAR.spellLevels = {
-  0: "SWNMODULAR.SpellLevel0",
-  1: "SWNMODULAR.SpellLevel1",
-  2: "SWNMODULAR.SpellLevel2",
-  3: "SWNMODULAR.SpellLevel3",
-  4: "SWNMODULAR.SpellLevel4"
-  // 5: "SWNMODULAR.SpellLevel5",
-  // 6: "SWNMODULAR.SpellLevel6",
-  // 7: "SWNMODULAR.SpellLevel7",
-  // 8: "SWNMODULAR.SpellLevel8",
-  // 9: "SWNMODULAR.SpellLevel9"
+SWNPRETTY.spellLevels = {
+  0: "SWNPRETTY.SpellLevel0",
+  1: "SWNPRETTY.SpellLevel1",
+  2: "SWNPRETTY.SpellLevel2",
+  3: "SWNPRETTY.SpellLevel3",
+  4: "SWNPRETTY.SpellLevel4"
+  // 5: "SWNPRETTY.SpellLevel5",
+  // 6: "SWNPRETTY.SpellLevel6",
+  // 7: "SWNPRETTY.SpellLevel7",
+  // 8: "SWNPRETTY.SpellLevel8",
+  // 9: "SWNPRETTY.SpellLevel9"
 };
 
 // Spell Scroll Compendium UUIDs
-SWNMODULAR.spellScrollIds = {
-  0: 'Compendium.swnmodular.items.rQ6sO7HDWzqMhSI3',
-  1: 'Compendium.swnmodular.items.9GSfMg0VOA2b4uFN',
-  2: 'Compendium.swnmodular.items.XdDp6CKh9qEvPTuS',
-  3: 'Compendium.swnmodular.items.hqVKZie7x9w3Kqds',
-  4: 'Compendium.swnmodular.items.DM7hzgL836ZyUFB1',
-  5: 'Compendium.swnmodular.items.wa1VF8TXHmkrrR35',
-  6: 'Compendium.swnmodular.items.tI3rWx4bxefNCexS',
-  7: 'Compendium.swnmodular.items.mtyw4NS1s7j2EJaD',
-  8: 'Compendium.swnmodular.items.aOrinPg7yuDZEuWr',
-  9: 'Compendium.swnmodular.items.O4YbkJkLlnsgUszZ'
+SWNPRETTY.spellScrollIds = {
+  0: 'Compendium.swnpretty.items.rQ6sO7HDWzqMhSI3',
+  1: 'Compendium.swnpretty.items.9GSfMg0VOA2b4uFN',
+  2: 'Compendium.swnpretty.items.XdDp6CKh9qEvPTuS',
+  3: 'Compendium.swnpretty.items.hqVKZie7x9w3Kqds',
+  4: 'Compendium.swnpretty.items.DM7hzgL836ZyUFB1',
+  5: 'Compendium.swnpretty.items.wa1VF8TXHmkrrR35',
+  6: 'Compendium.swnpretty.items.tI3rWx4bxefNCexS',
+  7: 'Compendium.swnpretty.items.mtyw4NS1s7j2EJaD',
+  8: 'Compendium.swnpretty.items.aOrinPg7yuDZEuWr',
+  9: 'Compendium.swnpretty.items.O4YbkJkLlnsgUszZ'
 };
 
 /**
@@ -605,7 +605,7 @@ SWNMODULAR.spellScrollIds = {
  * The entries of this array represent the spell slot progression for a full spell-caster.
  * @type {Array[]}
  */
-SWNMODULAR.SPELL_SLOT_TABLE = [
+SWNPRETTY.SPELL_SLOT_TABLE = [
   [2],
   [3],
   [4, 2],
@@ -631,19 +631,19 @@ SWNMODULAR.SPELL_SLOT_TABLE = [
 /* -------------------------------------------- */
 
 // Polymorph options.
-SWNMODULAR.polymorphSettings = {
-  keepPhysical: 'SWNMODULAR.PolymorphKeepPhysical',
-  keepMental: 'SWNMODULAR.PolymorphKeepMental',
-  keepSaves: 'SWNMODULAR.PolymorphKeepSaves',
-  keepSkills: 'SWNMODULAR.PolymorphKeepSkills',
-  mergeSaves: 'SWNMODULAR.PolymorphMergeSaves',
-  mergeSkills: 'SWNMODULAR.PolymorphMergeSkills',
-  keepClass: 'SWNMODULAR.PolymorphKeepClass',
-  keepFeats: 'SWNMODULAR.PolymorphKeepFeats',
-  keepSpells: 'SWNMODULAR.PolymorphKeepSpells',
-  keepItems: 'SWNMODULAR.PolymorphKeepItems',
-  keepBio: 'SWNMODULAR.PolymorphKeepBio',
-  keepVision: 'SWNMODULAR.PolymorphKeepVision'
+SWNPRETTY.polymorphSettings = {
+  keepPhysical: 'SWNPRETTY.PolymorphKeepPhysical',
+  keepMental: 'SWNPRETTY.PolymorphKeepMental',
+  keepSaves: 'SWNPRETTY.PolymorphKeepSaves',
+  keepSkills: 'SWNPRETTY.PolymorphKeepSkills',
+  mergeSaves: 'SWNPRETTY.PolymorphMergeSaves',
+  mergeSkills: 'SWNPRETTY.PolymorphMergeSkills',
+  keepClass: 'SWNPRETTY.PolymorphKeepClass',
+  keepFeats: 'SWNPRETTY.PolymorphKeepFeats',
+  keepSpells: 'SWNPRETTY.PolymorphKeepSpells',
+  keepItems: 'SWNPRETTY.PolymorphKeepItems',
+  keepBio: 'SWNPRETTY.PolymorphKeepBio',
+  keepVision: 'SWNPRETTY.PolymorphKeepVision'
 };
 
 /* -------------------------------------------- */
@@ -653,11 +653,11 @@ SWNMODULAR.polymorphSettings = {
  * Each level provides a proficiency multiplier
  * @type {Object}
  */
-SWNMODULAR.proficiencyLevels = {
-  0: "SWNMODULAR.NotProficient",
-  1: "SWNMODULAR.Proficient",
-  0.5: "SWNMODULAR.HalfProficient",
-  2: "SWNMODULAR.Expertise"
+SWNPRETTY.proficiencyLevels = {
+  0: "SWNPRETTY.NotProficient",
+  1: "SWNPRETTY.Proficient",
+  0.5: "SWNPRETTY.HalfProficient",
+  2: "SWNPRETTY.Expertise"
 };
 
 /* -------------------------------------------- */
@@ -667,128 +667,128 @@ SWNMODULAR.proficiencyLevels = {
  * In cases where multiple pieces of cover are
  * in play, we take the highest value.
  */
-SWNMODULAR.cover = {
-  0: 'SWNMODULAR.None',
-  .5: 'SWNMODULAR.CoverHalf',
-  .75: 'SWNMODULAR.CoverThreeQuarters',
-  1: 'SWNMODULAR.CoverTotal'
+SWNPRETTY.cover = {
+  0: 'SWNPRETTY.None',
+  .5: 'SWNPRETTY.CoverHalf',
+  .75: 'SWNPRETTY.CoverThreeQuarters',
+  1: 'SWNPRETTY.CoverTotal'
 };
 
 /* -------------------------------------------- */
 
 
 // Condition Types
-SWNMODULAR.conditionTypes = {
-  "blinded": "SWNMODULAR.ConBlinded",
-  "deafened": "SWNMODULAR.ConDeafened",
-  "frightened": "SWNMODULAR.ConFrightened",
-  "invisible": "SWNMODULAR.ConInvisible",
-  "stunned": "SWNMODULAR.ConStunned",
-  "unconscious": "SWNMODULAR.ConUnconscious"
+SWNPRETTY.conditionTypes = {
+  "blinded": "SWNPRETTY.ConBlinded",
+  "deafened": "SWNPRETTY.ConDeafened",
+  "frightened": "SWNPRETTY.ConFrightened",
+  "invisible": "SWNPRETTY.ConInvisible",
+  "stunned": "SWNPRETTY.ConStunned",
+  "unconscious": "SWNPRETTY.ConUnconscious"
 };
 
 // Languages
-SWNMODULAR.languages = {
-  "english": "SWNMODULAR.LanguagesEnglish",
-  "spanish": "SWNMODULAR.LanguagesSpanish",
-  "japanese": "SWNMODULAR.LanguagesJapanese",
-  "chinese": "SWNMODULAR.LanguagesChinese",
-  "arabic": "SWNMODULAR.LanguagesArabic",
-  "swahili": "SWNMODULAR.LanguagesSwahili",
-  "signlanguage": "SWNMODULAR.LanguagesSignLanguage",
-  "prisonspeak": "SWNMODULAR.LanguagesPrisonSpeak"
+SWNPRETTY.languages = {
+  "english": "SWNPRETTY.LanguagesEnglish",
+  "spanish": "SWNPRETTY.LanguagesSpanish",
+  "japanese": "SWNPRETTY.LanguagesJapanese",
+  "chinese": "SWNPRETTY.LanguagesChinese",
+  "arabic": "SWNPRETTY.LanguagesArabic",
+  "swahili": "SWNPRETTY.LanguagesSwahili",
+  "signlanguage": "SWNPRETTY.LanguagesSignLanguage",
+  "prisonspeak": "SWNPRETTY.LanguagesPrisonSpeak"
 };
 
 // Character Level XP Requirements
-SWNMODULAR.CHARACTER_EXP_LEVELS =  [
+SWNPRETTY.CHARACTER_EXP_LEVELS =  [
   0, 20, 60, 100, 180, 260, 420, 740, 1060, 1700, 2340, 2980];
 
 // Challenge Rating XP Levels
-SWNMODULAR.CR_EXP_LEVELS = [
+SWNPRETTY.CR_EXP_LEVELS = [
   10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
   20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
 ];
 
 // Character Features Per Class And Level
-SWNMODULAR.classFeatures = ClassFeatures;
+SWNPRETTY.classFeatures = ClassFeatures;
 
 // Configure Optional Character Flags
-SWNMODULAR.characterFlags = {
+SWNPRETTY.characterFlags = {
   "elvenAccuracy": {
-    name: "SWNMODULAR.FlagsElvenAccuracy",
-    hint: "SWNMODULAR.FlagsElvenAccuracyHint",
+    name: "SWNPRETTY.FlagsElvenAccuracy",
+    hint: "SWNPRETTY.FlagsElvenAccuracyHint",
     section: "Racial Traits",
     type: Boolean
   },
   "halflingLucky": {
-    name: "SWNMODULAR.FlagsHalflingLucky",
-    hint: "SWNMODULAR.FlagsHalflingLuckyHint",
+    name: "SWNPRETTY.FlagsHalflingLucky",
+    hint: "SWNPRETTY.FlagsHalflingLuckyHint",
     section: "Racial Traits",
     type: Boolean
   },
   "initiativeAdv": {
-    name: "SWNMODULAR.FlagsInitiativeAdv",
-    hint: "SWNMODULAR.FlagsInitiativeAdvHint",
+    name: "SWNPRETTY.FlagsInitiativeAdv",
+    hint: "SWNPRETTY.FlagsInitiativeAdvHint",
     section: "Feats",
     type: Boolean
   },
   "initiativeAlert": {
-    name: "SWNMODULAR.FlagsAlert",
-    hint: "SWNMODULAR.FlagsAlertHint",
+    name: "SWNPRETTY.FlagsAlert",
+    hint: "SWNPRETTY.FlagsAlertHint",
     section: "Feats",
     type: Boolean
   },
   "jackOfAllTrades": {
-    name: "SWNMODULAR.FlagsJOAT",
-    hint: "SWNMODULAR.FlagsJOATHint",
+    name: "SWNPRETTY.FlagsJOAT",
+    hint: "SWNPRETTY.FlagsJOATHint",
     section: "Feats",
     type: Boolean
   },
 
   "observantFeat": {
-    name: "SWNMODULAR.FlagsObservant",
-    hint: "SWNMODULAR.FlagsObservantHint",
+    name: "SWNPRETTY.FlagsObservant",
+    hint: "SWNPRETTY.FlagsObservantHint",
     skills: ['prc','inv'],
     section: "Feats",
     type: Boolean
   },
 
   "powerfulBuild": {
-    name: "SWNMODULAR.FlagsPowerfulBuild",
-    hint: "SWNMODULAR.FlagsPowerfulBuildHint",
+    name: "SWNPRETTY.FlagsPowerfulBuild",
+    hint: "SWNPRETTY.FlagsPowerfulBuildHint",
     section: "Racial Traits",
     type: Boolean
   },
   "reliableTalent": {
-    name: "SWNMODULAR.FlagsReliableTalent",
-    hint: "SWNMODULAR.FlagsReliableTalentHint",
+    name: "SWNPRETTY.FlagsReliableTalent",
+    hint: "SWNPRETTY.FlagsReliableTalentHint",
     section: "Feats",
     type: Boolean
   },
   "remarkableAthlete": {
-    name: "SWNMODULAR.FlagsRemarkableAthlete",
-    hint: "SWNMODULAR.FlagsRemarkableAthleteHint",
+    name: "SWNPRETTY.FlagsRemarkableAthlete",
+    hint: "SWNPRETTY.FlagsRemarkableAthleteHint",
     abilities: ['str','dex','con'],
     section: "Feats",
     type: Boolean
   },
   "weaponCriticalThreshold": {
-    name: "SWNMODULAR.FlagsWeaponCritThreshold",
-    hint: "SWNMODULAR.FlagsWeaponCritThresholdHint",
+    name: "SWNPRETTY.FlagsWeaponCritThreshold",
+    hint: "SWNPRETTY.FlagsWeaponCritThresholdHint",
     section: "Feats",
     type: Number,
     placeholder: 20
   },
   "spellCriticalThreshold": {
-    name: "SWNMODULAR.FlagsSpellCritThreshold",
-    hint: "SWNMODULAR.FlagsSpellCritThresholdHint",
+    name: "SWNPRETTY.FlagsSpellCritThreshold",
+    hint: "SWNPRETTY.FlagsSpellCritThresholdHint",
     section: "Feats",
     type: Number,
     placeholder: 20
   },
   "meleeCriticalDamageDice": {
-    name: "SWNMODULAR.FlagsMeleeCriticalDice",
-    hint: "SWNMODULAR.FlagsMeleeCriticalDiceHint",
+    name: "SWNPRETTY.FlagsMeleeCriticalDice",
+    hint: "SWNPRETTY.FlagsMeleeCriticalDiceHint",
     section: "Feats",
     type: Number,
     placeholder: 0
@@ -796,4 +796,4 @@ SWNMODULAR.characterFlags = {
 };
 
 // Configure allowed status flags
-SWNMODULAR.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(SWNMODULAR.characterFlags));
+SWNPRETTY.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(SWNPRETTY.characterFlags));

@@ -23,7 +23,7 @@ export default class ItemSheet5e extends ItemSheet {
 	  return mergeObject(super.defaultOptions, {
       width: 560,
       height: 400,
-      classes: ["swnmodular", "sheet", "item"],
+      classes: ["swnpretty", "sheet", "item"],
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
@@ -34,7 +34,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = "systems/swnmodular/templates/items/";
+    const path = "systems/swnpretty/templates/items/";
     return `${path}/${this.item.data.type}.html`;
   }
 
@@ -44,7 +44,7 @@ export default class ItemSheet5e extends ItemSheet {
   async getData(options) {
     const data = super.getData(options);
     data.labels = this.item.labels;
-    data.config = CONFIG.SWNMODULAR;
+    data.config = CONFIG.SWNPRETTY;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
@@ -124,14 +124,14 @@ export default class ItemSheet5e extends ItemSheet {
         const uses = i.data.data.uses || {};
         if ( uses.per && uses.max ) {
           const label = uses.per === "charges" ?
-            ` (${game.i18n.format("SWNMODULAR.AbilityUseChargesLabel", {value: uses.value})})` :
-            ` (${game.i18n.format("SWNMODULAR.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
+            ` (${game.i18n.format("SWNPRETTY.AbilityUseChargesLabel", {value: uses.value})})` :
+            ` (${game.i18n.format("SWNPRETTY.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
           obj[i.id] = i.name + label;
         }
 
         // Recharging items
         const recharge = i.data.data.recharge || {};
-        if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("SWNMODULAR.Recharge")})`;
+        if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("SWNPRETTY.Recharge")})`;
         return obj;
       }, {})
     }
@@ -147,13 +147,13 @@ export default class ItemSheet5e extends ItemSheet {
    */
   _getItemStatus(item) {
     if ( item.type === "spell" ) {
-      return CONFIG.SWNMODULAR.spellPreparationModes[item.data.preparation];
+      return CONFIG.SWNPRETTY.spellPreparationModes[item.data.preparation];
     }
     else if ( ["weapon", "equipment"].includes(item.type) ) {
-      return game.i18n.localize(item.data.equipped ? "SWNMODULAR.Equipped" : "SWNMODULAR.Unequipped");
+      return game.i18n.localize(item.data.equipped ? "SWNPRETTY.Equipped" : "SWNPRETTY.Unequipped");
     }
     else if ( item.type === "tool" ) {
-      return game.i18n.localize(item.data.proficient ? "SWNMODULAR.Proficient" : "SWNMODULAR.NotProficient");
+      return game.i18n.localize(item.data.proficient ? "SWNPRETTY.Proficient" : "SWNPRETTY.NotProficient");
     }
   }
 
@@ -171,20 +171,20 @@ export default class ItemSheet5e extends ItemSheet {
     if ( item.type === "weapon" ) {
       props.push(...Object.entries(item.data.properties)
         .filter(e => e[1] === true)
-        .map(e => CONFIG.SWNMODULAR.weaponProperties[e[0]]));
+        .map(e => CONFIG.SWNPRETTY.weaponProperties[e[0]]));
     }
 
     else if ( item.type === "spell" ) {
       props.push(
         labels.components,
         labels.materials,
-        item.data.components.concentration ? game.i18n.localize("SWNMODULAR.Concentration") : null,
-        item.data.components.ritual ? game.i18n.localize("SWNMODULAR.Ritual") : null
+        item.data.components.concentration ? game.i18n.localize("SWNPRETTY.Concentration") : null,
+        item.data.components.ritual ? game.i18n.localize("SWNPRETTY.Ritual") : null
       )
     }
 
     else if ( item.type === "equipment" ) {
-      props.push(CONFIG.SWNMODULAR.equipmentTypes[item.data.armor.type]);
+      props.push(CONFIG.SWNPRETTY.equipmentTypes[item.data.armor.type]);
       props.push(labels.armor);
     }
 
@@ -194,7 +194,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Action type
     if ( item.data.actionType ) {
-      props.push(CONFIG.SWNMODULAR.itemActionTypes[item.data.actionType]);
+      props.push(CONFIG.SWNPRETTY.itemActionTypes[item.data.actionType]);
     }
 
     // Action usage
@@ -310,7 +310,7 @@ export default class ItemSheet5e extends ItemSheet {
   _onConfigureClassSkills(event) {
     event.preventDefault();
     const skills = this.item.data.data.skills;
-    const choices = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.SWNMODULAR.skills);
+    const choices = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.SWNPRETTY.skills);
     const a = event.currentTarget;
     const label = a.parentElement;
 
@@ -318,7 +318,7 @@ export default class ItemSheet5e extends ItemSheet {
     new TraitSelector(this.item, {
       name: a.dataset.target,
       title: label.innerText,
-      choices: Object.entries(CONFIG.SWNMODULAR.skills).reduce((obj, e) => {
+      choices: Object.entries(CONFIG.SWNPRETTY.skills).reduce((obj, e) => {
         if ( choices.includes(e[0] ) ) obj[e[0]] = e[1];
         return obj;
       }, {}),

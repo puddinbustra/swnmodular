@@ -3,7 +3,7 @@ export const registerSystemSettings = function() {
   /**
    * Track the system version upon which point a migration was last applied
    */
-  game.settings.register("swnmodular", "systemMigrationVersion", {
+  game.settings.register("swnpretty", "systemMigrationVersion", {
     name: "System Migration Version",
     scope: "world",
     config: false,
@@ -14,7 +14,7 @@ export const registerSystemSettings = function() {
   /**
    * Register resting variants
    */
-  game.settings.register("swnmodular", "restVariant", {
+  game.settings.register("swnpretty", "restVariant", {
     name: "SETTINGS.5eRestN",
     hint: "SETTINGS.5eRestL",
     scope: "world",
@@ -31,7 +31,7 @@ export const registerSystemSettings = function() {
   /**
    * Register diagonal movement rule setting
    */
-  game.settings.register("swnmodular", "diagonalMovement", {
+  game.settings.register("swnpretty", "diagonalMovement", {
     name: "SETTINGS.5eDiagN",
     hint: "SETTINGS.5eDiagL",
     scope: "world",
@@ -49,7 +49,7 @@ export const registerSystemSettings = function() {
   /**
    * Register Initiative formula setting
    */
-  game.settings.register("swnmodular", "initiativeDexTiebreaker", {
+  game.settings.register("swnpretty", "initiativeDexTiebreaker", {
     name: "SETTINGS.5eInitTBN",
     hint: "SETTINGS.5eInitTBL",
     scope: "world",
@@ -61,7 +61,7 @@ export const registerSystemSettings = function() {
   /**
    * Require Currency Carrying Weight
    */
-  game.settings.register("swnmodular", "currencyWeight", {
+  game.settings.register("swnpretty", "currencyWeight", {
     name: "SETTINGS.5eCurWtN",
     hint: "SETTINGS.5eCurWtL",
     scope: "world",
@@ -73,7 +73,7 @@ export const registerSystemSettings = function() {
   /**
    * Option to disable XP bar for session-based or story-based advancement.
    */
-  game.settings.register("swnmodular", "disableExperienceTracking", {
+  game.settings.register("swnpretty", "disableExperienceTracking", {
     name: "SETTINGS.5eNoExpN",
     hint: "SETTINGS.5eNoExpL",
     scope: "world",
@@ -85,7 +85,7 @@ export const registerSystemSettings = function() {
   /**
    * Option to automatically collapse Item Card descriptions
    */
-  game.settings.register("swnmodular", "autoCollapseItemCards", {
+  game.settings.register("swnpretty", "autoCollapseItemCards", {
     name: "SETTINGS.5eAutoCollapseCardN",
     hint: "SETTINGS.5eAutoCollapseCardL",
     scope: "client",
@@ -100,7 +100,7 @@ export const registerSystemSettings = function() {
   /**
    * Option to allow GMs to restrict polymorphing to GMs only.
    */
-  game.settings.register('swnmodular', 'allowPolymorphing', {
+  game.settings.register('swnpretty', 'allowPolymorphing', {
     name: 'SETTINGS.5eAllowPolymorphingN',
     hint: 'SETTINGS.5eAllowPolymorphingL',
     scope: 'world',
@@ -112,7 +112,7 @@ export const registerSystemSettings = function() {
   /**
    * Remember last-used polymorph settings.
    */
-  game.settings.register('swnmodular', 'polymorphSettings', {
+  game.settings.register('swnpretty', 'polymorphSettings', {
     scope: 'client',
     default: {
       keepPhysical: false,

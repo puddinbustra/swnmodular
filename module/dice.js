@@ -125,16 +125,16 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
     // Handle advantage
     if (adv === 1) {
       nd = elvenAccuracy ? 3 : 2;
-      messageData.flavor += ` (${game.i18n.localize("SWNMODULAR.Advantage")})`;
-      if ( "flags.swnmodular.roll" in messageData ) messageData["flags.swnmodular.roll"].advantage = true;
+      messageData.flavor += ` (${game.i18n.localize("SWNPRETTY.Advantage")})`;
+      if ( "flags.swnpretty.roll" in messageData ) messageData["flags.swnpretty.roll"].advantage = true;
       mods += "kh";
     }
 
     // Handle disadvantage
     else if (adv === -1) {
       nd = 2;
-      messageData.flavor += ` (${game.i18n.localize("SWNMODULAR.Disadvantage")})`;
-      if ( "flags.swnmodular.roll" in messageData ) messageData["flags.swnmodular.roll"].disadvantage = true;
+      messageData.flavor += ` (${game.i18n.localize("SWNPRETTY.Disadvantage")})`;
+      if ( "flags.swnpretty.roll" in messageData ) messageData["flags.swnpretty.roll"].disadvantage = true;
       mods += "kl";
     }
 
@@ -157,7 +157,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
       const abl = data.abilities[data.ability];
       if (abl) {
         data.mod = abl.mod;
-        messageData.flavor += ` (${CONFIG.SWNMODULAR.abilities[data.ability]})`;
+        messageData.flavor += ` (${CONFIG.SWNPRETTY.abilities[data.ability]})`;
       }
     }
 
@@ -187,7 +187,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 
     // If reliable talent was applied, add it to the flavor text
     if (reliableTalent && roll.dice[0].total < 10) {
-      messageData.flavor += ` (${game.i18n.localize("SWNMODULAR.FlagsReliableTalent")})`;
+      messageData.flavor += ` (${game.i18n.localize("SWNPRETTY.FlagsReliableTalent")})`;
     }
     return roll;
   };
@@ -211,13 +211,13 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 async function _d20RollDialog({template, title, parts, data, rollMode, dialogOptions, roll}={}) {
 
   // Render modal dialog
-  template = template || "systems/swnmodular/templates/chat/roll-dialog.html";
+  template = template || "systems/swnpretty/templates/chat/roll-dialog.html";
   let dialogData = {
     formula: parts.join(" + "),
     data: data,
     rollMode: rollMode,
     rollModes: CONFIG.Dice.rollModes,
-    config: CONFIG.SWNMODULAR
+    config: CONFIG.SWNPRETTY
   };
   const html = await renderTemplate(template, dialogData);
 
@@ -228,15 +228,15 @@ async function _d20RollDialog({template, title, parts, data, rollMode, dialogOpt
       content: html,
       buttons: {
         advantage: {
-          label: game.i18n.localize("SWNMODULAR.Advantage"),
+          label: game.i18n.localize("SWNPRETTY.Advantage"),
           callback: html => resolve(roll(parts, 1, html[0].querySelector("form")))
         },
         normal: {
-          label: game.i18n.localize("SWNMODULAR.Normal"),
+          label: game.i18n.localize("SWNPRETTY.Normal"),
           callback: html => resolve(roll(parts, 0, html[0].querySelector("form")))
         },
         disadvantage: {
-          label: game.i18n.localize("SWNMODULAR.Disadvantage"),
+          label: game.i18n.localize("SWNPRETTY.Disadvantage"),
           callback: html => resolve(roll(parts, -1, html[0].querySelector("form")))
         }
       },
@@ -305,8 +305,8 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
         roll.terms[0].alter(1, criticalBonusDice);
         roll._formula = roll.formula;
       }
-      messageData.flavor += ` (${game.i18n.localize("SWNMODULAR.Critical")})`;
-      if ( "flags.swnmodular.roll" in messageData ) messageData["flags.swnmodular.roll"].critical = true;
+      messageData.flavor += ` (${game.i18n.localize("SWNPRETTY.Critical")})`;
+      if ( "flags.swnpretty.roll" in messageData ) messageData["flags.swnpretty.roll"].critical = true;
     }
 
     // Execute the roll
@@ -342,7 +342,7 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
 async function _damageRollDialog({template, title, parts, data, allowCritical, rollMode, dialogOptions, roll}={}) {
 
   // Render modal dialog
-  template = template || "systems/swnmodular/templates/chat/roll-dialog.html";
+  template = template || "systems/swnpretty/templates/chat/roll-dialog.html";
   let dialogData = {
     formula: parts.join(" + "),
     data: data,
@@ -359,11 +359,11 @@ async function _damageRollDialog({template, title, parts, data, allowCritical, r
       buttons: {
         critical: {
           condition: allowCritical,
-          label: game.i18n.localize("SWNMODULAR.CriticalHit"),
+          label: game.i18n.localize("SWNPRETTY.CriticalHit"),
           callback: html => resolve(roll(parts, true, html[0].querySelector("form")))
         },
         normal: {
-          label: game.i18n.localize(allowCritical ? "SWNMODULAR.Normal" : "SWNMODULAR.Roll"),
+          label: game.i18n.localize(allowCritical ? "SWNPRETTY.Normal" : "SWNPRETTY.Roll"),
           callback: html => resolve(roll(parts, false, html[0].querySelector("form")))
         },
       },

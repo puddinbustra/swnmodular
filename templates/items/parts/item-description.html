@@ -3,22 +3,22 @@
     <div class="item-properties">
         {{#if isPhysical}}
         <div class="form-group">
-            <label>{{ localize "SWNMODULAR.Quantity" }}</label>
+            <label>{{ localize "SWNPRETTY.Quantity" }}</label>
             <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
         </div>
 
         <div class="form-group">
-            <label>{{ localize "SWNMODULAR.Weight" }}</label>
+            <label>{{ localize "SWNPRETTY.Weight" }}</label>
             <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
         </div>
 
         <div class="form-group">
-            <label>{{ localize "SWNMODULAR.Price" }}</label>
+            <label>{{ localize "SWNPRETTY.Price" }}</label>
             <input type="text" name="data.price" value="{{data.price}}" data-dtype="Number"/>
         </div>
         <div class="form-group item-location">
 <!--            Choose whether equipment is readied, equipped, or stored-->
-            <label>{{ localize "SWNMODULAR.Location" }}</label>
+            <label>{{ localize "SWNPRETTY.Location" }}</label>
             <select name = "data.location">
                 {{#select data.location}}
                     {{#each config.equipmentLocation as |name type|}}

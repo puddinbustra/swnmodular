@@ -7,8 +7,8 @@ export default class ActorMovementConfig extends BaseEntitySheet {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-      classes: ["swnmodular"],
-      template: "systems/swnmodular/templates/apps/movement-config.html",
+      classes: ["swnpretty"],
+      template: "systems/swnpretty/templates/apps/movement-config.html",
       width: 300,
       height: "auto"
     });
@@ -18,7 +18,7 @@ export default class ActorMovementConfig extends BaseEntitySheet {
 
   /** @override */
   get title() {
-    return `${game.i18n.localize("SWNMODULAR.MovementConfig")}: ${this.entity.name}`;
+    return `${game.i18n.localize("SWNPRETTY.MovementConfig")}: ${this.entity.name}`;
   }
 
   /* -------------------------------------------- */
@@ -27,7 +27,7 @@ export default class ActorMovementConfig extends BaseEntitySheet {
   getData(options) {
     const data = {
       movement: duplicate(this.entity._data.data.attributes.movement),
-      units: CONFIG.SWNMODULAR.movementUnits
+      units: CONFIG.SWNPRETTY.movementUnits
     }
     for ( let [k, v] of Object.entries(data.movement) ) {
       if ( ["units", "hover"].includes(k) ) continue;

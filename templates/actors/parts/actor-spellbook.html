@@ -1,7 +1,7 @@
 <div class="inventory-filters spellbook-filters flexrow">
     <div class="form-group spellcasting-ability">
 <!--        {{#unless isNPC}}-->
-        <label>{{localize "SWNMODULAR.Effort"}}: &nbsp; </label>
+        <label>{{localize "SWNPRETTY.Effort"}}: &nbsp; </label>
         <div class="">
             <input name="data.attributes.effort.value" type="text" class = "effort-box"
                    value="{{data.attributes.effort.value}}" data-dtype="Number" placeholder= "0"/>
@@ -15,7 +15,7 @@
 
 
 
-        <label> {{localize "SWNMODULAR.Strain"}}: &nbsp; &nbsp; </label>
+        <label> {{localize "SWNPRETTY.Strain"}}: &nbsp; &nbsp; </label>
         <div class="">
             <span> {{data.attributes.strain.value}}</span>
 <!--            <input name="data.attributes.strain.value" type="text" class = "strain-box"-->
@@ -25,29 +25,29 @@
         </div>
 
 <!--        {{else}}-->
-<!--        <label>{{localize "SWNMODULAR.Level"}}</label>-->
+<!--        <label>{{localize "SWNPRETTY.Level"}}</label>-->
 <!--        <input class="spellcasting-level" type="text" name="data.details.spellLevel"-->
 <!--               value="{{data.details.spellLevel}}" data-dtype="Number" placeholder="0"/>-->
 <!--        {{/unless}}-->
 <!--        <select name="data.attributes.spellcasting" data-type="String">-->
 <!--            {{#select data.attributes.spellcasting}}-->
-<!--            <option value="">{{localize "SWNMODULAR.None"}}</option>-->
+<!--            <option value="">{{localize "SWNPRETTY.None"}}</option>-->
 <!--            {{#each data.abilities as |abl a|}}-->
 <!--            <option value="{{a}}">{{abl.label}}</option>-->
 <!--            {{/each}}-->
 <!--            {{/select}}-->
 <!--        </select>-->
-<!--        <span>{{localize "SWNMODULAR.AbbreviationDC"}} {{data.attributes.spelldc}}</span>-->
+<!--        <span>{{localize "SWNPRETTY.AbbreviationDC"}} {{data.attributes.spelldc}}</span>-->
     </div>
 
     <ul class="filter-list flexrow" data-filter="spellbook">
-        <li class="filter-item" data-filter="action">{{localize "SWNMODULAR.Action"}}</li>
-        <li class="filter-item" data-filter="move">{{localize "SWNMODULAR.MoveAction"}}</li>
-        <li class="filter-item" data-filter="onturn">{{localize "SWNMODULAR.OnTurnAction"}}</li>
-        <li class="filter-item" data-filter="instant">{{localize "SWNMODULAR.InstantAction"}}</li>
-<!--        <li class="filter-item" data-filter="concentration">{{localize "SWNMODULAR.AbbreviationConc"}}</li>-->
-<!--        <li class="filter-item" data-filter="ritual">{{localize "SWNMODULAR.Ritual"}}</li>-->
-<!--        <li class="filter-item" data-filter="prepared">{{localize "SWNMODULAR.Prepared"}}{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>-->
+        <li class="filter-item" data-filter="action">{{localize "SWNPRETTY.Action"}}</li>
+        <li class="filter-item" data-filter="move">{{localize "SWNPRETTY.MoveAction"}}</li>
+        <li class="filter-item" data-filter="onturn">{{localize "SWNPRETTY.OnTurnAction"}}</li>
+        <li class="filter-item" data-filter="instant">{{localize "SWNPRETTY.InstantAction"}}</li>
+<!--        <li class="filter-item" data-filter="concentration">{{localize "SWNPRETTY.AbbreviationConc"}}</li>-->
+<!--        <li class="filter-item" data-filter="ritual">{{localize "SWNPRETTY.Ritual"}}</li>-->
+<!--        <li class="filter-item" data-filter="prepared">{{localize "SWNPRETTY.Prepared"}}{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>-->
     </ul>
 </div>
 
@@ -64,7 +64,7 @@
 <!--                <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">-->
 <!--                    {{{section.slots}}}-->
 <!--                    {{#if ../editable}}-->
-<!--                    <a class="slot-max-override" title="{{localize 'SWNMODULAR.SpellProgOverride'}}">-->
+<!--                    <a class="slot-max-override" title="{{localize 'SWNPRETTY.SpellProgOverride'}}">-->
 <!--                        <i class="fas fa-edit"></i>-->
 <!--                    </a>-->
 <!--                    {{/if}}-->
@@ -76,14 +76,14 @@
 <!--                {{/if}}-->
 <!--            </div>-->
         </div>
-        <div class="spell-school">{{localize "SWNMODULAR.SpellSchool"}}</div>
-        <div class="spell-action">{{localize "SWNMODULAR.SpellUsage"}}</div>
-        <div class="spell-target">{{localize "SWNMODULAR.SpellTarget"}}</div>
+        <div class="spell-school">{{localize "SWNPRETTY.SpellSchool"}}</div>
+        <div class="spell-action">{{localize "SWNPRETTY.SpellUsage"}}</div>
+        <div class="spell-target">{{localize "SWNPRETTY.SpellTarget"}}</div>
 
         <div class="item-controls flexrow">
             {{#if section.canCreate}}
-            <a class="item-control item-create" title="{{localize 'SWNMODULAR.SpellCreate'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> {{localize "SWNMODULAR.Add"}}
+            <a class="item-control item-create" title="{{localize 'SWNPRETTY.SpellCreate'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-plus"></i> {{localize "SWNPRETTY.Add"}}
             </a>
             {{/if}}
         </div>
@@ -106,7 +106,7 @@
             </div>
             <div class="spell-school">{{labels.school}}</div>
             <div class="spell-action">{{labels.activation}}</div>
-            <div class="spell-target" title="{{localize 'SWNMODULAR.Range'}}: {{labels.range}}">
+            <div class="spell-target" title="{{localize 'SWNPRETTY.Range'}}: {{labels.range}}">
                 {{#if labels.target}}
                 {{labels.target}}
                 {{else}}None
@@ -126,15 +126,15 @@
 {{else}}
     {{#if owner}}
     {{#if filters.spellbook.size}}
-    <li class="item flexrow"><p class="notes">{{localize "SWNMODULAR.FilterNoSpells"}}</p></li>
+    <li class="item flexrow"><p class="notes">{{localize "SWNPRETTY.FilterNoSpells"}}</p></li>
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty">
         <div class="item-controls flexrow">
-            <a class="item-control item-create" title="{{localize 'SWNMODULAR.SpellCreate'}}" data-type="spell"
-               data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "SWNMODULAR.SpellAdd"}}</a>
+            <a class="item-control item-create" title="{{localize 'SWNPRETTY.SpellCreate'}}" data-type="spell"
+               data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "SWNPRETTY.SpellAdd"}}</a>
         </div>
     </li>
-    <li class="item flexrow"><p class="notes">{{localize "SWNMODULAR.NoSpellLevels"}}</p></li>
+    <li class="item flexrow"><p class="notes">{{localize "SWNPRETTY.NoSpellLevels"}}</p></li>
     {{/if}}
     {{/if}}
 {{/each}}

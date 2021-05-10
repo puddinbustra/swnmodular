@@ -10,7 +10,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-      classes: ["swnmodular", "sheet", "actor", "npc"],
+      classes: ["swnpretty", "sheet", "actor", "npc"],
       width: 600,
       height: 680
     });
@@ -26,10 +26,10 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
     // Categorize Items as Features and Spells
     const features = {
-      weapons: { label: game.i18n.localize("SWNMODULAR.AttackPl"), items: [] , hasActions: true, dataset: {type: "weapon", "weapon-type": "natural"} },
-      actions: { label: game.i18n.localize("SWNMODULAR.ActionPl"), items: [] , hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
-      passive: { label: game.i18n.localize("SWNMODULAR.Features"), items: [], dataset: {type: "feat"} },
-      equipment: { label: game.i18n.localize("SWNMODULAR.Inventory"), items: [], dataset: {type: "loot"}}
+      weapons: { label: game.i18n.localize("SWNPRETTY.AttackPl"), items: [] , hasActions: true, dataset: {type: "weapon", "weapon-type": "natural"} },
+      actions: { label: game.i18n.localize("SWNPRETTY.ActionPl"), items: [] , hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
+      passive: { label: game.i18n.localize("SWNPRETTY.Features"), items: [], dataset: {type: "feat"} },
+      equipment: { label: game.i18n.localize("SWNPRETTY.Inventory"), items: [], dataset: {type: "loot"}}
     };
 
     // Start by classifying items into groups for rendering

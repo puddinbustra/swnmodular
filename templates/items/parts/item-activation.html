@@ -1,6 +1,6 @@
 {{!-- Activation Cost --}}
 <div class="form-group input-select">
-    <label>{{ localize "SWNMODULAR.ItemActivationCost" }}</label>
+    <label>{{ localize "SWNPRETTY.ItemActivationCost" }}</label>
     <div class="form-fields">
         <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder="-"/>
         <select name="data.activation.type">
@@ -17,7 +17,7 @@
 
 {{!-- Activation Condition --}}
 <div class="form-group">
-    <label>{{ localize "SWNMODULAR.ItemActivationCondition" }}</label>
+    <label>{{ localize "SWNPRETTY.ItemActivationCondition" }}</label>
     <div class="form-fields">
         <input type="text" name="data.activation.condition" value="{{data.activation.condition}}"/>
     </div>
@@ -25,7 +25,7 @@
 
 {{#if isCrewed}}
 <div class="form-group">
-    <label>{{localize 'SWNMODULAR.Cover'}}</label>
+    <label>{{localize 'SWNPRETTY.Cover'}}</label>
     <div class="form-fields">
         <select name="data.cover" data-dtype="Number">
             {{#select data.cover}}
@@ -41,7 +41,7 @@
 
 {{!-- Ability Target --}}
 <div class="form-group input-select-select">
-    <label>{{ localize "SWNMODULAR.Target" }}</label>
+    <label>{{ localize "SWNPRETTY.Target" }}</label>
     <div class="form-fields">
         <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
         <select name="data.target.units">
@@ -66,7 +66,7 @@
 {{!-- Ability Target Width --}}
 {{#if isLine}}
 <div class="form-group input-select-select">
-    <label>{{ localize "SWNMODULAR.TargetWidth" }}</label>
+    <label>{{ localize "SWNPRETTY.TargetWidth" }}</label>
     <div class="form-fields">
         <input type="text" name="data.target.width" value="{{data.target.width}}" data-dtype="Number" placeholder="-"/>
     </div>
@@ -75,11 +75,11 @@
 
 {{!-- Ability Range --}}
 <div class="form-group input-select">
-    <label>{{ localize "SWNMODULAR.Range" }}</label>
+    <label>{{ localize "SWNPRETTY.Range" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="{{ localize 'SWNMODULAR.Normal' }}"/>
+        <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="{{ localize 'SWNPRETTY.Normal' }}"/>
         <span class="sep">/</span>
-        <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{ localize 'SWNMODULAR.Max' }}"/>
+        <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{ localize 'SWNPRETTY.Max' }}"/>
         <select name="data.range.units">
             {{#select data.range.units}}
             <option value=""></option>
@@ -93,7 +93,7 @@
 
 {{!-- Effect Duration --}}
 <div class="form-group input-select">
-    <label>{{ localize "SWNMODULAR.Duration" }}</label>
+    <label>{{ localize "SWNPRETTY.Duration" }}</label>
     <div class="form-fields">
         <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="-"/>
         <select name="data.duration.units">
@@ -109,12 +109,12 @@
 
 {{!-- Limited Uses --}}
 <div class="form-group uses-per">
-    <label>{{ localize "SWNMODULAR.LimitedUses" }}</label>
+    <label>{{ localize "SWNPRETTY.LimitedUses" }}</label>
     <div class="form-fields">
         <input type="text" name="data.uses.value" value="{{data.uses.value}}" data-dtype="Number"/>
-        <span class="sep">{{ localize "SWNMODULAR.of" }}</span>
+        <span class="sep">{{ localize "SWNPRETTY.of" }}</span>
         <input type="text" name="data.uses.max" value="{{data.uses.max}}"/>
-        <span class="sep">{{ localize "SWNMODULAR.per" }}</span>
+        <span class="sep">{{ localize "SWNPRETTY.per" }}</span>
         <select name="data.uses.per">
             {{#select data.uses.per}}
             <option value=""></option>
@@ -128,7 +128,7 @@
 
 {{!-- Consumption --}}
 <div class="form-group uses-per">
-    <label>{{ localize "SWNMODULAR.ConsumeTitle" }}</label>
+    <label>{{ localize "SWNPRETTY.ConsumeTitle" }}</label>
     <div class="form-fields">
         <select name="data.consume.type">
             {{#select data.consume.type}}

@@ -7,8 +7,8 @@ export default class ActorSheetFlags extends BaseEntitySheet {
     const options = super.defaultOptions;
     return mergeObject(options, {
       id: "actor-flags",
-	    classes: ["swnmodular"],
-      template: "systems/swnmodular/templates/apps/actor-flags.html",
+	    classes: ["swnpretty"],
+      template: "systems/swnpretty/templates/apps/actor-flags.html",
       width: 500,
       closeOnSubmit: true
     });
@@ -18,7 +18,7 @@ export default class ActorSheetFlags extends BaseEntitySheet {
 
   /** @override */
   get title() {
-    return `${game.i18n.localize('SWNMODULAR.FlagsTitle')}: ${this.object.name}`;
+    return `${game.i18n.localize('SWNPRETTY.FlagsTitle')}: ${this.object.name}`;
   }
 
   /* -------------------------------------------- */
@@ -42,14 +42,14 @@ export default class ActorSheetFlags extends BaseEntitySheet {
   _getFlags() {
     const flags = {};
     const baseData = this.entity._data;
-    for ( let [k, v] of Object.entries(CONFIG.SWNMODULAR.characterFlags) ) {
+    for ( let [k, v] of Object.entries(CONFIG.SWNPRETTY.characterFlags) ) {
       if ( !flags.hasOwnProperty(v.section) ) flags[v.section] = {};
       let flag = duplicate(v);
       flag.type = v.type.name;
       flag.isCheckbox = v.type === Boolean;
       flag.isSelect = v.hasOwnProperty('choices');
-      flag.value = getProperty(baseData.flags, `swnmodular.${k}`);
-      flags[v.section][`flags.swnmodular.${k}`] = flag;
+      flag.value = getProperty(baseData.flags, `swnpretty.${k}`);
+      flags[v.section][`flags.swnpretty.${k}`] = flag;
     }
     return flags;
   }
@@ -63,18 +63,18 @@ export default class ActorSheetFlags extends BaseEntitySheet {
    */
   _getBonuses() {
     const bonuses = [
-      {name: "data.bonuses.mwak.attack", label: "SWNMODULAR.BonusMWAttack"},
-      {name: "data.bonuses.mwak.damage", label: "SWNMODULAR.BonusMWDamage"},
-      {name: "data.bonuses.rwak.attack", label: "SWNMODULAR.BonusRWAttack"},
-      {name: "data.bonuses.rwak.damage", label: "SWNMODULAR.BonusRWDamage"},
-      {name: "data.bonuses.msak.attack", label: "SWNMODULAR.BonusMSAttack"},
-      {name: "data.bonuses.msak.damage", label: "SWNMODULAR.BonusMSDamage"},
-      {name: "data.bonuses.rsak.attack", label: "SWNMODULAR.BonusRSAttack"},
-      {name: "data.bonuses.rsak.damage", label: "SWNMODULAR.BonusRSDamage"},
-      {name: "data.bonuses.abilities.check", label: "SWNMODULAR.BonusAbilityCheck"},
-      {name: "data.bonuses.abilities.save", label: "SWNMODULAR.BonusAbilitySave"},
-      {name: "data.bonuses.abilities.skill", label: "SWNMODULAR.BonusAbilitySkill"},
-      {name: "data.bonuses.spell.dc", label: "SWNMODULAR.BonusSpellDC"}
+      {name: "data.bonuses.mwak.attack", label: "SWNPRETTY.BonusMWAttack"},
+      {name: "data.bonuses.mwak.damage", label: "SWNPRETTY.BonusMWDamage"},
+      {name: "data.bonuses.rwak.attack", label: "SWNPRETTY.BonusRWAttack"},
+      {name: "data.bonuses.rwak.damage", label: "SWNPRETTY.BonusRWDamage"},
+      {name: "data.bonuses.msak.attack", label: "SWNPRETTY.BonusMSAttack"},
+      {name: "data.bonuses.msak.damage", label: "SWNPRETTY.BonusMSDamage"},
+      {name: "data.bonuses.rsak.attack", label: "SWNPRETTY.BonusRSAttack"},
+      {name: "data.bonuses.rsak.damage", label: "SWNPRETTY.BonusRSDamage"},
+      {name: "data.bonuses.abilities.check", label: "SWNPRETTY.BonusAbilityCheck"},
+      {name: "data.bonuses.abilities.save", label: "SWNPRETTY.BonusAbilitySave"},
+      {name: "data.bonuses.abilities.skill", label: "SWNPRETTY.BonusAbilitySkill"},
+      {name: "data.bonuses.spell.dc", label: "SWNPRETTY.BonusSpellDC"}
     ];
     for ( let b of bonuses ) {
       b.value = getProperty(this.object._data, b.name) || "";
@@ -91,11 +91,11 @@ export default class ActorSheetFlags extends BaseEntitySheet {
 
     // Unset any flags which are "false"
     let unset = false;
-    const flags = updateData.flags.swnmodular;
+    const flags = updateData.flags.swnpretty;
     for ( let [k, v] of Object.entries(flags) ) {
       if ( [undefined, null, "", false, 0].includes(v) ) {
         delete flags[k];
-        if ( hasProperty(actor._data.flags, `swnmodular.${k}`) ) {
+        if ( hasProperty(actor._data.flags, `swnpretty.${k}`) ) {
           unset = true;
           flags[`-=${k}`] = null;
         }

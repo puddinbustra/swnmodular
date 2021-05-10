@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SWNMODULAR.SpellName' }}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SWNPRETTY.SpellName' }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -22,7 +22,7 @@
                     {{labels.school}}
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'SWNMODULAR.Source' }}"/>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'SWNPRETTY.Source' }}"/>
                 </li>
             </ul>
         </div>
@@ -30,24 +30,24 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "SWNMODULAR.Description" }}</a>
-        <a class="item" data-tab="details">{{ localize "SWNMODULAR.Details" }}</a>
-<!--        <a class="item" data-tab="effects">{{ localize "SWNMODULAR.Effects" }}</a>-->
+        <a class="item active" data-tab="description">{{ localize "SWNPRETTY.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SWNPRETTY.Details" }}</a>
+<!--        <a class="item" data-tab="effects">{{ localize "SWNPRETTY.Effects" }}</a>-->
     </nav>
 
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "systems/swnmodular/templates/items/parts/item-description.html"}}
+        {{> "systems/swnpretty/templates/items/parts/item-description.html"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">{{ localize "SWNMODULAR.SpellDetails" }}</h3>
+            <h3 class="form-header">{{ localize "SWNPRETTY.SpellDetails" }}</h3>
 
             {{!-- Spell Level --}}
             <div class="form-group">
-                <label>{{ localize "SWNMODULAR.SpellLevel" }}</label>
+                <label>{{ localize "SWNPRETTY.SpellLevel" }}</label>
                 <select name="data.level" data-dtype="Number">
                     {{#select data.level}}
                     {{#each config.spellLevels as |name lvl|}}
@@ -59,7 +59,7 @@
 
             {{!-- Spell School --}}
             <div class="form-group">
-                <label>{{ localize "SWNMODULAR.SpellSchool" }}</label>
+                <label>{{ localize "SWNPRETTY.SpellSchool" }}</label>
                 <select name="data.school">
                     {{#select data.school}}
                     {{#each config.spellSchools as |name sch|}}
@@ -71,35 +71,35 @@
 
             {{!-- Spell Components --}}
             <div class="spell-components form-group stacked">
-                <label>{{ localize "SWNMODULAR.SpellComponents" }}</label>
+                <label>{{ localize "SWNPRETTY.SpellComponents" }}</label>
 <!--                <label class="checkbox">-->
-<!--                    <input type="checkbox" name="data.components.vocal" {{checked data.components.vocal}}/> {{ localize "SWNMODULAR.ComponentVerbal" }}-->
+<!--                    <input type="checkbox" name="data.components.vocal" {{checked data.components.vocal}}/> {{ localize "SWNPRETTY.ComponentVerbal" }}-->
 <!--                </label>-->
 <!--                <label class="checkbox">-->
-<!--                    <input type="checkbox" name="data.components.somatic" {{checked data.components.somatic}}/> {{ localize "SWNMODULAR.ComponentSomatic" }}-->
+<!--                    <input type="checkbox" name="data.components.somatic" {{checked data.components.somatic}}/> {{ localize "SWNPRETTY.ComponentSomatic" }}-->
 <!--                </label>-->
                 <label class="checkbox">
-                    <input type="checkbox" name="data.components.material" {{checked data.components.material}}/> {{ localize "SWNMODULAR.ComponentMaterial" }}
+                    <input type="checkbox" name="data.components.material" {{checked data.components.material}}/> {{ localize "SWNPRETTY.ComponentMaterial" }}
                 </label>
 <!--                <label class="checkbox">-->
-<!--                    <input type="checkbox" name="data.components.concentration" {{checked data.components.concentration}}/> {{ localize "SWNMODULAR.Concentration" }}-->
+<!--                    <input type="checkbox" name="data.components.concentration" {{checked data.components.concentration}}/> {{ localize "SWNPRETTY.Concentration" }}-->
 <!--                </label>-->
                 <label class="checkbox">
-                    <input type="checkbox" name="data.components.other" {{checked data.components.other}}/> {{ localize "SWNMODULAR.Other" }}
+                    <input type="checkbox" name="data.components.other" {{checked data.components.other}}/> {{ localize "SWNPRETTY.Other" }}
                 </label>
             </div>
 
             {{!-- Material Components --}}
             <div class="form-group stacked">
-                <label>{{ localize "SWNMODULAR.SpellMaterials" }}</label>
+                <label>{{ localize "SWNPRETTY.SpellMaterials" }}</label>
                 <input class="materials" type="text" name="data.materials.value" value="{{data.materials.value}}"/>
                 {{#if data.materials.value}}
                 <div class="spell-materials flexrow">
-                    <label>{{ localize "SWNMODULAR.Supply" }}</label>
+                    <label>{{ localize "SWNPRETTY.Supply" }}</label>
                     <input type="text" name="data.materials.supply" value="{{data.materials.supply}}" data-dtype="Number" Placeholder="0"/>
-                    <label>{{ localize "SWNMODULAR.CostGP" }}</label>
+                    <label>{{ localize "SWNPRETTY.CostGP" }}</label>
                     <input type="text" name="data.materials.cost" value="{{data.materials.cost}}" data-dtype="Number" Placeholder="-"/>
-                    <label>{{ localize "SWNMODULAR.Consumed" }}</label>
+                    <label>{{ localize "SWNPRETTY.Consumed" }}</label>
                     <input type="checkbox" name="data.materials.consumed" {{checked data.materials.consumed}}/>
                 </div>
                 {{/if}}
@@ -107,10 +107,10 @@
 
 <!--            {{!&#45;&#45; Preparation Mode &#45;&#45;}}-->
 <!--            <div class="form-group input-select">-->
-<!--                <label>{{ localize "SWNMODULAR.SpellPreparationMode" }}</label>-->
+<!--                <label>{{ localize "SWNPRETTY.SpellPreparationMode" }}</label>-->
 <!--                <div class="form-fields">-->
 <!--                    <label class="checkbox prepared">-->
-<!--                        {{ localize "SWNMODULAR.SpellPrepared" }} <input type="checkbox" name="data.preparation.prepared" {{checked data.preparation.prepared}}/>-->
+<!--                        {{ localize "SWNPRETTY.SpellPrepared" }} <input type="checkbox" name="data.preparation.prepared" {{checked data.preparation.prepared}}/>-->
 <!--                    </label>-->
 <!--                    <select name="data.preparation.mode">-->
 <!--                        {{ selectOptions config.spellPreparationModes selected=data.preparation.mode }}-->
@@ -118,19 +118,19 @@
 <!--                </div>-->
 <!--            </div>-->
 
-            <h3 class="form-header">{{ localize "SWNMODULAR.SpellCastingHeader" }}</h3>
+            <h3 class="form-header">{{ localize "SWNPRETTY.SpellCastingHeader" }}</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "systems/swnmodular/templates/items/parts/item-activation.html"}}
+            {{> "systems/swnpretty/templates/items/parts/item-activation.html"}}
 
-            <h3 class="form-header">{{ localize "SWNMODULAR.SpellEffects" }}</h3>
+            <h3 class="form-header">{{ localize "SWNPRETTY.SpellEffects" }}</h3>
 
             {{!-- Item Action Template --}}
-            {{> "systems/swnmodular/templates/items/parts/item-action.html"}}
+            {{> "systems/swnpretty/templates/items/parts/item-action.html"}}
 
             {{!-- Spell Level Scaling --}}
             <div class="form-group">
-                <label>{{ localize "SWNMODULAR.LevelScaling" }}</label>
+                <label>{{ localize "SWNPRETTY.LevelScaling" }}</label>
                 <div class="form-fields">
                     <select name="data.scaling.mode">
                         {{#select data.scaling.mode}}
@@ -139,14 +139,14 @@
                         {{/each}}
                         {{/select}}
                     </select>
-                    <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'SWNMODULAR.ScalingFormula' }}"/>
+                    <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'SWNPRETTY.ScalingFormula' }}"/>
                 </div>
             </div>
         </div>
 
 <!--        {{!&#45;&#45; Effects Tab &#45;&#45;}}-->
 <!--        <div class="tab effects flexcol" data-group="primary" data-tab="effects">-->
-<!--            {{> "systems/swnmodular/templates/actors/parts/active-effects.html"}}-->
+<!--            {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}-->
 <!--        </div>-->
     </section>
 </form>

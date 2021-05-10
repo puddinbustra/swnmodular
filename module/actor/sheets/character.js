@@ -14,7 +14,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-      classes: ["swnmodular", "sheet", "actor", "character"],
+      classes: ["swnpretty", "sheet", "actor", "character"],
       width: 720,
       height: 680
     });
@@ -37,14 +37,14 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     sheetData["resources"] = ["primary", "secondary", "tertiary", "quartary", "quinary"].reduce((arr, r) => {
       const res = sheetData.data.resources[r] || {};
       res.name = r;
-      res.placeholder = game.i18n.localize("SWNMODULAR.Resource"+r.titleCase());
+      res.placeholder = game.i18n.localize("SWNPRETTY.Resource"+r.titleCase());
       if (res && res.value === 0) delete res.value;
       if (res && res.max === 0) delete res.max;
       return arr.concat([res]);
     }, []);
 
     // Experience Tracking
-    sheetData["disableExperience"] = game.settings.get("swnmodular", "disableExperienceTracking");
+    sheetData["disableExperience"] = game.settings.get("swnpretty", "disableExperienceTracking");
     sheetData["classLabels"] = this.actor.itemTypes.class.map(c => c.name).join(", ");
     sheetData["multiclassLabels"] = this.actor.itemTypes.class.map(c => {
       return [c.data.data.subclass, c.name, c.data.data.levels].filterJoin(' ')
@@ -64,12 +64,12 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {
-      weapon: { label: "SWNMODULAR.ItemTypeWeaponPl", items: [], dataset: {type: "weapon"} },
-      equipment: { label: "SWNMODULAR.ItemTypeEquipmentPl", items: [], dataset: {type: "equipment"} },
-      consumable: { label: "SWNMODULAR.ItemTypeConsumablePl", items: [], dataset: {type: "consumable"} },
-      tool: { label: "SWNMODULAR.ItemTypeToolPl", items: [], dataset: {type: "tool"} },
-      backpack: { label: "SWNMODULAR.ItemTypeContainerPl", items: [], dataset: {type: "backpack"} },
-      loot: { label: "SWNMODULAR.ItemTypeLootPl", items: [], dataset: {type: "loot"} }
+      weapon: { label: "SWNPRETTY.ItemTypeWeaponPl", items: [], dataset: {type: "weapon"} },
+      equipment: { label: "SWNPRETTY.ItemTypeEquipmentPl", items: [], dataset: {type: "equipment"} },
+      consumable: { label: "SWNPRETTY.ItemTypeConsumablePl", items: [], dataset: {type: "consumable"} },
+      tool: { label: "SWNPRETTY.ItemTypeToolPl", items: [], dataset: {type: "tool"} },
+      backpack: { label: "SWNPRETTY.ItemTypeContainerPl", items: [], dataset: {type: "backpack"} },
+      loot: { label: "SWNPRETTY.ItemTypeLootPl", items: [], dataset: {type: "loot"} }
     };
 
     // Partition items by category
@@ -79,15 +79,15 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       // item.img = item.img || DEFAULT_TOKEN;
       // item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
       // item.attunement = {
-      //   [CONFIG.SWNMODULAR.attunementTypes.REQUIRED]: {
+      //   [CONFIG.SWNPRETTY.attunementTypes.REQUIRED]: {
       //     icon: "fa-sun",
       //     cls: "not-attuned",
-      //     title: "SWNMODULAR.AttunementRequired"
+      //     title: "SWNPRETTY.AttunementRequired"
       //   },
-      //   [CONFIG.SWNMODULAR.attunementTypes.ATTUNED]: {
+      //   [CONFIG.SWNPRETTY.attunementTypes.ATTUNED]: {
       //     icon: "fa-sun",
       //     cls: "attuned",
-      //     title: "SWNMODULAR.AttunementAttuned"
+      //     title: "SWNPRETTY.AttunementAttuned"
       //   }
       // }[item.data.attunement];
 
@@ -129,9 +129,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Features
     const features = {
-      classes: { label: "SWNMODULAR.ItemTypeClassPl", items: [], hasActions: false, dataset: {type: "class"}, isClass: true },
-      active: { label: "SWNMODULAR.FeatureActive", items: [], hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
-      passive: { label: "SWNMODULAR.FeaturePassive", items: [], hasActions: false, dataset: {type: "feat"} }
+      classes: { label: "SWNPRETTY.ItemTypeClassPl", items: [], hasActions: false, dataset: {type: "class"}, isClass: true },
+      active: { label: "SWNPRETTY.FeatureActive", items: [], hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
+      passive: { label: "SWNPRETTY.FeaturePassive", items: [], hasActions: false, dataset: {type: "feat"} }
     };
     for ( let f of feats ) {
       if ( f.data.activation.type ) features.active.items.push(f);
@@ -160,14 +160,14 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const isPrepared =  getProperty(item.data, "preparation.prepared");
       item.toggleClass = isPrepared ? "active" : "";
       if ( isAlways ) item.toggleClass = "fixed";
-      if ( isAlways ) item.toggleTitle = CONFIG.SWNMODULAR.spellPreparationModes.always;
-      else if ( isPrepared ) item.toggleTitle = CONFIG.SWNMODULAR.spellPreparationModes.prepared;
-      else item.toggleTitle = game.i18n.localize("SWNMODULAR.SpellUnprepared");
+      if ( isAlways ) item.toggleTitle = CONFIG.SWNPRETTY.spellPreparationModes.always;
+      else if ( isPrepared ) item.toggleTitle = CONFIG.SWNPRETTY.spellPreparationModes.prepared;
+      else item.toggleTitle = game.i18n.localize("SWNPRETTY.SpellUnprepared");
     }
     else {
       const isActive = getProperty(item.data, "equipped");
       item.toggleClass = isActive ? "active" : "";
-      item.toggleTitle = game.i18n.localize(isActive ? "SWNMODULAR.Equipped" : "SWNMODULAR.Unequipped");
+      item.toggleTitle = game.i18n.localize(isActive ? "SWNPRETTY.Equipped" : "SWNPRETTY.Unequipped");
     }
   }
 
@@ -207,8 +207,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     switch( button.dataset.action ) {
       case "convertCurrency":
         return Dialog.confirm({
-          title: `${game.i18n.localize("SWNMODULAR.CurrencyConvert")}`,
-          content: `<p>${game.i18n.localize("SWNMODULAR.CurrencyConvertHint")}</p>`,
+          title: `${game.i18n.localize("SWNPRETTY.CurrencyConvert")}`,
+          content: `<p>${game.i18n.localize("SWNPRETTY.CurrencyConvertHint")}</p>`,
           yes: () => this.actor.convertCurrency()
         });
       case "rollDeathSave":

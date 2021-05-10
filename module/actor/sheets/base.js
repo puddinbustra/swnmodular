@@ -3,7 +3,7 @@ import TraitSelector from "../../apps/trait-selector.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
-import {SWNMODULAR} from '../../config.js';
+import {SWNPRETTY} from '../../config.js';
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
 
 /**
@@ -46,8 +46,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/swnmodular/templates/actors/limited-sheet.html";
-    return `systems/swnmodular/templates/actors/${this.actor.data.type}-sheet.html`;
+    if ( !game.user.isGM && this.actor.limited ) return "systems/swnpretty/templates/actors/limited-sheet.html";
+    return `systems/swnpretty/templates/actors/${this.actor.data.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -66,7 +66,7 @@ export default class ActorSheet5e extends ActorSheet {
       isCharacter: this.entity.data.type === "character",
       isNPC: this.entity.data.type === "npc",
       isVehicle: this.entity.data.type === 'vehicle',
-      config: CONFIG.SWNMODULAR,
+      config: CONFIG.SWNPRETTY,
     };
 
     // The Actor and its Items
@@ -83,17 +83,17 @@ export default class ActorSheet5e extends ActorSheet {
     // Ability Scores
     for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
-      abl.hover = CONFIG.SWNMODULAR.proficiencyLevels[abl.proficient];
-      abl.label = CONFIG.SWNMODULAR.abilities[a];
+      abl.hover = CONFIG.SWNPRETTY.proficiencyLevels[abl.proficient];
+      abl.label = CONFIG.SWNPRETTY.abilities[a];
     }
 
     // Skills
     if (data.actor.data.skills) {
       for ( let [s, skl] of Object.entries(data.actor.data.skills)) {
-        skl.ability = CONFIG.SWNMODULAR.abilityAbbreviations[skl.ability];
+        skl.ability = CONFIG.SWNPRETTY.abilityAbbreviations[skl.ability];
         skl.icon = this._getProficiencyIcon(skl.value);
-        skl.hover = CONFIG.SWNMODULAR.proficiencyLevels[skl.value];
-        skl.label = CONFIG.SWNMODULAR.skills[s];
+        skl.hover = CONFIG.SWNPRETTY.proficiencyLevels[skl.value];
+        skl.label = CONFIG.SWNPRETTY.skills[s];
       }
     }
 
@@ -130,13 +130,13 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Prepare an array of available movement speeds
     let speeds = [
-      [movement.burrow, `${game.i18n.localize("SWNMODULAR.MovementBurrow")} ${movement.burrow}`],
-      [movement.climb, `${game.i18n.localize("SWNMODULAR.MovementClimb")} ${movement.climb}`],
-      [movement.fly, `${game.i18n.localize("SWNMODULAR.MovementFly")} ${movement.fly}` + (movement.hover ? ` (${game.i18n.localize("SWNMODULAR.MovementHover")})` : "")],
-      [movement.swim, `${game.i18n.localize("SWNMODULAR.MovementSwim")} ${movement.swim}`]
+      [movement.burrow, `${game.i18n.localize("SWNPRETTY.MovementBurrow")} ${movement.burrow}`],
+      [movement.climb, `${game.i18n.localize("SWNPRETTY.MovementClimb")} ${movement.climb}`],
+      [movement.fly, `${game.i18n.localize("SWNPRETTY.MovementFly")} ${movement.fly}` + (movement.hover ? ` (${game.i18n.localize("SWNPRETTY.MovementHover")})` : "")],
+      [movement.swim, `${game.i18n.localize("SWNPRETTY.MovementSwim")} ${movement.swim}`]
     ]
     if ( largestPrimary ) {
-      speeds.push([movement.walk, `${game.i18n.localize("SWNMODULAR.MovementWalk")} ${movement.walk}`]);
+      speeds.push([movement.walk, `${game.i18n.localize("SWNPRETTY.MovementWalk")} ${movement.walk}`]);
     }
 
     // Filter and sort speeds on their values
@@ -165,7 +165,7 @@ export default class ActorSheet5e extends ActorSheet {
   _getSenses(actorData) {
     const senses = actorData.data.attributes.senses || {};
     const tags = {};
-    for ( let [k, label] of Object.entries(CONFIG.SWNMODULAR.senses) ) {
+    for ( let [k, label] of Object.entries(CONFIG.SWNPRETTY.senses) ) {
       const v = senses[k] ?? 0
       if ( v === 0 ) continue;
       tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
@@ -183,14 +183,14 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _prepareTraits(traits) {
     const map = {
-      "dr": CONFIG.SWNMODULAR.damageResistanceTypes,
-      "di": CONFIG.SWNMODULAR.damageResistanceTypes,
-      "dv": CONFIG.SWNMODULAR.damageResistanceTypes,
-      "ci": CONFIG.SWNMODULAR.conditionTypes,
-      "languages": CONFIG.SWNMODULAR.languages,
-      "armorProf": CONFIG.SWNMODULAR.armorProficiencies,
-      "weaponProf": CONFIG.SWNMODULAR.weaponProficiencies,
-      "toolProf": CONFIG.SWNMODULAR.toolProficiencies
+      "dr": CONFIG.SWNPRETTY.damageResistanceTypes,
+      "di": CONFIG.SWNPRETTY.damageResistanceTypes,
+      "dv": CONFIG.SWNPRETTY.damageResistanceTypes,
+      "ci": CONFIG.SWNPRETTY.conditionTypes,
+      "languages": CONFIG.SWNPRETTY.languages,
+      "armorProf": CONFIG.SWNPRETTY.armorProficiencies,
+      "weaponProf": CONFIG.SWNPRETTY.weaponProficiencies,
+      "toolProf": CONFIG.SWNPRETTY.toolProficiencies
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
@@ -266,18 +266,18 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Level-based spellcasters have cantrips and leveled slots
     if ( maxLevel > 0 ) {
-      registerSection("spell0", 0, CONFIG.SWNMODULAR.spellLevels[0]);
+      registerSection("spell0", 0, CONFIG.SWNPRETTY.spellLevels[0]);
       for (let lvl = 1; lvl <= maxLevel; lvl++) {
         const sl = `spell${lvl}`;
-        registerSection(sl, lvl, CONFIG.SWNMODULAR.spellLevels[lvl], levels[sl]);
+        registerSection(sl, lvl, CONFIG.SWNPRETTY.spellLevels[lvl], levels[sl]);
       }
     }
 
     // Pact magic users have cantrips and a pact magic section
     if ( levels.pact && levels.pact.max ) {
-      if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.SWNMODULAR.spellLevels[0]);
+      if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.SWNPRETTY.spellLevels[0]);
       const l = levels.pact;
-      const config = CONFIG.SWNMODULAR.spellPreparationModes.pact;
+      const config = CONFIG.SWNPRETTY.spellPreparationModes.pact;
       registerSection("pact", sections.pact, config, {
         prepMode: "pact",
         value: l.value,
@@ -303,7 +303,7 @@ export default class ActorSheet5e extends ActorSheet {
         s = sections[mode];
         if ( !spellbook[s] ){
           const l = levels[mode] || {};
-          const config = CONFIG.SWNMODULAR.spellPreparationModes[mode];
+          const config = CONFIG.SWNPRETTY.spellPreparationModes[mode];
           registerSection(mode, s, config, {
             prepMode: mode,
             value: l.value,
@@ -315,7 +315,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Sections for higher-level spells which the caster "should not" have, but spell items exist for
       else if ( !spellbook[s] ) {
-        registerSection(sl, s, CONFIG.SWNMODULAR.spellLevels[s], {levels: levels[sl]});
+        registerSection(sl, s, CONFIG.SWNPRETTY.spellLevels[s], {levels: levels[sl]});
       }
 
       // Add the spell to the relevant heading
@@ -547,7 +547,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   async _onDropActor(event, data) {
-    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('swnmodular', 'allowPolymorphing'));
+    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('swnpretty', 'allowPolymorphing'));
     if ( !canPolymorph ) return false;
 
     // Get the target actor
@@ -566,29 +566,29 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('input').each((i, el) => {
         options[el.name] = el.checked;
       });
-      const settings = mergeObject(game.settings.get('swnmodular', 'polymorphSettings') || {}, options);
-      game.settings.set('swnmodular', 'polymorphSettings', settings);
+      const settings = mergeObject(game.settings.get('swnpretty', 'polymorphSettings') || {}, options);
+      game.settings.set('swnpretty', 'polymorphSettings', settings);
       return settings;
     };
 
     // Create and render the Dialog
     return new Dialog({
-      title: game.i18n.localize('SWNMODULAR.PolymorphPromptTitle'),
+      title: game.i18n.localize('SWNPRETTY.PolymorphPromptTitle'),
       content: {
-        options: game.settings.get('swnmodular', 'polymorphSettings'),
-        i18n: SWNMODULAR.polymorphSettings,
+        options: game.settings.get('swnpretty', 'polymorphSettings'),
+        i18n: SWNPRETTY.polymorphSettings,
         isToken: this.actor.isToken
       },
       default: 'accept',
       buttons: {
         accept: {
           icon: '<i class="fas fa-check"></i>',
-          label: game.i18n.localize('SWNMODULAR.PolymorphAcceptSettings'),
+          label: game.i18n.localize('SWNPRETTY.PolymorphAcceptSettings'),
           callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
         },
         wildshape: {
           icon: '<i class="fas fa-paw"></i>',
-          label: game.i18n.localize('SWNMODULAR.PolymorphWildShape'),
+          label: game.i18n.localize('SWNPRETTY.PolymorphWildShape'),
           callback: html => this.actor.transformInto(sourceActor, {
             keepBio: true,
             keepClass: true,
@@ -600,7 +600,7 @@ export default class ActorSheet5e extends ActorSheet {
         },
         polymorph: {
           icon: '<i class="fas fa-pastafarianism"></i>',
-          label: game.i18n.localize('SWNMODULAR.Polymorph'),
+          label: game.i18n.localize('SWNPRETTY.Polymorph'),
           callback: html => this.actor.transformInto(sourceActor, {
             transformTokens: rememberOptions(html).transformTokens
           })
@@ -611,9 +611,9 @@ export default class ActorSheet5e extends ActorSheet {
         }
       }
     }, {
-      classes: ['dialog', 'swnmodular'],
+      classes: ['dialog', 'swnpretty'],
       width: 600,
-      template: 'systems/swnmodular/templates/apps/polymorph-prompt.html'
+      template: 'systems/swnpretty/templates/apps/polymorph-prompt.html'
     }).render(true);
   }
 
@@ -743,7 +743,7 @@ export default class ActorSheet5e extends ActorSheet {
     const header = event.currentTarget;
     const type = header.dataset.type;
     const itemData = {
-      name: game.i18n.format("SWNMODULAR.ItemNew", {type: type.capitalize()}),
+      name: game.i18n.format("SWNPRETTY.ItemNew", {type: type.capitalize()}),
       type: type,
       data: duplicate(header.dataset)
     };
@@ -859,7 +859,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const a = event.currentTarget;
     const label = a.parentElement.querySelector("label");
-    const choices = CONFIG.SWNMODULAR[a.dataset.options];
+    const choices = CONFIG.SWNPRETTY[a.dataset.options];
     const options = { name: a.dataset.target, title: label.innerText, choices };
     new TraitSelector(this.actor, options).render(true)
   }
@@ -873,7 +873,7 @@ export default class ActorSheet5e extends ActorSheet {
     // Add button to revert polymorph
     if ( !this.actor.isPolymorphed || this.actor.isToken ) return buttons;
     buttons.unshift({
-      label: 'SWNMODULAR.PolymorphRestoreTransformation',
+      label: 'SWNPRETTY.PolymorphRestoreTransformation',
       class: "restore-transformation",
       icon: "fas fa-backward",
       onclick: ev => this.actor.revertOriginalForm()

@@ -6,12 +6,12 @@
 
         <section class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'SWNMODULAR.Name' }}"/>
+                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'SWNPRETTY.Name' }}"/>
             </h1>
 
             <aside class="header-exp flexcol">
                 <div class="cr">
-                    <label>{{ localize "SWNMODULAR.AbbreviationCR" }}</label>
+                    <label>{{ localize "SWNPRETTY.AbbreviationCR" }}</label>
                     <input name="data.details.cr" type="text" value="{{labels.cr}}" placeholder="1"/>
                 </div>
                 <div class="experience">
@@ -25,46 +25,46 @@
                     <span>{{lookup config.actorSizes data.traits.size}}</span>
                 </li>
                 <li>
-                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'SWNMODULAR.Alignment' }}"/>
+                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'SWNPRETTY.Alignment' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{ localize 'SWNMODULAR.Type' }}"/>
+                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{ localize 'SWNPRETTY.Type' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{ localize 'SWNMODULAR.Source' }}"/>
+                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{ localize 'SWNPRETTY.Source' }}"/>
                 </li>
             </ul>
 
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
                <li class="attribute health">
-                    <h4 class="attribute-name box-title rollable">{{ localize "SWNMODULAR.HitPoints" }}</h4>
+                    <h4 class="attribute-name box-title rollable">{{ localize "SWNPRETTY.HitPoints" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10" data-dtype="Number"/>
                         <span class="sep"> / </span>
                         <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10" data-dtype="Number"/>
                     </div>
                     <footer class="attribute-footer">
-                        <input name="data.attributes.hp.formula" class="hpformula" type="text" placeholder="{{ localize 'SWNMODULAR.HPFormula' }}"
+                        <input name="data.attributes.hp.formula" class="hpformula" type="text" placeholder="{{ localize 'SWNPRETTY.HPFormula' }}"
                                value="{{data.attributes.hp.formula}}"/>
                     </footer>
                 </li>
 
                 <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "SWNMODULAR.ArmorClass" }}</h4>
+                    <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.ArmorClass" }}</h4>
                     <div class="attribute-value">
                         <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
                     </div>
                     <footer class="attribute-footer">
-                        <span>{{ localize "SWNMODULAR.Proficiency" }}</span>
+                        <span>{{ localize "SWNPRETTY.Proficiency" }}</span>
                         <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
                     </footer>
                 </li>
 
                 <li class="attribute movement">
                     <h4 class="attribute-name box-title">
-                        {{ localize "SWNMODULAR.Movement" }}
-                        <a class="config-button" data-action="movement" title="{{localize 'SWNMODULAR.MovementConfig'}}"><i class="fas fa-cog"></i></a>
+                        {{ localize "SWNPRETTY.Movement" }}
+                        <a class="config-button" data-action="movement" title="{{localize 'SWNPRETTY.MovementConfig'}}"><i class="fas fa-cog"></i></a>
                     </h4>
                     <div class="attribute-value">
                         <span>{{movement.primary}}</span>
@@ -79,11 +79,11 @@
 
     {{!-- NPC Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="attributes">{{ localize "SWNMODULAR.Attributes" }}</a>
-        <a class="item" data-tab="features">{{ localize "SWNMODULAR.Features" }}</a>
-        <a class="item" data-tab="spellbook">{{ localize "SWNMODULAR.Spellbook" }}</a>
-        <a class="item" data-tab="effects">{{ localize "SWNMODULAR.Effects" }}</a>
-        <a class="item" data-tab="biography">{{ localize "SWNMODULAR.Biography" }}</a>
+        <a class="item active" data-tab="attributes">{{ localize "SWNPRETTY.Attributes" }}</a>
+        <a class="item" data-tab="features">{{ localize "SWNPRETTY.Features" }}</a>
+        <a class="item" data-tab="spellbook">{{ localize "SWNPRETTY.Spellbook" }}</a>
+        <a class="item" data-tab="effects">{{ localize "SWNPRETTY.Effects" }}</a>
+        <a class="item" data-tab="biography">{{ localize "SWNPRETTY.Biography" }}</a>
     </nav>
 
     {{!-- NPC Sheet Body --}}
@@ -99,7 +99,7 @@
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                         <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
-                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SWNMODULAR.Proficiency' }}">{{{ability.icon}}}</a>
+                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SWNPRETTY.Proficiency' }}">{{{ability.icon}}}</a>
                         <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
                     </div>
                 </li>
@@ -125,7 +125,7 @@
                 {{!-- Legendary Actions --}}
                 <div class="counters">
                     <div class="counter flexrow legendary">
-                        <h4>{{ localize "SWNMODULAR.LegAct" }}</h4>
+                        <h4>{{ localize "SWNPRETTY.LegAct" }}</h4>
                         <div class="counter-value">
                             <input name="data.resources.legact.value" type="number" value="{{data.resources.legact.value}}" placeholder="0"/>
                             <span class="sep">/</span>
@@ -133,7 +133,7 @@
                         </div>
                     </div>
                     <div class="counter flexrow legendary">
-                        <h4>{{ localize "SWNMODULAR.LegRes" }}</h4>
+                        <h4>{{ localize "SWNPRETTY.LegRes" }}</h4>
                         <div class="counter-value">
                             <input name="data.resources.legres.value" type="number" value="{{data.resources.legres.value}}" placeholder="0"/>
                             <span class="sep">/</span>
@@ -141,7 +141,7 @@
                         </div>
                     </div>
                     <div class="counter flexrow lair">
-                        <h4>{{ localize "SWNMODULAR.LairAct" }}</h4>
+                        <h4>{{ localize "SWNPRETTY.LairAct" }}</h4>
                         <div class="counter-value">
                             <input name="data.resources.lair.value" type="checkbox" value="{{data.resources.lair.value}}"
                                    data-dtype="Boolean" {{checked data.resources.lair.value}}/>
@@ -151,23 +151,23 @@
                 </div>
 
                 {{!-- Traits --}}
-                {{> "systems/swnmodular/templates/actors/parts/actor-traits.html"}}
+                {{> "systems/swnpretty/templates/actors/parts/actor-traits.html"}}
             </section>
         </div>
 
         {{!-- Features Tab --}}
         <div class="tab features flexcol" data-group="primary" data-tab="features">
-            {{> "systems/swnmodular/templates/actors/parts/actor-features.html" sections=features}}
+            {{> "systems/swnpretty/templates/actors/parts/actor-features.html" sections=features}}
         </div>
 
         {{!-- Spellbook Tab --}}
         <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
-            {{> "systems/swnmodular/templates/actors/parts/actor-spellbook.html"}}
+            {{> "systems/swnpretty/templates/actors/parts/actor-spellbook.html"}}
         </div>
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "systems/swnmodular/templates/actors/parts/active-effects.html"}}
+            {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}
         </div>
 
         {{!-- Biography Tab --}}

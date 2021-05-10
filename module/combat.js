@@ -13,8 +13,8 @@ export const _getInitiativeFormula = function(combatant) {
   let nd = 1;
   let mods = "";
 
-  if (actor.getFlag("swnmodular", "halflingLucky")) mods += "r1=1";
-  if (actor.getFlag("swnmodular", "initiativeAdv")) {
+  if (actor.getFlag("swnpretty", "halflingLucky")) mods += "r1=1";
+  if (actor.getFlag("swnpretty", "initiativeAdv")) {
     nd = 2;
     mods += "kh";
   }
@@ -22,7 +22,7 @@ export const _getInitiativeFormula = function(combatant) {
   const parts = [`${nd}d8${mods}`, init.mod, (init.prof !== 0) ? init.prof : null, (init.bonus !== 0) ? init.bonus : null];
 
   // Optionally apply Dexterity tiebreaker
-  const tiebreaker = game.settings.get("swnmodular", "initiativeDexTiebreaker");
+  const tiebreaker = game.settings.get("swnpretty", "initiativeDexTiebreaker");
   if ( tiebreaker ) parts.push(actor.data.data.abilities.dex.value / 100);
   return parts.filter(p => p !== null).join(" + ");
 };

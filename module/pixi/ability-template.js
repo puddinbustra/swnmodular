@@ -1,4 +1,4 @@
-import { SWNMODULAR } from "../config.js";
+import { SWNPRETTY } from "../config.js";
 
 /**
  * A helper class for building MeasuredTemplates for 5e spells and abilities
@@ -13,7 +13,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
    */
   static fromItem(item) {
     const target = getProperty(item.data, "data.target") || {};
-    const templateShape = SWNMODULAR.areaTargetTypes[target.type];
+    const templateShape = SWNPRETTY.areaTargetTypes[target.type];
     if ( !templateShape ) return null;
 
     // Prepare template data

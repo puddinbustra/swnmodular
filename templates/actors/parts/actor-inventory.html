@@ -4,7 +4,7 @@
     <ol class="currency flexrow">
 <!--        <h3>-->
 
-<!--            <label> {{localize "SWNMODULAR.CurrencyCredits"}}</label>-->
+<!--            <label> {{localize "SWNPRETTY.CurrencyCredits"}}</label>-->
 <!--            <input class = "money-box" type="text" name="data.currency.credits" value="{{data.currency.credits}}" data-dtype="Number"/></h3>-->
 
 
@@ -17,11 +17,11 @@
 
     {{#unless isVehicle}}
     <ul class="filter-list flexrow" data-filter="inventory">
-        <li class="filter-item" data-filter="action">{{localize "SWNMODULAR.Action"}}</li>
-        <li class="filter-item" data-filter="move">{{localize "SWNMODULAR.MoveAction"}}</li>
-        <li class="filter-item" data-filter="onturn">{{localize "SWNMODULAR.OnTurnAction"}}</li>
-        <li class="filter-item" data-filter="instant">{{localize "SWNMODULAR.InstantAction"}}</li>
-<!--        <li class="filter-item" data-filter="equipped">{{localize "SWNMODULAR.Equipped"}}</li>-->
+        <li class="filter-item" data-filter="action">{{localize "SWNPRETTY.Action"}}</li>
+        <li class="filter-item" data-filter="move">{{localize "SWNPRETTY.MoveAction"}}</li>
+        <li class="filter-item" data-filter="onturn">{{localize "SWNPRETTY.OnTurnAction"}}</li>
+        <li class="filter-item" data-filter="instant">{{localize "SWNPRETTY.InstantAction"}}</li>
+<!--        <li class="filter-item" data-filter="equipped">{{localize "SWNPRETTY.Equipped"}}</li>-->
     </ul>
     {{/unless}}
 </div>
@@ -38,23 +38,23 @@
         {{else}}
 <!--        This is Lofty's equipment location code-->
             {{#if ../isCharacter}}
-                <div class="item-detail item-location-inv"> {{ localize "SWNMODULAR.Location" }}</div>
+                <div class="item-detail item-location-inv"> {{ localize "SWNPRETTY.Location" }}</div>
             {{/if}}
 
             {{#if ../isCharacter}}
-                <div class="item-detail item-weight">{{localize "SWNMODULAR.Weight"}}</div>
+                <div class="item-detail item-weight">{{localize "SWNPRETTY.Weight"}}</div>
             {{/if}}
 
-            <div class="item-detail item-uses">{{localize "SWNMODULAR.Charges"}}</div>
-            <div class="item-detail item-action">{{localize "SWNMODULAR.Usage"}}</div>
+            <div class="item-detail item-uses">{{localize "SWNPRETTY.Charges"}}</div>
+            <div class="item-detail item-action">{{localize "SWNPRETTY.Usage"}}</div>
         {{/if}}
 
         {{#if ../owner}}
 <!--        This anchor looks like it's missing a closing carat. But, putting it in breaks everything, so idk. -Lofty-->
         <div class="item-controls flexrow">
-            <a class="item-control item-create" title='{{localize "SWNMODULAR.ItemCreate"}}'
+            <a class="item-control item-create" title='{{localize "SWNPRETTY.ItemCreate"}}'
                {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> {{localize "SWNMODULAR.Add"}}
+                <i class="fas fa-plus"></i> {{localize "SWNPRETTY.Add"}}
             </a>
         </div>
         {{/if}}
@@ -148,12 +148,12 @@
             <div class="item-controls inventory-icons flexrow">
 <!--                This is the equipped button. It doesn't work properly now, but making into a readied/equipped button would be nice -Lofty-->
                 {{#unless section.editableName}}
-                <a class="item-control item-edit" title='{{localize "SWNMODULAR.ItemEdit"}}'><i class="fas fa-edit"></i></a>
+                <a class="item-control item-edit" title='{{localize "SWNPRETTY.ItemEdit"}}'><i class="fas fa-edit"></i></a>
                 {{/unless}}
                 {{#unless @root.isVehicle}}
                 <a class="item-control"><i class="fas "></i></a>
                 {{/unless}}
-                <a class = "item-delete item-control" title='{{localize "SWNMODULAR.ItemDelete"}}'><i class="fas fa-trash " ></i></a>
+                <a class = "item-delete item-control" title='{{localize "SWNPRETTY.ItemDelete"}}'><i class="fas fa-trash " ></i></a>
             </div>
             {{/if}}
         </li>

@@ -8,9 +8,9 @@ export default class TraitSelector extends FormApplication {
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
 	    id: "trait-selector",
-      classes: ["swnmodular"],
+      classes: ["swnpretty"],
       title: "Actor Trait Selection",
-      template: "systems/swnmodular/templates/apps/trait-selector.html",
+      template: "systems/swnpretty/templates/apps/trait-selector.html",
       width: 320,
       height: "auto",
       choices: {},

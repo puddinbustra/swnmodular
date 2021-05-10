@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SWNMODULAR.ItemName' }}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SWNPRETTY.ItemName' }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -19,10 +19,10 @@
                     {{lookup config.weaponTypes data.weaponType }}
                 </li>
                 <li>
-                    <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="{{ localize 'SWNMODULAR.Rarity' }}"/>
+                    <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="{{ localize 'SWNPRETTY.Rarity' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'SWNMODULAR.Source' }}"/>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'SWNPRETTY.Source' }}"/>
                 </li>
             </ul>
         </div>
@@ -30,23 +30,23 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "SWNMODULAR.Description" }}</a>
-        <a class="item" data-tab="details">{{ localize "SWNMODULAR.Details" }}</a>
+        <a class="item active" data-tab="description">{{ localize "SWNPRETTY.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SWNPRETTY.Details" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "systems/swnmodular/templates/items/parts/item-description.html"}}
+        {{> "systems/swnpretty/templates/items/parts/item-description.html"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">{{ localize "SWNMODULAR.ItemWeaponDetails" }}</h3>
+            <h3 class="form-header">{{ localize "SWNPRETTY.ItemWeaponDetails" }}</h3>
 
             {{!-- Weapon Type --}}
             <div class="form-group">
-                <label>{{ localize "SWNMODULAR.ItemWeaponType" }}</label>
+                <label>{{ localize "SWNPRETTY.ItemWeaponType" }}</label>
                 <select name="data.weaponType">
                     {{#select data.weaponType}}
                     {{#each config.weaponTypes as |name type|}}
@@ -58,7 +58,7 @@
 
             {{#unless isMountable}}
             <div class="form-group">
-                <label>{{localize "SWNMODULAR.Attunement"}}</label>
+                <label>{{localize "SWNPRETTY.Attunement"}}</label>
                 <select name="data.attunement" data-dtype="Number">
                     {{selectOptions config.attunements selected=data.attunement localize=true}}
                 </select>
@@ -75,19 +75,19 @@
 
             {{!-- Weapon Status --}}
             <div class="form-group stacked">
-                <label>{{ localize "SWNMODULAR.ItemWeaponStatus" }}</label>
+                <label>{{ localize "SWNPRETTY.ItemWeaponStatus" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SWNMODULAR.Proficient" }}
+                        <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SWNPRETTY.Proficient" }}
                     </label>
 <!--                    <label class="checkbox">-->
-<!--                        <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SWNMODULAR.Equipped" }}-->
+<!--                        <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SWNPRETTY.Equipped" }}-->
 <!--                    </label>-->
                     <label class="checkbox">
-                        <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SWNMODULAR.Identified" }}
+                        <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SWNPRETTY.Identified" }}
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="data.pcondition" {{checked data.pcondition}}/> {{ localize "SWNMODULAR.PoorCondition" }}
+                        <input type="checkbox" name="data.pcondition" {{checked data.pcondition}}/> {{ localize "SWNPRETTY.PoorCondition" }}
                     </label>
                 </div>
             </div>
@@ -95,7 +95,7 @@
 
             {{!-- Weapon Properties --}}
             <div class="form-group stacked weapon-properties">
-                <label>{{ localize "SWNMODULAR.ItemWeaponProperties" }}</label>
+                <label>{{ localize "SWNPRETTY.ItemWeaponProperties" }}</label>
                 {{#each config.weaponProperties as |name prop|}}
                 <label class="checkbox">
                     <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}}/> {{ name }}
@@ -105,25 +105,25 @@
 
             {{#if isMountable}}
             <div class="form-group">
-                <label>{{localize 'SWNMODULAR.ArmorClass'}}</label>
+                <label>{{localize 'SWNPRETTY.ArmorClass'}}</label>
                 <div class="form-fields">
                     <input type="text" name="data.armor.value" value="{{data.armor.value}}"
                            data-dtype="Number">
                 </div>
             </div>
 
-            {{> 'systems/swnmodular/templates/items/parts/item-mountable.html'}}
+            {{> 'systems/swnpretty/templates/items/parts/item-mountable.html'}}
             {{/if}}
 
-            <h3 class="form-header">{{ localize "SWNMODULAR.ItemWeaponUsage" }}</h3>
+            <h3 class="form-header">{{ localize "SWNPRETTY.ItemWeaponUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "systems/swnmodular/templates/items/parts/item-activation.html"}}
+            {{> "systems/swnpretty/templates/items/parts/item-activation.html"}}
 
-            <h3 class="form-header">{{ localize "SWNMODULAR.ItemWeaponAttack" }}</h3>
+            <h3 class="form-header">{{ localize "SWNPRETTY.ItemWeaponAttack" }}</h3>
 
             {{!-- Item Action Template --}}
-            {{> "systems/swnmodular/templates/items/parts/item-action.html"}}
+            {{> "systems/swnpretty/templates/items/parts/item-action.html"}}
         </div>
     </section>
 </form>

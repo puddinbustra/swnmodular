@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
     <section class="form-body">
-	    <p class="notes">{{localize 'SWNMODULAR.FlagsInstructions'}}</p>
+	    <p class="notes">{{localize 'SWNPRETTY.FlagsInstructions'}}</p>
 
         {{#each flags as |fs section|}}
         <h3 class="form-header">{{localize section}}</h3>
@@ -30,8 +30,8 @@
         {{/each}}
         {{/each}}
 
-        <h3 class="form-header">{{localize "SWNMODULAR.Bonuses"}}</h3>
-        <p class="notes">{{localize "SWNMODULAR.BonusesHint"}}</p>
+        <h3 class="form-header">{{localize "SWNPRETTY.Bonuses"}}</h3>
+        <p class="notes">{{localize "SWNPRETTY.BonusesHint"}}</p>
         {{#each bonuses as |b|}}
         <div class="form-group">
             <label>{{localize b.label}}</label>
@@ -42,7 +42,7 @@
 
     <footer class="form-footer">
         <button type="submit" name="submit">
-            <i class="far fa-save"></i> {{localize 'SWNMODULAR.FlagsSave'}}
+            <i class="far fa-save"></i> {{localize 'SWNPRETTY.FlagsSave'}}
         </button>
     </footer>
 </form>

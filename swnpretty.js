@@ -4,12 +4,12 @@
  * Author: Atropos
  * Software License: GNU GPLv3
  * Content License: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
- * Repository: https://gitlab.com/foundrynet/swnmodular
- * Issue Tracker: https://gitlab.com/foundrynet/swnmodular/issues
+ * Repository: https://gitlab.com/foundrynet/swnpretty
+ * Issue Tracker: https://gitlab.com/foundrynet/swnpretty/issues
  */
 
 // Import Modules
-import { SWNMODULAR } from "./module/config.js";
+import { SWNPRETTY } from "./module/config.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
@@ -43,10 +43,10 @@ import * as migrations from "./module/migration.js";
 /* -------------------------------------------- */
 
 Hooks.once("init", function() {
-  console.log(`DnD5e | Initializing the DnD5e Game System\n${SWNMODULAR.ASCII}`);
+  console.log(`DnD5e | Initializing the DnD5e Game System\n${SWNPRETTY.ASCII}`);
 
   // Create a namespace within the game global
-  game.swnmodular = {
+  game.swnpretty = {
     applications: {
       AbilityUseDialog,
       ActorSheetFlags,
@@ -61,7 +61,7 @@ Hooks.once("init", function() {
     canvas: {
       AbilityTemplate
     },
-    config: SWNMODULAR,
+    config: SWNPRETTY,
     dice: dice,
     entities: {
       Actor5e,
@@ -73,7 +73,7 @@ Hooks.once("init", function() {
   };
 
   // Record Configuration Values
-  CONFIG.SWNMODULAR = SWNMODULAR;
+  CONFIG.SWNPRETTY = SWNPRETTY;
   CONFIG.Actor.entityClass = Actor5e;
   CONFIG.Item.entityClass = Item5e;
   CONFIG.time.roundTime = 6;
@@ -90,25 +90,25 @@ Hooks.once("init", function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("swnmodular", ActorSheet5eCharacter, {
+  Actors.registerSheet("swnpretty", ActorSheet5eCharacter, {
     types: ["character"],
     makeDefault: true,
-    label: "SWNMODULAR.SheetClassCharacter"
+    label: "SWNPRETTY.SheetClassCharacter"
   });
-  Actors.registerSheet("swnmodular", ActorSheet5eNPC, {
+  Actors.registerSheet("swnpretty", ActorSheet5eNPC, {
     types: ["npc"],
     makeDefault: true,
-    label: "SWNMODULAR.SheetClassNPC"
+    label: "SWNPRETTY.SheetClassNPC"
   });
-  Actors.registerSheet('swnmodular', ActorSheet5eVehicle, {
+  Actors.registerSheet('swnpretty', ActorSheet5eVehicle, {
     types: ['vehicle'],
     makeDefault: true,
-    label: "SWNMODULAR.SheetClassVehicle"
+    label: "SWNPRETTY.SheetClassVehicle"
   });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("swnmodular", ItemSheet5e, {
+  Items.registerSheet("swnpretty", ItemSheet5e, {
     makeDefault: true,
-    label: "SWNMODULAR.SheetClassItem"
+    label: "SWNPRETTY.SheetClassItem"
   });
 
   // Preload Handlebars Templates
@@ -144,11 +144,11 @@ Hooks.once("setup", function() {
 
   // Localize and sort CONFIG objects
   for ( let o of toLocalize ) {
-    const localized = Object.entries(CONFIG.SWNMODULAR[o]).map(e => {
+    const localized = Object.entries(CONFIG.SWNPRETTY[o]).map(e => {
       return [e[0], game.i18n.localize(e[1])];
     });
     if ( !noSort.includes(o) ) localized.sort((a, b) => a[1].localeCompare(b[1]));
-    CONFIG.SWNMODULAR[o] = localized.reduce((obj, e) => {
+    CONFIG.SWNPRETTY[o] = localized.reduce((obj, e) => {
       obj[e[0]] = e[1];
       return obj;
     }, {});
@@ -167,7 +167,7 @@ Hooks.once("ready", function() {
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
-  const currentVersion = game.settings.get("swnmodular", "systemMigrationVersion");
+  const currentVersion = game.settings.get("swnpretty", "systemMigrationVersion");
   const NEEDS_MIGRATION_VERSION = "1.2.1";
   const COMPATIBLE_MIGRATION_VERSION = 0.80;
   const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
@@ -188,7 +188,7 @@ Hooks.once("ready", function() {
 Hooks.on("canvasInit", function() {
 
   // Extend Diagonal Measurement
-  canvas.grid.diagonalRule = game.settings.get("swnmodular", "diagonalMovement");
+  canvas.grid.diagonalRule = game.settings.get("swnpretty", "diagonalMovement");
   SquareGrid.prototype.measureDistances = measureDistances;
 
   // Extend Token Resource Bars
@@ -209,7 +209,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
   chat.highlightCriticalSuccessFailure(app, html, data);
 
   // Optionally collapse the content
-  if (game.settings.get("swnmodular", "autoCollapseItemCards")) html.find(".card-content").hide();
+  if (game.settings.get("swnpretty", "autoCollapseItemCards")) html.find(".card-content").hide();
 });
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));

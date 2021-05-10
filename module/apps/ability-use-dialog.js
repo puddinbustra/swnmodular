@@ -5,7 +5,7 @@
 export default class AbilityUseDialog extends Dialog {
   constructor(item, dialogData={}, options={}) {
     super(dialogData, options);
-    this.options.classes = ["swnmodular", "dialog"];
+    this.options.classes = ["swnpretty", "dialog"];
 
     /**
      * Store a reference to the Item entity being used
@@ -39,7 +39,7 @@ export default class AbilityUseDialog extends Dialog {
     // Prepare dialog form data
     const data = {
       item: item.data,
-      title: game.i18n.format("SWNMODULAR.AbilityUseHint", item.data),
+      title: game.i18n.format("SWNPRETTY.AbilityUseHint", item.data),
       note: this._getAbilityUseNote(item.data, uses, recharge),
       consumeSpellSlot: false,
       consumeRecharge: recharges,
@@ -52,11 +52,11 @@ export default class AbilityUseDialog extends Dialog {
     if ( item.data.type === "spell" ) this._getSpellData(actorData, itemData, data);
 
     // Render the ability usage template
-    const html = await renderTemplate("systems/swnmodular/templates/apps/ability-use.html", data);
+    const html = await renderTemplate("systems/swnpretty/templates/apps/ability-use.html", data);
 
     // Create the Dialog and return data as a Promise
     const icon = data.isSpell ? "fa-magic" : "fa-fist-raised";
-    const label = game.i18n.localize("SWNMODULAR.AbilityUse" + (data.isSpell ? "Cast" : "Use"));
+    const label = game.i18n.localize("SWNPRETTY.AbilityUse" + (data.isSpell ? "Cast" : "Use"));
     return new Promise((resolve) => {
       const dlg = new this(item, {
         title: `${item.name}: Usage Configuration`,
@@ -90,7 +90,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // Determine whether the spell may be up-cast
     const lvl = itemData.level;
-    const consumeSpellSlot = (lvl > 0) && CONFIG.SWNMODULAR.spellUpcastModes.includes(itemData.preparation.mode);
+    const consumeSpellSlot = (lvl > 0) && CONFIG.SWNPRETTY.spellUpcastModes.includes(itemData.preparation.mode);
 
     // If can't upcast, return early and don't bother calculating available spell slots
     if (!consumeSpellSlot) {
@@ -102,14 +102,14 @@ export default class AbilityUseDialog extends Dialog {
     let lmax = 0;
     const spellLevels = Array.fromRange(10).reduce((arr, i) => {
       if ( i < lvl ) return arr;
-      const label = CONFIG.SWNMODULAR.spellLevels[i];
+      const label = CONFIG.SWNPRETTY.spellLevels[i];
       const l = actorData.spells["spell"+i] || {max: 0, override: null};
       let max = parseInt(l.override || l.max || 0);
       let slots = Math.clamped(parseInt(l.value || 0), 0, max);
       if ( max > 0 ) lmax = i;
       arr.push({
         level: i,
-        label: i > 0 ? game.i18n.format('SWNMODULAR.SpellLevelSlot', {level: label, n: slots}) : label,
+        label: i > 0 ? game.i18n.format('SWNPRETTY.SpellLevelSlot', {level: label, n: slots}) : label,
         canCast: max > 0,
         hasSlots: slots > 0
       });
@@ -121,14 +121,14 @@ export default class AbilityUseDialog extends Dialog {
     if (pact.level >= lvl) {
       spellLevels.push({
         level: 'pact',
-        label: `${game.i18n.format('SWNMODULAR.SpellLevelPact', {level: pact.level, n: pact.value})}`,
+        label: `${game.i18n.format('SWNPRETTY.SpellLevelPact', {level: pact.level, n: pact.value})}`,
         canCast: true,
         hasSlots: pact.value > 0
       });
     }
     const canCast = spellLevels.some(l => l.hasSlots);
-    if ( !canCast ) data.errors.push(game.i18n.format("SWNMODULAR.SpellCastNoSlots", {
-      level: CONFIG.SWNMODULAR.spellLevels[lvl],
+    if ( !canCast ) data.errors.push(game.i18n.format("SWNPRETTY.SpellCastNoSlots", {
+      level: CONFIG.SWNPRETTY.spellLevels[lvl],
       name: data.item.name
     }));
 
@@ -146,11 +146,11 @@ export default class AbilityUseDialog extends Dialog {
 
     // Zero quantity
     const quantity = item.data.quantity;
-    if ( quantity <= 0 ) return game.i18n.localize("SWNMODULAR.AbilityUseUnavailableHint");
+    if ( quantity <= 0 ) return game.i18n.localize("SWNPRETTY.AbilityUseUnavailableHint");
 
     // Abilities which use Recharge
     if ( !!recharge.value ) {
-      return game.i18n.format(recharge.charged ? "SWNMODULAR.AbilityUseChargedHint" : "SWNMODULAR.AbilityUseRechargeHint", {
+      return game.i18n.format(recharge.charged ? "SWNPRETTY.AbilityUseChargedHint" : "SWNPRETTY.AbilityUseRechargeHint", {
         type: item.type,
       })
     }
@@ -160,26 +160,26 @@ export default class AbilityUseDialog extends Dialog {
 
     // Consumables
     if ( item.type === "consumable" ) {
-      let str = "SWNMODULAR.AbilityUseNormalHint";
-      if ( uses.value > 1 ) str = "SWNMODULAR.AbilityUseConsumableChargeHint";
-      else if ( item.data.quantity === 1 && uses.autoDestroy ) str = "SWNMODULAR.AbilityUseConsumableDestroyHint";
-      else if ( item.data.quantity > 1 ) str = "SWNMODULAR.AbilityUseConsumableQuantityHint";
+      let str = "SWNPRETTY.AbilityUseNormalHint";
+      if ( uses.value > 1 ) str = "SWNPRETTY.AbilityUseConsumableChargeHint";
+      else if ( item.data.quantity === 1 && uses.autoDestroy ) str = "SWNPRETTY.AbilityUseConsumableDestroyHint";
+      else if ( item.data.quantity > 1 ) str = "SWNPRETTY.AbilityUseConsumableQuantityHint";
       return game.i18n.format(str, {
         type: item.data.consumableType,
         value: uses.value,
         quantity: item.data.quantity,
         max: uses.max,
-        per: CONFIG.SWNMODULAR.limitedUsePeriods[uses.per]
+        per: CONFIG.SWNPRETTY.limitedUsePeriods[uses.per]
       });
     }
 
     // Other Items
     else {
-      return game.i18n.format("SWNMODULAR.AbilityUseNormalHint", {
+      return game.i18n.format("SWNPRETTY.AbilityUseNormalHint", {
         type: item.type,
         value: uses.value,
         max: uses.max,
-        per: CONFIG.SWNMODULAR.limitedUsePeriods[uses.per]
+        per: CONFIG.SWNPRETTY.limitedUsePeriods[uses.per]
       });
     }
   }

@@ -1,12 +1,12 @@
 <form id="short-rest-hd" class="dialog-content" onsubmit="event.preventDefault();">
-    <p>{{ localize "SWNMODULAR.ShortRestHint" }}</p>
+    <p>{{ localize "SWNPRETTY.ShortRestHint" }}</p>
     <div class="form-group">
-        <label>{{ localize "SWNMODULAR.ShortRestSelect" }}</label>
+        <label>{{ localize "SWNPRETTY.ShortRestSelect" }}</label>
         <div class="form-fields">
             <select name="hd">
                 {{#select denomination}}
                 {{#each availableHD as |num denom|}}
-                <option value="{{denom}}">{{denom}} ({{num}} {{ localize "SWNMODULAR.available" }})</option>
+                <option value="{{denom}}">{{denom}} ({{num}} {{ localize "SWNPRETTY.available" }})</option>
                 {{/each}}
                 {{/select}}
             </select>
@@ -15,7 +15,7 @@
             </button>
         </div>
         {{#unless canRoll}}
-        <p class="notes">{{ localize "SWNMODULAR.ShortRestNoHD" }}</p>
+        <p class="notes">{{ localize "SWNPRETTY.ShortRestNoHD" }}</p>
         {{/unless}}
     </div>
 

@@ -72,53 +72,53 @@
 /* ----------------------------------------- */
 /*  All DnD5e Apps                           */
 /* ----------------------------------------- */
-.swnmodular {
+.swnpretty {
   /* ----------------------------------------- */
   /*  Element Styles                           */
   /* ----------------------------------------- */
   /* Form Groups */
   /* Tags */
 }
-.swnmodular .window-content {
+.swnpretty .window-content {
   background: url("ui/parchment.jpg") repeat;
   font-size: 13px;
   color: #191813;
 }
-.swnmodular input[type="text"],
-.swnmodular input[type="number"],
-.swnmodular select {
+.swnpretty input[type="text"],
+.swnpretty input[type="number"],
+.swnpretty select {
   height: calc(100% - 2px);
   border: 1px solid #7a7971;
   background: rgba(0, 0, 0, 0.05);
   color: #191813;
 }
-.swnmodular input[type="text"]:hover,
-.swnmodular input[type="number"]:hover,
-.swnmodular input[type="text"]:focus,
-.swnmodular input[type="number"]:focus {
+.swnpretty input[type="text"]:hover,
+.swnpretty input[type="number"]:hover,
+.swnpretty input[type="text"]:focus,
+.swnpretty input[type="number"]:focus {
   border: 1px solid #111;
   box-shadow: 0 0 8px #2301a3;
 }
-.swnmodular input:disabled,
-.swnmodular select:disabled,
-.swnmodular textarea:disabled {
+.swnpretty input:disabled,
+.swnpretty select:disabled,
+.swnpretty textarea:disabled {
   color: #2a2a26;
 }
-.swnmodular input:disabled:hover,
-.swnmodular select:disabled:hover,
-.swnmodular textarea:disabled:hover,
-.swnmodular input:disabled:focus,
-.swnmodular select:disabled:focus,
-.swnmodular textarea:disabled:focus {
+.swnpretty input:disabled:hover,
+.swnpretty select:disabled:hover,
+.swnpretty textarea:disabled:hover,
+.swnpretty input:disabled:focus,
+.swnpretty select:disabled:focus,
+.swnpretty textarea:disabled:focus {
   box-shadow: none !important;
   border: 1px solid transparent !important;
   outline: none !important;
 }
-.swnmodular button {
+.swnpretty button {
   background: rgba(0, 0, 0, 0.27);
   border: 2px groove #eeede0;
 }
-.swnmodular label.checkbox {
+.swnpretty label.checkbox {
   flex: auto;
   padding: 0;
   margin: 0;
@@ -126,57 +126,57 @@
   line-height: 22px;
   font-size: 11px;
 }
-.swnmodular label.checkbox > input[type="checkbox"] {
+.swnpretty label.checkbox > input[type="checkbox"] {
   width: 16px;
   height: 16px;
   margin: 0 2px 0 0;
   position: relative;
   top: 4px;
 }
-.swnmodular label.checkbox.right > input[type="checkbox"] {
+.swnpretty label.checkbox.right > input[type="checkbox"] {
   margin: 0 0 0 2px;
 }
-.swnmodular .form-group label {
+.swnpretty .form-group label {
   flex: 2;
   color: #4b4a44;
   font-weight: bold;
 }
-.swnmodular .form-group .form-fields {
+.swnpretty .form-group .form-fields {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-.swnmodular .form-group .form-fields > * {
+.swnpretty .form-group .form-fields > * {
   flex: 1;
 }
-.swnmodular .form-group .form-fields .flex1 {
+.swnpretty .form-group .form-fields .flex1 {
   flex: 1;
 }
-.swnmodular .form-group .form-fields .flex2 {
+.swnpretty .form-group .form-fields .flex2 {
   flex: 2;
 }
-.swnmodular .form-group .form-fields .flex3 {
+.swnpretty .form-group .form-fields .flex3 {
   flex: 3;
 }
-.swnmodular .form-group .form-fields .flex4 {
+.swnpretty .form-group .form-fields .flex4 {
   flex: 4;
 }
-.swnmodular .form-group .form-fields > * {
+.swnpretty .form-group .form-fields > * {
   margin: 0 3px 0 0;
 }
-.swnmodular .form-group .form-fields > *:last-child {
+.swnpretty .form-group .form-fields > *:last-child {
   margin-right: 0;
 }
-.swnmodular .form-group.stacked label {
+.swnpretty .form-group.stacked label {
   flex: 0 0 100%;
   margin: 0;
 }
-.swnmodular .form-group.stacked label.checkbox {
+.swnpretty .form-group.stacked label.checkbox {
   flex: auto;
   text-align: left;
 }
-.swnmodular .form-header {
+.swnpretty .form-header {
   margin: 0 0 0.25em 0;
   padding: 2px 0;
   border-top: 2px groove #eeede0;
@@ -185,7 +185,7 @@
   font-size: 20px;
   font-weight: 700;
 }
-.swnmodular .tag {
+.swnpretty .tag {
   display: inline-block;
   margin: 0 2px 0 0;
   padding: 0 3px;
@@ -198,7 +198,7 @@
 /* ----------------------------------------- */
 /*  Entity Sheets Specifically               */
 /* ----------------------------------------- */
-.swnmodular.sheet {
+.swnpretty.sheet {
   /* ----------------------------------------- */
   /*  Element Styles                           */
   /* ----------------------------------------- */
@@ -227,48 +227,48 @@
   /*  Active Effects                           */
   /* ----------------------------------------- */
 }
-.swnmodular.sheet .window-content {
+.swnpretty.sheet .window-content {
   overflow-y: hidden;
   padding: 5px;
   background: url("ui/parchment.jpg") repeat;
   font-size: 13px;
   color: #191813;
 }
-.swnmodular.sheet .window-content form {
+.swnpretty.sheet .window-content form {
   height: 100%;
   overflow: hidden;
 }
-.swnmodular.sheet .window-content .tab {
+.swnpretty.sheet .window-content .tab {
   height: 100%;
   overflow-y: auto;
   align-content: flex-start;
 }
-.swnmodular.sheet input[type="text"],
-.swnmodular.sheet input[type="number"] {
+.swnpretty.sheet input[type="text"],
+.swnpretty.sheet input[type="number"] {
   background: none;
   border: 1px solid transparent;
 }
-.swnmodular.sheet input[type="text"]:hover,
-.swnmodular.sheet input[type="number"]:hover,
-.swnmodular.sheet input[type="text"]:focus,
-.swnmodular.sheet input[type="number"]:focus {
+.swnpretty.sheet input[type="text"]:hover,
+.swnpretty.sheet input[type="number"]:hover,
+.swnpretty.sheet input[type="text"]:focus,
+.swnpretty.sheet input[type="number"]:focus {
   border: 1px solid #111;
 }
-.swnmodular.sheet select {
+.swnpretty.sheet select {
   flex: 1;
   font-size: 12px;
   height: 22px;
   background: transparent;
 }
-.swnmodular.sheet .editable .rollable:hover {
+.swnpretty.sheet .editable .rollable:hover {
   cursor: pointer;
 }
-.swnmodular.sheet .editable h4.rollable:hover,
-.swnmodular.sheet .editable .rollable:hover > h4 {
+.swnpretty.sheet .editable h4.rollable:hover,
+.swnpretty.sheet .editable .rollable:hover > h4 {
   color: #000;
   text-shadow: 0 0 10px #2301a3;
 }
-.swnmodular.sheet span.sep {
+.swnpretty.sheet span.sep {
   flex: none;
   margin: 0 1px;
   display: inline;
@@ -276,39 +276,39 @@
   color: #7a7971;
   font-weight: normal;
 }
-.swnmodular.sheet .editor {
+.swnpretty.sheet .editor {
   height: 100%;
 }
-.swnmodular.sheet .editor .tox-toolbar-overlord,
-.swnmodular.sheet .editor .tox-toolbar__primary {
+.swnpretty.sheet .editor .tox-toolbar-overlord,
+.swnpretty.sheet .editor .tox-toolbar__primary {
   background: none;
 }
-.swnmodular.sheet .sheet-header {
+.swnpretty.sheet .sheet-header {
   flex: 0 0 100px;
   border-bottom: 2px groove #eeede0;
   /* Character Name */
   /* Profile Image */
   /* Header Summary Details */
 }
-.swnmodular.sheet .sheet-header .header-details {
+.swnpretty.sheet .sheet-header .header-details {
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
   font-weight: 700;
 }
-.swnmodular.sheet .sheet-header h1 {
+.swnpretty.sheet .sheet-header h1 {
   flex: 1;
   border-bottom: none;
   height: 60px;
   margin: 0;
   padding: 5px;
 }
-.swnmodular.sheet .sheet-header h1 input {
+.swnpretty.sheet .sheet-header h1 input {
   display: block;
   height: 50px;
   font-size: 32px;
   margin: 0;
 }
-.swnmodular.sheet .sheet-header img.profile {
+.swnpretty.sheet .sheet-header img.profile {
   flex: 0 0 100px;
   max-width: 100px;
   height: 100px;
@@ -316,7 +316,7 @@
   border: none;
   border-right: 2px groove #eeede0;
 }
-.swnmodular.sheet .sheet-header .summary {
+.swnpretty.sheet .sheet-header .summary {
   flex: 0 0 100%;
   height: 40px;
   margin: 0;
@@ -329,7 +329,7 @@
   display: flex;
   justify-content: center;
 }
-.swnmodular.sheet .sheet-header .summary li {
+.swnpretty.sheet .sheet-header .summary li {
   height: calc(100% - 6px);
   float: left;
   margin: 2px 0;
@@ -338,34 +338,34 @@
   line-height: 34px;
   color: #4b4a44;
 }
-.swnmodular.sheet .sheet-header .summary li:last-child {
+.swnpretty.sheet .sheet-header .summary li:last-child {
   border-right: none;
 }
-.swnmodular.sheet .sheet-navigation{
+.swnpretty.sheet .sheet-navigation{
   flex: 0 0 30px;
   margin-bottom: 5px;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
   font-weight: 700;
 }
-.swnmodular.sheet .sheet-navigation .item {
+.swnpretty.sheet .sheet-navigation .item {
   height: 30px;
   line-height: 32px;
   margin: 0 24px;
   border-bottom: 3px solid #b5b3a4;
 }
-.swnmodular.sheet .sheet-navigation .item:hover {
+.swnpretty.sheet .sheet-navigation .item:hover {
   text-shadow: 0 0 10px #2301a3;
 }
-.swnmodular.sheet .sheet-navigation .item.active {
+.swnpretty.sheet .sheet-navigation .item.active {
   border-bottom: 3px solid rgba(56, 45, 161, 0.62);
   text-shadow: 0 0 10px #2301a3;
 }
-.swnmodular.sheet .sheet-body {
+.swnpretty.sheet .sheet-body {
   flex: 1;
   overflow: hidden;
 }
-.swnmodular.sheet .filter-list {
+.swnpretty.sheet .filter-list {
   align-items: center;
   list-style: none;
   margin: 0;
@@ -373,45 +373,45 @@
   line-height: 16px;
   max-width: 70%;
 }
-.swnmodular.sheet .filter-list .filter-icon {
+.swnpretty.sheet .filter-list .filter-icon {
   flex: none;
   font-size: 14px;
   color: #7a7971;
 }
-.swnmodular.sheet .filter-list .filter-item {
+.swnpretty.sheet .filter-list .filter-item {
   text-align: center;
   font-size: 12px;
   margin: 0 6px 0 0;
   border-bottom: 3px solid #b5b3a4;
   white-space: nowrap;
 }
-.swnmodular.sheet .filter-list .filter-item:last-child {
+.swnpretty.sheet .filter-list .filter-item:last-child {
   margin: 0;
 }
-.swnmodular.sheet .filter-list .filter-item:hover {
+.swnpretty.sheet .filter-list .filter-item:hover {
   text-shadow: 0 0 4px #2301a3;
   border-bottom: 3px solid #7a7971;
 }
-.swnmodular.sheet .filter-list .filter-item.active {
+.swnpretty.sheet .filter-list .filter-item.active {
   border-bottom: 3px solid #2301a3;
 }
-.swnmodular.sheet .traits {
+.swnpretty.sheet .traits {
   margin: 5px 0 0;
 }
-.swnmodular.sheet .traits .trait-selector {
+.swnpretty.sheet .traits .trait-selector {
   flex: 0 0 16px;
   padding: 2px 0;
   color: #999;
   font-size: 10px;
 }
-.swnmodular.sheet .traits .traits-list {
+.swnpretty.sheet .traits .traits-list {
   flex: 0 0 100%;
   line-height: 20px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.swnmodular.sheet .items-list {
+.swnpretty.sheet .items-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -419,12 +419,12 @@
   scrollbar-width: thin;
   color: #7a7971;
 }
-.swnmodular.sheet .items-list .item-list {
+.swnpretty.sheet .items-list .item-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.swnmodular.sheet .items-list .item-name {
+.swnpretty.sheet .items-list .item-name {
   flex: 2;
   margin: 0;
   overflow: hidden;
@@ -432,39 +432,39 @@
   text-align: left;
   align-items: center;
 }
-.swnmodular.sheet .items-list .item-name h3,
-.swnmodular.sheet .items-list .item-name h4 {
+.swnpretty.sheet .items-list .item-name h3,
+.swnpretty.sheet .items-list .item-name h4 {
   margin: 0;
   white-space: nowrap;
   overflow-x: hidden;
 }
-.swnmodular.sheet .items-list .item-controls {
+.swnpretty.sheet .items-list .item-controls {
   flex: 0 0 60px;
   justify-content: space-between;
 }
-.swnmodular.sheet .items-list .item-controls a {
+.swnpretty.sheet .items-list .item-controls a {
   font-size: 12px;
   text-align: center;
 }
-.swnmodular.sheet .items-list .item {
+.swnpretty.sheet .items-list .item {
   align-items: center;
   padding: 0 2px;
   border-bottom: 1px solid #c9c7b8;
 }
-.swnmodular.sheet .items-list .item:last-child {
+.swnpretty.sheet .items-list .item:last-child {
   border-bottom: none;
 }
-.swnmodular.sheet .items-list .item .item-name {
+.swnpretty.sheet .items-list .item .item-name {
   color: #191813;
 }
-.swnmodular.sheet .items-list .item .item-name .item-image {
+.swnpretty.sheet .items-list .item .item-name .item-image {
   flex: 0 0 30px;
   height: 30px;
   background-size: 30px;
   border: none;
   margin-right: 5px;
 }
-.swnmodular.sheet .items-list .items-header {
+.swnpretty.sheet .items-list .items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
@@ -473,11 +473,11 @@
   border: 2px groove #eeede0;
   font-weight: bold;
 }
-.swnmodular.sheet .items-list .items-header > * {
+.swnpretty.sheet .items-list .items-header > * {
   font-size: 12px;
   text-align: center;
 }
-.swnmodular.sheet .items-list .items-header h3 {
+.swnpretty.sheet .items-list .items-header h3 {
   padding-left: 5px;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
   /*font-size: 20px;*/
@@ -485,25 +485,25 @@
   text-align: left;
   font-size: 16px;
 }
-/*.swnmodular.sheet .items-list .items-header .item-create{*/
+/*.swnpretty.sheet .items-list .items-header .item-create{*/
 /*  min-width: 0;*/
 /*  max-width: 50px;*/
 /*  background-color: #2a2a26;*/
 /*  padding-right: 5px;*/
 /*}*/
-/*.swnmodular.sheet .items-list .items-header .item-action{*/
+/*.swnpretty.sheet .items-list .items-header .item-action{*/
 /*  min-width: 0;*/
 /*  max-width: 30px;*/
 /*}*/
-.swnmodular.sheet .effects .item .effect-source,
-.swnmodular.sheet .effects .item .effect-duration,
-.swnmodular.sheet .effects .item .effect-controls {
+.swnpretty.sheet .effects .item .effect-source,
+.swnpretty.sheet .effects .item .effect-duration,
+.swnpretty.sheet .effects .item .effect-controls {
   text-align: center;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
-.swnmodular.sheet .effects .item .effect-controls {
+.swnpretty.sheet .effects .item .effect-controls {
   border: none;
 }
 /* ----------------------------------------- */
@@ -518,7 +518,7 @@
   height: 24px;
   margin: 2px;
 }
-.swnmodular.sheet.actor {
+.swnpretty.sheet.actor {
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
@@ -552,45 +552,45 @@
   /*  TinyMCE                                  */
   /* ----------------------------------------- */
 }
-.swnmodular.sheet.actor .sheet-header img.profile {
+.swnpretty.sheet.actor .sheet-header img.profile {
   flex: 0 0 160px;
   max-width: 160px;
   height: 160px;
 }
-.swnmodular.sheet.actor .sheet-header h1.charname {
+.swnpretty.sheet.actor .sheet-header h1.charname {
   flex: 1;
   height: 60px;
   padding: 0;
 }
-.swnmodular.sheet.actor .sheet-header h1.charname input {
+.swnpretty.sheet.actor .sheet-header h1.charname input {
   height: 40px;
   margin: 10px 0;
 }
-.swnmodular.sheet.actor .sheet-header .header-exp {
+.swnpretty.sheet.actor .sheet-header .header-exp {
   flex: 0 0 150px;
   margin-right: 3px;
   height: 60px;
   justify-content: flex-end;
   text-align: right;
 }
-.swnmodular.sheet.actor .sheet-header .summary {
+.swnpretty.sheet.actor .sheet-header .summary {
   height: 30px;
   /*border-bottom: 2px groove #eeede0;*/
   font-size: 18px;
 }
-.swnmodular.sheet.actor .sheet-header .summary input,
-.swnmodular.sheet.actor .sheet-header .summary span {
+.swnpretty.sheet.actor .sheet-header .summary input,
+.swnpretty.sheet.actor .sheet-header .summary span {
   display: block;
   height: 24px;
   line-height: 24px;
 }
 
-.swnmodular.sheet.actor .sheet-header .attributes {
+.swnpretty.sheet.actor .sheet-header .attributes {
   flex: 0 0 100%;
   margin: 0;
   background-color: rgba(36, 69, 231, 0.14);
 }
-.swnmodular.sheet.actor .sheet-header .attributes .attribute {
+.swnpretty.sheet.actor .sheet-header .attributes .attribute {
   height: 70px;
   margin: 0;
   border: none;
@@ -598,17 +598,17 @@
   border-top: 2px groove #eeede0;
   border-radius: 0;
 }
-.swnmodular.sheet.actor .sheet-header .attributes .attribute:last-child {
+.swnpretty.sheet.actor .sheet-header .attributes .attribute:last-child {
   border-right: none;
 }
-.swnmodular.sheet.actor .sheet-header .attributes .attribute .attribute-value {
+.swnpretty.sheet.actor .sheet-header .attributes .attribute .attribute-value {
   height: 30px;
   line-height: 30px;
 }
-.swnmodular.sheet.actor .sheet-header .attributes .movement h4.attribute-name {
+.swnpretty.sheet.actor .sheet-header .attributes .movement h4.attribute-name {
   position: relative;
 }
-.swnmodular.sheet.actor .sheet-header .attributes .movement .config-button {
+.swnpretty.sheet.actor .sheet-header .attributes .movement .config-button {
   position: absolute;
   display: none;
   right: 0;
@@ -616,14 +616,14 @@
   font-size: 12px;
   font-weight: normal;
 }
-.swnmodular.sheet.actor .sheet-header .attributes .movement:hover .config-button {
+.swnpretty.sheet.actor .sheet-header .attributes .movement:hover .config-button {
   display: block;
 }
-.swnmodular.sheet.actor .sheet-header .attributes input.temphp {
+.swnpretty.sheet.actor .sheet-header .attributes input.temphp {
   width: 48%;
 }
 /*This targets all the titles of boxes- including in resources, header, and attributes*/
-.swnmodular.sheet.actor h4.box-title {
+.swnpretty.sheet.actor h4.box-title {
   height: 18px;
   line-height: 16px;
   margin: 4px 8px 2px;
@@ -634,11 +634,11 @@
   border-bottom: 1px solid #727076;
   white-space: nowrap;
 }
-.swnmodular.sheet.actor .tab.attributes {
+.swnpretty.sheet.actor .tab.attributes {
   overflow: hidden;
 }
 /*This targets the larger container, where the boxes themselves are, not contents, of all the stuff below*/
-.swnmodular.sheet.actor ul.attributes {
+.swnpretty.sheet.actor ul.attributes {
   flex: 0 0 60px;
   list-style: none;
   margin: 0;
@@ -646,7 +646,7 @@
   /*border-top: 2px groove #eeede0;*/
 }
 /*Applies to Resources, saves, and not the header -Lofty*/
-.swnmodular.sheet.actor ul.attributes li.attribute {
+.swnpretty.sheet.actor ul.attributes li.attribute {
   height: 60px;
   margin: 0 5px 0 0;
   border: 2px groove rgb(175, 175, 175);
@@ -655,14 +655,14 @@
   padding-top: 2px;
 }
 /*Applies to header only -Lofty*/
-.swnmodular.sheet.actor ul.attributes div.no-sub{
+.swnpretty.sheet.actor ul.attributes div.no-sub{
   padding-top: 7px;
 }
-.swnmodular.sheet.actor ul.attributes li.attribute:last-child {
+.swnpretty.sheet.actor ul.attributes li.attribute:last-child {
   margin: 0;
 }
 /*This one targets all of the values in attributes*/
-.swnmodular.sheet.actor ul.attributes li.attribute .attribute-value {
+.swnpretty.sheet.actor ul.attributes li.attribute .attribute-value {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -673,19 +673,19 @@
   font-weight: 700;
 }
 /*Lofty modified*/
-.swnmodular.sheet.actor li.attribute.resource {
+.swnpretty.sheet.actor li.attribute.resource {
   min-width: 120px;
   max-width: 150px;
 }
 
-.swnmodular.sheet.actor ul.attributes li.attribute .attribute-value > * {
+.swnpretty.sheet.actor ul.attributes li.attribute .attribute-value > * {
   font-weight: 400;
   font-size: 24px;
 }
-.swnmodular.sheet.actor ul.attributes li.attribute .attribute-value.multiple input {
+.swnpretty.sheet.actor ul.attributes li.attribute .attribute-value.multiple input {
   flex: 0 0 33%;
 }
-.swnmodular.sheet.actor ul.attributes li.attribute .attribute-footer {
+.swnpretty.sheet.actor ul.attributes li.attribute .attribute-footer {
   flex: 0 0 18px;
   margin-top: -1px;
   line-height: 11px;
@@ -695,7 +695,7 @@
   white-space: nowrap;
   /*opacity: 90%;*/
 }
-.swnmodular.sheet.actor .ability-scores {
+.swnpretty.sheet.actor .ability-scores {
   flex: 0 0 100px;
   height: 440px;
   list-style: none;
@@ -708,29 +708,29 @@
   border-radius: 3px;
   background-color: rgba(36, 69, 231, 0.14);
 }
-.swnmodular.sheet.actor .ability-scores .ability {
+.swnpretty.sheet.actor .ability-scores .ability {
   height: 70px;
   text-align: center;
   border-bottom: 2px groove #eeede0;
 }
-.swnmodular.sheet.actor .ability-scores .ability:last-child {
+.swnpretty.sheet.actor .ability-scores .ability:last-child {
   border-bottom: none;
   margin-bottom: -3px;
 }
-.swnmodular.sheet.actor .ability-scores .ability input.ability-score {
+.swnpretty.sheet.actor .ability-scores .ability input.ability-score {
   height: 30px;
   width: 36px;
   margin: 0 auto;
   line-height: 32px;
   font-size: 24px;
 }
-.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers {
+.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers {
   height: 24px;
   margin: -8px 0 0;
   justify-content: flex-end;
 }
-.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod,
-.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
+.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod,
+.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
   flex: 0 0 25%;
   height: 22px;
   line-height: 22px;
@@ -739,15 +739,15 @@
   align-content: center;
   position: relative;
 }
-.swnmodular.sheet.actor li.save-box{
+.swnpretty.sheet.actor li.save-box{
   background-color: rgba(142, 30, 30, 0.22);;
 }
 
-.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
+.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
   border-left: 2px groove #eeede0;
 }
 
-.swnmodular.sheet.actor .info {
+.swnpretty.sheet.actor .info {
   border: 2px groove #eeede0;
   flex: 1 0 25%;
   font-size: 13px;
@@ -757,27 +757,27 @@
   max-width: 200px;
   overflow: hidden;
 }
-.swnmodular.sheet.actor .front-info{
+.swnpretty.sheet.actor .front-info{
   margin-top: 5px;
   overflow: hidden;
 }
 
 
-/*.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers .ability-proficiency {*/
+/*.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers .ability-proficiency {*/
 /*  line-height: 30px;*/
 /*}*/
-/*.swnmodular.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {*/
+/*.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {*/
 /*  border-right: 2px groove #eeede0;*/
 /*}*/
 
-/*.swnmodular.sheet.actor .proficiency-toggle {*/
+/*.swnpretty.sheet.actor .proficiency-toggle {*/
 /*  color: #b5b3a4;*/
 /*  font-size: 12px;*/
 /*}*/
-/*.swnmodular.sheet.actor .proficient .proficiency-toggle {*/
+/*.swnpretty.sheet.actor .proficient .proficiency-toggle {*/
 /*  color: #4b4a44;*/
 /*}*/
-/*.swnmodular.sheet.actor .locked .proficiency-toggle {*/
+/*.swnpretty.sheet.actor .locked .proficiency-toggle {*/
 /*  color: #b5b3a4;*/
 /*  text-shadow: none;*/
 /*  cursor: default;*/
@@ -797,7 +797,7 @@
 /*}*/
 
 /*This is the big skill box*/
-.swnmodular.sheet.actor ul.skills-list {
+.swnpretty.sheet.actor ul.skills-list {
   flex: 0 0 180px;
   height: 440px;
   list-style: none;
@@ -814,18 +814,18 @@
   scrollbar-color: blue green;
 }
 /*This controls each line I think*/
-.swnmodular.sheet.actor ul.skills-list li.skill {
+.swnpretty.sheet.actor ul.skills-list li.skill {
   height: 24px;
   padding: 3px 2px;
   min-width: 120px;
 }
 
 /*Applies to every other row*/
-.swnmodular.sheet.actor ul.skills-list li.skill:nth-child(even) {
+.swnpretty.sheet.actor ul.skills-list li.skill:nth-child(even) {
   background: rgba(0, 0, 100, 0.05);
 }
 /*The ability name. This will stretch to fill box. No I don't know how to change it. -lofty*/
-.swnmodular.sheet.actor ul.skills-list li.skill h4 {
+.swnpretty.sheet.actor ul.skills-list li.skill h4 {
   flex: 1px;
   margin: 0;
   font-size: 13px;
@@ -834,51 +834,51 @@
   /*border: 2px groove green;*/
 }
 
-.swnmodular.sheet.actor ul.skills-list li.skill .skill-mod {
+.swnpretty.sheet.actor ul.skills-list li.skill .skill-mod {
   flex: 0 0 20px;
   /*border: 2px groove blue;*/
   /*border-radius: 2px;*/
 }
 
-.swnmodular.sheet.actor ul.skills-list li.skill .skill-other {
+.swnpretty.sheet.actor ul.skills-list li.skill .skill-other {
   flex: 0 0 25px;
   /*border: 2px groove orange;*/
 }
 
-/*.swnmodular.sheet.actor .counters {*/
+/*.swnpretty.sheet.actor .counters {*/
 /*  flex: auto;*/
 /*  padding: 5px 0;*/
 /*  margin: 0;*/
 /*  border-bottom: 2px groove #eeede0;*/
 /*}*/
 
-/*.swnmodular.sheet.actor .counters .counter {*/
+/*.swnpretty.sheet.actor .counters .counter {*/
 /*  height: 20px;*/
 /*  line-height: 20px;*/
 /*}*/
-/*.swnmodular.sheet.actor .counters .counter h4 {*/
+/*.swnpretty.sheet.actor .counters .counter h4 {*/
 /*  flex: auto;*/
 /*  margin: 0;*/
 /*  font-size: 13px;*/
 /*  font-weight: bold;*/
 /*  color: #4b4a44;*/
 /*}*/
-/*.swnmodular.sheet.actor .counters .counter .counter-value {*/
+/*.swnpretty.sheet.actor .counters .counter .counter-value {*/
 /*  flex: none;*/
 /*  text-align: right;*/
 
-/*.swnmodular.sheet.actor .counters .counter .counter-value > * {*/
+/*.swnpretty.sheet.actor .counters .counter .counter-value > * {*/
 /*  display: inline;*/
 /*}*/
-/*.swnmodular.sheet.actor .counters .counter input[type="text"],*/
-/*.swnmodular.sheet.actor .counters .counter input[type="number"] {*/
+/*.swnpretty.sheet.actor .counters .counter input[type="text"],*/
+/*.swnpretty.sheet.actor .counters .counter input[type="number"] {*/
 /*  height: 20px;*/
 /*  max-width: 20px;*/
 /*  margin: 0;*/
 /*  padding: 0;*/
 /*  text-align: left;*/
 /*}*/
-/*.swnmodular.sheet.actor .counters .counter input[type="checkbox"] {*/
+/*.swnpretty.sheet.actor .counters .counter input[type="checkbox"] {*/
 /*  position: relative;*/
 /*  width: 16px;*/
 /*  height: 16px;*/
@@ -886,63 +886,63 @@
 /*  top: 4px;*/
 /*}*/
 
-/*.swnmodular.sheet.actor .counters .counter span.sep {*/
+/*.swnpretty.sheet.actor .counters .counter span.sep {*/
 /*  font-size: 12px;*/
 /*}*/
-.swnmodular.sheet.actor .center-pane {
+.swnpretty.sheet.actor .center-pane {
   height: 100%;
   padding: 0 5px 0 3px;
   overflow-y: auto;
   scrollbar-width: thin;
 }
-.swnmodular.sheet.actor .traits .form-group,
-.swnmodular.sheet.actor .traits .form-group-stacked {
+.swnpretty.sheet.actor .traits .form-group,
+.swnpretty.sheet.actor .traits .form-group-stacked {
   margin: 0 0 3px 0;
   justify-content: space-between;
 }
-.swnmodular.sheet.actor .traits .config-button {
+.swnpretty.sheet.actor .traits .config-button {
   flex: 1;
 }
-.swnmodular.sheet.actor .traits label {
+.swnpretty.sheet.actor .traits label {
   flex: none;
   line-height: 20px;
   font-weight: bold;
   margin: 0 10px 0 0;
 }
-.swnmodular.sheet.actor .traits select {
+.swnpretty.sheet.actor .traits select {
   max-width: 200px;
 }
-.swnmodular.sheet.actor .traits input {
+.swnpretty.sheet.actor .traits input {
   text-align: right;
 }
-.swnmodular.sheet.actor .traits i.fas {
+.swnpretty.sheet.actor .traits i.fas {
   float: right;
   margin-right: 3px;
   text-align: right;
   color: #999;
 }
-.swnmodular.sheet.actor i.fas:hover {
+.swnpretty.sheet.actor i.fas:hover {
   color: #111;
   text-shadow: 0 0 10px #2301a3;
 }
-.swnmodular.sheet a:hover{
+.swnpretty.sheet a:hover{
   color: #111;
   text-shadow: 0 0 10px #2301a3;
 }
-.swnmodular.sheet.actor .traits .inactive {
+.swnpretty.sheet.actor .traits .inactive {
   color: #7a7971;
 }
-.swnmodular.sheet.actor .tab.features,
-.swnmodular.sheet.actor .tab.inventory,
-.swnmodular.sheet.actor .tab.spellbook {
+.swnpretty.sheet.actor .tab.features,
+.swnpretty.sheet.actor .tab.inventory,
+.swnpretty.sheet.actor .tab.spellbook {
   overflow-y: hidden;
 }
-.swnmodular.sheet.actor .inventory-filters {
+.swnpretty.sheet.actor .inventory-filters {
   margin: 0 8px;
   flex: 0 0 20px;
   justify-content: flex-end;
 }
-.swnmodular.sheet.actor .inventory-filters .currency {
+.swnpretty.sheet.actor .inventory-filters .currency {
   flex: 0 0 100%;
   list-style: none;
   margin: 4px 0 8px;
@@ -950,7 +950,7 @@
   font-size: 24px;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
 }
-.swnmodular.sheet.actor .inventory-filters .currency label {
+.swnpretty.sheet.actor .inventory-filters .currency label {
   flex: 0;
   margin-left: 15px;
   /*text-align: right;*/
@@ -958,7 +958,7 @@
   color: #383834;
 }
 
-.swnmodular.sheet.actor .inventory-filters .currency input[type="text"] {
+.swnpretty.sheet.actor .inventory-filters .currency input[type="text"] {
   flex: 0 0 48px;
   text-align: center;
   margin-left: 8px;
@@ -966,41 +966,41 @@
   min-width: 90px;
   font-size: 95%;
 }
-.swnmodular.sheet.actor .inventory-list {
+.swnpretty.sheet.actor .inventory-list {
   padding: 0 5px;
 }
-.swnmodular.sheet.actor .inventory-list .item .item-name {
+.swnpretty.sheet.actor .inventory-list .item .item-name {
   cursor: pointer;
 }
-.swnmodular.sheet.actor .inventory-list .item .item-name.rollable:hover .item-image {
+.swnpretty.sheet.actor .inventory-list .item .item-name.rollable:hover .item-image {
   background-image: url("../../icons/svg/d20-grey.svg") !important;
 }
-.swnmodular.sheet.actor .inventory-list .item .item-name.rollable .item-image:hover {
+.swnpretty.sheet.actor .inventory-list .item .item-name.rollable .item-image:hover {
   background-image: url("../../icons/svg/d20-black.svg") !important;
 }
-.swnmodular.sheet.actor .inventory-list .item .item-name i.attuned {
+.swnpretty.sheet.actor .inventory-list .item .item-name i.attuned {
   color: #7a7971;
 }
-.swnmodular.sheet.actor .inventory-list .item .item-name i.not-attuned {
+.swnpretty.sheet.actor .inventory-list .item .item-name i.not-attuned {
   color: #44191A;
 }
-.swnmodular.sheet.actor .inventory-list .item .item-uses input {
+.swnpretty.sheet.actor .inventory-list .item .item-uses input {
   width: 24px;
   text-align: center;
 }
-.swnmodular.sheet.actor .inventory-list .item .item-properties {
+.swnpretty.sheet.actor .inventory-list .item .item-properties {
   margin-top: 3px;
 }
-.swnmodular.sheet.actor .inventory-list .item .item-recharge {
+.swnpretty.sheet.actor .inventory-list .item .item-recharge {
   flex: 0 0 80px;
   text-align: right;
   font-size: 11px;
   white-space: nowrap;
 }
-.swnmodular.sheet.actor .inventory-list .inventory-header .item-controls a.item-create {
+.swnpretty.sheet.actor .inventory-list .inventory-header .item-controls a.item-create {
   flex: 0 0 100%;
 }
-.swnmodular.sheet.actor .inventory-list .item-detail {
+.swnpretty.sheet.actor .inventory-list .item-detail {
   flex: 0 0 70px;
   font-size: 12px;
   text-align: center;
@@ -1009,21 +1009,21 @@
   white-space: nowrap;
   overflow: hidden;
 }
-.swnmodular.sheet.actor .inventory-list .item-detail:last-child {
+.swnpretty.sheet.actor .inventory-list .item-detail:last-child {
   border-right: none;
 }
-.swnmodular.sheet.actor .inventory-list .item-detail.item-action {
+.swnpretty.sheet.actor .inventory-list .item-detail.item-action {
   flex: 0 0 100px;
 }
-/*.swnmodular.sheet.actor .inventory-list .item-detail.attunement {*/
+/*.swnpretty.sheet.actor .inventory-list .item-detail.attunement {*/
 /*  flex: 0 0 24px;*/
 /*}*/
-.swnmodular.sheet.actor .inventory-list .item-weight {
+.swnpretty.sheet.actor .inventory-list .item-weight {
   flex: 0 0 60px;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
 }
-.swnmodular.sheet.actor .inventory-list .item-location-inv{
+.swnpretty.sheet.actor .inventory-list .item-location-inv{
   flex: 0 0 100px;
   border-left: 1px solid #c9c7b8;
   border-right: none;
@@ -1032,16 +1032,16 @@
   min-width: 60px;
   max-width: 100px;
 }
-.swnmodular.sheet.actor .inventory-list .item-controls {
+.swnpretty.sheet.actor .inventory-list .item-controls {
   flex: 0 0 44px;
 }
 /*Right now, this below will target the trash and inventory icons in inventory. You can change the min and max width here -Lofty*/
-/*.swnmodular.sheet.actor .inventory-list .inventory-icons{*/
+/*.swnpretty.sheet.actor .inventory-list .inventory-icons{*/
 /*  !*background-color: #2a2a26;*!*/
 /*  min-width: 0;*/
 /*  max-width: 50px;*/
 /*}*/
-.swnmodular.sheet.actor .inventory-list .item-summary {
+.swnpretty.sheet.actor .inventory-list .item-summary {
   flex: 0 0 100%;
   font-size: 12px;
   line-height: 16px;
@@ -1049,7 +1049,7 @@
   color: #191813;
   border-top: 1px solid #c9c7b8;
 }
-.swnmodular.sheet.actor .encumbrance {
+.swnpretty.sheet.actor .encumbrance {
   flex: 0 0 12px;
   background: #7a7971;
   margin: 1px 15px 0 1px;
@@ -1057,7 +1057,7 @@
   border-radius: 3px;
   position: relative;
 }
-.swnmodular.sheet.actor .encumbrance .encumbrance-bar {
+.swnpretty.sheet.actor .encumbrance .encumbrance-bar {
   position: absolute;
   top: 1px;
   left: 1px;
@@ -1066,7 +1066,7 @@
   border: 1px solid #435fd7;
   border-radius: 2px;
 }
-.swnmodular.sheet.actor .encumbrance .readied{
+.swnpretty.sheet.actor .encumbrance .readied{
   position: absolute;
   top: 1px;
   left: 1px;
@@ -1075,7 +1075,7 @@
   border: 1px solid #435fd7;
   border-radius: 2px;
 }
-.swnmodular.sheet.actor .encumbrance .encumbrance-label {
+.swnpretty.sheet.actor .encumbrance .encumbrance-label {
   height: 10px;
   padding: 0 5px;
   position: absolute;
@@ -1087,17 +1087,17 @@
   color: #EEE;
   text-shadow: 0 0 5px #000;
 }
-.swnmodular.sheet.actor .encumbrance .encumbrance-breakpoint {
+.swnpretty.sheet.actor .encumbrance .encumbrance-breakpoint {
   display: block;
   position: absolute;
 }
-.swnmodular.sheet.actor .encumbrance .encumbrance-breakpoint.encumbrance-33 {
+.swnpretty.sheet.actor .encumbrance .encumbrance-breakpoint.encumbrance-33 {
   left: 33%;
 }
-.swnmodular.sheet.actor .encumbrance .encumbrance-breakpoint.encumbrance-66 {
+.swnpretty.sheet.actor .encumbrance .encumbrance-breakpoint.encumbrance-66 {
   left: 66%;
 }
-.swnmodular.sheet.actor .encumbrance .arrow-up {
+.swnpretty.sheet.actor .encumbrance .arrow-up {
   bottom: 0;
   width: 0;
   height: 0;
@@ -1105,7 +1105,7 @@
   border-right: 4px solid transparent;
   border-bottom: 4px solid #666;
 }
-.swnmodular.sheet.actor .encumbrance .arrow-down {
+.swnpretty.sheet.actor .encumbrance .arrow-down {
   top: 0;
   width: 0;
   height: 0;
@@ -1113,73 +1113,73 @@
   border-right: 4px solid transparent;
   border-top: 4px solid #666;
 }
-.swnmodular.sheet.actor .encumbrance.encumbered .arrow-up {
+.swnpretty.sheet.actor .encumbrance.encumbered .arrow-up {
   border-bottom: 4px solid #000;
 }
-.swnmodular.sheet.actor .encumbrance.encumbered .arrow-down {
+.swnpretty.sheet.actor .encumbrance.encumbered .arrow-down {
   border-top: 4px solid #000;
 }
-.swnmodular.sheet.actor .effort-box{
+.swnpretty.sheet.actor .effort-box{
   max-width: 20px;
   padding: 0;
   margin: 0;
 }
-/*.swnmodular.sheet.actor .strain-box{*/
+/*.swnpretty.sheet.actor .strain-box{*/
 /*  max-width: 15px;*/
 /*}*/
-.swnmodular.sheet.actor .spellcasting-ability {
+.swnpretty.sheet.actor .spellcasting-ability {
   flex: 0 0 240px;
   margin: 0;
   min-width: 260px;
 
 }
-.swnmodular.sheet.actor .spellcasting-ability label,
-.swnmodular.sheet.actor .spellcasting-ability span {
+.swnpretty.sheet.actor .spellcasting-ability label,
+.swnpretty.sheet.actor .spellcasting-ability span {
   flex: none;
 }
-.swnmodular.sheet.actor .spellcasting-ability input {
+.swnpretty.sheet.actor .spellcasting-ability input {
   flex: 0 0 28px;
   text-align: center;
 }
-.swnmodular.sheet.actor .spellcasting-ability select {
+.swnpretty.sheet.actor .spellcasting-ability select {
   margin: 0 5px;
   flex: 0 0 120px;
 }
-.swnmodular.sheet.actor .spell-slots,
-.swnmodular.sheet.actor .spell-comps {
+.swnpretty.sheet.actor .spell-slots,
+.swnpretty.sheet.actor .spell-comps {
   flex: none;
   padding: 0 5px;
   font-size: 12px;
   color: #7a7971;
   border-right: 1px solid #c9c7b8;
 }
-.swnmodular.sheet.actor .spell-slots input {
+.swnpretty.sheet.actor .spell-slots input {
   display: inline;
   max-width: 20px;
 }
-.swnmodular.sheet.actor .spell-slots .sep {
+.swnpretty.sheet.actor .spell-slots .sep {
   font-size: 13px;
   font-weight: normal;
 }
-.swnmodular.sheet.actor .spellbook .spell-uses {
+.swnpretty.sheet.actor .spellbook .spell-uses {
   padding-right: 5px;
   text-align: right;
   color: #7a7971;
 }
-.swnmodular.sheet.actor .spell-school,
-.swnmodular.sheet.actor .spell-action,
-.swnmodular.sheet.actor .spell-target {
+.swnpretty.sheet.actor .spell-school,
+.swnpretty.sheet.actor .spell-action,
+.swnpretty.sheet.actor .spell-target {
   flex: 0 0 100px;
   font-size: 12px;
   color: #7a7971;
   text-align: center;
   border-right: 1px solid #c9c7b8;
 }
-.swnmodular.sheet.actor .spell-component {
+.swnpretty.sheet.actor .spell-component {
   line-height: 14px;
 }
-.swnmodular.sheet.actor .spell-component.C,
-.swnmodular.sheet.actor .spell-component.R {
+.swnpretty.sheet.actor .spell-component.C,
+.swnpretty.sheet.actor .spell-component.R {
   display: inline-block;
   text-align: center;
   padding-top: 1px;
@@ -1189,10 +1189,10 @@
   border: 1px solid transparent;
   border-radius: 8px;
 }
-.swnmodular.sheet.actor .spellbook-empty .item-controls {
+.swnpretty.sheet.actor .spellbook-empty .item-controls {
   flex: 1;
 }
-.swnmodular.sheet.actor .editor {
+.swnpretty.sheet.actor .editor {
   padding: 0 8px;
 }
 #actor-flags .window-content {
@@ -1208,7 +1208,7 @@
   overflow-y: auto;
   scrollbar-width: thin;
 }
-.swnmodular.sheet.item {
+.swnpretty.sheet.item {
   min-height: 400px;
   max-height: 95%;
   min-width: 480px;
@@ -1228,10 +1228,10 @@
   /*  Loot Sheet (No Tabs)                     */
   /* ----------------------------------------- */
 }
-.swnmodular.sheet.item .sheet-header img.profile {
+.swnpretty.sheet.item .sheet-header img.profile {
   border: 2px solid #000;
 }
-.swnmodular.sheet.item .sheet-header .item-subtitle {
+.swnpretty.sheet.item .sheet-header .item-subtitle {
   flex: 0 0 100px;
   height: 60px;
   margin: 0;
@@ -1239,61 +1239,61 @@
   text-align: right;
   color: #7a7971;
 }
-.swnmodular.sheet.item .sheet-header .item-subtitle .item-type {
+.swnpretty.sheet.item .sheet-header .item-subtitle .item-type {
   font-size: 24px;
   line-height: 26px;
   margin: 0;
 }
-.swnmodular.sheet.item .sheet-header .item-subtitle .item-status {
+.swnpretty.sheet.item .sheet-header .item-subtitle .item-status {
   font-size: 16px;
   line-height: 24px;
 }
-.swnmodular.sheet.item .sheet-navigation {
+.swnpretty.sheet.item .sheet-navigation {
   margin-bottom: 5px;
 }
-.swnmodular.sheet.item .sheet-navigation .item {
+.swnpretty.sheet.item .sheet-navigation .item {
   font-size: 18px;
 }
-.swnmodular.sheet.item .sheet-body {
+.swnpretty.sheet.item .sheet-body {
   overflow: hidden;
 }
-.swnmodular.sheet.item .sheet-body .tab {
+.swnpretty.sheet.item .sheet-body .tab {
   padding: 0 5px;
   overflow: hidden auto;
 }
-.swnmodular.sheet.item .sheet-body .item-properties {
+.swnpretty.sheet.item .sheet-body .item-properties {
   flex: 0 0 120px;
   margin: 5px 5px 5px 0;
   padding-right: 5px;
   border-right: 2px groove #eeede0;
 }
-.swnmodular.sheet.item .sheet-body .item-properties .item-location{
+.swnpretty.sheet.item .sheet-body .item-properties .item-location{
   text-align: center;
 }
-.swnmodular.sheet.item .sheet-body .item-properties .form-group {
+.swnpretty.sheet.item .sheet-body .item-properties .form-group {
   margin: 0;
 }
-.swnmodular.sheet.item .sheet-body .item-properties .form-group label {
+.swnpretty.sheet.item .sheet-body .item-properties .form-group label {
   line-height: 20px;
 }
-.swnmodular.sheet.item .sheet-body .item-properties .form-group input {
+.swnpretty.sheet.item .sheet-body .item-properties .form-group input {
   text-align: right;
 }
-.swnmodular.sheet.item .sheet-body .form-group .mag input {
+.swnpretty.sheet.item .sheet-body .form-group .mag input {
   min-width: 0px;
   max-width: 57%;
 }
-.swnmodular.sheet.item .sheet-body .form-group .mag{
+.swnpretty.sheet.item .sheet-body .form-group .mag{
   /*This controls the mag size text box. It grows slightly more than the others, and is annoying. But I don't see how to change it. -lofty*/
   justify-content: flex-end;
   margin-right: 0;
 }
-.swnmodular.sheet.item .sheet-body .item-properties .properties-list {
+.swnpretty.sheet.item .sheet-body .item-properties .properties-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.swnmodular.sheet.item .sheet-body .item-properties .properties-list li {
+.swnpretty.sheet.item .sheet-body .item-properties .properties-list li {
   margin: 3px 0;
   padding: 0 2px;
   background: rgba(0, 0, 0, 0.05);
@@ -1302,81 +1302,81 @@
   font-size: 12px;
   line-height: 18px;
 }
-.swnmodular.sheet.item .details input[type="text"],
-.swnmodular.sheet.item .details input[type="number"],
-.swnmodular.sheet.item .details select {
+.swnpretty.sheet.item .details input[type="text"],
+.swnpretty.sheet.item .details input[type="number"],
+.swnpretty.sheet.item .details select {
   height: 24px;
   border: 1px solid #7a7971;
   background: rgba(0, 0, 0, 0.05);
 }
-.swnmodular.sheet.item .details .form-group span {
+.swnpretty.sheet.item .details .form-group span {
   text-align: center;
   line-height: 24px;
 }
-.swnmodular.sheet.item .details .form-group.input-select select {
+.swnpretty.sheet.item .details .form-group.input-select select {
   flex: 1.8;
 }
-.swnmodular.sheet.item .details .form-group.input-select-select select {
+.swnpretty.sheet.item .details .form-group.input-select-select select {
   flex: 1.5;
 }
-.swnmodular.sheet.item .details .form-group.uses-per .form-fields {
+.swnpretty.sheet.item .details .form-group.uses-per .form-fields {
   flex-wrap: nowrap;
 }
-.swnmodular.sheet.item .details .form-group.uses-per input {
+.swnpretty.sheet.item .details .form-group.uses-per input {
   flex: 0 0 32px;
 }
-.swnmodular.sheet.item .details .form-group.uses-per span {
+.swnpretty.sheet.item .details .form-group.uses-per span {
   flex: 0 0 16px;
   margin: 0 4px 0 0;
 }
-.swnmodular.sheet.item .details span.sep {
+.swnpretty.sheet.item .details span.sep {
   flex: 0 0 8px;
 }
-.swnmodular.sheet.item .details .prepared {
+.swnpretty.sheet.item .details .prepared {
   flex: 1.3 !important;
   text-align: right;
   padding-right: 10px;
 }
-.swnmodular.sheet.item .details .spell-materials {
+.swnpretty.sheet.item .details .spell-materials {
   flex: 0 0 100%;
   margin: 0.25em 0;
   justify-content: flex-end;
 }
-.swnmodular.sheet.item .details .spell-materials label {
+.swnpretty.sheet.item .details .spell-materials label {
   flex: 0 0 64px;
   text-align: right;
   margin-right: 5px;
   font-size: 12px;
   line-height: 24px;
 }
-.swnmodular.sheet.item .details .spell-materials input[type="text"] {
+.swnpretty.sheet.item .details .spell-materials input[type="text"] {
   flex: 0 0 48px;
   margin-right: 10px;
 }
-.swnmodular.sheet.item h4.damage-header {
+.swnpretty.sheet.item h4.damage-header {
   margin: 0;
   padding: 0;
   font-weight: bold;
   line-height: 24px;
   color: #4b4a44;
 }
-.swnmodular.sheet.item .damage-parts {
+.swnpretty.sheet.item .damage-parts {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.swnmodular.sheet.item .damage-parts .damage-part {
+.swnpretty.sheet.item .damage-parts .damage-part {
   flex: 0 0 100%;
   padding: 0;
 }
-.swnmodular.sheet.item .damage-parts .damage-part input {
+.swnpretty.sheet.item .damage-parts .damage-part input {
   flex: 3;
 }
-.swnmodular.sheet.item .damage-parts .damage-part select {
+.swnpretty.sheet.item .damage-parts .damage-part select {
   margin-left: 5px;
   flex: 1;
 }
-.swnmodular.sheet.item .damage-control {
+.swnpretty.sheet.item .damage-control {
   width: 18px;
   flex: 0 0 18px;
   line-height: 24px;
@@ -1384,45 +1384,45 @@
   text-align: right;
   color: #7a7971;
 }
-.swnmodular.sheet.item .recharge.form-group span {
+.swnpretty.sheet.item .recharge.form-group span {
   text-align: right;
   padding-right: 3px;
 }
-.swnmodular.sheet.item .recharge.form-group input[type="text"] {
+.swnpretty.sheet.item .recharge.form-group input[type="text"] {
   flex: 0 0 32px;
   text-align: center;
 }
-.swnmodular.sheet.item .recharge.form-group label.checkbox {
+.swnpretty.sheet.item .recharge.form-group label.checkbox {
   flex: none;
 }
-.swnmodular.sheet.item .recharge.form-group label.checkbox input {
+.swnpretty.sheet.item .recharge.form-group label.checkbox input {
   width: 16px;
   height: 16px;
   top: 4px;
 }
-.swnmodular.sheet.item .weapon-properties label.checkbox {
+.swnpretty.sheet.item .weapon-properties label.checkbox {
   flex: 0 0 98px;
 }
-.swnmodular.sheet.item .loot-header {
+.swnpretty.sheet.item .loot-header {
   margin-bottom: 10px;
 }
 /* ----------------------------------------- */
 /*  Chat Cards
 /* ----------------------------------------- */
-.swnmodular.chat-card {
+.swnpretty.chat-card {
   font-style: normal;
   font-size: 12px;
 }
-.swnmodular.chat-card .card-header {
+.swnpretty.chat-card .card-header {
   padding: 3px 0;
   border-top: 2px groove #FFF;
   border-bottom: 2px groove #FFF;
 }
-.swnmodular.chat-card .card-header img {
+.swnpretty.chat-card .card-header img {
   flex: 0 0 36px;
   margin-right: 5px;
 }
-.swnmodular.chat-card .card-header h3 {
+.swnpretty.chat-card .card-header h3 {
   flex: 1;
   margin: 0;
   line-height: 36px;
@@ -1431,49 +1431,49 @@
   font-weight: 700;
   color: #4b4a44;
 }
-.swnmodular.chat-card .card-header h3:hover {
+.swnpretty.chat-card .card-header h3:hover {
   color: #111;
   text-shadow: 0 0 10px #2301a3;
 }
-.swnmodular.chat-card .card-content {
+.swnpretty.chat-card .card-content {
   margin: 5px 0;
 }
-.swnmodular.chat-card .card-content h3 {
+.swnpretty.chat-card .card-content h3 {
   font-size: 12px;
   margin: 0;
   font-weight: bold;
 }
-.swnmodular.chat-card .card-content > * {
+.swnpretty.chat-card .card-content > * {
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
 }
-.swnmodular.chat-card .card-buttons {
+.swnpretty.chat-card .card-buttons {
   margin: 5px 0;
 }
-.swnmodular.chat-card .card-buttons span {
+.swnpretty.chat-card .card-buttons span {
   display: block;
   line-height: 28px;
   text-align: center;
   border: 1px solid #CCC;
 }
-.swnmodular.chat-card .card-buttons button {
+.swnpretty.chat-card .card-buttons button {
   font-size: 12px;
   height: 24px;
   line-height: 20px;
   margin: 2px 0;
 }
-.swnmodular.chat-card .card-footer {
+.swnpretty.chat-card .card-footer {
   padding: 3px 0 0;
   border-top: 2px groove #FFF;
 }
-.swnmodular.chat-card .card-footer span {
+.swnpretty.chat-card .card-footer span {
   border-right: 2px groove #FFF;
   padding: 0 3px 0 0;
   font-size: 10px;
 }
-.swnmodular.chat-card .card-footer span:last-child {
+.swnpretty.chat-card .card-footer span:last-child {
   border-right: none;
   padding-right: 0;
 }
@@ -1496,7 +1496,7 @@
 /* ----------------------------------------- */
 /*  Basic Structure                          */
 /* ----------------------------------------- */
-.swnmodular.sheet.actor.character {
+.swnpretty.sheet.actor.character {
   min-width: 720px;
   min-height: 680px;
   /* ----------------------------------------- */
@@ -1512,12 +1512,12 @@
   /*  Biography                                */
   /* ----------------------------------------- */
 }
-.swnmodular.sheet.actor.character .sheet-header img.profile {
+.swnpretty.sheet.actor.character .sheet-header img.profile {
   flex: 0 0 160px;
   max-width: 160px;
   height: 160px;
 }
-.swnmodular.sheet.actor.character .sheet-header .feedback{
+.swnpretty.sheet.actor.character .sheet-header .feedback{
   position: relative;
   text-align: left;
   font-size: 12px;
@@ -1535,32 +1535,32 @@
   /*background-color: #435fd7;*/
   /*left: 300px;*/
 }
-/*.swnmodular.sheet.actor.character .sheet-header .feedback:hover{*/
+/*.swnpretty.sheet.actor.character .sheet-header .feedback:hover{*/
 /*  color: #2a2a26;*/
 /*  text-shadow: rgba(62, 32, 155, 0.45); !important*/
 /*}*/
-.swnmodular.sheet.actor.character .sheet-header .charlevel {
+.swnpretty.sheet.actor.character .sheet-header .charlevel {
   flex: 0 0 20px;
   height: 20px;
   font-size: 18px;
   color: #7a7971;
   white-space: nowrap;
 }
-.swnmodular.sheet.actor.character .sheet-header .charlevel .levelInput{
+.swnpretty.sheet.actor.character .sheet-header .charlevel .levelInput{
   width: 10px;
 }
-.swnmodular.sheet.actor.character .sheet-header .experience {
+.swnpretty.sheet.actor.character .sheet-header .experience {
   flex: 0 0 32px;
   margin-bottom: -5px;
   align-items: center;
   font-size: 18px;
 }
-.swnmodular.sheet.actor.character .sheet-header .experience span.max {
+.swnpretty.sheet.actor.character .sheet-header .experience span.max {
   color: #7a7971;
   flex: none;
   margin-left: 3px;
 }
-.swnmodular.sheet.actor.character .sheet-header .xpbar {
+.swnpretty.sheet.actor.character .sheet-header .xpbar {
   flex: 0 0 8px;
   width: 100%;
   margin-bottom: 5px;
@@ -1568,7 +1568,7 @@
   border: 1px solid #000;
   border-radius: 3px;
 }
-.swnmodular.sheet.actor.character .sheet-header .xpbar .bar {
+.swnpretty.sheet.actor.character .sheet-header .xpbar .bar {
   height: 4px;
   margin: 1px;
   display: block;
@@ -1576,33 +1576,33 @@
   border: 1px solid #000;
   border-radius: 2px;
 }
-.swnmodular.sheet.actor.character .sheet-header .attributes .hit-dice {
+.swnpretty.sheet.actor.character .sheet-header .attributes .hit-dice {
   font-size: 24px;
 }
 
-.swnmodular.sheet.actor.character .sheet-header .attributes .initiative{
+.swnpretty.sheet.actor.character .sheet-header .attributes .initiative{
   border-right: 2px groove #eeede0;
 }
-.swnmodular.sheet.actor.character .sheet-header .attributes .health{
+.swnpretty.sheet.actor.character .sheet-header .attributes .health{
   border-left: 2px groove #eeede0;
 }
-.swnmodular.sheet.actor.character .resource .attribute-value input {
+.swnpretty.sheet.actor.character .resource .attribute-value input {
   flex: 0 0 25%;
 }
-.swnmodular.sheet.actor.character .sheet-header .currency{
+.swnpretty.sheet.actor.character .sheet-header .currency{
   /*background-color: #56bd6c;*/
   /*min-width: 0;*/
   /*max-width: 100px;*/
   /*position: relative;*/
 }
 
-.swnmodular.sheet.actor.character .sheet-header .currencylist{
+.swnpretty.sheet.actor.character .sheet-header .currencylist{
   /*background-color: #56bd6c;*/
   min-width: 0px;
   max-width: 150px;
   border-right: none;
 }
-.swnmodular.sheet.actor.character .sheet-header .currencyimage{
+.swnpretty.sheet.actor.character .sheet-header .currencyimage{
   min-width: 0px;
   max-width: 27px;
   padding-left: 1px;
@@ -1610,11 +1610,11 @@
   border-left: none;
   line-height: 150%;
 }
-.swnmodular.sheet.actor.character .custom-resource{
+.swnpretty.sheet.actor.character .custom-resource{
   flex: 0 0 25%;
   height: 21px;
 }
-.swnmodular.sheet.actor.character .custom-resource input{
+.swnpretty.sheet.actor.character .custom-resource input{
   height: 18px;
   line-height: 16px;
   margin: 4px 8px 2px;
@@ -1627,58 +1627,58 @@
   max-width: 130px;
 }
 /*This is me making custom resource VALUES format to match everything else -Lofty*/
-.swnmodular.sheet.actor.character .custom-value{
+.swnpretty.sheet.actor.character .custom-value{
   height: 20px;
   line-height: 20px;
   padding-top: 0;
   margin-top: -5px;
   /*background-color: #6e0000;*/
 }
-.swnmodular.sheet.actor.character ul.skills-list {
+.swnpretty.sheet.actor.character ul.skills-list {
   flex: 0 0 212px;
 }
-.swnmodular.sheet.actor.character ul.skills-list li.skill {
+.swnpretty.sheet.actor.character ul.skills-list li.skill {
   padding: 3px;
 }
-.swnmodular.sheet.actor.character ul.skills-list li.skill h4 {
+.swnpretty.sheet.actor.character ul.skills-list li.skill h4 {
   flex: 1px;
   margin: 0;
   font-size: 13px;
 }
-.swnmodular.sheet.actor.character .item-detail.player-class {
+.swnpretty.sheet.actor.character .item-detail.player-class {
   flex: 0 0 180px;
   text-align: right;
   padding-right: 10px;
 }
-.swnmodular.sheet.actor.character .inventory .item-controls,
-.swnmodular.sheet.actor.character .spellbook .item-controls {
+.swnpretty.sheet.actor.character .inventory .item-controls,
+.swnpretty.sheet.actor.character .spellbook .item-controls {
   flex: 0 0 68px;
   /*background-color: rgba(0, 108, 0, 0.44);*/
   text-shadow: #435fd7;
 }
-.swnmodular.sheet.actor.character .inventory .item-controls .item-toggle,
-.swnmodular.sheet.actor.character .spellbook .item-controls .item-toggle {
+.swnpretty.sheet.actor.character .inventory .item-controls .item-toggle,
+.swnpretty.sheet.actor.character .spellbook .item-controls .item-toggle {
   color: #b5b3a4;
 }
-.swnmodular.sheet.actor.character .inventory .item-controls .item-toggle.active,
-.swnmodular.sheet.actor.character .spellbook .item-controls .item-toggle.active {
+.swnpretty.sheet.actor.character .inventory .item-controls .item-toggle.active,
+.swnpretty.sheet.actor.character .spellbook .item-controls .item-toggle.active {
   color: #4b4a44;
 }
-.swnmodular.sheet.actor.character .inventory .item-controls .item-toggle.fixed,
-.swnmodular.sheet.actor.character .spellbook .item-controls .item-toggle.fixed {
+.swnpretty.sheet.actor.character .inventory .item-controls .item-toggle.fixed,
+.swnpretty.sheet.actor.character .spellbook .item-controls .item-toggle.fixed {
   color: #193844;
 }
-.swnmodular.sheet.actor.character .inventory .item-controls .item-toggle.fixed:hover,
-.swnmodular.sheet.actor.character .spellbook .item-controls .item-toggle.fixed:hover {
+.swnpretty.sheet.actor.character .inventory .item-controls .item-toggle.fixed:hover,
+.swnpretty.sheet.actor.character .spellbook .item-controls .item-toggle.fixed:hover {
   text-shadow: none;
   /*background-color: #006c00;*/
 }
-.swnmodular.sheet.actor.character .characteristics {
+.swnpretty.sheet.actor.character .characteristics {
   flex: 0 0 180px;
   height: 100%;
   padding: 0 3px 3px;
 }
-.swnmodular.sheet.actor.character .characteristics label {
+.swnpretty.sheet.actor.character .characteristics label {
   flex: 0 0 20px;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
@@ -1688,62 +1688,62 @@
   line-height: 20px;
   text-align: center;
 }
-.swnmodular.sheet.actor.character .characteristics textarea {
+.swnpretty.sheet.actor.character .characteristics textarea {
   font-family: "Signika", serif;
   font-size: 13px;
   border: 1px solid #c9c7b8;
   resize: none;
 }
-.swnmodular.sheet.actor.character .biography {
+.swnpretty.sheet.actor.character .biography {
   max-width: calc(100% - 180px);
 }
 /* ----------------------------------------- */
 /*  Basic Structure                          */
 /* ----------------------------------------- */
-.swnmodular.sheet.actor.npc {
+.swnpretty.sheet.actor.npc {
   min-width: 600px;
   min-height: 680px;
 }
-.swnmodular.sheet.actor.npc .header-exp {
+.swnpretty.sheet.actor.npc .header-exp {
   flex: 0 0 80px;
   justify-content: center;
 }
-.swnmodular.sheet.actor.npc .header-exp .cr {
+.swnpretty.sheet.actor.npc .header-exp .cr {
   flex: 0 0 32px;
   line-height: 28px;
   margin-bottom: -5px;
   font-size: 24px;
 }
-.swnmodular.sheet.actor.npc .header-exp .cr input {
+.swnpretty.sheet.actor.npc .header-exp .cr input {
   width: 32px;
   padding: 0;
   text-align: center;
 }
-.swnmodular.sheet.actor.npc .header-exp .experience {
+.swnpretty.sheet.actor.npc .header-exp .experience {
   flex: 0 0 18px;
   color: #7a7971;
   font-size: 16px;
 }
-.swnmodular.sheet.actor.npc .summary {
+.swnpretty.sheet.actor.npc .summary {
   font-size: 18px;
 }
-.swnmodular.sheet.actor.vehicle .features .item-controls {
+.swnpretty.sheet.actor.vehicle .features .item-controls {
   flex: 0 0 68px;
 }
-.swnmodular.sheet.actor.vehicle .features .item-controls .item-toggle {
+.swnpretty.sheet.actor.vehicle .features .item-controls .item-toggle {
   color: #b5b3a4;
 }
-.swnmodular.sheet.actor.vehicle .features .item-controls .item-toggle.active {
+.swnpretty.sheet.actor.vehicle .features .item-controls .item-toggle.active {
   color: #4b4a44;
 }
-.swnmodular.sheet.actor.vehicle .counters .counter.creature-cap .counter-value {
+.swnpretty.sheet.actor.vehicle .counters .counter.creature-cap .counter-value {
   flex: 1;
 }
-.swnmodular.sheet.actor.vehicle .counters .counter.creature-cap input {
+.swnpretty.sheet.actor.vehicle .counters .counter.creature-cap input {
   max-width: none;
   text-align: right;
 }
-.swnmodular.sheet.actor.vehicle .counters .counter.cargo-cap input {
+.swnpretty.sheet.actor.vehicle .counters .counter.cargo-cap input {
   max-width: 40px;
   text-align: right;
 }

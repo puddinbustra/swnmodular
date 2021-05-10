@@ -26,8 +26,8 @@ export default class ShortRestDialog extends Dialog {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-	    template: "systems/swnmodular/templates/apps/short-rest.html",
-      classes: ["swnmodular", "dialog"]
+	    template: "systems/swnpretty/templates/apps/short-rest.html",
+      classes: ["swnpretty", "dialog"]
     });
   }
 
@@ -51,7 +51,7 @@ export default class ShortRestDialog extends Dialog {
     data.denomination = this._denom;
 
     // Determine rest type
-    const variant = game.settings.get("swnmodular", "restVariant");
+    const variant = game.settings.get("swnpretty", "restVariant");
     data.promptNewDay = variant !== "epic";     // It's never a new day when only resting 1 minute
     data.newDay = false;                        // It may be a new day, but not by default
     return data;
@@ -100,7 +100,7 @@ export default class ShortRestDialog extends Dialog {
             label: "Rest",
             callback: html => {
               let newDay = false;
-              if (game.settings.get("swnmodular", "restVariant") === "gritty")
+              if (game.settings.get("swnpretty", "restVariant") === "gritty")
                 newDay = html.find('input[name="newDay"]')[0].checked;
               resolve(newDay);
             }

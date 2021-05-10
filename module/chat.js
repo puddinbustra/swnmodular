@@ -40,7 +40,7 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
  * Optionally hide the display of chat card action buttons which cannot be performed by the user
  */
 export const displayChatActionButtons = function(message, html, data) {
-  const chatCard = html.find(".swnmodular.chat-card");
+  const chatCard = html.find(".swnpretty.chat-card");
   if ( chatCard.length > 0 ) {
     const flavor = html.find(".flavor-text");
     if ( flavor.text() === html.find(".item-name").text() ) flavor.remove();
@@ -77,25 +77,25 @@ export const addChatMessageContextOptions = function(html, options) {
   };
   options.push(
     {
-      name: game.i18n.localize("SWNMODULAR.ChatContextDamage"),
+      name: game.i18n.localize("SWNPRETTY.ChatContextDamage"),
       icon: '<i class="fas fa-user-minus"></i>',
       condition: canApply,
       callback: li => applyChatCardDamage(li, 1)
     },
     {
-      name: game.i18n.localize("SWNMODULAR.ChatContextHealing"),
+      name: game.i18n.localize("SWNPRETTY.ChatContextHealing"),
       icon: '<i class="fas fa-user-plus"></i>',
       condition: canApply,
       callback: li => applyChatCardDamage(li, -1)
     },
     {
-      name: game.i18n.localize("SWNMODULAR.ChatContextDoubleDamage"),
+      name: game.i18n.localize("SWNPRETTY.ChatContextDoubleDamage"),
       icon: '<i class="fas fa-user-injured"></i>',
       condition: canApply,
       callback: li => applyChatCardDamage(li, 2)
     },
     {
-      name: game.i18n.localize("SWNMODULAR.ChatContextHalfDamage"),
+      name: game.i18n.localize("SWNPRETTY.ChatContextHalfDamage"),
       icon: '<i class="fas fa-user-shield"></i>',
       condition: canApply,
       callback: li => applyChatCardDamage(li, 0.5)
