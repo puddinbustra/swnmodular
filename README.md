@@ -8,6 +8,10 @@ If you have any other feedback, be it suggestions or support, send me a message 
 # Support
 [Buy me a coffee ☕](https://www.buymeacoffee.com/lofty)
 
+# About
+
+This sheet is for Stars Without Number: Revised edition. 
+This sheet has originally been made for personal use. As such, a couple things - like certain item qualities (like tech level) are not included. Though, these can be included in the item description (If there is demand, I may change these to suit more people). 
 
 # Why This Sheet?
 
