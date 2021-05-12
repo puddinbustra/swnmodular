@@ -7,54 +7,8 @@
             <h1 class="charname">
                 <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'SWNPRETTY.Name' }}"/>
             </h1>
-<!--            <aside class="header-exp flexcol">-->
-<!--                <a class = "feedback" href = "https://github.com/puddinbustra/swnpretty">Sheet Feedback?</a>-->
-<!--                <div class="charlevel" title="{{multiclassLabels}}">-->
-<!--                    <label> {{ localize "SWNPRETTY.Level" }} </label>-->
-<!--                    <input class = "levelInput" name = "data.attributes.level.value" type = "number" value = "{{data.attributes.level.value}}" placeholder="0" data-dtype="Number"/>-->
-<!--                    <span class="levels">{{classLabels}}</span>-->
-<!--                </div>-->
-
-<!--                {{#unless disableExperience}}-->
-<!--                <div class="experience flexrow">-->
-<!--                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}" placeholder="0" data-dtype="Number"/>-->
-<!--                    <span class="sep">/</span>-->
-<!--                    <span class="max">{{data.details.xp.max}}</span>-->
-<!--                </div>-->
-<!--                <div class="xpbar">-->
-<!--                    <span class="bar" style="width: {{data.details.xp.pct}}%"></span>-->
-<!--                </div>-->
-<!--                {{/unless}}-->
-<!--            </aside>-->
 
             {{!-- Header Attributes --}}
-
-            {{!-- Character Summary --}}
-            <ul class="summary flexrow header-boxes">
-                <li>
-                    <span> Att Bonus: &nbsp </span>
-                    <input type="text" name="data.attackBonus" value="{{data.attackBonus}}"/>
-                </li>
-                <li>
-                    <span> # of Att: &nbsp </span>
-                    <input type="text" name="data.attributes.attacks" value="{{data.attributes.attacks}}" placeholder=1/>
-                </li>
-                <li>
-                    <span> Dam Bonus: &nbsp </span>
-                    <input type="text" name="data.damageBonus" value="{{data.damageBonus}}"/>
-                </li>
-                <li>
-                    <select name="data.attitude.type">
-                        {{#select data.attitude.type}}
-                        {{#each config.attitudes as |name type|}}
-                            <option value="{{type}}">{{localize name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </li>
-            </ul>
-
-
             <ul class="attributes flexrow">
                 <li class="attribute health no-sub">
                     <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.HitPoints" }}</h4>
@@ -67,19 +21,16 @@
 
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.HitDice" }}</h4>
-                    <div class="attribute-value multiple no-sub">
-                        <input name="data.npcHitDice" class="hit-dice" type="text" value="{{data.npcHitDice}}"/>
+                    <div class="attribute-value no-sub">
+                        <input name="data.npcHitDice" class="hit-dice" type="text" value="{{data.npcHitDice}}" placeholder="1"/>
                     </div>
                 </li>
 
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.ArmorClass" }}</h4>
-                    <div class="attribute-value">
+                    <div class="attribute-value no-sub">
                         <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
                     </div>
-                    <footer class="attribute-footer">
-                        <span class="spell-dc">{{localize "SWNPRETTY.BaseAC"}}: {{data.attributes.base}}</span>
-                    </footer>
                 </li>
 
                 <li class="attribute movement">
@@ -100,6 +51,34 @@
                     <div class="attribute-value no-sub">
                         <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
                     </div>
+                </li>
+            </ul>
+
+            {{!-- Character Summary --}}
+            <ul class="summary flexrow header-boxes">
+                <li>
+                    <label> Att Bonus: &nbsp
+                        <input type="text" name="data.attackBonus" value="{{data.attackBonus}}" id="attbonus" placeholder="0"/>
+                    </label>
+                </li>
+                <li>
+                    <label> # of Att: &nbsp
+                        <input type="text" name="data.attributes.attacks" value="{{data.attributes.attacks}}" placeholder=1 />
+                    </label>
+                </li>
+                <li>
+                    <label> Dam Bonus: &nbsp
+                        <input type="text" name="data.damageBonus" value="{{data.damageBonus}}" placeholder="0"/>
+                    </label>
+                </li>
+                <li>
+                    <select name="data.attitude.type" class="attitude">
+                        {{#select data.attitude.type}}
+                        {{#each config.attitudes as |name type|}}
+                          <option value="{{type}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
                 </li>
             </ul>
 
@@ -197,6 +176,7 @@
                             </div>
                         </li>
                     </div>
+                    <div>
                         <li class="attribute resource">
                             <h4 class="attribute-name box-title"> {{localize "SWNPRETTY.Effort"}} </h4>
                             <div class="attribute-value">
@@ -207,9 +187,10 @@
                                        value="{{data.attributes.effort.max}}" data-dtype="Number" placeholder= "0"/>
                             </div>
                         </li>
+                    </div>
                 </ul>
-                <label> More Info </label>
-                <textarea name="data.details.other">{{data.details.other}}</textarea>
+<!--                <label> More Info </label>-->
+                <textarea name="data.details.other" placeholder="Notes" class="npc-text-area">{{data.details.other}}</textarea>
             </section>
         </div>
 
@@ -218,7 +199,7 @@
             {{> "systems/swnpretty/templates/actors/parts/actor-features.html" sections=features}}
         </div>
 
-        {{!-- Spellbook Tab --}}
+        {{!-- Psionics Tab --}}
         <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
             {{> "systems/swnpretty/templates/actors/parts/actor-spellbook.html"}}
         </div>
@@ -244,9 +225,10 @@
             <div class="biography">
                 {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
             </div>
+            <!--        <div class="tab biography flexcol" data-group="primary" data-tab="biography">-->
+            <!--            {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}-->
+            <!--        </div>-->
         </div>
-<!--        <div class="tab biography flexcol" data-group="primary" data-tab="biography">-->
-<!--            {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}-->
-<!--        </div>-->
+
     </section>
 </form>

@@ -51,6 +51,7 @@
           "movement": {
             "burrow": 0,
             "climb": 0,
+            "drive": 0,
             "fly": 0,
             "swim": 0,
             "walk": 30,

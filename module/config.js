@@ -322,6 +322,7 @@ SWNPRETTY.damageResistanceTypes = mergeObject(duplicate(SWNPRETTY.damageTypes), 
 SWNPRETTY.movementTypes = {
   "burrow": "SWNPRETTY.MovementBurrow",
   "climb": "SWNPRETTY.MovementClimb",
+  "drive": "SWNPRETTY.MovementDrive",
   "fly": "SWNPRETTY.MovementFly",
   "swim": "SWNPRETTY.MovementSwim",
   "walk": "SWNPRETTY.MovementWalk",

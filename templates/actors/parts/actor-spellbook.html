@@ -1,34 +1,38 @@
 <div class="inventory-filters spellbook-filters flexrow">
     <div class="form-group spellcasting-ability">
-<!--        {{#unless isNPC}}-->
-        <label>{{localize "SWNPRETTY.Effort"}}: &nbsp; </label>
-        <div class="">
-            <input name="data.attributes.effort.value" type="text" class = "effort-box"
-                   value="{{data.attributes.effort.value}}" data-dtype="Number" placeholder= "0"/>
-<!--            <span> 0</span>-->
-            <span class="sep">/</span>
-            <input name="data.attributes.effort.max" type="text" class = "effort-box"
-                   value="{{data.attributes.effort.max}}" data-dtype="Number" placeholder= "0"/>
-<!--            <span> {{data.attributes.effort.max}} </span>-->
-        </div>
-<!--        Let's add the max effort and current effort, and duplicate the system strain values here for convenient manipulation -Lofty -->
+        {{#unless isVehicle}}
 
+            {{#if isCharacter}}
+            <label>{{localize "SWNPRETTY.Effort"}}: &nbsp; </label>
+            <div class="">
+                <input name="data.attributes.effort.value" type="text" class = "effort-box"
+                       value="{{data.attributes.effort.value}}" data-dtype="Number" placeholder= "0"/>
+    <!--            <span> 0</span>-->
+                <span class="sep">/</span>
+                <input name="data.attributes.effort.max" type="text" class = "effort-box"
+                       value="{{data.attributes.effort.max}}" data-dtype="Number" placeholder= "0"/>
+    <!--            <span> {{data.attributes.effort.max}} </span>-->
+            </div>
+            {{/if}}
 
+            {{#if isNPC}}
+                <label> {{localize "SWNPRETTY.Effort"}}: &nbsp; &nbsp; </label>
+                <div class="">
+                    <span> {{data.attributes.effort.value}}</span>
+                    <span class="sep"> &nbsp; /&nbsp; </span>
+                    <span> {{data.attributes.effort.max}} </span>
+                </div>
+            {{/if}}
 
         <label> {{localize "SWNPRETTY.Strain"}}: &nbsp; &nbsp; </label>
         <div class="">
             <span> {{data.attributes.strain.value}}</span>
-<!--            <input name="data.attributes.strain.value" type="text" class = "strain-box"-->
-<!--                   value="{{data.attributes.strain.value}}" data-dtype="Number" placeholder= "0"/>-->
             <span class="sep"> &nbsp; /&nbsp; </span>
             <span> {{data.abilities.con.value}} </span>
         </div>
 
-<!--        {{else}}-->
-<!--        <label>{{localize "SWNPRETTY.Level"}}</label>-->
-<!--        <input class="spellcasting-level" type="text" name="data.details.spellLevel"-->
-<!--               value="{{data.details.spellLevel}}" data-dtype="Number" placeholder="0"/>-->
-<!--        {{/unless}}-->
+        {{/unless}}
+
 <!--        <select name="data.attributes.spellcasting" data-type="String">-->
 <!--            {{#select data.attributes.spellcasting}}-->
 <!--            <option value="">{{localize "SWNPRETTY.None"}}</option>-->

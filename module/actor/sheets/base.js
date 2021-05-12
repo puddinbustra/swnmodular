@@ -132,6 +132,7 @@ export default class ActorSheet5e extends ActorSheet {
     let speeds = [
       [movement.burrow, `${game.i18n.localize("SWNPRETTY.MovementBurrow")} ${movement.burrow}`],
       [movement.climb, `${game.i18n.localize("SWNPRETTY.MovementClimb")} ${movement.climb}`],
+      [movement.drive, `${game.i18n.localize("SWNPRETTY.MovementDrive")} ${movement.drive}`],
       [movement.fly, `${game.i18n.localize("SWNPRETTY.MovementFly")} ${movement.fly}` + (movement.hover ? ` (${game.i18n.localize("SWNPRETTY.MovementHover")})` : "")],
       [movement.swim, `${game.i18n.localize("SWNPRETTY.MovementSwim")} ${movement.swim}`]
     ]
