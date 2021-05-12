@@ -1590,10 +1590,6 @@
   flex: 0 0 25%;
 }
 .swnpretty.sheet.actor.character .sheet-header .currency{
-  /*background-color: #56bd6c;*/
-  /*min-width: 0;*/
-  /*max-width: 100px;*/
-  /*position: relative;*/
 }
 
 .swnpretty.sheet.actor.character .sheet-header .currencylist{
@@ -1610,10 +1606,12 @@
   border-left: none;
   line-height: 150%;
 }
+.swnpretty.sheet.actor.npc .custom-resource,
 .swnpretty.sheet.actor.character .custom-resource{
   flex: 0 0 25%;
   height: 21px;
 }
+.swnpretty.sheet.actor.npc .custom-resource input,
 .swnpretty.sheet.actor.character .custom-resource input{
   height: 18px;
   line-height: 16px;

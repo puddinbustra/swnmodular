@@ -365,6 +365,7 @@
         "environment": "",
         "cr": 1,
         "spellLevel": 0,
+        "morale": 0,
         "xp": {
           "value": 10
         },

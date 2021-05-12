@@ -3,51 +3,65 @@
     {{!-- NPC Sheet Header --}}
     <header class="sheet-header flexrow">
         <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
-
         <section class="header-details flexrow">
             <h1 class="charname">
                 <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'SWNPRETTY.Name' }}"/>
             </h1>
+<!--            <aside class="header-exp flexcol">-->
+<!--                <a class = "feedback" href = "https://github.com/puddinbustra/swnpretty">Sheet Feedback?</a>-->
+<!--                <div class="charlevel" title="{{multiclassLabels}}">-->
+<!--                    <label> {{ localize "SWNPRETTY.Level" }} </label>-->
+<!--                    <input class = "levelInput" name = "data.attributes.level.value" type = "number" value = "{{data.attributes.level.value}}" placeholder="0" data-dtype="Number"/>-->
+<!--                    <span class="levels">{{classLabels}}</span>-->
+<!--                </div>-->
 
-            <aside class="header-exp flexcol">
-                <div class="cr">
-                    <label>{{ localize "SWNPRETTY.AbbreviationCR" }}</label>
-                    <input name="data.details.cr" type="text" value="{{labels.cr}}" placeholder="1"/>
-                </div>
-                <div class="experience">
-                    <span>{{data.details.xp.value}} XP</span>
-                </div>
-            </aside>
-
-            {{!-- Character Summary --}}
-            <ul class="summary flexrow">
-                <li>
-                    <span>{{lookup config.actorSizes data.traits.size}}</span>
-                </li>
-                <li>
-                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'SWNPRETTY.Alignment' }}"/>
-                </li>
-                <li>
-                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{ localize 'SWNPRETTY.Type' }}"/>
-                </li>
-                <li>
-                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{ localize 'SWNPRETTY.Source' }}"/>
-                </li>
-            </ul>
+<!--                {{#unless disableExperience}}-->
+<!--                <div class="experience flexrow">-->
+<!--                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}" placeholder="0" data-dtype="Number"/>-->
+<!--                    <span class="sep">/</span>-->
+<!--                    <span class="max">{{data.details.xp.max}}</span>-->
+<!--                </div>-->
+<!--                <div class="xpbar">-->
+<!--                    <span class="bar" style="width: {{data.details.xp.pct}}%"></span>-->
+<!--                </div>-->
+<!--                {{/unless}}-->
+<!--            </aside>-->
 
             {{!-- Header Attributes --}}
+
+<!--            {{!&#45;&#45; Character Summary &#45;&#45;}}-->
+<!--            <ul class="summary flexrow">-->
+<!--                <li>-->
+<!--                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNPRETTY.Background' }}"/>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <input type="text" name="data.details.focus" value="{{data.details.focus}}" placeholder="{{ localize 'SWNPRETTY.Focus' }}"/>-->
+<!--                </li>-->
+<!--                <li class="currencylist">-->
+<!--                    <input class = "currency" type="text" name="data.currency.credits" value="{{data.currency.credits}}"-->
+<!--                           placeholder="{{localize 'SWNPRETTY.CurrencyCredits'}}"/>-->
+<!--                </li>-->
+<!--                <li class = "currencyimage">-->
+<!--                    <i class="fas fa-coins" title = "Credits"></i>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+
             <ul class="attributes flexrow">
-               <li class="attribute health">
-                    <h4 class="attribute-name box-title rollable">{{ localize "SWNPRETTY.HitPoints" }}</h4>
-                    <div class="attribute-value multiple">
+                <li class="attribute health no-sub">
+                    <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.HitPoints" }}</h4>
+                    <div class="attribute-value multiple no-sub">
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10" data-dtype="Number"/>
                         <span class="sep"> / </span>
                         <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10" data-dtype="Number"/>
                     </div>
-                    <footer class="attribute-footer">
-                        <input name="data.attributes.hp.formula" class="hpformula" type="text" placeholder="{{ localize 'SWNPRETTY.HPFormula' }}"
-                               value="{{data.attributes.hp.formula}}"/>
-                    </footer>
+                </li>
+
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.HitDice" }}</h4>
+                    <div class="attribute-value multiple no-sub">
+                        <label class="hit-dice">{{data.attributes.level.value}} D6 + {{data.abilities.con.mod}}</span></label>
+                    </div>
                 </li>
 
                 <li class="attribute">
@@ -56,8 +70,7 @@
                         <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
                     </div>
                     <footer class="attribute-footer">
-                        <span>{{ localize "SWNPRETTY.Proficiency" }}</span>
-                        <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
+                        <span class="spell-dc">{{localize "SWNPRETTY.BaseAC"}}: {{data.attributes.base}}</span>
                     </footer>
                 </li>
 
@@ -73,7 +86,15 @@
                         <span>{{movement.special}}</span>
                     </footer>
                 </li>
+
+                <li class="attribute initiative">
+                    <h4 class="attribute-name box-title rollable" data-action="rollInitiative">{{ localize "SWNPRETTY.Initiative" }}</h4>
+                    <div class="attribute-value no-sub">
+                        <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
+                    </div>
+                </li>
             </ul>
+
         </section>
     </header>
 
@@ -92,66 +113,93 @@
 
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
-            {{#each data.abilities as |ability id|}}
-                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
+                {{#each data.abilities as |ability id|}}
+                <li class="ability" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
                     <div class="ability-modifiers flexrow">
-                        <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
-                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SWNPRETTY.Proficiency' }}">{{{ability.icon}}}</a>
-                        <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
+                        <span class="ability-mod" title="Modifier" id="att-mod">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                     </div>
                 </li>
-            {{/each}}
+                {{/each}}
             </ul>
 
             {{!-- Skills --}}
             <ul class="skills-list">
-            {{#each data.skills as |skill s|}}
-                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
-                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
-                    <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
+                {{#each data.skills as |skill s|}}
+                <li class="skill flexrow" data-skill="{{s}}">
                     <h4 class="skill-name rollable">{{skill.label}}</h4>
-                    <span class="skill-ability">{{skill.ability}}</span>
-                    <span class="skill-mod">{{numberFormat skill.total decimals=0 sign=true}}</span>
-                    <span class="skill-passive">({{skill.passive}})</span>
+                    <input class="skill-mod" name = "data.skills.{{s}}.value" value="{{skill.value}}"
+                           title = "Level" type="number" placeholder="0" />
+                    <input class="skill-other" name = "data.skills.{{s}}.prof" value="{{skill.prof}}"
+                           title = "Other" type="number" placeholder="-1" />
                 </li>
-            {{/each}}
+                {{/each}}
             </ul>
 
+<!--            Right side of the sheet-->
             <section class="center-pane flexcol">
-
-                {{!-- Legendary Actions --}}
-                <div class="counters">
-                    <div class="counter flexrow legendary">
-                        <h4>{{ localize "SWNPRETTY.LegAct" }}</h4>
-                        <div class="counter-value">
-                            <input name="data.resources.legact.value" type="number" value="{{data.resources.legact.value}}" placeholder="0"/>
-                            <span class="sep">/</span>
-                            <input name="data.resources.legact.max" type="number" value="{{data.resources.legact.max}}" placeholder="0"/>
+                <ul class="attributes flexrow boxes">
+<!--                                        Save buttons from Lofty-->
+                <div>
+                    <li class="attribute resource save-box">
+                        <h4 class="save-click attribute-name box-title rollable" data-saves = "psave"> Physical Save </h4>
+                        <div class="attribute-value">
+                            <span name="data.attributes.saves.psave" type="text"> vs {{data.attributes.psave}} </span>
                         </div>
-                    </div>
-                    <div class="counter flexrow legendary">
-                        <h4>{{ localize "SWNPRETTY.LegRes" }}</h4>
-                        <div class="counter-value">
-                            <input name="data.resources.legres.value" type="number" value="{{data.resources.legres.value}}" placeholder="0"/>
-                            <span class="sep">/</span>
-                            <input name="data.resources.legres.max" type="number" value="{{data.resources.legres.max}}" placeholder="0"/>
+                    </li>
+                </div>
+                <div>
+                    <li class="attribute resource save-box">
+                        <h4 class="save-click attribute-name box-title rollable" data-saves = "esave"> Evasion Save </h4>
+                        <div class="attribute-value">
+                            <span name="data.attributes.saves.esave" type="text"> vs {{data.attributes.esave}} </span>
                         </div>
-                    </div>
-                    <div class="counter flexrow lair">
-                        <h4>{{ localize "SWNPRETTY.LairAct" }}</h4>
-                        <div class="counter-value">
-                            <input name="data.resources.lair.value" type="checkbox" value="{{data.resources.lair.value}}"
-                                   data-dtype="Boolean" {{checked data.resources.lair.value}}/>
-                            <input name="data.resources.lair.initiative" type="number" value="{{data.resources.lair.initiative}}" placeholder="20"/>
+                    </li>
+                </div>
+                <div>
+                    <li class="attribute resource save-box">
+                        <h4 class="save-click attribute-name box-title rollable" data-saves = "msave"> Mental Save </h4>
+                        <div class="attribute-value">
+                            <span name="data.attributes.saves.msave" type="text"> vs {{data.attributes.msave}} </span>
                         </div>
-                    </div>
+                    </li>
+                </div>
+                <div>
+                    <li class="attribute resource save-box">
+                        <h4 class="save-click attribute-name box-title rollable" data-saves = "msave"> Morale Check </h4>
+                        <div class="attribute-value">
+                            <span name="data.attributes.saves.msave" type="text"> vs &nbsp; </span>
+                            <input name="data.attributes.morale" type="text" class = "effort-box"
+                                   value="{{data.attributes.morale}}" data-dtype="Number" placeholder= "0"/>
+                        </div>
+                    </li>
                 </div>
 
-                {{!-- Traits --}}
-                {{> "systems/swnpretty/templates/actors/parts/actor-traits.html"}}
+
+                    <!--                    System Strain from Lofty-->
+                    <div>
+                        <li class="attribute resource">
+                            <h4 class="attribute-name box-title"> System Strain </h4>
+                            <div class="attribute-value">
+                                <input name="data.attributes.strain.value" type="text" class = "effort-box"
+                                       value="{{data.attributes.strain.value}}" data-dtype="Number" placeholder= "0"/>
+                                <span class="sep"> /&nbsp; </span>
+                                <span> {{data.abilities.con.value}} </span>
+                            </div>
+                        </li>
+                    </div>
+                        <li class="attribute resource">
+                            <h4 class="attribute-name box-title"> {{localize "SWNPRETTY.Effort"}} </h4>
+                            <div class="attribute-value">
+                                <input name="data.attributes.effort.value" type="text" class = "effort-box"
+                                       value="{{data.attributes.effort.value}}" data-dtype="Number" placeholder= "0"/>
+                                <span class="sep">/</span>
+                                <input name="data.attributes.effort.max" type="text" class = "effort-box"
+                                       value="{{data.attributes.effort.max}}" data-dtype="Number" placeholder= "0"/>
+                            </div>
+                        </li>
+                </ul>
             </section>
         </div>
 
@@ -165,8 +213,9 @@
             {{> "systems/swnpretty/templates/actors/parts/actor-spellbook.html"}}
         </div>
 
-        {{!-- Effects Tab --}}
+        {{!-- Senses/Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/swnpretty/templates/actors/parts/actor-traits.html"}}
             {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}
         </div>
 
