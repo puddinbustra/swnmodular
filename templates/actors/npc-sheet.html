@@ -29,22 +29,30 @@
 
             {{!-- Header Attributes --}}
 
-<!--            {{!&#45;&#45; Character Summary &#45;&#45;}}-->
-<!--            <ul class="summary flexrow">-->
-<!--                <li>-->
-<!--                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNPRETTY.Background' }}"/>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <input type="text" name="data.details.focus" value="{{data.details.focus}}" placeholder="{{ localize 'SWNPRETTY.Focus' }}"/>-->
-<!--                </li>-->
-<!--                <li class="currencylist">-->
-<!--                    <input class = "currency" type="text" name="data.currency.credits" value="{{data.currency.credits}}"-->
-<!--                           placeholder="{{localize 'SWNPRETTY.CurrencyCredits'}}"/>-->
-<!--                </li>-->
-<!--                <li class = "currencyimage">-->
-<!--                    <i class="fas fa-coins" title = "Credits"></i>-->
-<!--                </li>-->
-<!--            </ul>-->
+            {{!-- Character Summary --}}
+            <ul class="summary flexrow header-boxes">
+                <li>
+                    <span> Att Bonus: &nbsp </span>
+                    <input type="text" name="data.attackBonus" value="{{data.attackBonus}}"/>
+                </li>
+                <li>
+                    <span> # of Att: &nbsp </span>
+                    <input type="text" name="data.attributes.attacks" value="{{data.attributes.attacks}}" placeholder=1/>
+                </li>
+                <li>
+                    <span> Dam Bonus: &nbsp </span>
+                    <input type="text" name="data.damageBonus" value="{{data.damageBonus}}"/>
+                </li>
+                <li>
+                    <select name="data.attitude.type">
+                        {{#select data.attitude.type}}
+                        {{#each config.attitudes as |name type|}}
+                            <option value="{{type}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </li>
+            </ul>
 
 
             <ul class="attributes flexrow">
@@ -60,7 +68,7 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.HitDice" }}</h4>
                     <div class="attribute-value multiple no-sub">
-                        <label class="hit-dice">{{data.attributes.level.value}} D6 + {{data.abilities.con.mod}}</span></label>
+                        <input name="data.npcHitDice" class="hit-dice" type="text" value="{{data.npcHitDice}}"/>
                     </div>
                 </li>
 
@@ -200,6 +208,8 @@
                             </div>
                         </li>
                 </ul>
+                <label> More Info </label>
+                <textarea name="data.details.other">{{data.details.other}}</textarea>
             </section>
         </div>
 
@@ -220,8 +230,23 @@
         </div>
 
         {{!-- Biography Tab --}}
-        <div class="tab biography flexcol" data-group="primary" data-tab="biography">
-            {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
+        <div class="tab flexrow" data-group="primary" data-tab="biography">
+            <div class="characteristics flexcol">
+                <label>{{ localize "SWNPRETTY.Appearance" }}</label>
+                <textarea name="data.details.appearance">{{data.details.appearance}}</textarea>
+                <label>{{ localize "SWNPRETTY.Ideals" }}</label>
+                <textarea name="data.details.ideal">{{data.details.ideal}}</textarea>
+                <label>{{ localize "SWNPRETTY.PersonalityTraits" }}</label>
+                <textarea name="data.details.trait">{{data.details.trait}}</textarea>
+                <label>{{ localize "SWNPRETTY.Bonds" }}</label>
+                <textarea name="data.details.bond">{{data.details.bond}}</textarea>
+            </div>
+            <div class="biography">
+                {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
+            </div>
         </div>
+<!--        <div class="tab biography flexcol" data-group="primary" data-tab="biography">-->
+<!--            {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}-->
+<!--        </div>-->
     </section>
 </form>

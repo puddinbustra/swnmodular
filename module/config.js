@@ -67,6 +67,21 @@ SWNPRETTY.alignments = {
 
 /* -------------------------------------------- */
 
+
+/**
+ * NPC attitude options
+ * @type {Object}
+ */
+SWNPRETTY.attitudes = {
+  'unknown': "SWNPRETTY.AttitudeUnknown",
+  'hostile': "SWNPRETTY.AttitudeHostile",
+  'negative': "SWNPRETTY.AttitudeNegative",
+  'neutral': "SWNPRETTY.AttitudeNeutral",
+  'positive': "SWNPRETTY.AttitudePositive",
+  'friendly': "SWNPRETTY.AttitudeFriendly",
+};
+
+/* -------------------------------------------- */
 /**
  * An enumeration of item attunement types
  * @enum {number}

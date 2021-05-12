@@ -584,7 +584,11 @@
   height: 24px;
   line-height: 24px;
 }
-
+.swnpretty.sheet.actor .sheet-header .summary input{
+  /*min-width: 0px;*/
+  /*max-width: 20px;*/
+  /*background-color: #2a2a26;*/
+}
 .swnpretty.sheet.actor .sheet-header .attributes {
   flex: 0 0 100%;
   margin: 0;
@@ -1606,12 +1610,12 @@
   border-left: none;
   line-height: 150%;
 }
-.swnpretty.sheet.actor.npc .custom-resource,
+/*.swnpretty.sheet.actor.npc .custom-resource,*/
 .swnpretty.sheet.actor.character .custom-resource{
   flex: 0 0 25%;
   height: 21px;
 }
-.swnpretty.sheet.actor.npc .custom-resource input,
+/*.swnpretty.sheet.actor.npc .custom-resource input,*/
 .swnpretty.sheet.actor.character .custom-resource input{
   height: 18px;
   line-height: 16px;

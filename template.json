@@ -309,7 +309,8 @@
         "trait": "",
         "ideal": "",
         "bond": "",
-        "flaw": ""
+        "flaw": "",
+        "other": ""
       },
       "resources": {
         "primary": {
@@ -366,6 +367,8 @@
         "cr": 1,
         "spellLevel": 0,
         "morale": 0,
+        "attacks": 1,
+        "npcHitDice": "1d6",
         "xp": {
           "value": 10
         },
@@ -500,6 +503,7 @@
         "ability": null,
         "actionType": null,
         "attackBonus": 0,
+        "damageBonus": 0,
         "chatFlavor": "",
         "critical": null,
         "damage": {
