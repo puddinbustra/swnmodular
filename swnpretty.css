@@ -696,6 +696,11 @@
   white-space: nowrap;
   /*opacity: 90%;*/
 }
+.swnpretty.sheet.actor ul.attributes li.attribute .input-footer {
+  margin-top: -5px;
+
+  /*background-color: rgba(110, 0, 0, 0.7);*/
+}
 .swnpretty.sheet.actor .ability-scores {
   flex: 0 0 100px;
   height: 440px;

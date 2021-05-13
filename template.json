@@ -46,7 +46,8 @@
           },
           "init": {
             "value": 0,
-            "bonus": 0
+            "bonus": 0,
+            "custom": 0
           },
           "movement": {
             "burrow": 0,
