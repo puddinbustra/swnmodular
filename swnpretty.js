@@ -84,7 +84,7 @@ Hooks.once("init", function() {
   // Register System Settings
   registerSystemSettings();
 
-  // Patch Core Functions
+  // Patch Core Functions. "I don't think this is currently relevant. -Lofty"
   CONFIG.Combat.initiative.formula = "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus";
   Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
 

@@ -5,6 +5,7 @@ import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
 import {SWNPRETTY} from '../../config.js';
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
+import {d20Roll} from "../../dice";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -446,6 +447,7 @@ export default class ActorSheet5e extends ActorSheet {
       // Roll Ability Saves - Lofty
       html.find('.save-click').click(this._onRollAbilitySave.bind(this));
 
+
       // Item Rolling
       html.find('.item .item-image').click(event => this._onItemRoll(event));
       html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
@@ -816,11 +818,28 @@ export default class ActorSheet5e extends ActorSheet {
   _onRollAbilitySave(event) {
     event.preventDefault();
     const save = event.currentTarget.dataset.saves;
+
     this.actor.rollSaveSwn(save, {event: event});
   }
 
   /* -------------------------------------------- */
 
+
+  // /**
+  //  * Handle rolling a morale check
+  //  * @param {Event} event   The originating click event
+  //  * @private
+  //  */
+  // _onRollMoraleSave(event) {
+  //   event.preventDefault();
+  //
+  //   const parts = ['2d8'];
+  //   return d20Roll({parts});
+  //   // const save = event.currentTarget.dataset.saves;
+  //   // this.actor.rollSaveSwn(save, {event: event});
+  // }
+
+  /* -------------------------------------------- */
   /**
    * Handle toggling Ability score proficiency level
    * @param {Event} event     The originating click event
