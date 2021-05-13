@@ -19,8 +19,7 @@ export const _getInitiativeFormula = function(combatant) {
     mods += "kh";
   }
 
-  // const parts = [`${nd}d8${mods}`, init.mod, (init.prof !== 0) ? init.prof : null, (init.bonus !== 0) ? init.bonus : null];
-  const parts = [`${nd}d8${mods}`, init.total];
+  const parts = [`${nd}d8${mods}`, init.mod, (init.prof !== 0) ? init.prof : null, (init.bonus !== 0) ? init.bonus : null];
 
   // Optionally apply Dexterity tiebreaker
   const tiebreaker = game.settings.get("swnpretty", "initiativeDexTiebreaker");

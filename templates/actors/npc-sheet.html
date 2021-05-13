@@ -47,40 +47,32 @@
                 </li>
 
                 <li class="attribute initiative">
-                    <h4 class="attribute-name box-title rollable init-click" data-action="rollInitiative">{{ localize "SWNPRETTY.Initiative" }}</h4>
-                    <div class="attribute-value">
+                    <h4 class="attribute-name box-title rollable" data-action="rollInitiative">{{ localize "SWNPRETTY.Initiative" }}</h4>
+                    <div class="attribute-value no-sub">
                         <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
                     </div>
-<!--                    <div class="attribute-value no-sub">-->
-<!--                        <input name="data.attributes.init.total" type="number" value="{{data.attributes.init.total}}" placeholder="0"/>-->
-<!--                    </div>-->
-                    <footer class="attribute-footer input-footer">
-<!--                        <span class="spell-dc">{{localize "SWNPRETTY.BaseAC"}}: {{data.attributes.base}}</span>-->
-                        <input name="data.attributes.init.custom" type="number" value="{{data.attributes.init.custom}}" placeholder="0" title="Bonus"  />
-                    </footer>
                 </li>
             </ul>
 
             {{!-- Character Summary --}}
             <ul class="summary flexrow header-boxes">
                 <li>
-                    <label> # of Atts: &nbsp
-                        <input type="text" name="data.attributes.attacks" value="{{data.attributes.attacks}}" placeholder=1 />
-                    </label>
-                </li>
-                <li>
                     <label> Att Bonus: &nbsp
                         <input type="text" name="data.attackBonus" value="{{data.attackBonus}}" id="attbonus" placeholder="0"/>
                     </label>
                 </li>
-
+                <li>
+                    <label> # of Att: &nbsp
+                        <input type="text" name="data.attributes.attacks" value="{{data.attributes.attacks}}" placeholder=1 />
+                    </label>
+                </li>
                 <li>
                     <label> Dam Bonus: &nbsp
                         <input type="text" name="data.damageBonus" value="{{data.damageBonus}}" placeholder="0"/>
                     </label>
                 </li>
                 <li>
-                    <select name="data.attitude.type" class="attitude" title="Attitude">
+                    <select name="data.attitude.type" class="attitude">
                         {{#select data.attitude.type}}
                         {{#each config.attitudes as |name type|}}
                           <option value="{{type}}">{{localize name}}</option>

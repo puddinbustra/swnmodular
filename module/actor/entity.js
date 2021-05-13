@@ -124,12 +124,15 @@ export default class Actor5e extends Actor {
 
     // Determine Initiative Modifier
     const init = data.attributes.init;
+    const athlete = flags.remarkableAthlete;
+    const joat = flags.jackOfAllTrades;
     init.mod = data.abilities.dex.mod;
-
+    if ( joat ) init.prof = Math.floor(0.5 * data.attributes.prof);
+    else if ( athlete ) init.prof = Math.ceil(0.5 * data.attributes.prof);
+    else init.prof = 0;
     init.value = init.value ?? 0;
-    init.custom = init.custom ?? 0;
-    init.bonus = init.value;
-    init.total = init.mod + init.bonus + init.custom;
+    init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
+    init.total = init.mod + init.prof + init.bonus;
 
     // Prepare spell-casting data
     data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
@@ -137,7 +140,7 @@ export default class Actor5e extends Actor {
 
     //Set base AC -lofty
     data.attributes.base = 10 + data.abilities.dex.mod;
-    // console.log("BASE AC ATTEMPT IS", data.attributes.base);
+    console.log("BASE AC ATTEMPT IS", data.attributes.base);
 
     // Compute owned item attributes which depend on prepared Actor data
     this.items.forEach(item => {

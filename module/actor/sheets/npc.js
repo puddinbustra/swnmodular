@@ -107,27 +107,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 	activateListeners(html) {
     super.activateListeners(html);
     html.find(".health .rollable").click(this._onRollHPFormula.bind(this));
-    html.find('.morale-click').click(this._onRollMoraleSave.bind(this));
-
-    // Rollable sheet actions
-    html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Handle mouse click events for character sheet actions
-   * @param {MouseEvent} event    The originating click event
-   * @private
-   */
-  _onSheetAction(event) {
-    event.preventDefault();
-    const button = event.currentTarget;
-    switch( button.dataset.action ) {
-      case "rollInitiative":
-        return this.actor.rollInitiative({createCombatants: true});
-    }
-  }
   /* -------------------------------------------- */
 
   /**
