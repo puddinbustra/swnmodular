@@ -89,7 +89,8 @@ function _isUnsupportedTerm(term) {
  * @param {boolean} elvenAccuracy   Allow Elven Accuracy to modify this roll?
  * @param {boolean} halflingLucky   Allow Halfling Luck to modify this roll?
  * @param {boolean} reliableTalent  Allow Reliable Talent to modify this roll?
- * @param {save} save            Is this a save? - Lofty
+ * @param {save} save               Is this a save? - Lofty
+ * @param {save} moraleSave         Is this a morale save (different dice formula)?- Lofty
  * @param {boolean} chatMessage     Automatically create a Chat Message for the result of this roll
  * @param {object} messageData      Additional data which is applied to the created Chat Message, if any
  *
@@ -98,7 +99,7 @@ function _isUnsupportedTerm(term) {
 export async function d20Roll({parts=[], data={}, event={}, rollMode=null, template=null, title=null, speaker=null,
   flavor=null, fastForward=null, dialogOptions,
   advantage=null, disadvantage=null, critical=20, fumble=1, targetValue=null,
-  elvenAccuracy=false, halflingLucky=false, reliableTalent=false, isSave=null,
+  elvenAccuracy=false, halflingLucky=false, reliableTalent=false, isSave=null, moraleSave=null,
   chatMessage=true, messageData={}}={}) {
 
   // Prepare Message Data
@@ -141,6 +142,8 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
     // Prepend the d20 roll
     let formula = `${nd}d20${mods}`;
     if (reliableTalent) formula = `{${nd}d20${mods},10}kh`;
+    //I don't know why this works, I just know it does. Also, doesn't work with advantage/disadvantage -Lofty
+    if (moraleSave) formula = `2d8${mods}`;
     parts.unshift(formula);
 
     // Optionally include a situational bonus

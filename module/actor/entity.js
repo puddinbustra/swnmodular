@@ -103,7 +103,7 @@ export default class Actor5e extends Actor {
     // actorData.data.spells
     // let spellMax = 0;
 
-    // //So below is my work so far on automating the max effort. However, I'm having trouble referencing the level -Lofty
+    // //So below is my work so far on automating the max effort. However, I'm having trouble referencing the spell level -Lofty
     // console.log("ENTITY JS ITEMS- ",actorData.items);
     //
     // //Check all items, if they're a spell, see if they're a higher level than our current spells, if so replace that
@@ -926,10 +926,9 @@ export default class Actor5e extends Actor {
    */
   rollSaveSwn(saveType, options={}){
 
-
     const stype = CONFIG.SWNPRETTY.saves[saveType];
     const sval = this.data.data.attributes[saveType];
-    const saveLabel = game.i18n.localize(`${stype}`);
+    let saveLabel = game.i18n.localize(`${stype}`);
     console.log("SVAL IS ",sval);
     console.log("savetype is",saveType);
     // Construct parts
@@ -949,16 +948,34 @@ export default class Actor5e extends Actor {
       parts.push(...options.parts);
     }
 
-    // Roll and return
-    const rollData = mergeObject(options, {
-      parts: parts,
-      data: data,
-      fastForward: true,
-      //Right now, sval doesn't include +/- extra modifiers. To do that, just add those in here also - Lofty
-      isSave: sval,
-      title: game.i18n.format("SWNPRETTY.SavePromptTitleVS", {ability: saveLabel, dc: sval}),
-      messageData: {"flags.swnpretty.roll": {type: "save", saveLabel}}
-    });
+    //Deal with morale checks
+    var rollData;
+
+    if(saveType === "morale"){
+      saveLabel = "Morale";
+      // Roll and return
+      rollData = mergeObject(options, {
+        parts: parts,
+        data: data,
+        fastForward: true,
+        isSave: sval,
+        moraleSave: true,
+        //To make this like the other saves where it publically says the dc, change to SavePromptTitleVS -Lofty
+        title: game.i18n.format("SWNPRETTY.SavePromptTitle", {ability: saveLabel, dc: sval}),
+        messageData: {"flags.swnpretty.roll": {type: "save", saveLabel}}
+      });
+    }
+    else{
+      rollData = mergeObject(options, {
+        parts: parts,
+        data: data,
+        fastForward: true,
+        //Right now, sval doesn't include +/- extra modifiers. To do that, just add those in here also - Lofty
+        isSave: sval,
+        title: game.i18n.format("SWNPRETTY.SavePromptTitleVS", {ability: saveLabel, dc: sval}),
+        messageData: {"flags.swnpretty.roll": {type: "save", saveLabel}}
+      });
+    }
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }
