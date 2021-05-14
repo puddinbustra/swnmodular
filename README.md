@@ -34,3 +34,4 @@ Since this is mostly based off of the 5e character sheet, some of those modules 
 - Ships
 - Global modifiers, like melee attack bonus, shock damage, or encumbrance bonus. For both characters and NPCs
 - Compendiums
+- Remove unused files and code
