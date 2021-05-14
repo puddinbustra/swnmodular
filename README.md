@@ -32,5 +32,5 @@ Since this is mostly based off of the 5e character sheet, some of those modules 
 # Possible Additions
 - Vehicles
 - Ships
-- Global modifiers, like melee attack bonus, or encumbrance bonus
+- Global modifiers, like melee attack bonus, shock damage, or encumbrance bonus. For both characters and NPCs
 - Compendiums
