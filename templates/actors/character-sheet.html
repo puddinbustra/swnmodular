@@ -251,12 +251,14 @@
 <!--                    <h4> {{ localize "SWNPRETTY.Flaws" }}</h4>-->
 <!--                    <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>-->
 
-                    <div class = "info biography">
-                        {{editor content=data.details.info.value target="data.details.info.value" button=true owner=owner editable=editable}}
+                    <div class="flexcol info">
+<!--                        {{editor content=data.details.info.value target="data.details.info.value" button=true owner=owner editable=editable}}-->
+                        <textarea name="data.details.info.value" placeholder="Ongoing Effects" class="npc-text-area">{{data.details.info.value}}</textarea>
 
                     </div>
-                    <div class = "info biography">
-                        {{editor content=data.details.scars.value target="data.details.scars.value" button=true owner=owner editable=editable}}
+                    <div class="flexcol info">
+<!--                        {{editor content=data.details.scars.value target="data.details.scars.value" button=true owner=owner editable=editable}}-->
+                        <textarea name="data.details.scars.value" placeholder="Notes" class="npc-text-area">{{data.details.scars.value}}</textarea>
 
                     </div>
                 </div>

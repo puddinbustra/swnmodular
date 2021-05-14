@@ -698,7 +698,10 @@
 }
 .swnpretty.sheet.actor ul.attributes li.attribute .input-footer {
   margin-top: -5px;
-
+  /*background-color: rgba(110, 0, 0, 0.7);*/
+}
+.swnpretty.sheet.actor ul.attributes li.attribute .input-footer input{
+  max-height: 15px;
   /*background-color: rgba(110, 0, 0, 0.7);*/
 }
 .swnpretty.sheet.actor .ability-scores {
@@ -752,20 +755,41 @@
 .swnpretty.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
   border-left: 2px groove #eeede0;
 }
-
-.swnpretty.sheet.actor .info {
-  border: 2px groove #eeede0;
-  flex: 1 0 25%;
-  font-size: 13px;
-  /*height: 255px;*/
-  max-height: 315px;
-  min-width: 200px;
-  max-width: 200px;
-  overflow: hidden;
-}
 .swnpretty.sheet.actor .front-info{
   margin-top: 5px;
+  flex: 1 0 25%;
   overflow: hidden;
+}
+.swnpretty.sheet.actor .info{
+  border: 2px groove #eeede0;
+  flex: 1 0 25%;
+  max-height: 315px;
+  overflow: hidden;
+}
+.swnpretty.sheet.actor .info textarea{
+  font-size: 13px;
+  font-family: "Signika", serif;
+  resize: none;
+  border: none;
+}
+.swnpretty.sheet.actor .info textarea:focus{
+  /*outline-color: rgba(62, 32, 155, 0);*/
+  /*outline-width: 2px;*/
+  outline: none;
+  box-shadow: 2px 2px 8px #2301a3;
+  /*background-color: #435fd7;*/
+}
+.swnpretty.sheet.actor .tab textarea:focus{
+  /*box-shadow:none;*/
+  outline-color: rgba(39, 41, 132, 0.62);
+  outline-width: 2px;
+  box-shadow: 0 0 8px #2301a3;
+
+  /*padding: 3px 0px 3px 3px;*/
+  /*margin: 5px 1px 3px 0px;*/
+  /*border: 1px solid rgba(81, 203, 238, 1);*/
+  /*outline-color: #3E209B;*/
+  /*box-shadow: #435fd7;*/
 }
 
 
@@ -1600,13 +1624,15 @@
   /*margin-left: 5px;*/
 }
 /*NPC text area*/
-.swnpretty.sheet.actor.npc .npc-text-area {
+.swnpretty.sheet.actor.npc .npc-text-area{
   margin-top: 4px;
   margin-bottom: 4px;
   font-family: "Signika", sans-serif;
+  resize: none;
+  outline: none;
 }
 /*Header box manipulation*/
-.swnpretty.sheet.actor .sheet-header .header-boxes {
+.swnpretty.sheet.actor .sheet-header .header-boxes{
   background-color: rgba(36, 69, 231, 0.14);
   /*max-height: 30px;*/
 }
@@ -1718,8 +1744,8 @@
 .swnpretty.sheet.actor .characteristics label {
   flex: 0 0 20px;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
-  font-size: 20px;
-  font-weight: 700;
+  /*font-size: 20px;*/
+  /*font-weight: 700;*/
   font-size: 16px;
   font-weight: normal;
   line-height: 20px;
