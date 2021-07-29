@@ -95,8 +95,8 @@ export default class Actor5e extends Actor {
     data.attributes.saves.psave = 16 - level - Math.max((data.abilities.str.mod), (data.abilities.con.mod));
     data.attributes.saves.esave = 16 - level - Math.max((data.abilities.dex.mod), (data.abilities.int.mod));
     data.attributes.saves.msave = 16 - level - Math.max((data.abilities.wis.mod), (data.abilities.cha.mod));
-    console.log("The final msave is ", data.attributes.saves.msave, "and wis mod is", data.abilities.wis.mod);
-    console.log("The higher msave ability score is", Math.max((data.abilities.wis.mod), (data.abilities.cha.mod)));
+    // console.log("The final msave is ", data.attributes.saves.msave, "and wis mod is", data.abilities.wis.mod);
+    // console.log("The higher msave ability score is", Math.max((data.abilities.wis.mod), (data.abilities.cha.mod)));
 
     // Inventory encumbrance
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
@@ -934,8 +934,8 @@ export default class Actor5e extends Actor {
     const stype = CONFIG.SWNPRETTY.saves[saveType];
     const sval = this.data.data.attributes.saves[saveType];
     let saveLabel = game.i18n.localize(`${stype}`);
-    console.log("SVAL IS ",sval);
-    console.log("savetype is",saveType);
+    // console.log("SVAL IS ",sval);
+    // console.log("savetype is",saveType);
     // Construct parts
     const parts = [0];  //["@mod"];
     const data = {0:0};   //{mod: type};

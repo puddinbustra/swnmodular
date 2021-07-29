@@ -8,6 +8,15 @@
                 <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'SWNPRETTY.Name' }}"/>
             </h1>
 
+<!--            Lofty adding character level to npc just for easy power upgrade-->
+            <aside class="header-exp flexcol">
+                <div class="charlevel" title="{{multiclassLabels}}">
+                    <label> {{ localize "SWNPRETTY.Level" }} </label>
+                    <input class = "levelInput" name = "data.attributes.level.value" type = "number" value = "{{data.attributes.level.value}}" placeholder="0" data-dtype="Number"/>
+                    <span class="levels">{{classLabels}}</span>
+                </div>
+            </aside>
+
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
                 <li class="attribute health no-sub">
@@ -64,7 +73,7 @@
             {{!-- Character Summary --}}
             <ul class="summary flexrow header-boxes">
                 <li>
-                    <label> # of Atts: &nbsp
+                    <label> # of Atks: &nbsp
                         <input type="text" name="data.attributes.attacks" value="{{data.attributes.attacks}}" placeholder=1 />
                     </label>
                 </li>
@@ -96,9 +105,9 @@
     {{!-- NPC Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="attributes">{{ localize "SWNPRETTY.Attributes" }}</a>
-        <a class="item" data-tab="features">{{ localize "SWNPRETTY.Features" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "SWNPRETTY.Inventory" }}</a>
         <a class="item" data-tab="spellbook">{{ localize "SWNPRETTY.Spellbook" }}</a>
-        <a class="item" data-tab="effects">{{ localize "SWNPRETTY.Effects" }}</a>
+        <a class="item" data-tab="effects">{{ localize "SWNPRETTY.SenseEffects" }}</a>
         <a class="item" data-tab="biography">{{ localize "SWNPRETTY.Biography" }}</a>
     </nav>
 
@@ -215,7 +224,7 @@
         {{!-- Senses/Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
             {{> "systems/swnpretty/templates/actors/parts/actor-traits.html"}}
-            {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}
+<!--            {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}-->
         </div>
 
         {{!-- Biography Tab --}}

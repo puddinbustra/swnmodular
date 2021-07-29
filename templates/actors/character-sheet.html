@@ -21,8 +21,8 @@
                 {{#unless disableExperience}}
                 <div class="experience flexrow">
                     <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}" placeholder="0" data-dtype="Number"/>
-                    <span class="sep">/</span>
-                    <span class="max">{{data.details.xp.max}}</span>
+<!--                    <span class="sep">/</span>-->
+<!--                    <span class="max">{{data.details.xp.max}}</span>-->
                 </div>
                 <div class="xpbar">
                     <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
@@ -39,13 +39,13 @@
                 <!--                    <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="{{ localize 'SWNPRETTY.Race' }}"/>-->
                 <!--                </li>-->
                 <li>
-                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNPRETTY.Background' }}"/>
+                    <input type="text" name="data.details.focus" value="{{data.details.focus}}" placeholder="{{ localize 'SWNPRETTY.Class' }}"/>
                 </li>
                 <!--                <li>-->
                 <!--                    <input class="saves" name="data.abilities.{'str'}.value" type="number" value="{str.value}"/>-->
                 <!--                </li>-->
                 <li>
-                    <input type="text" name="data.details.focus" value="{{data.details.focus}}" placeholder="{{ localize 'SWNPRETTY.Focus' }}"/>
+                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'SWNPRETTY.Background' }}"/>
                 </li>
                 <li class="currencylist">
 <!--                    <label> {{localize "SWNPRETTY.CurrencyCredits"}}</label>-->
@@ -226,6 +226,23 @@
                             </div>
                         </li>
                     </div>
+
+<!--                    Lofty putting in resource 1 and 2 as counters instead-->
+
+                    <div>
+                        <li class="attribute resource">
+                            <h4 class="attribute-name box-title">
+                                <input name="data.resources.{{primary.name}}.label" type="text" value="{{primary.label}}"
+                                       placeholder="Resource 1" />
+                            </h4>
+
+                            <div class="attribute-value">
+                                <input name="data.attributes.resources.primary.value" type="text" value="{{data.attributes.resources.primary.value}}"
+                                       data-dtype="Number" placeholder= "0"/>
+                            </div>
+                        </li>
+                    </div>
+
                     {{#each resources as |res|}}
                     <div>
                         <li class="attribute resource">
@@ -283,7 +300,7 @@
         {{!-- Senses/Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
             {{> "systems/swnpretty/templates/actors/parts/actor-traits.html"}}
-            {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}
+<!--            {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}-->
         </div>
 
         {{!-- Biography Tab --}}

@@ -22,7 +22,7 @@
   "primaryTokenAttribute": "attributes.hp",
   "secondaryTokenAttribute": null,
   "minimumCoreVersion": "0.7.6",
-  "compatibleCoreVersion": "0.7.9",
+  "compatibleCoreVersion": "0.8.8",
   "url": "https://github.com/puddinbustra/swnpretty",
   "manifest": "https://raw.githubusercontent.com/puddinbustra/swnpretty/main/system.json",
   "download": "https://github.com/puddinbustra/swnpretty/archive/refs/heads/main.zip"

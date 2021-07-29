@@ -34,7 +34,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     if (hp.tempmax === 0) delete hp.tempmax;
 
     // Resources
-    sheetData["resources"] = ["primary", "secondary", "tertiary", "quartary", "quinary"].reduce((arr, r) => {
+    sheetData["resources"] = ["tertiary", "quartary", "quinary"].reduce((arr, r) => {
       const res = sheetData.data.resources[r] || {};
       res.name = r;
       res.placeholder = game.i18n.localize("SWNPRETTY.Resource"+r.titleCase());

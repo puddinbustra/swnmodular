@@ -58,17 +58,17 @@ export const registerSystemSettings = function() {
     type: Boolean
   });
 
-  /**
-   * Require Currency Carrying Weight
-   */
-  game.settings.register("swnpretty", "currencyWeight", {
-    name: "SETTINGS.5eCurWtN",
-    hint: "SETTINGS.5eCurWtL",
-    scope: "world",
-    config: true,
-    default: true,
-    type: Boolean
-  });
+  // /**
+  //  * Require Currency Carrying Weight
+  //  */
+  // game.settings.register("swnpretty", "currencyWeight", {
+  //   name: "SETTINGS.5eCurWtN",
+  //   hint: "SETTINGS.5eCurWtL",
+  //   scope: "world",
+  //   config: true,
+  //   default: true,
+  //   type: Boolean
+  // });
 
   /**
    * Option to disable XP bar for session-based or story-based advancement.

@@ -5,6 +5,7 @@ import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
 import {SWNPRETTY} from '../../config.js';
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
+// import ActiveEffect5e from "../../active-effect.js";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -154,6 +155,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Prepare active effects
     data.effects = prepareActiveEffectCategories(this.entity.effects);
+    // data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
 
     // Return data to the sheet
     return data
