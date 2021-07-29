@@ -70,6 +70,9 @@ export default class Actor5e extends Actor {
       else{
         abl.mod =Math.floor((abl.value - 10) / 4);
       }
+      // console.log("abl is ",abl, "and mod is",abl.mod, "and id is",id, "and this should match");
+        // data.abilities.id.mod = abl.mod;
+
 
       //Here I'm trying to get rid of poroficency bonus without breaking anything - lofty
       // abl.prof = (abl.proficient || 0) * data.attributes.prof;
@@ -89,9 +92,11 @@ export default class Actor5e extends Actor {
     // Set save bonus
     const level = data.attributes.level.value
 
-    data.attributes.psave = 16 - level - Math.max(data.abilities.str.mod, data.abilities.con.mod);
-    data.attributes.esave = 16 - level - Math.max(data.abilities.dex.mod, data.abilities.int.mod);
-    data.attributes.msave = 16 - level - Math.max(data.abilities.wis.mod, data.abilities.cha.mod);
+    data.attributes.saves.psave = 16 - level - Math.max((data.abilities.str.mod), (data.abilities.con.mod));
+    data.attributes.saves.esave = 16 - level - Math.max((data.abilities.dex.mod), (data.abilities.int.mod));
+    data.attributes.saves.msave = 16 - level - Math.max((data.abilities.wis.mod), (data.abilities.cha.mod));
+    console.log("The final msave is ", data.attributes.saves.msave, "and wis mod is", data.abilities.wis.mod);
+    console.log("The higher msave ability score is", Math.max((data.abilities.wis.mod), (data.abilities.cha.mod)));
 
     // Inventory encumbrance
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
@@ -368,17 +373,17 @@ export default class Actor5e extends Actor {
     for (let [id, skl] of Object.entries(data.skills)) {
 
       skl.value = Math.clamped(Number(skl.value).toNearest(1), -1, 9) ?? -1;
-      //Fill in all the 'other' category with -1 as default
-      if (skl.prof == null){
-        skl.prof = -1;
+      //Fill in all the 'level' category with -1 as default
+      if (skl.level == null){
+        skl.level = -1;
       }
       //Yes I know it's bad, but I'm redoing the skill ability attribute to be a flag because it's convenient
       //I've placed all of the default values to be 'str', so when someone gets a level, it checks if it's 0
       //And if it's not, it adds to the 'other' if the flag is 'str', and changes the flag so it only happens once ever
-      if((skl.ability === "str")&&(skl.value > 0)){
-        skl.prof = skl.prof +1;
-        skl.ability = "dex";
-      }
+      // if((skl.ability === "str")&&(skl.value > 0)){
+      //   skl.prof = skl.prof +1;
+      //   skl.ability = "dex";
+      // }
 
       // skl.prof = Math.clamped(Number(skl.prof).toNearest(1), -9, 9) ?? -1;
 
@@ -927,7 +932,7 @@ export default class Actor5e extends Actor {
   rollSaveSwn(saveType, options={}){
 
     const stype = CONFIG.SWNPRETTY.saves[saveType];
-    const sval = this.data.data.attributes[saveType];
+    const sval = this.data.data.attributes.saves[saveType];
     let saveLabel = game.i18n.localize(`${stype}`);
     console.log("SVAL IS ",sval);
     console.log("savetype is",saveType);
@@ -960,7 +965,7 @@ export default class Actor5e extends Actor {
         fastForward: true,
         isSave: sval,
         moraleSave: true,
-        //To make this like the other saves where it publically says the dc, change to SavePromptTitleVS -Lofty
+        //To make this like the other saves where it publically says the dc, changed to SavePromptTitleVS -Lofty
         title: game.i18n.format("SWNPRETTY.SavePromptTitle", {ability: saveLabel, dc: sval}),
         messageData: {"flags.swnpretty.roll": {type: "save", saveLabel}}
       });
@@ -1542,7 +1547,7 @@ export default class Actor5e extends Actor {
    */
   async revertOriginalForm() {
     if ( !this.isPolymorphed ) return;
-    if ( !this.owner ) {
+    if ( !this.isOwner ) {
       return ui.notifications.warn(game.i18n.localize("SWNPRETTY.PolymorphRevertWarn"));
     }
 

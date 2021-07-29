@@ -143,7 +143,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
     let formula = `${nd}d20${mods}`;
     if (reliableTalent) formula = `{${nd}d20${mods},10}kh`;
     //I don't know why this works, I just know it does. Also, doesn't work with advantage/disadvantage -Lofty
-    if (moraleSave) formula = `2d8${mods}`;
+    if (moraleSave) formula = `2d6${mods}`;
     parts.unshift(formula);
 
     // Optionally include a situational bonus

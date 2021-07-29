@@ -55,37 +55,80 @@ export default class ActorSheet5e extends ActorSheet {
   /** @override */
   getData() {
 
+    // // Basic data
+    // let isOwner = this.entity.owner;
+    // const data = {
+    //   owner: isOwner,
+    //   limited: this.entity.limited,
+    //   options: this.options,
+    //   editable: this.isEditable,
+    //   cssClass: isOwner ? "editable" : "locked",
+    //   isCharacter: this.entity.data.type === "character",
+    //   isNPC: this.entity.data.type === "npc",
+    //   isVehicle: this.entity.data.type === 'vehicle',
+    //   config: CONFIG.SWNPRETTY,
+    // };
+    //
+    // // The Actor and its Items
+    // data.actor = duplicate(this.actor.data);
+    // data.items = this.actor.items.map(i => {
+    //   i.data.labels = i.labels;
+    //   return i.data;
+    // });
+    // data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    // data.data = data.actor.data;
+    // data.labels = this.actor.labels || {};
+    // data.filters = this._filters;
+    //
+    // // Ability Scores
+    // for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {
+    //   abl.icon = this._getProficiencyIcon(abl.proficient);
+    //   abl.hover = CONFIG.SWNPRETTY.proficiencyLevels[abl.proficient];
+    //   abl.label = CONFIG.SWNPRETTY.abilities[a];
+    // }
+
+
     // Basic data
-    let isOwner = this.entity.owner;
+    let isOwner = this.actor.isOwner;
     const data = {
       owner: isOwner,
-      limited: this.entity.limited,
+      limited: this.actor.limited,
       options: this.options,
       editable: this.isEditable,
       cssClass: isOwner ? "editable" : "locked",
-      isCharacter: this.entity.data.type === "character",
-      isNPC: this.entity.data.type === "npc",
-      isVehicle: this.entity.data.type === 'vehicle',
+      isCharacter: this.actor.type === "character",
+      isNPC: this.actor.type === "npc",
+      isVehicle: this.actor.type === 'vehicle',
       config: CONFIG.SWNPRETTY,
+      rollData: this.actor.getRollData.bind(this.actor)
     };
 
-    // The Actor and its Items
-    data.actor = duplicate(this.actor.data);
-    data.items = this.actor.items.map(i => {
-      i.data.labels = i.labels;
-      return i.data;
-    });
+    // The Actor's data
+    const actorData = this.actor.data.toObject(false);
+    const source = this.actor.data._source.data;
+    data.actor = actorData;
+    data.data = actorData.data;
+
+    // Owned Items
+    data.items = actorData.items;
+    for ( let i of data.items ) {
+      const item = this.actor.items.get(i._id);
+      i.labels = item.labels;
+    }
     data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-    data.data = data.actor.data;
+
+    // Labels and filters
     data.labels = this.actor.labels || {};
     data.filters = this._filters;
 
     // Ability Scores
-    for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {
+    for ( let [a, abl] of Object.entries(actorData.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.SWNPRETTY.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.SWNPRETTY.abilities[a];
+      abl.baseProf = source.abilities[a].proficient;
     }
+
 
     // Skills
     if (data.actor.data.skills) {
@@ -222,7 +265,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _prepareSpellbook(data, spells) {
-    const owner = this.actor.owner;
+    const owner = this.actor.isOwner;
     const levels = data.data.spells;
     const spellbook = {};
 
@@ -434,7 +477,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Owner Only Listeners
-    if ( this.actor.owner ) {
+    if ( this.actor.isOwner ) {
 
       // Ability Checks
       html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
@@ -548,7 +591,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   async _onDropActor(event, data) {
-    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('swnpretty', 'allowPolymorphing'));
+    const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get('swnpretty', 'allowPolymorphing'));
     if ( !canPolymorph ) return false;
 
     // Get the target actor
@@ -715,7 +758,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     let li = $(event.currentTarget).parents(".item"),
         item = this.actor.getOwnedItem(li.data("item-id")),
-        chatData = item.getChatData({secrets: this.actor.owner});
+        chatData = item.getChatData({secrets: this.actor.isOwner});
 
     // Toggle summary
     if ( li.hasClass("expanded") ) {

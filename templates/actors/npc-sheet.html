@@ -125,9 +125,9 @@
                 <li class="skill flexrow" data-skill="{{s}}">
                     <h4 class="skill-name rollable">{{skill.label}}</h4>
                     <input class="skill-mod" name = "data.skills.{{s}}.value" value="{{skill.value}}"
-                           title = "Level" type="number" placeholder="0" />
+                           title = "Level" type="number" placeholder="-1" />
                     <input class="skill-other" name = "data.skills.{{s}}.prof" value="{{skill.prof}}"
-                           title = "Other" type="number" placeholder="-1" />
+                           title = "Other" type="number" placeholder="0" />
                 </li>
                 {{/each}}
             </ul>
@@ -140,7 +140,7 @@
                     <li class="attribute resource save-box">
                         <h4 class="save-click attribute-name box-title rollable" data-saves = "psave"> Physical Save </h4>
                         <div class="attribute-value">
-                            <span name="data.attributes.saves.psave" type="text"> vs {{data.attributes.psave}} </span>
+                            <span name="data.attributes.saves.psave" type="text"> vs {{data.attributes.saves.psave}} </span>
                         </div>
                     </li>
                 </div>
@@ -148,7 +148,7 @@
                     <li class="attribute resource save-box">
                         <h4 class="save-click attribute-name box-title rollable" data-saves = "esave"> Evasion Save </h4>
                         <div class="attribute-value">
-                            <span name="data.attributes.saves.esave" type="text"> vs {{data.attributes.esave}} </span>
+                            <span name="data.attributes.saves.esave" type="text"> vs {{data.attributes.saves.esave}} </span>
                         </div>
                     </li>
                 </div>
@@ -156,7 +156,7 @@
                     <li class="attribute resource save-box">
                         <h4 class="save-click attribute-name box-title rollable" data-saves = "msave"> Mental Save </h4>
                         <div class="attribute-value">
-                            <span name="data.attributes.saves.msave" type="text"> vs {{data.attributes.msave}} </span>
+                            <span name="data.attributes.saves.msave" type="text"> vs {{data.attributes.saves.msave}} </span>
                         </div>
                     </li>
                 </div>
@@ -166,7 +166,7 @@
                         <div class="attribute-value">
                             <span name="data.attributes.saves.morale" type="text"> vs &nbsp; </span>
                             <input name="data.attributes.saves.morale" type="text" class = "effort-box"
-                                   value="{{data.attributes.saves.morale}}" data-dtype="Number" placeholder= "0"/>
+                                   value="{{data.attributes.saves.morale}}" data-dtype="Number" placeholder= "6?"/>
                         </div>
                     </li>
                 </div>

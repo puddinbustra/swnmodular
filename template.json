@@ -6,27 +6,33 @@
         "abilities": {
           "str": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "mod": 666
           },
           "con": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "mod": 66
           },
           "dex": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "mod": 666
           },
           "int": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "mod": 666
           },
           "wis": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "mod": 666
           },
           "cha": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "mod": 666
           }
         },
         "attributes": {
@@ -72,7 +78,7 @@
           "saves": {
             "psave": 16,
             "esave": 16,
-            "msave": 16,
+            "msave": 99,
             "morale": 0
           }
         },
