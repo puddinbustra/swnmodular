@@ -789,12 +789,12 @@ export default class ActorSheet5e extends ActorSheet {
     const header = event.currentTarget;
     const type = header.dataset.type;
     const itemData = {
-      name: game.i18n.format("SWNPRETTY.ItemNew", {type: type.capitalize()}),
+      name: game.i18n.format("SWNPRETTY.ItemNew", {type: game.i18n.localize(`SWNPRETTY.ItemType${type.capitalize()}`)}),
       type: type,
-      data: duplicate(header.dataset)
+      data: foundry.utils.deepClone(header.dataset)
     };
     delete itemData.data["type"];
-    return this.actor.createEmbeddedEntity("OwnedItem", itemData);
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 
   /* -------------------------------------------- */
