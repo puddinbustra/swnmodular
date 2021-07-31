@@ -98,18 +98,6 @@ export const registerSystemSettings = function() {
   });
 
   /**
-   * Option to allow GMs to restrict polymorphing to GMs only.
-   */
-  game.settings.register('swnpretty', 'allowPolymorphing', {
-    name: 'SETTINGS.5eAllowPolymorphingN',
-    hint: 'SETTINGS.5eAllowPolymorphingL',
-    scope: 'world',
-    config: true,
-    default: false,
-    type: Boolean
-  });
-
-  /**
    * Remember last-used polymorph settings.
    */
   game.settings.register('swnpretty', 'polymorphSettings', {
@@ -129,5 +117,17 @@ export const registerSystemSettings = function() {
       keepVision: true,
       transformTokens: true
     }
+  });
+
+  /**
+   * Option to replace imperial weight units with metric weight units.
+   */
+  game.settings.register("swnpretty", "metricWeightUnits", {
+    name: "SETTINGS.5eMetricN",
+    hint: "SETTINGS.5eMetricL",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false
   });
 };

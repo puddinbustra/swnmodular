@@ -1,7 +1,9 @@
 import { d20Roll, damageRoll } from "../dice.js";
+import SelectItemsPrompt from "../apps/select-items-prompt.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import {SWNPRETTY} from '../config.js';
+import Item5e from "../item/entity.js";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -242,13 +244,36 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  async updateEmbeddedEntity(embeddedName, data, options={}) {
-    const createItems = embeddedName === "OwnedItem" ? await this._createClassFeatures(data) : [];
-    let updated = await super.updateEmbeddedEntity(embeddedName, data, options);
-    if ( createItems.length ) await this.createEmbeddedEntity("OwnedItem", createItems);
-    return updated;
+  // /** @override */
+  // async updateEmbeddedEntity(embeddedName, data, options={}) {
+  //   const createItems = embeddedName === "OwnedItem" ? await this._createClassFeatures(data) : [];
+  //   let updated = await super.updateEmbeddedEntity(embeddedName, data, options);
+  //   if ( createItems.length ) await this.createEmbeddedEntity("OwnedItem", createItems);
+  //   return updated;
+  // }
+
+  async addEmbeddedItems(items, prompt=true) {
+    let itemsToAdd = items;
+    if ( !items.length ) return [];
+
+    // Obtain the array of item creation data
+    let toCreate = [];
+    if (prompt) {
+      const itemIdsToAdd = await SelectItemsPrompt.create(items, {
+        hint: game.i18n.localize('SWNPRETTY.AddEmbeddedItemPromptHint')
+      });
+      for (let item of items) {
+        if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
+      }
+    } else {
+      toCreate = items.map(item => item.toObject());
+    }
+
+    // Create the requested items
+    if (itemsToAdd.length === 0) return [];
+    return Item5e.createDocuments(toCreate, {parent: this});
   }
+
 
   /* -------------------------------------------- */
 

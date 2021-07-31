@@ -26,8 +26,8 @@ export default class ShortRestDialog extends Dialog {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-	    template: "systems/swnpretty/templates/apps/short-rest.html",
-      classes: ["swnpretty", "dialog"]
+	    template: "systems/SWNPRETTY/templates/apps/short-rest.html",
+      classes: ["SWNPRETTY", "dialog"]
     });
   }
 
@@ -40,7 +40,7 @@ export default class ShortRestDialog extends Dialog {
     // Determine Hit Dice
     data.availableHD = this.actor.data.items.reduce((hd, item) => {
       if ( item.type === "class" ) {
-        const d = item.data;
+        const d = item.data.data;
         const denom = d.hitDice || "d6";
         const available = parseInt(d.levels || 1) - parseInt(d.hitDiceUsed || 0);
         hd[denom] = denom in hd ? hd[denom] + available : available;
@@ -51,7 +51,7 @@ export default class ShortRestDialog extends Dialog {
     data.denomination = this._denom;
 
     // Determine rest type
-    const variant = game.settings.get("swnpretty", "restVariant");
+    const variant = game.settings.get("SWNPRETTY", "restVariant");
     data.promptNewDay = variant !== "epic";     // It's never a new day when only resting 1 minute
     data.newDay = false;                        // It may be a new day, but not by default
     return data;
@@ -93,21 +93,21 @@ export default class ShortRestDialog extends Dialog {
   static async shortRestDialog({actor}={}) {
     return new Promise((resolve, reject) => {
       const dlg = new this(actor, {
-        title: "Short Rest",
+        title: game.i18n.localize("SWNPRETTY.ShortRest"),
         buttons: {
           rest: {
             icon: '<i class="fas fa-bed"></i>',
-            label: "Rest",
+            label: game.i18n.localize("SWNPRETTY.Rest"),
             callback: html => {
               let newDay = false;
-              if (game.settings.get("swnpretty", "restVariant") === "gritty")
+              if (game.settings.get("SWNPRETTY", "restVariant") === "gritty")
                 newDay = html.find('input[name="newDay"]')[0].checked;
               resolve(newDay);
             }
           },
           cancel: {
             icon: '<i class="fas fa-times"></i>',
-            label: "Cancel",
+            label: game.i18n.localize("Cancel"),
             callback: reject
           }
         },

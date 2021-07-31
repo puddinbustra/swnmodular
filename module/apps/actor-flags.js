@@ -1,14 +1,13 @@
 /**
  * An application class which provides advanced configuration for special character flags which modify an Actor
- * @implements {BaseEntitySheet}
+ * @implements {DocumentSheet}
  */
-export default class ActorSheetFlags extends BaseEntitySheet {
+export default class ActorSheetFlags extends DocumentSheet {
   static get defaultOptions() {
-    const options = super.defaultOptions;
-    return mergeObject(options, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-flags",
-	    classes: ["swnpretty"],
-      template: "systems/swnpretty/templates/apps/actor-flags.html",
+	    classes: ["SWNPRETTY"],
+      template: "systems/SWNPRETTY/templates/apps/actor-flags.html",
       width: 500,
       closeOnSubmit: true
     });
@@ -27,6 +26,7 @@ export default class ActorSheetFlags extends BaseEntitySheet {
   getData() {
     const data = {};
     data.actor = this.object;
+    data.classes = this._getClasses();
     data.flags = this._getFlags();
     data.bonuses = this._getBonuses();
     return data;
@@ -35,21 +35,37 @@ export default class ActorSheetFlags extends BaseEntitySheet {
   /* -------------------------------------------- */
 
   /**
+   * Prepare an object of sorted classes.
+   * @return {object}
+   * @private
+   */
+  _getClasses() {
+    const classes = this.object.items.filter(i => i.type === "class");
+    return classes.sort((a, b) => a.name.localeCompare(b.name)).reduce((obj, i) => {
+      obj[i.id] = i.name;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare an object of flags data which groups flags by section
    * Add some additional data for rendering
    * @return {object}
+   * @private
    */
   _getFlags() {
     const flags = {};
-    const baseData = this.entity._data;
+    const baseData = this.document.toJSON();
     for ( let [k, v] of Object.entries(CONFIG.SWNPRETTY.characterFlags) ) {
       if ( !flags.hasOwnProperty(v.section) ) flags[v.section] = {};
-      let flag = duplicate(v);
+      let flag = foundry.utils.deepClone(v);
       flag.type = v.type.name;
       flag.isCheckbox = v.type === Boolean;
       flag.isSelect = v.hasOwnProperty('choices');
-      flag.value = getProperty(baseData.flags, `swnpretty.${k}`);
-      flags[v.section][`flags.swnpretty.${k}`] = flag;
+      flag.value = getProperty(baseData.flags, `SWNPRETTY.${k}`);
+      flags[v.section][`flags.SWNPRETTY.${k}`] = flag;
     }
     return flags;
   }
@@ -77,7 +93,7 @@ export default class ActorSheetFlags extends BaseEntitySheet {
       {name: "data.bonuses.spell.dc", label: "SWNPRETTY.BonusSpellDC"}
     ];
     for ( let b of bonuses ) {
-      b.value = getProperty(this.object._data, b.name) || "";
+      b.value = getProperty(this.object.data._source, b.name) || "";
     }
     return bonuses;
   }
@@ -91,11 +107,11 @@ export default class ActorSheetFlags extends BaseEntitySheet {
 
     // Unset any flags which are "false"
     let unset = false;
-    const flags = updateData.flags.swnpretty;
+    const flags = updateData.flags.SWNPRETTY;
     for ( let [k, v] of Object.entries(flags) ) {
       if ( [undefined, null, "", false, 0].includes(v) ) {
         delete flags[k];
-        if ( hasProperty(actor._data.flags, `swnpretty.${k}`) ) {
+        if ( hasProperty(actor.data._source.flags, `SWNPRETTY.${k}`) ) {
           unset = true;
           flags[`-=${k}`] = null;
         }

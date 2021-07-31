@@ -10,9 +10,9 @@ export const _getInitiativeFormula = function(combatant) {
   if ( !actor ) return "1d8";
   const init = actor.data.data.attributes.init;
 
+  //Constructive initiative part
   let nd = 1;
   let mods = "";
-
   if (actor.getFlag("swnpretty", "halflingLucky")) mods += "r1=1";
   if (actor.getFlag("swnpretty", "initiativeAdv")) {
     nd = 2;

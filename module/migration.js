@@ -3,13 +3,13 @@
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function() {
-  ui.notifications.info(`Applying DnD5E System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
+  ui.notifications.info(`Applying SWN System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
 
   // Migrate World Actors
-  for ( let a of game.actors.entities ) {
+  for ( let a of game.actors.contents ) {
     try {
-      const updateData = migrateActorData(a.data);
-      if ( !isObjectEmpty(updateData) ) {
+      const updateData = migrateActorData(a.toObject());
+      if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
       }
@@ -20,10 +20,10 @@ export const migrateWorld = async function() {
   }
 
   // Migrate World Items
-  for ( let i of game.items.entities ) {
+  for ( let i of game.items.contents ) {
     try {
-      const updateData = migrateItemData(i.data);
-      if ( !isObjectEmpty(updateData) ) {
+      const updateData = migrateItemData(i.toObject());
+      if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Item entity ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
       }
@@ -34,12 +34,15 @@ export const migrateWorld = async function() {
   }
 
   // Migrate Actor Override Tokens
-  for ( let s of game.scenes.entities ) {
+  for ( let s of game.scenes.contents ) {
     try {
       const updateData = migrateSceneData(s.data);
-      if ( !isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Scene entity ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
+        // If we do not do this, then synthetic token actors remain in cache
+        // with the un-updated actorData.
+        s.tokens.contents.forEach(t => t._actor = null);
       }
     } catch(err) {
       err.message = `Failed swnpretty system migration for Scene ${s.name}: ${err.message}`;
@@ -56,7 +59,7 @@ export const migrateWorld = async function() {
 
   // Set the migration as complete
   game.settings.set("swnpretty", "systemMigrationVersion", game.system.data.version);
-  ui.notifications.info(`DnD5E System Migration to version ${game.system.data.version} completed!`, {permanent: true});
+  ui.notifications.info(`SWN System Migration to version ${game.system.data.version} completed!`, {permanent: true});
 };
 
 /* -------------------------------------------- */
@@ -76,42 +79,87 @@ export const migrateCompendium = async function(pack) {
 
   // Begin by requesting server-side data model migration and get the migrated content
   await pack.migrate();
-  const content = await pack.getContent();
+  const documents = await pack.getDocuments();
 
   // Iterate over compendium entries - applying fine-tuned migration functions
-  for ( let ent of content ) {
+  for ( let doc of documents ) {
     let updateData = {};
     try {
       switch (entity) {
         case "Actor":
-          updateData = migrateActorData(ent.data);
+          updateData = migrateActorData(doc.toObject());
           break;
         case "Item":
-          updateData = migrateItemData(ent.data);
+          updateData = migrateItemData(doc.toObject());
           break;
         case "Scene":
-          updateData = migrateSceneData(ent.data);
+          updateData = migrateSceneData(doc.data);
           break;
       }
-      if ( isObjectEmpty(updateData) ) continue;
 
       // Save the entry, if data was changed
-      updateData["_id"] = ent._id;
-      await pack.updateEntity(updateData);
-      console.log(`Migrated ${entity} entity ${ent.name} in Compendium ${pack.collection}`);
+      if ( foundry.utils.isObjectEmpty(updateData) ) continue;
+      await doc.update(updateData);
+      console.log(`Migrated ${entity} entity ${doc.name} in Compendium ${pack.collection}`);
     }
 
     // Handle migration failures
     catch(err) {
-      err.message = `Failed swnpretty system migration for entity ${ent.name} in pack ${pack.collection}: ${err.message}`;
+      err.message = `Failed swnpretty system migration for entity ${doc.name} in pack ${pack.collection}: ${err.message}`;
       console.error(err);
     }
   }
 
   // Apply the original locked status for the pack
-  pack.configure({locked: wasLocked});
+  await pack.configure({locked: wasLocked});
   console.log(`Migrated all ${entity} entities from Compendium ${pack.collection}`);
 };
+
+/**
+ * Apply 'smart' AC migration to a given Actor compendium. This will perform the normal AC migration but additionally
+ * check to see if the actor has armor already equipped, and opt to use that instead.
+ * @param pack
+ * @return {Promise}
+ */
+export const migrateArmorClass = async function(pack) {
+  if ( typeof pack === "string" ) pack = game.packs.get(pack);
+  if ( pack.metadata.entity !== "Actor" ) return;
+  const wasLocked = pack.locked;
+  await pack.configure({locked: false});
+  const actors = await pack.getDocuments();
+  const updates = [];
+  const armor = new Set(Object.keys(CONFIG.SWNPRETTYE.armorTypes));
+
+  for ( const actor of actors ) {
+    try {
+      console.log(`Migrating ${actor.name}...`);
+      const src = actor.toObject();
+      const update = {_id: actor.id};
+      const currentAC = src.data.attributes.ac.value;
+      const hasArmorEquipped = actor.itemTypes.equipment.some(e =>
+        armor.has(e.data.data.armor?.type) && e.data.data.equipped);
+
+      // Perform the normal migration.
+      _migrateActorAC(src, update);
+      updates.push(update);
+
+      if ( !hasArmorEquipped ) continue;
+      const computedAC = actor._computeArmorClass(actor.data.data, {ignoreFlat: true}).value;
+      if ( (currentAC !== undefined) && (computedAC !== currentAC) ) {
+        console.log(`${actor.name} had different computed AC: ${currentAC} (current) vs. ${computedAC} (computed)`);
+      }
+      delete update["data.attributes.ac.flat"];
+      update["data.attributes.ac.-=flat"] = null;
+    } catch (e) {
+      console.warn(`Failed to migrate ${actor.name}`, e);
+    }
+  }
+
+  await Actor.implementation.updateDocuments(updates, {pack: pack.collection});
+  await pack.getDocuments(); // Force a re-prepare of all actors.
+  await pack.configure({locked: wasLocked});
+  console.log(`Migrated the AC of all Actors from Compendium ${pack.collection}`);
+}
 
 /* -------------------------------------------- */
 /*  Entity Type Migration Helpers               */
@@ -127,31 +175,36 @@ export const migrateActorData = function(actor) {
   const updateData = {};
 
   // Actor Data Updates
-  _migrateActorMovement(actor, updateData);
-  _migrateActorSenses(actor, updateData);
+  if (actor.data) {
+    _migrateActorMovement(actor, updateData);
+    _migrateActorSenses(actor, updateData);
+    _migrateActorType(actor, updateData);
+    _migrateActorAC(actor, updateData);
+  }
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
-  let hasItemUpdates = false;
-  const items = actor.items.map(i => {
-
+  const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
-    let itemUpdate = migrateItemData(i);
+    const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
+    let itemUpdate = migrateItemData(itemData);
 
     // Prepared, Equipped, and Proficient for NPC actors
     if ( actor.type === "npc" ) {
-      if (getProperty(i.data, "preparation.prepared") === false) itemUpdate["data.preparation.prepared"] = true;
-      if (getProperty(i.data, "equipped") === false) itemUpdate["data.equipped"] = true;
-      if (getProperty(i.data, "proficient") === false) itemUpdate["data.proficient"] = true;
+      if (getProperty(itemData.data, "preparation.prepared") === false) itemUpdate["data.preparation.prepared"] = true;
+      if (getProperty(itemData.data, "equipped") === false) itemUpdate["data.equipped"] = true;
+      if (getProperty(itemData.data, "proficient") === false) itemUpdate["data.proficient"] = true;
     }
 
     // Update the Owned Item
     if ( !isObjectEmpty(itemUpdate) ) {
-      hasItemUpdates = true;
-      return mergeObject(i, itemUpdate, {enforceTypes: false, inplace: false});
-    } else return i;
-  });
-  if ( hasItemUpdates ) updateData.items = items;
+      itemUpdate._id = itemData._id;
+      arr.push(expandObject(itemUpdate));
+    }
+
+    return arr;
+  }, []);
+  if ( items.length > 0 ) updateData.items = items;
   return updateData;
 };
 
@@ -170,7 +223,7 @@ function cleanActorData(actorData) {
   actorData.data = filterObject(actorData.data, model);
 
   // Scrub system flags
-  const allowedFlags = CONFIG.SWNPRETTY.allowedActorFlags.reduce((obj, f) => {
+  const allowedFlags = CONFIG.SWNPRETTYE.allowedActorFlags.reduce((obj, f) => {
     obj[f] = null;
     return obj;
   }, {});
@@ -187,11 +240,15 @@ function cleanActorData(actorData) {
 
 /**
  * Migrate a single Item entity to incorporate latest data model changes
- * @param item
+ *
+ * @param {object} item  Item data to migrate
+ * @return {object}      The updateData to apply
  */
 export const migrateItemData = function(item) {
   const updateData = {};
   _migrateItemAttunement(item, updateData);
+  _migrateItemRarity(item, updateData);
+  _migrateItemSpellcasting(item, updateData);
   return updateData;
 };
 
@@ -204,24 +261,34 @@ export const migrateItemData = function(item) {
  * @return {Object}       The updateData to apply
  */
 export const migrateSceneData = function(scene) {
-  const tokens = duplicate(scene.tokens);
-  return {
-    tokens: tokens.map(t => {
-      if (!t.actorId || t.actorLink || !t.actorData.data) {
-        t.actorData = {};
-        return t;
-      }
-      const token = new Token(t);
-      if ( !token.actor ) {
-        t.actorId = null;
-        t.actorData = {};
-      } else if ( !t.actorLink ) {
-        const updateData = migrateActorData(token.data.actorData);
-        t.actorData = mergeObject(token.data.actorData, updateData);
-      }
-      return t;
-    })
-  };
+  const tokens = scene.tokens.map(token => {
+    const t = token.toJSON();
+    if (!t.actorId || t.actorLink) {
+      t.actorData = {};
+    }
+    else if ( !game.actors.has(t.actorId) ){
+      t.actorId = null;
+      t.actorData = {};
+    }
+    else if ( !t.actorLink ) {
+      const actorData = duplicate(t.actorData);
+      actorData.type = token.actor?.type;
+      const update = migrateActorData(actorData);
+      ['items', 'effects'].forEach(embeddedName => {
+        if (!update[embeddedName]?.length) return;
+        const updates = new Map(update[embeddedName].map(u => [u._id, u]));
+        t.actorData[embeddedName].forEach(original => {
+          const update = updates.get(original._id);
+          if (update) mergeObject(original, update);
+        });
+        delete update[embeddedName];
+      });
+
+      mergeObject(t.actorData, update);
+    }
+    return t;
+  });
+  return {tokens};
 };
 
 /* -------------------------------------------- */
@@ -263,6 +330,7 @@ function _migrateActorSenses(actor, updateData) {
   const ad = actor.data;
   if ( ad?.traits?.senses === undefined ) return;
   const original = ad.traits.senses || "";
+  if ( typeof original !== "string" ) return;
 
   // Try to match old senses with the format like "Darkvision 60 ft, Blindsight 30 ft"
   const pattern = /([A-z]+)\s?([0-9]+)\s?([A-z]+)?/;
@@ -274,7 +342,7 @@ function _migrateActorSenses(actor, updateData) {
     const match = s.match(pattern);
     if ( !match ) continue;
     const type = match[1].toLowerCase();
-    if ( type in CONFIG.SWNPRETTY.senses ) {
+    if ( type in CONFIG.SWNPRETTYE.senses ) {
       updateData[`data.attributes.senses.${type}`] = Number(match[2]).toNearest(0.5);
       wasMatched = true;
     }
@@ -293,13 +361,130 @@ function _migrateActorSenses(actor, updateData) {
 /* -------------------------------------------- */
 
 /**
+ * Migrate the actor details.type string to object
+ * @private
+ */
+function _migrateActorType(actor, updateData) {
+  const ad = actor.data;
+  const original = ad.details?.type;
+  if ( typeof original !== "string" ) return;
+
+  // New default data structure
+  let data = {
+    "value": "",
+    "subtype": "",
+    "swarm": "",
+    "custom": ""
+  }
+
+  // Match the existing string
+  const pattern = /^(?:swarm of (?<size>[\w\-]+) )?(?<type>[^(]+?)(?:\((?<subtype>[^)]+)\))?$/i;
+  const match = original.trim().match(pattern);
+  if ( match ) {
+
+    // Match a known creature type
+    const typeLc = match.groups.type.trim().toLowerCase();
+    const typeMatch = Object.entries(CONFIG.SWNPRETTYE.creatureTypes).find(([k, v]) => {
+      return (typeLc === k) ||
+        (typeLc === game.i18n.localize(v).toLowerCase()) ||
+        (typeLc === game.i18n.localize(`${v}Pl`).toLowerCase());
+    });
+    if (typeMatch) data.value = typeMatch[0];
+    else {
+      data.value = "custom";
+      data.custom = match.groups.type.trim().titleCase();
+    }
+    data.subtype = match.groups.subtype?.trim().titleCase() || "";
+
+    // Match a swarm
+    const isNamedSwarm = actor.name.startsWith(game.i18n.localize("SWNPRETTYE.CreatureSwarm"));
+    if ( match.groups.size || isNamedSwarm ) {
+      const sizeLc = match.groups.size ? match.groups.size.trim().toLowerCase() : "tiny";
+      const sizeMatch = Object.entries(CONFIG.SWNPRETTYE.actorSizes).find(([k, v]) => {
+        return (sizeLc === k) || (sizeLc === game.i18n.localize(v).toLowerCase());
+      });
+      data.swarm = sizeMatch ? sizeMatch[0] : "tiny";
+    }
+    else data.swarm = "";
+  }
+
+  // No match found
+  else {
+    data.value = "custom";
+    data.custom = original;
+  }
+
+  // Update the actor data
+  updateData["data.details.type"] = data;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate the actor attributes.ac.value to the new ac.flat override field.
+ * @private
+ */
+function _migrateActorAC (actorData, updateData) {
+  const ac = actorData.data?.attributes?.ac;
+  if ( !Number.isNumeric(ac?.value) ) return;
+  updateData['data.attributes.ac.flat'] = ac.value;
+  updateData['data.attributes.ac.-=value'] = null;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Delete the old data.attuned boolean
+ *
+ * @param {object} item        Item data to migrate
+ * @param {object} updateData  Existing update to expand upon
+ * @return {object}            The updateData to apply
  * @private
  */
 function _migrateItemAttunement(item, updateData) {
-  if ( item.data.attuned === undefined ) return;
-  updateData["data.attunement"] = CONFIG.SWNPRETTY.attunementTypes.NONE;
+  if ( item.data?.attuned === undefined ) return updateData;
+  updateData["data.attunement"] = CONFIG.SWNPRETTYE.attunementTypes.NONE;
   updateData["data.-=attuned"] = null;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Attempt to migrate item rarity from freeform string to enum value.
+ *
+ * @param {object} item        Item data to migrate
+ * @param {object} updateData  Existing update to expand upon
+ * @return {object}            The updateData to apply
+ * @private
+ */
+function _migrateItemRarity(item, updateData) {
+  if ( item.data?.rarity === undefined ) return updateData;
+  const rarity = Object.keys(CONFIG.SWNPRETTYE.itemRarity).find(key =>
+    (CONFIG.SWNPRETTYE.itemRarity[key].toLowerCase() === item.data.rarity.toLowerCase()) || (key === item.data.rarity)
+  );
+  updateData["data.rarity"] = rarity ?? "";
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Replace class spellcasting string to object.
+ *
+ * @param {object} item        Item data to migrate
+ * @param {object} updateData  Existing update to expand upon
+ * @return {object}            The updateData to apply
+ * @private
+ */
+function _migrateItemSpellcasting(item, updateData) {
+  if ( item.type !== "class" || (foundry.utils.getType(item.data.spellcasting) === "Object") ) return updateData;
+  updateData["data.spellcasting"] = {
+    progression: item.data.spellcasting,
+    ability: ""
+  };
   return updateData;
 }
 
