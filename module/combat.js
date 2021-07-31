@@ -5,8 +5,8 @@
  * Apply the dexterity score as a decimal tiebreaker if requested
  * See Combat._getInitiativeFormula for more detail.
  */
-export const _getInitiativeFormula = function(combatant) {
-  const actor = combatant.actor;
+export const _getInitiativeFormula = function() {
+  const actor = this.actor;
   if ( !actor ) return "1d8";
   const init = actor.data.data.attributes.init;
 
