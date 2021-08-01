@@ -51,9 +51,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }).join(', ');
 
     // Weight unit
-    sheetData["weightUnit"] = game.settings.get("dnd5e", "metricWeightUnits")
-      ? game.i18n.localize("DND5E.AbbreviationKgs")
-      : game.i18n.localize("DND5E.AbbreviationLbs");
+    sheetData["weightUnit"] = game.settings.get("swnpretty", "metricWeightUnits")
+      ? game.i18n.localize("SWNPRETTY.AbbreviationKgs")
+      : game.i18n.localize("SWNPRETTY.AbbreviationLbs");
 
     // Return data for rendering
     return sheetData;
