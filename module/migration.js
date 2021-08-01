@@ -128,7 +128,7 @@ export const migrateArmorClass = async function(pack) {
   await pack.configure({locked: false});
   const actors = await pack.getDocuments();
   const updates = [];
-  const armor = new Set(Object.keys(CONFIG.SWNPRETTYE.armorTypes));
+  const armor = new Set(Object.keys(CONFIG.SWNPRETTY.armorTypes));
 
   for ( const actor of actors ) {
     try {
@@ -223,7 +223,7 @@ function cleanActorData(actorData) {
   actorData.data = filterObject(actorData.data, model);
 
   // Scrub system flags
-  const allowedFlags = CONFIG.SWNPRETTYE.allowedActorFlags.reduce((obj, f) => {
+  const allowedFlags = CONFIG.SWNPRETTY.allowedActorFlags.reduce((obj, f) => {
     obj[f] = null;
     return obj;
   }, {});
@@ -342,7 +342,7 @@ function _migrateActorSenses(actor, updateData) {
     const match = s.match(pattern);
     if ( !match ) continue;
     const type = match[1].toLowerCase();
-    if ( type in CONFIG.SWNPRETTYE.senses ) {
+    if ( type in CONFIG.SWNPRETTY.senses ) {
       updateData[`data.attributes.senses.${type}`] = Number(match[2]).toNearest(0.5);
       wasMatched = true;
     }
@@ -384,7 +384,7 @@ function _migrateActorType(actor, updateData) {
 
     // Match a known creature type
     const typeLc = match.groups.type.trim().toLowerCase();
-    const typeMatch = Object.entries(CONFIG.SWNPRETTYE.creatureTypes).find(([k, v]) => {
+    const typeMatch = Object.entries(CONFIG.SWNPRETTY.creatureTypes).find(([k, v]) => {
       return (typeLc === k) ||
         (typeLc === game.i18n.localize(v).toLowerCase()) ||
         (typeLc === game.i18n.localize(`${v}Pl`).toLowerCase());
@@ -397,10 +397,10 @@ function _migrateActorType(actor, updateData) {
     data.subtype = match.groups.subtype?.trim().titleCase() || "";
 
     // Match a swarm
-    const isNamedSwarm = actor.name.startsWith(game.i18n.localize("SWNPRETTYE.CreatureSwarm"));
+    const isNamedSwarm = actor.name.startsWith(game.i18n.localize("SWNPRETTY.CreatureSwarm"));
     if ( match.groups.size || isNamedSwarm ) {
       const sizeLc = match.groups.size ? match.groups.size.trim().toLowerCase() : "tiny";
-      const sizeMatch = Object.entries(CONFIG.SWNPRETTYE.actorSizes).find(([k, v]) => {
+      const sizeMatch = Object.entries(CONFIG.SWNPRETTY.actorSizes).find(([k, v]) => {
         return (sizeLc === k) || (sizeLc === game.i18n.localize(v).toLowerCase());
       });
       data.swarm = sizeMatch ? sizeMatch[0] : "tiny";
@@ -445,7 +445,7 @@ function _migrateActorAC (actorData, updateData) {
  */
 function _migrateItemAttunement(item, updateData) {
   if ( item.data?.attuned === undefined ) return updateData;
-  updateData["data.attunement"] = CONFIG.SWNPRETTYE.attunementTypes.NONE;
+  updateData["data.attunement"] = CONFIG.SWNPRETTY.attunementTypes.NONE;
   updateData["data.-=attuned"] = null;
   return updateData;
 }
@@ -462,8 +462,8 @@ function _migrateItemAttunement(item, updateData) {
  */
 function _migrateItemRarity(item, updateData) {
   if ( item.data?.rarity === undefined ) return updateData;
-  const rarity = Object.keys(CONFIG.SWNPRETTYE.itemRarity).find(key =>
-    (CONFIG.SWNPRETTYE.itemRarity[key].toLowerCase() === item.data.rarity.toLowerCase()) || (key === item.data.rarity)
+  const rarity = Object.keys(CONFIG.SWNPRETTY.itemRarity).find(key =>
+    (CONFIG.SWNPRETTY.itemRarity[key].toLowerCase() === item.data.rarity.toLowerCase()) || (key === item.data.rarity)
   );
   updateData["data.rarity"] = rarity ?? "";
   return updateData;

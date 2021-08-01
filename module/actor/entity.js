@@ -7,21 +7,62 @@ import Item5e from "../item/entity.js";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
+ * @extends {Actor}
  */
 export default class Actor5e extends Actor {
 
   /**
+   * The data source for Actor5e.classes allowing it to be lazily computed.
+   * @type {Object<string, Item5e>}
+   * @private
+   */
+  _classes = undefined;
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * A mapping of classes belonging to this Actor.
+   * @type {Object<string, Item5e>}
+   */
+  get classes() {
+    if ( this._classes !== undefined ) return this._classes;
+    if ( !["character", "npc"].includes(this.data.type) ) return this._classes = {};
+    return this._classes = this.items.filter((item) => item.type === "class").reduce((obj, cls) => {
+      obj[cls.name.slugify({strict: true})] = cls;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this Actor currently polymorphed into some other creature?
-   * @return {boolean}
+   * @type {boolean}
    */
   get isPolymorphed() {
     return this.getFlag("swnpretty", "isPolymorphed") || false;
   }
 
   /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  prepareData() {
+    this._preparationWarnings = [];
+    super.prepareData();
+
+    // iterate over owned items and recompute attributes that depend on prepared actor data
+    this.items.forEach(item => item.prepareFinalAttributes());
+  }
+
+  /* -------------------------------------------- */
 
   /** @override */
   prepareBaseData() {
+    this._prepareBaseArmorClass(this.data);
     switch ( this.data.type ) {
       case "character":
         return this._prepareCharacterData(this.data);
@@ -30,6 +71,16 @@ export default class Actor5e extends Actor {
       case "vehicle":
         return this._prepareVehicleData(this.data);
     }
+  }
+
+  /* --------------------------------------------- */
+
+  /** @override */
+  applyActiveEffects() {
+    // The Active Effects do not have access to their parent at preparation time so we wait until this stage to
+    // determine whether they are suppressed or not.
+    this.effects.forEach(e => e.determineSuppression());
+    return super.applyActiveEffects();
   }
 
   /* -------------------------------------------- */
@@ -61,6 +112,7 @@ export default class Actor5e extends Actor {
     const dcBonus = Number.isNumeric(data.bonuses?.spell?.dc) ? parseInt(data.bonuses.spell.dc) : 0;
     const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
     const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
+
     //Compute ability bonus -Lofty
     for (let [id, abl] of Object.entries(data.abilities)) {
       if (8 <= abl.value && abl.value <=13){
@@ -91,7 +143,7 @@ export default class Actor5e extends Actor {
       // }
     }
 
-    // Set save bonus
+    // Set save bonus -Lofty
     const level = data.attributes.level.value
 
     data.attributes.saves.psave = 16 - level - Math.max((data.abilities.str.mod), (data.abilities.con.mod));
@@ -100,7 +152,7 @@ export default class Actor5e extends Actor {
     // console.log("The final msave is ", data.attributes.saves.msave, "and wis mod is", data.abilities.wis.mod);
     // console.log("The higher msave ability score is", Math.max((data.abilities.wis.mod), (data.abilities.cha.mod)));
 
-    // Inventory encumbrance
+    // Inventory encumbrance -lofty
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
     data.attributes.readiedEnc = this._computeReadied(actorData);
     // console.log("normal enc- ",data.attributes.encumbrance)
@@ -129,7 +181,10 @@ export default class Actor5e extends Actor {
     // Prepare skills
     this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
 
-    // Determine Initiative Modifier
+    // Reset class store to ensure it is updated with any changes
+    this._classes = undefined;
+
+    // Determine Initiative Modifier -Lofty
     const init = data.attributes.init;
     init.mod = data.abilities.dex.mod;
 
@@ -139,18 +194,22 @@ export default class Actor5e extends Actor {
     init.total = init.mod + init.bonus + init.custom;
 
     // Prepare spell-casting data
-    data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
+    // data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
 
     //Set base AC -lofty
     data.attributes.base = 10 + data.abilities.dex.mod;
     // console.log("BASE AC ATTEMPT IS", data.attributes.base);
+    // Prepare armor class data
+    const {armor, shield} = this._computeArmorClass(data);
+    this.armor = armor || null;
+    this.shield = shield || null;
 
-    // Compute owned item attributes which depend on prepared Actor data
-    this.items.forEach(item => {
-      item.getSaveDC();
-      item.getAttackToHit();
-    });
+    // // Compute owned item attributes which depend on prepared Actor data
+    // this.items.forEach(item => {
+    //   item.getSaveDC();
+    //   item.getAttackToHit();
+    // });
   }
 
   /* -------------------------------------------- */
@@ -182,14 +241,12 @@ export default class Actor5e extends Actor {
   /** @override */
   getRollData() {
     const data = super.getRollData();
-    data.classes = this.data.items.reduce((obj, i) => {
-      if ( i.type === "class" ) {
-        obj[i.name.slugify({strict: true})] = i.data;
-      }
+    data.prof = this.data.data.attributes.prof || 0;
+    data.classes = Object.entries(this.classes).reduce((obj, e) => {
+      const [slug, cls] = e;
+      obj[slug] = cls.data.data;
       return obj;
     }, {});
-    // data.prof = this.data.data.attributes.prof || 0;
-    data.prof = 0;
     return data;
   }
 
@@ -203,7 +260,7 @@ export default class Actor5e extends Actor {
    * @param {number} priorLevel       The previous level of the added class
    * @return {Promise<Item5e[]>}     Array of Item5e entities
    */
-  static async getClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
+  static async loadClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
     className = className.toLowerCase();
     subclassName = subclassName.slugify();
 
@@ -252,64 +309,64 @@ export default class Actor5e extends Actor {
   //   return updated;
   // }
 
-  async addEmbeddedItems(items, prompt=true) {
-    let itemsToAdd = items;
-    if ( !items.length ) return [];
-
-    // Obtain the array of item creation data
-    let toCreate = [];
-    if (prompt) {
-      const itemIdsToAdd = await SelectItemsPrompt.create(items, {
-        hint: game.i18n.localize('SWNPRETTY.AddEmbeddedItemPromptHint')
-      });
-      for (let item of items) {
-        if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
-      }
-    } else {
-      toCreate = items.map(item => item.toObject());
-    }
-
-    // Create the requested items
-    if (itemsToAdd.length === 0) return [];
-    return Item5e.createDocuments(toCreate, {parent: this});
-  }
-
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create additional class features in the Actor when a class item is updated.
-   * @private
-   */
-  async _createClassFeatures(updated) {
-    let toCreate = [];
-    for (let u of updated instanceof Array ? updated : [updated]) {
-      const item = this.items.get(u._id);
-      if (!item || (item.data.type !== "class")) continue;
-      const updateData = expandObject(u);
-      const config = {
-        className: updateData.name || item.data.name,
-        subclassName: getProperty(updateData, "data.subclass") || item.data.data.subclass,
-        level: getProperty(updateData, "data.levels"),
-        priorLevel: item ? item.data.data.levels : 0
-      }
-
-      // Get and create features for an increased class level
-      let changed = false;
-      if ( config.level && (config.level > config.priorLevel)) changed = true;
-      if ( config.subclassName !== item.data.data.subclass ) changed = true;
-
-      // Get features to create
-      if ( changed ) {
-        const existing = new Set(this.items.map(i => i.name));
-        const features = await Actor5e.getClassFeatures(config);
-        for ( let f of features ) {
-          if ( !existing.has(f.name) ) toCreate.push(f);
-        }
-      }
-    }
-    return toCreate
-  }
+  // async addEmbeddedItems(items, prompt=true) {
+  //   let itemsToAdd = items;
+  //   if ( !items.length ) return [];
+  //
+  //   // Obtain the array of item creation data
+  //   let toCreate = [];
+  //   if (prompt) {
+  //     const itemIdsToAdd = await SelectItemsPrompt.create(items, {
+  //       hint: game.i18n.localize('SWNPRETTY.AddEmbeddedItemPromptHint')
+  //     });
+  //     for (let item of items) {
+  //       if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
+  //     }
+  //   } else {
+  //     toCreate = items.map(item => item.toObject());
+  //   }
+  //
+  //   // Create the requested items
+  //   if (itemsToAdd.length === 0) return [];
+  //   return Item5e.createDocuments(toCreate, {parent: this});
+  // }
+  //
+  //
+  // /* -------------------------------------------- */
+  //
+  // /**
+  //  * Create additional class features in the Actor when a class item is updated.
+  //  * @private
+  //  */
+  // async _createClassFeatures(updated) {
+  //   let toCreate = [];
+  //   for (let u of updated instanceof Array ? updated : [updated]) {
+  //     const item = this.items.get(u._id);
+  //     if (!item || (item.data.type !== "class")) continue;
+  //     const updateData = expandObject(u);
+  //     const config = {
+  //       className: updateData.name || item.data.name,
+  //       subclassName: getProperty(updateData, "data.subclass") || item.data.data.subclass,
+  //       level: getProperty(updateData, "data.levels"),
+  //       priorLevel: item ? item.data.data.levels : 0
+  //     }
+  //
+  //     // Get and create features for an increased class level
+  //     let changed = false;
+  //     if ( config.level && (config.level > config.priorLevel)) changed = true;
+  //     if ( config.subclassName !== item.data.data.subclass ) changed = true;
+  //
+  //     // Get features to create
+  //     if ( changed ) {
+  //       const existing = new Set(this.items.map(i => i.name));
+  //       const features = await Actor5e.getClassFeatures(config);
+  //       for ( let f of features ) {
+  //         if ( !existing.has(f.name) ) toCreate.push(f);
+  //       }
+  //     }
+  //   }
+  //   return toCreate
+  // }
 
   /* -------------------------------------------- */
   /*  Data Preparation Helpers                    */
@@ -322,11 +379,11 @@ export default class Actor5e extends Actor {
     const data = actorData.data;
 
     // Determine character level and available hit dice based on owned Class items
-    const [level, hd] = actorData.items.reduce((arr, item) => {
+    const [level, hd] = this.items.reduce((arr, item) => {
       if ( item.type === "class" ) {
-        const classLevels = parseInt(item.data.levels) || 1;
+        const classLevels = parseInt(item.data.data.levels) || 1;
         arr[0] += classLevels;
-        arr[1] += classLevels - (parseInt(item.data.hitDiceUsed) || 0);
+        arr[1] += classLevels - (parseInt(item.data.data.hitDiceUsed) || 0);
       }
       return arr;
     }, [0, 0]);
@@ -396,6 +453,8 @@ export default class Actor5e extends Actor {
     // const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
+      skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
+      let round = Math.floor;
 
       skl.value = Math.clamped(Number(skl.value).toNearest(1), -1, 9) ?? -1;
       //Fill in all the 'level' category with -1 as default
@@ -436,7 +495,8 @@ export default class Actor5e extends Actor {
    */
   _computeSpellcastingProgression (actorData) {
     if (actorData.type === 'vehicle') return;
-    const spells = actorData.data.spells;
+    const ad = actorData.data;
+    const spells = ad.spells;
     const isNPC = actorData.type === 'npc';
 
     // Translate the list of classes into spell-casting progression
@@ -452,14 +512,14 @@ export default class Actor5e extends Actor {
     // Tabulate the total spell-casting progression
     const classes = this.data.items.filter(i => i.type === "class");
     for ( let cls of classes ) {
-      const d = cls.data;
-      if ( d.spellcasting === "none" ) continue;
+      const d = cls.data.data;
+      if ( d.spellcasting.progression === "none" ) continue;
       const levels = d.levels;
-      const prog = d.spellcasting;
+      const prog = d.spellcasting.progression;
 
       // Accumulate levels
       if ( prog !== "pact" ) {
-        caster = cls;
+        caster = d;
         progression.total++;
       }
       switch (prog) {
@@ -473,9 +533,9 @@ export default class Actor5e extends Actor {
 
     // EXCEPTION: single-classed non-full progression rounds up, rather than down
     const isSingleClass = (progression.total === 1) && (progression.slot > 0);
-    if (!isNPC && isSingleClass && ['half', 'third'].includes(caster.data.spellcasting) ) {
-      const denom = caster.data.spellcasting === 'third' ? 3 : 2;
-      progression.slot = Math.ceil(caster.data.levels / denom);
+    if (!isNPC && isSingleClass && ['half', 'third'].includes(caster.spellcasting.progression) ) {
+      const denom = caster.spellcasting.progression === 'third' ? 3 : 2;
+      progression.slot = Math.ceil(caster.levels / denom);
     }
 
     // EXCEPTION: NPC with an explicit spell-caster level
@@ -513,11 +573,85 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
+  // /** -From Lofty - this is the compute armor class function I can add if it might help, putting it here for convenience
+  //  * Determine a character's AC value from their equipped armor and shield.
+  //  * @param {object} data
+  //  * @param {object} [options]
+  //  * @param {boolean} [options.ignoreFlat]  Should ac.flat be ignored while calculating the AC?
+  //  * @return {Number}                       Calculated armor value.
+  //  * @private
+  //  */
+  // _computeArmorClass(data, { ignoreFlat=false }={}) {
+  //   const calc = data.attributes.ac;
+  //   if ( !ignoreFlat && (calc.flat !== null) ) {
+  //     calc.value = calc.flat;
+  //     return {value: calc.flat};
+  //   }
+  //
+  //   const armorTypes = new Set(Object.keys(CONFIG.SWNPRETTY.armorTypes));
+  //   const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
+  //     const armor = equip.data.data.armor;
+  //     if ( !equip.data.data.equipped || !armorTypes.has(armor?.type) ) return obj;
+  //     if ( armor.type === "shield" ) obj.shields.push(equip);
+  //     else obj.armors.push(equip);
+  //     return obj;
+  //   }, {armors: [], shields: []});
+  //
+  //   if ( armors.length ) {
+  //     if ( armors.length > 1 ) this._preparationWarnings.push("SWNPRETTY.WarnMultipleArmor");
+  //     const armorData = armors[0].data.data.armor;
+  //     let ac = armorData.value + Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
+  //     if ( armorData.type === "heavy" ) ac = armorData.value;
+  //     if ( (ac > calc.base) && (calc.calc === "default") ) calc.base = ac;
+  //   }
+  //
+  //   if ( shields.length ) {
+  //     if ( shields.length > 1 ) this._preparationWarnings.push("SWNPRETTY.WarnMultipleShields");
+  //     const ac = shields[0].data.data.armor.value;
+  //     if ( ac > calc.shield ) calc.shield = ac;
+  //   }
+  //
+  //   if ( !armors.length || calc.calc !== "default" ) {
+  //     let formula = calc.calc === "custom" ? calc.formula : CONFIG.SWNPRETTY.armorClasses[calc.calc]?.formula;
+  //     const rollData = this.getRollData();
+  //     let ac;
+  //     try {
+  //       const replaced = Roll.replaceFormulaData(formula, rollData);
+  //       ac = Roll.safeEval(replaced);
+  //     } catch (err) {
+  //       this._preparationWarnings.push("SWNPRETTY.WarnBadACFormula");
+  //       formula = CONFIG.SWNPRETTY.armorClasses.default.formula;
+  //       const replaced = Roll.replaceFormulaData(formula, rollData);
+  //       ac = Roll.safeEval(replaced);
+  //     }
+  //     calc.base = ac;
+  //   }
+//
+//   if ( !armors.length || calc.calc !== "default" ) {
+//   let formula = calc.calc === "custom" ? calc.formula : CONFIG.SWNPRETTY.armorClasses[calc.calc]?.formula;
+//   const rollData = this.getRollData();
+//   let ac;
+//   try {
+//   const replaced = Roll.replaceFormulaData(formula, rollData);
+//   ac = Roll.safeEval(replaced);
+// } catch (err) {
+//   this._preparationWarnings.push("SWNPRETTY.WarnBadACFormula");
+//   formula = CONFIG.SWNPRETTY.armorClasses.default.formula;
+//   const replaced = Roll.replaceFormulaData(formula, rollData);
+//   ac = Roll.safeEval(replaced);
+// }
+// calc.base = ac;
+// }
+//
+// calc.value = calc.base + calc.shield + calc.bonus + calc.cover;
+// return {value: calc.value, armor: armors[0], shield: shields[0]};
+// }
+
+  /* -------------------------------------------- */
+
   /**
    * Compute the level and percentage of encumbrance for an Actor.
    *
-   * Optionally include the weight of carried currency across all denominations by applying the standard rule
-   * from the PHB pg. 143
    * @param {Object} actorData      The data object for the Actor being rendered
    * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
    * @private
@@ -581,126 +715,76 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-  /*  Socket Listeners and Handlers
+  /*  Event Handlers
   /* -------------------------------------------- */
 
-  /** @override */
-  static async create(data, options={}) {
-    data.token = data.token || {};
-    if ( data.type === "character" ) {
-      mergeObject(data.token, {
-        vision: true,
-        dimSight: 30,
-        brightSight: 0,
-        actorLink: true,
-        disposition: 1
-      }, {overwrite: false});
+  /** @inheritdoc */
+  async _preCreate(data, options, user) {
+    await super._preCreate(data, options, user);
+    const sourceId = this.getFlag("core", "sourceId");
+    if ( sourceId?.startsWith("Compendium.") ) return;
+
+    // Some sensible defaults for convenience
+    // Token size category
+    const s = CONFIG.SWNPRETTY.tokenSizes[this.data.data.traits.size || "med"];
+    this.data.token.update({width: s, height: s});
+
+    // Player character configuration
+    if ( this.type === "character" ) {
+      this.data.token.update({vision: true, actorLink: true, disposition: 1});
     }
-    return super.create(data, options);
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
-  async update(data, options={}) {
+  /** @inheritdoc */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
 
     // Apply changes in Actor size to Token width/height
-    const newSize = getProperty(data, "data.traits.size");
-    if ( newSize && (newSize !== getProperty(this.data, "data.traits.size")) ) {
+    const newSize = foundry.utils.getProperty(changed, "data.traits.size");
+    if ( newSize && (newSize !== foundry.utils.getProperty(this.data, "data.traits.size")) ) {
       let size = CONFIG.SWNPRETTY.tokenSizes[newSize];
-      if ( this.isToken ) this.token.update({height: size, width: size});
-      else if ( !data["token.width"] && !hasProperty(data, "token.width") ) {
-        data["token.height"] = size;
-        data["token.width"] = size;
+      if ( !foundry.utils.hasProperty(changed, "token.width") ) {
+        changed.token = changed.token || {};
+        changed.token.height = size;
+        changed.token.width = size;
       }
     }
 
     // Reset death save counters
-    if ( (this.data.data.attributes.hp.value <= 0) && (getProperty(data, "data.attributes.hp.value") > 0) ) {
-      setProperty(data, "data.attributes.death.success", 0);
-      setProperty(data, "data.attributes.death.failure", 0);
+    const isDead = this.data.data.attributes.hp.value <= 0;
+    if ( isDead && (foundry.utils.getProperty(changed, "data.attributes.hp.value") > 0) ) {
+      foundry.utils.setProperty(changed, "data.attributes.death.success", 0);
+      foundry.utils.setProperty(changed, "data.attributes.death.failure", 0);
     }
 
-    // Perform the update
-    return super.update(data, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async createEmbeddedEntity(embeddedName, itemData, options={}) {
-
-    // Pre-creation steps for owned items
-    if ( embeddedName === "OwnedItem" ) this._preCreateOwnedItem(itemData, options);
-
-    // Standard embedded entity creation
-    return super.createEmbeddedEntity(embeddedName, itemData, options);
+  //   // Perform the update
+  //   return super.update(data, options);
+  // }
+  //
+  // /* -------------------------------------------- */
+  //
+  // /** @override */
+  // async createEmbeddedEntity(embeddedName, itemData, options={}) {
+  //
+  //   // Pre-creation steps for owned items
+  //   if ( embeddedName === "OwnedItem" ) this._preCreateOwnedItem(itemData, options);
+  //
+  //   // Standard embedded entity creation
+  //   return super.createEmbeddedEntity(embeddedName, itemData, options);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * A temporary shim function which will eventually (in core fvtt version 0.8.0+) be migrated to the new abstraction layer
-   * @param itemData
-   * @param options
-   * @private
+   * Assign a class item as the original class for the Actor based on which class has the most levels
+   * @protected
    */
-  _preCreateOwnedItem(itemData, options) {
-    if ( this.data.type === "vehicle" ) return;
-    const isNPC = this.data.type === 'npc';
-    let initial = {};
-    switch ( itemData.type ) {
-
-      case "weapon":
-        if ( getProperty(itemData, "data.equipped") === undefined ) {
-          initial["data.equipped"] = isNPC;       // NPCs automatically equip weapons
-        }
-        if ( getProperty(itemData, "data.proficient") === undefined ) {
-          if ( isNPC ) {
-            initial["data.proficient"] = true;    // NPCs automatically have equipment proficiency
-          } else {
-            const weaponProf = {
-              "natural": true,
-              "simpleM": "sim",
-              "simpleR": "sim",
-            }[itemData.data?.weaponType];         // Player characters check proficiency
-            const actorWeaponProfs = this.data.data.traits?.weaponProf?.value || [];
-            const hasWeaponProf = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
-            initial["data.proficient"] = hasWeaponProf;
-          }
-        }
-        break;
-
-      case "equipment":
-        if ( getProperty(itemData, "data.equipped") === undefined ) {
-          initial["data.equipped"] = isNPC;       // NPCs automatically equip equipment
-        }
-        if ( getProperty(itemData, "data.proficient") === undefined ) {
-          if ( isNPC ) {
-            initial["data.proficient"] = true;    // NPCs automatically have equipment proficiency
-          } else {
-            const armorProf = {
-              "natural": true,
-              "clothing": true,
-              "light": "lgt",
-              "medium": "med",
-              "heavy": "hvy",
-              "shield": "shl"
-            }[itemData.data?.armor?.type];        // Player characters check proficiency
-            const actorArmorProfs = this.data.data.traits?.armorProf?.value || [];
-            const hasEquipmentProf = (armorProf === true) || actorArmorProfs.includes(armorProf);
-            initial["data.proficient"] = hasEquipmentProf;
-          }
-        }
-        break;
-
-      case "spell":
-        if ( getProperty(itemData, "data.proficient") === undefined ) {
-          initial["data.prepared"] = isNPC;       // NPCs automatically prepare spells
-        }
-        break;
-    }
-    mergeObject(itemData, initial);
+  _assignPrimaryClass() {
+    const classes = this.itemTypes.class.sort((a, b) => b.data.data.levels - a.data.data.levels);
+    const newPC = classes[0]?.id || "";
+    return this.update({"data.details.originalClass": newPC});
   }
 
   /* -------------------------------------------- */
@@ -827,7 +911,7 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {Object} options      Options which configure how the skill check is rolled
-   * @param {int} options      Options which configure how the skill check is rolled
+   * @param {int} options         Options which configure how the skill check is rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    * Lofty has renamed this method from rollSkill in order to add another parameter
    */
@@ -839,6 +923,7 @@ export default class Actor5e extends Actor {
     // Compose roll parts and data
     const parts = ["@mod"];
     const data = {mod: skl.value + skl.prof + attr};
+
     // Ability test bonus
     if ( bonuses.check ) {
       data["checkBonus"] = bonuses.check;
@@ -860,15 +945,18 @@ export default class Actor5e extends Actor {
     const reliableTalent = (skl.value >= 1 && this.getFlag("swnpretty", "reliableTalent"));
 
     // Roll and return
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNPRETTY.SkillPromptTitle", {skill: CONFIG.SWNPRETTY.skills[skillId]}),
       fastForward: true,
-      messageData: {"flags.swnpretty.roll": {type: "skill", skillId }}
+      // messageData: {"flags.swnpretty.roll": {type: "skill", skillId }}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.swnpretty.roll": {type: "skill", skillId }
+      }
     });
-    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
-
+    // rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
 
 
@@ -937,13 +1025,16 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNPRETTY.AbilityPromptTitle", {ability: label}),
-      messageData: {"flags.swnpretty.roll": {type: "ability", abilityId }}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.swnpretty.roll": {type: "ability", abilityId }
+      }
     });
-    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
+    // rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }
 
@@ -984,7 +1075,7 @@ export default class Actor5e extends Actor {
     if(saveType === "morale"){
       saveLabel = "Morale";
       // Roll and return
-      rollData = mergeObject(options, {
+      rollData = foundry.utils.mergeObject(options, {
         parts: parts,
         data: data,
         fastForward: true,
@@ -996,7 +1087,7 @@ export default class Actor5e extends Actor {
       });
     }
     else{
-      rollData = mergeObject(options, {
+      rollData = foundry.utils.mergeObject(options, {
         parts: parts,
         data: data,
         fastForward: true,
@@ -1006,6 +1097,17 @@ export default class Actor5e extends Actor {
         messageData: {"flags.swnpretty.roll": {type: "save", saveLabel}}
       });
     }
+
+    // // Roll and return
+    // rollData = foundry.utils.mergeObject(options, {
+    //   parts: parts,
+    //   data: data,
+    //   title: game.i18n.format("SWNPRETTY.SavePromptTitle", {ability: label}),
+    //   messageData: {
+    //     speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+    //     "flags.swnpretty.roll": {type: "save", abilityId }
+    //   }
+    // });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }
@@ -1045,13 +1147,16 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNPRETTY.SavePromptTitle", {ability: label}),
-      messageData: {"flags.swnpretty.roll": {type: "save", abilityId }}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.swnpretty.roll": {type: "save", abilityId }
+      }
     });
-    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
+    // rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }
 
@@ -1077,20 +1182,22 @@ export default class Actor5e extends Actor {
     const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
     // Include a global actor ability save bonus
-    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    const bonuses = foundry.utils.getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.save ) {
       parts.push("@saveBonus");
       data.saveBonus = bonuses.save;
     }
 
     // Evaluate the roll
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.localize("SWNPRETTY.DeathSavingThrow"),
-      speaker: speaker,
       targetValue: 10,
-      messageData: {"flags.swnpretty.roll": {type: "death"}}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.swnpretty.roll": {type: "death"}
+      }
     });
     rollData.speaker = speaker;
     const roll = await d20Roll(rollData);
@@ -1099,6 +1206,8 @@ export default class Actor5e extends Actor {
     // Take action depending on the result
     const success = roll.total >= 10;
     const d20 = roll.dice[0].total;
+
+    let chatString;
 
     // Save success
     if ( success ) {
@@ -1111,7 +1220,7 @@ export default class Actor5e extends Actor {
           "data.attributes.death.failure": 0,
           "data.attributes.hp.value": 1
         });
-        await ChatMessage.create({content: game.i18n.format("SWNPRETTY.DeathSaveCriticalSuccess", {name: this.name}), speaker});
+        chatString = "SWNPRETTY.DeathSaveCriticalSuccess";
       }
 
       // 3 Successes = survive and reset checks
@@ -1120,7 +1229,7 @@ export default class Actor5e extends Actor {
           "data.attributes.death.success": 0,
           "data.attributes.death.failure": 0
         });
-        await ChatMessage.create({content: game.i18n.format("SWNPRETTY.DeathSaveSuccess", {name: this.name}), speaker});
+        chatString = "SWNPRETTY.DeathSaveSuccess";
       }
 
       // Increment successes
@@ -1132,8 +1241,15 @@ export default class Actor5e extends Actor {
       let failures = (death.failure || 0) + (d20 === 1 ? 2 : 1);
       await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
       if ( failures >= 3 ) {  // 3 Failures = death
-        await ChatMessage.create({content: game.i18n.format("SWNPRETTY.DeathSaveFailure", {name: this.name}), speaker});
+        chatString = "SWNPRETTY.DeathSaveFailure";
       }
+    }
+
+    // Display success/failure chat message
+    if ( chatString ) {
+      let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      await ChatMessage.create(chatData);
     }
 
     // Return the rolled result
@@ -1176,7 +1292,7 @@ export default class Actor5e extends Actor {
     // Prepare roll data
     const parts = [`1${denomination}`, "@abilities.con.mod"];
     const title = game.i18n.localize("SWNPRETTY.HitDiceRoll");
-    const rollData = duplicate(this.data.data);
+    const rollData = foundry.utils.deepClone(this.data.data);
 
     // Call the roll helper utility
     const roll = await damageRoll({
@@ -1184,11 +1300,13 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: rollData,
       title: title,
-      speaker: ChatMessage.getSpeaker({actor: this}),
-      allowcritical: false,
+      allowCritical: false,
       fastForward: !dialog,
       dialogOptions: {width: 350},
-      messageData: {"flags.swnpretty.roll": {type: "hitDie"}}
+      messageData: {
+        speaker: ChatMessage.getSpeaker({actor: this}),
+        "flags.swnpretty.roll": {type: "hitDie"}
+      }
     });
     if ( !roll ) return null;
 
@@ -1445,7 +1563,7 @@ export default class Actor5e extends Actor {
     const o = duplicate(this.toJSON());
     o.flags.swnpretty = o.flags.swnpretty || {};
     o.flags.swnpretty.transformOptions = {mergeSkills, mergeSaves};
-    const source = duplicate(target.toJSON());
+    const source = target.toJSON();
 
     // Prepare new data to merge from the source
     const d = {
@@ -1454,38 +1572,38 @@ export default class Actor5e extends Actor {
       data: source.data, // Get the data model of your new form
       items: source.items, // Get the items of your new form
       effects: o.effects.concat(source.effects), // Combine active effects from both forms
-      token: source.token, // New token configuration
       img: source.img, // New appearance
       permission: o.permission, // Use the original actor permissions
       folder: o.folder, // Be displayed in the same sidebar folder
       flags: o.flags // Use the original actor flags
     };
 
-    // Additional adjustments
+    // Specifically delete some data attributes
     delete d.data.resources; // Don't change your resource pools
     delete d.data.currency; // Don't lose currency
     delete d.data.bonuses; // Don't lose global bonuses
-    delete d.token.actorId; // Don't reference the old actor ID
-    d.token.actorLink = o.token.actorLink; // Keep your actor link
-    d.token.name = d.name; // Token name same as actor name
+
+    // Specific additional adjustments
     d.data.details.alignment = o.data.details.alignment; // Don't change alignment
     d.data.attributes.exhaustion = o.data.attributes.exhaustion; // Keep your prior exhaustion level
     d.data.attributes.inspiration = o.data.attributes.inspiration; // Keep inspiration
     d.data.spells = o.data.spells; // Keep spell slots
+    d.data.attributes.ac.flat = target.data.data.attributes.ac.value; // Override AC
+
+    // Token appearance updates
+    d.token = {name: d.name};
+    for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation"] ) {
+      d.token[k] = source.token[k];
+    }
+    const vision = keepVision ? o.token : source.token;
+    for ( let k of ['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle'] ) {
+      d.token[k] = vision[k];
+    }
 
     // Handle wildcard
     if ( source.token.randomImg ) {
       const images = await target.getTokenImages();
       d.token.img = images[Math.floor(Math.random() * images.length)];
-    }
-
-    // Keep Token configurations
-    const tokenConfig = ["displayName", "vision", "actorLink", "disposition", "displayBars", "bar1", "bar2"];
-    if ( keepVision ) {
-      tokenConfig.push(...['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle']);
-    }
-    for ( let c of tokenConfig ) {
-      d.token[c] = o.token[c];
     }
 
     // Transfer ability scores
@@ -1554,13 +1672,13 @@ export default class Actor5e extends Actor {
     if ( !transformTokens ) return;
     const tokens = this.getActiveTokens(true);
     const updates = tokens.map(t => {
-      const newTokenData = duplicate(d.token);
-      if ( !t.data.actorLink ) newTokenData.actorData = newActor.data;
+      const newTokenData = foundry.utils.deepClone(d.token);
       newTokenData._id = t.data._id;
       newTokenData.actorId = newActor.id;
+      newTokenData.actorLink = true;
       return newTokenData;
     });
-    return canvas.scene?.updateEmbeddedEntity("Token", updates);
+    return canvas.scene?.updateEmbeddedDocuments("Token", updates);
   }
 
   /* -------------------------------------------- */
@@ -1579,9 +1697,16 @@ export default class Actor5e extends Actor {
     // If we are reverting an unlinked token, simply replace it with the base actor prototype
     if ( this.isToken ) {
       const baseActor = game.actors.get(this.token.data.actorId);
-      const prototypeTokenData = duplicate(baseActor.token);
-      prototypeTokenData.actorData = null;
-      return this.token.update(prototypeTokenData);
+      const prototypeTokenData = await baseActor.getTokenData();
+      const tokenUpdate = {actorData: {}};
+      for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation", "name"] ) {
+        tokenUpdate[k] = prototypeTokenData[k];
+      }
+      await this.token.update(tokenUpdate, {recursive: false});
+      await this.sheet.close();
+      const actor = this.token.getActor();
+      actor.sheet.render(true);
+      return actor;
     }
 
     // Obtain a reference to the original actor
@@ -1591,19 +1716,22 @@ export default class Actor5e extends Actor {
     // Get the Tokens which represent this actor
     if ( canvas.ready ) {
       const tokens = this.getActiveTokens(true);
+      const tokenData = await original.getTokenData();
       const tokenUpdates = tokens.map(t => {
-        const tokenData = duplicate(original.data.token);
-        tokenData._id = t.id;
-        tokenData.actorId = original.id;
-        return tokenData;
+        const update = duplicate(tokenData);
+        update._id = t.id;
+        delete update.x;
+        delete update.y;
+        return update;
       });
-      canvas.scene.updateEmbeddedEntity("Token", tokenUpdates);
+      canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates);
     }
 
-    // Delete the polymorphed Actor and maybe re-render the original sheet
+    // Delete the polymorphed version of the actor, if possible
     const isRendered = this.sheet.rendered;
     if ( game.user.isGM ) await this.delete();
-    original.sheet.render(isRendered);
+    else if ( isRendered ) this.sheet.close();
+    if ( isRendered ) original.sheet.render(isRendered);
     return original;
   }
 
@@ -1629,6 +1757,72 @@ export default class Actor5e extends Actor {
         return actor && actor.isPolymorphed;
       }
     });
+  }
+  
+  /* -------------------------------------------- */
+
+  /**
+   * Format a type object into a string.
+   * @param {object} typeData          The type data to convert to a string.
+   * @returns {string}
+   */
+  static formatCreatureType(typeData) {
+    if ( typeof typeData === "string" ) return typeData; // backwards compatibility
+    let localizedType;
+    if ( typeData.value === "custom" ) {
+      localizedType = typeData.custom;
+    } else {
+      let code = CONFIG.SWNPRETTY.creatureTypes[typeData.value];
+      localizedType = game.i18n.localize(!!typeData.swarm ? `${code}Pl` : code);
+    }
+    let type = localizedType;
+    if ( !!typeData.swarm ) {
+      type = game.i18n.format('SWNPRETTY.CreatureSwarmPhrase', {
+        size: game.i18n.localize(CONFIG.SWNPRETTY.actorSizes[typeData.swarm]),
+        type: localizedType
+      });
+    }
+    if (typeData.subtype) type = `${type} (${typeData.subtype})`;
+    return type;
+  }
+
+  /* -------------------------------------------- */
+
+  /*
+   * Populate a proficiency object with a `selected` field containing a combination of
+   * localizable group & individual proficiencies from `value` and the contents of `custom`.
+   *
+   * @param {object} data                Object containing proficiency data
+   * @param {Array.<string>} data.value  Array of standard proficiency keys
+   * @param {string} data.custom         Semicolon-separated string of custom proficiencies
+   * @param {string} type                "armor", "weapon", or "tool"
+   */
+  static prepareProficiencies(data, type) {
+    const profs = CONFIG.SWNPRETTY[`${type}Proficiencies`];
+    const itemTypes = CONFIG.SWNPRETTY[`${type}Ids`];
+
+    let values = [];
+    if ( data.value ) {
+      values = data.value instanceof Array ? data.value : [data.value];
+    }
+
+    data.selected = {};
+    const pack = game.packs.get(CONFIG.SWNPRETTY.sourcePacks.ITEMS);
+    for ( const key of values ) {
+      if ( profs[key] ) {
+        data.selected[key] = profs[key];
+      } else if ( itemTypes && itemTypes[key] ) {
+        const item = pack.index.get(itemTypes[key]);
+        data.selected[key] = item.name;
+      } else if ( type === "tool" && CONFIG.SWNPRETTY.vehicleTypes[key] ) {
+        data.selected[key] = CONFIG.SWNPRETTY.vehicleTypes[key];
+      }
+    }
+
+    // Add custom entries
+    if ( data.custom ) {
+      data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
+    }
   }
 
   /* -------------------------------------------- */
