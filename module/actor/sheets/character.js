@@ -50,6 +50,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       return [c.data.data.subclass, c.name, c.data.data.levels].filterJoin(' ')
     }).join(', ');
 
+    // Weight unit
+    sheetData["weightUnit"] = game.settings.get("dnd5e", "metricWeightUnits")
+      ? game.i18n.localize("DND5E.AbbreviationKgs")
+      : game.i18n.localize("DND5E.AbbreviationLbs");
+
     // Return data for rendering
     return sheetData;
   }
@@ -75,21 +80,21 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Partition items by category
     let [items, spells, feats, classes] = data.items.reduce((arr, item) => {
 
-      // // Item details
-      // item.img = item.img || DEFAULT_TOKEN;
-      // item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
-      // item.attunement = {
-      //   [CONFIG.SWNPRETTY.attunementTypes.REQUIRED]: {
-      //     icon: "fa-sun",
-      //     cls: "not-attuned",
-      //     title: "SWNPRETTY.AttunementRequired"
-      //   },
-      //   [CONFIG.SWNPRETTY.attunementTypes.ATTUNED]: {
-      //     icon: "fa-sun",
-      //     cls: "attuned",
-      //     title: "SWNPRETTY.AttunementAttuned"
-      //   }
-      // }[item.data.attunement];
+      // Item details
+      item.img = item.img || CONST.DEFAULT_TOKEN;
+      item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
+      item.attunement = {
+        [CONFIG.SWNPRETTY.attunementTypes.REQUIRED]: {
+          icon: "fa-sun",
+          cls: "not-attuned",
+          title: "SWNPRETTY.AttunementRequired"
+        },
+        [CONFIG.SWNPRETTY.attunementTypes.ATTUNED]: {
+          icon: "fa-sun",
+          cls: "attuned",
+          title: "SWNPRETTY.AttunementAttuned"
+        }
+      }[item.data.attunement];
 
       // Item usage
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
@@ -99,6 +104,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Item toggle state
       this._prepareItemToggleState(item);
+
+      // Primary Class
+      if ( item.type === "class" ) item.isOriginalClass = ( item._id === this.actor.data.data.details.originalClass );
 
       // Classify items into types
       if ( item.type === "spell" ) arr[1].push(item);
@@ -137,7 +145,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       if ( f.data.activation.type ) features.active.items.push(f);
       else features.passive.items.push(f);
     }
-    classes.sort((a, b) => b.levels - a.levels);
+    classes.sort((a, b) => b.data.levels - a.data.levels);
     features.classes.items = classes;
 
     // Assign and return
@@ -177,11 +185,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
    * Activate event listeners using the prepared sheet HTML
-   * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
+   * @param html {jQuery}   The prepared HTML object ready to be rendered into the DOM
    */
 	activateListeners(html) {
     super.activateListeners(html);
-    if ( !this.options.editable ) return;
+    if ( !this.isEditable ) return;
 
     // Item State Toggling
     html.find('.item-toggle').click(this._onToggleItem.bind(this));
@@ -228,7 +236,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   _onToggleItem(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.items.get(itemId);
     const attr = item.data.type === "spell" ? "data.preparation.prepared" : "data.equipped";
     return item.update({[attr]: !getProperty(item.data, attr)});
   }
@@ -278,6 +286,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     // Default drop handling if levels were not added
-    super._onDropItemCreate(itemData);
+    return super._onDropItemCreate(itemData);
   }
 }

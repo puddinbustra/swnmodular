@@ -1,3 +1,8 @@
+import Actor5e from "../entity.js";
+import Item5e from "../../item/entity.js";
+import ProficiencySelector from "../../apps/proficiency-selector.js";
+import PropertyAttribution from "../../apps/property-attribution.js";
+import TraitSelector from "../../apps/trait-selector.js";
 import ActorArmorConfig from "../../apps/actor-armor.js";
 // import Item5e from "../../item/entity.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
