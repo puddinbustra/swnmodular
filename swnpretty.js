@@ -1,5 +1,5 @@
 /**
- * The DnD5e game system for Foundry Virtual Tabletop
+ * The swn game system for Foundry Virtual Tabletop
  * A system for playing the fifth edition of the worlds most popular roleplaying game.
  * Author: Atropos
  * Software License: GNU GPLv3
@@ -13,11 +13,13 @@ import { SWNPRETTY } from "./module/config.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
-import { measureDistances, getBarAttribute } from "./module/canvas.js";
+// import { measureDistances, getBarAttribute } from "./module/canvas.js";
+import { measureDistances } from "./module/canvas.js";
 
 // Import Entities
 import Actor5e from "./module/actor/entity.js";
 import Item5e from "./module/item/entity.js";
+import { TokenDocument5e, Token5e } from "./module/token.js";
 
 // Import Applications
 import AbilityTemplate from "./module/pixi/ability-template.js";
@@ -37,13 +39,14 @@ import * as chat from "./module/chat.js";
 import * as dice from "./module/dice.js";
 import * as macros from "./module/macros.js";
 import * as migrations from "./module/migration.js";
+import ActiveEffect5e from "./module/active-effect.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */
 
 Hooks.once("init", function() {
-  console.log(`DnD5e | Initializing the DnD5e Game System\n${SWNPRETTY.ASCII}`);
+  console.log(`SWN | Initializing the SWN Game System\n${SWNPRETTY.ASCII}`);
 
   // Create a namespace within the game global
   game.swnpretty = {
@@ -56,7 +59,8 @@ Hooks.once("init", function() {
       ItemSheet5e,
       ShortRestDialog,
       TraitSelector,
-      ActorMovementConfig
+      ActorMovementConfig,
+      ActorSensesConfig
     },
     canvas: {
       AbilityTemplate
@@ -66,6 +70,8 @@ Hooks.once("init", function() {
     entities: {
       Actor5e,
       Item5e,
+      TokenDocument5e,
+      Token5e,
     },
     macros: macros,
     migrations: migrations,
@@ -77,13 +83,16 @@ Hooks.once("init", function() {
   // CONFIG.Actor.entityClass = Actor5e;
   // CONFIG.Item.entityClass = Item5e;
 
-  // CONFIG.ActiveEffect.documentClass = ActiveEffect5e;
+  CONFIG.ActiveEffect.documentClass = ActiveEffect5e;
   CONFIG.Actor.documentClass = Actor5e;
   CONFIG.Item.documentClass = Item5e;
-  // CONFIG.Token.documentClass = TokenDocument5e;
-  // CONFIG.Token.objectClass = Token5e;
+  CONFIG.Token.documentClass = TokenDocument5e;
+  CONFIG.Token.objectClass = Token5e;
 
   CONFIG.time.roundTime = 6;
+
+  CONFIG.Dice.DamageRoll = dice.DamageRoll;
+  CONFIG.Dice.D20Roll = dice.D20Roll;
 
   // 5e cone RAW should be 53.13 degrees
   CONFIG.MeasuredTemplate.defaults.angle = 53.13;
@@ -93,7 +102,11 @@ Hooks.once("init", function() {
 
   // Patch Core Functions. "I don't think this is currently relevant. -Lofty"
   CONFIG.Combat.initiative.formula = "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus";
-  Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+  Combatant.prototype._getInitiativeFormula = _getInitiativeFormula;
+
+  // Register Roll Extensions
+  CONFIG.Dice.rolls.push(dice.D20Roll);
+  CONFIG.Dice.rolls.push(dice.DamageRoll);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -119,7 +132,7 @@ Hooks.once("init", function() {
   });
 
   // Preload Handlebars Templates
-  preloadHandlebarsTemplates();
+  return preloadHandlebarsTemplates();
 });
 
 
@@ -151,10 +164,14 @@ Hooks.once("setup", function() {
 
   // Localize and sort CONFIG objects
   for ( let o of toLocalize ) {
-    const localized = Object.entries(CONFIG.SWNPRETTY[o]).map(e => {
-      return [e[0], game.i18n.localize(e[1])];
+    const localized = Object.entries(CONFIG.SWNPRETTY[o]).map(([k, v]) => {
+      if ( v.label ) v.label = game.i18n.localize(v.label);
+      if ( typeof v === "string" ) return [k, game.i18n.localize(v)];
+      return [k, v];
     });
-    if ( !noSort.includes(o) ) localized.sort((a, b) => a[1].localeCompare(b[1]));
+    if ( !noSort.includes(o) ) localized.sort((a, b) =>
+      (a[1].label ?? a[1]).localeCompare(b[1].label ?? b[1])
+    );
     CONFIG.SWNPRETTY[o] = localized.reduce((obj, e) => {
       obj[e[0]] = e[1];
       return obj;
@@ -175,9 +192,10 @@ Hooks.once("ready", function() {
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
   const currentVersion = game.settings.get("swnpretty", "systemMigrationVersion");
-  const NEEDS_MIGRATION_VERSION = "1.2.1";
-  const COMPATIBLE_MIGRATION_VERSION = 0.80;
-  const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+  const NEEDS_MIGRATION_VERSION = "1.4.1";
+  const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
+  if ( !currentVersion && totalDocuments === 0 ) return game.settings.set("swnpretty", "systemMigrationVersion", game.system.data.version);
+  const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
   if ( !needsMigration ) return;
 
   // Perform the migration
@@ -198,8 +216,8 @@ Hooks.on("canvasInit", function() {
   canvas.grid.diagonalRule = game.settings.get("swnpretty", "diagonalMovement");
   SquareGrid.prototype.measureDistances = measureDistances;
 
-  // Extend Token Resource Bars
-  Token.prototype.getBarAttribute = getBarAttribute;
+  // // Extend Token Resource Bars
+  // Token.prototype.getBarAttribute = getBarAttribute;
 });
 
 
@@ -223,7 +241,7 @@ Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on('getActorDirectoryEntryContext', Actor5e.addDirectoryContextOptions);
 
-// TODO I should remove this
+// FIXME: This helper is needed for the vehicle sheet. It should probably be refactored.
 Handlebars.registerHelper('getProperty', function (data, property) {
   return getProperty(data, property);
 });
