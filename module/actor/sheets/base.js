@@ -1,11 +1,14 @@
-import Item5e from "../../item/entity.js";
-import TraitSelector from "../../apps/trait-selector.js";
+import ActorArmorConfig from "../../apps/actor-armor.js";
+// import Item5e from "../../item/entity.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
+// import TraitSelector from "../../apps/trait-selector.js";
+import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
+import ActorTypeConfig from "../../apps/actor-type.js";
 import {SWNPRETTY} from '../../config.js';
-import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
-// import ActiveEffect5e from "../../active-effect.js";
+// import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
+import ActiveEffect5e from "../../active-effect.js";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -45,6 +48,14 @@ export default class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * A set of item types that should be prevented from being dropped on this type of actor sheet.
+   * @type {Set<string>}
+   */
+  static unsupportedItemTypes = new Set();
+
+  /* -------------------------------------------- */
+
   /** @override */
   get template() {
     if ( !game.user.isGM && this.actor.limited ) return "systems/swnpretty/templates/actors/limited-sheet.html";
@@ -54,7 +65,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  getData(options) {
 
     // // Basic data
     // let isOwner = this.entity.owner;
@@ -132,30 +143,38 @@ export default class ActorSheet5e extends ActorSheet {
 
 
     // Skills
-    if (data.actor.data.skills) {
-      for ( let [s, skl] of Object.entries(data.actor.data.skills)) {
+    if (actorData.data.skills) {
+      for ( let [s, skl] of Object.entries(actorData.data.skills)) {
         skl.ability = CONFIG.SWNPRETTY.abilityAbbreviations[skl.ability];
         skl.icon = this._getProficiencyIcon(skl.value);
         skl.hover = CONFIG.SWNPRETTY.proficiencyLevels[skl.value];
         skl.label = CONFIG.SWNPRETTY.skills[s];
+        skl.baseValue = source.skills[s].value;
       }
     }
 
     // Movement speeds
-    data.movement = this._getMovementSpeed(data.actor);
+    data.movement = this._getMovementSpeed(actorData);
 
     // Senses
-    data.senses = this._getSenses(data.actor);
+    data.senses = this._getSenses(actorData);
 
     // Update traits
-    this._prepareTraits(data.actor.data.traits);
+    this._prepareTraits(actorData.data.traits);
 
     // Prepare owned items
     this._prepareItems(data);
 
     // Prepare active effects
-    data.effects = prepareActiveEffectCategories(this.entity.effects);
+    data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
+
     // data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
+    data.warnings = this.actor._preparationWarnings;
+
+    // Prepare property attributions
+    this.attribution = {
+      "attributes.ac": this._prepareArmorClassAttribution(actorData.data)
+    };
 
     // Return data to the sheet
     return data
@@ -223,6 +242,90 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
+   * Produce a list of armor class attribution objects.
+   * @param {object} data                Actor data to determine the attributions from.
+   * @return {AttributionDescription[]}  List of attribution descriptions.
+   */
+  _prepareArmorClassAttribution(data) {
+    const calc = data.attributes.ac;
+
+    // Flat
+    if ( calc.flat !== null ) {
+      return [{
+        label: game.i18n.localize("SWNPRETTY.Flat"),
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: calc.flat
+      }];
+    }
+
+    let attribution = [];
+
+    // Equipped Armor
+    if ( this.actor.armor && calc.calc === "default" ) {
+      const armorData = this.actor.armor.data.data.armor;
+      attribution.push({
+        label: this.actor.armor.name,
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: armorData.value
+      });
+      const dex = Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
+      if ( dex !== 0 && armorData.type !== "heavy" ) attribution.push({
+        label: "@abilities.dex.mod",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: dex
+      });
+    }
+
+    // Formula
+    else {
+      const formula = calc.calc === "custom" ? calc.formula : CONFIG.SWNPRETTY.armorClasses[calc.calc]?.formula;
+      let base = calc.base;
+      const dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
+      const rollData = this.actor.getRollData();
+      for ( const [match, term] of formula.matchAll(dataRgx) ) {
+        const value = foundry.utils.getProperty(data, term);
+        if ( (term === "attributes.ac.base") || (value === 0) ) continue;
+        if ( Number.isNumeric(value) ) base -= Number(value);
+        attribution.push({
+          label: match,
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: foundry.utils.getProperty(data, term)
+        });
+      }
+      attribution.unshift({
+        label: game.i18n.localize("SWNPRETTY.PropertyBase"),
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: base
+      });
+    }
+
+    // Shield
+    if ( this.actor.shield && calc.shield !== 0 ) attribution.push({
+      label: this.actor.shield.name,
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: calc.shield
+    });
+
+    // Bonus
+    if ( calc.bonus !== 0 ) attribution.push({
+      label: game.i18n.localize("SWNPRETTY.EquipmentBonus"),
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: calc.bonus
+    });
+
+    // Cover
+    if ( calc.cover !== 0 ) attribution.push({
+      label: game.i18n.localize("SWNPRETTY.Cover"),
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: calc.cover
+    });
+
+    return attribution;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare the data structure for traits data like languages, resistances & vulnerabilities, and proficiencies
    * @param {object} traits   The raw traits data object from the actor data
    * @private
@@ -254,6 +357,14 @@ export default class ActorSheet5e extends ActorSheet {
       if ( trait.custom ) {
         trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
       }
+      trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
+    }
+
+    // Populate and localize proficiencies
+    for ( const t of ["armor", "weapon", "tool"] ) {
+      const trait = traits[`${t}Prof`];
+      if ( !trait ) continue;
+      Actor5e.prepareProficiencies(trait, t);
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
   }
@@ -324,7 +435,9 @@ export default class ActorSheet5e extends ActorSheet {
       if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.SWNPRETTY.spellLevels[0]);
       const l = levels.pact;
       const config = CONFIG.SWNPRETTY.spellPreparationModes.pact;
-      registerSection("pact", sections.pact, config, {
+      const level = game.i18n.localize(`SWNPRETTY.SpellLevel${levels.pact.level}`);
+      const label = `${config} — ${level}`;
+      registerSection("pact", sections.pact, label, {
         prepMode: "pact",
         value: l.value,
         max: l.max,
@@ -433,10 +546,7 @@ export default class ActorSheet5e extends ActorSheet {
   /*  Event Listeners and Handlers
   /* -------------------------------------------- */
 
-  /**
-   * Activate event listeners using the prepared sheet HTML
-   * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
-   */
+  /** @inheritdoc */
   activateListeners(html) {
 
     // Activate Item Filters
@@ -446,6 +556,12 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Item summaries
     html.find('.item .item-name.rollable h4').click(event => this._onItemSummary(event));
+
+    // View Item Sheets
+    html.find('.item-edit').click(this._onItemEdit.bind(this));
+
+    // Property attributions
+    html.find('.attributable').mouseover(this._onPropertyAttribution.bind(this));
 
     // Editable Only Listeners
     if ( this.isEditable ) {
@@ -462,6 +578,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
 
       // Trait Selector
+      html.find('.proficiency-selector').click(this._onProficiencySelector.bind(this));
       html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
       // Configure Special Flags
@@ -469,13 +586,14 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Owned Item management
       html.find('.item-create').click(this._onItemCreate.bind(this));
-      html.find('.item-edit').click(this._onItemEdit.bind(this));
+      // html.find('.item-edit').click(this._onItemEdit.bind(this));
       html.find('.item-delete').click(this._onItemDelete.bind(this));
       html.find('.item-uses input').click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
       html.find('.slot-max-override').click(this._onSpellSlotOverride.bind(this));
 
       // Active Effect management
-      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.entity));
+      // html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.entity));
+      html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
     }
 
     // Owner Only Listeners
@@ -483,7 +601,6 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Ability Checks
       html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
-
 
       // Roll Skill Checks
       html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
@@ -508,7 +625,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Iinitialize Item list filters by activating the set of filters which are currently applied
+   * Initialize Item list filters by activating the set of filters which are currently applied
    * @private
    */
   _initializeFilterItemList(i, ul) {
@@ -549,17 +666,28 @@ export default class ActorSheet5e extends ActorSheet {
   _onConfigMenu(event) {
     event.preventDefault();
     const button = event.currentTarget;
+    let app;
     switch ( button.dataset.action ) {
+      case "armor":
+        app = new ActorArmorConfig(this.object);
+        break;
+      case "hit-dice":
+        app = new ActorHitDiceConfig(this.object);
+        break;
       case "movement":
-        new ActorMovementConfig(this.object).render(true);
+        app = new ActorMovementConfig(this.object);
         break;
       case "flags":
-        new ActorSheetFlags(this.object).render(true);
+        app = new ActorSheetFlags(this.object);
         break;
       case "senses":
-        new ActorSensesConfig(this.object).render(true);
+        app = new ActorSensesConfig(this.object);
+        break;
+      case "type":
+        app = new ActorTypeConfig(this.object);
         break;
     }
+    app?.render(true);
   }
 
   /* -------------------------------------------- */
@@ -571,22 +699,19 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onCycleSkillProficiency(event) {
     event.preventDefault();
-    const field = $(event.currentTarget).siblings('input[type="hidden"]');
+    const field = event.currentTarget.previousElementSibling;
+    const skillName = field.parentElement.dataset.skill;
+    const source = this.actor.data._source.data.skills[skillName];
+    if ( !source ) return;
 
-    // Get the current level and the array of levels
-    const level = parseFloat(field.val());
+    // Cycle to the next or previous skill level
     const levels = [0, 1, 0.5, 2];
-    let idx = levels.indexOf(level);
-
-    // Toggle next level - forward on click, backwards on right
-    if ( event.type === "click" ) {
-      field.val(levels[(idx === levels.length - 1) ? 0 : idx + 1]);
-    } else if ( event.type === "contextmenu" ) {
-      field.val(levels[(idx === 0) ? levels.length - 1 : idx - 1]);
-    }
+    let idx = levels.indexOf(source.value);
+    const next = idx + (event.type === "click" ? 1 : 3);
+    field.value = levels[next % 4];
 
     // Update the field value and save the form
-    this._onSubmit(event);
+    return this._onSubmit(event);
   }
 
   /* -------------------------------------------- */
@@ -668,6 +793,14 @@ export default class ActorSheet5e extends ActorSheet {
   /** @override */
   async _onDropItemCreate(itemData) {
 
+    // Check to make sure items of this type are allowed on this actor
+    if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
+      return ui.notifications.warn(game.i18n.format("SWNPRETTY.ActorWarningInvalidItem", {
+        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+      }));
+    }
+
     // Create a Consumable spell scroll on the Inventory tab
     if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
@@ -676,7 +809,25 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Ignore certain statuses
     if ( itemData.data ) {
-      ["attunement", "equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
+      // Ignore certain statuses
+      ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
+
+      // Downgrade ATTUNED to REQUIRED
+      itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.SWNPRETTY.attunementTypes.REQUIRED);
+    }
+
+    // Stack identical consumables
+    if ( itemData.type === "consumable" && itemData.flags.core?.sourceId ) {
+      const similarItem = this.actor.items.find(i => {
+        const sourceId = i.getFlag("core", "sourceId");
+        return sourceId && (sourceId === itemData.flags.core?.sourceId) &&
+               (i.type === "consumable") && (i.name === itemData.name);
+      });
+      if ( similarItem ) {
+        return similarItem.update({
+          'data.quantity': similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
+        });
+      }
     }
 
     // Create the owned item as normal
@@ -717,7 +868,7 @@ export default class ActorSheet5e extends ActorSheet {
   async _onUsesChange(event) {
       event.preventDefault();
       const itemId = event.currentTarget.closest(".item").dataset.itemId;
-      const item = this.actor.getOwnedItem(itemId);
+      const item = this.actor.items.get(itemId);
       const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
       event.target.value = uses;
       return item.update({ 'data.uses.value': uses });
@@ -732,7 +883,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemRoll(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.items.get(itemId);
     return item.roll();
   }
 
@@ -746,7 +897,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemRecharge(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.items.get(itemId);
     return item.rollRecharge();
   };
 
@@ -759,7 +910,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemSummary(event) {
     event.preventDefault();
     let li = $(event.currentTarget).parents(".item"),
-        item = this.actor.getOwnedItem(li.data("item-id")),
+        item = this.actor.items.get(li.data("item-id")),
         chatData = item.getChatData({secrets: this.actor.isOwner});
 
     // Toggle summary
@@ -807,8 +958,8 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemEdit(event) {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
-    const item = this.actor.getOwnedItem(li.dataset.itemId);
-    item.sheet.render(true);
+    const item = this.actor.items.get(li.dataset.itemId);
+    return item.sheet.render(true);
   }
 
   /* -------------------------------------------- */
@@ -821,7 +972,24 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemDelete(event) {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
-    this.actor.deleteOwnedItem(li.dataset.itemId);
+    const item = this.actor.items.get(li.dataset.itemId);
+    if ( item ) return item.delete();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle displaying the property attribution tooltip when a property is hovered over.
+   * @param {Event} event   The originating mouse event.
+   * @private
+   */
+  async _onPropertyAttribution(event) {
+    const existingTooltip = event.currentTarget.querySelector("div.tooltip");
+    const property = event.currentTarget.dataset.property;
+    if ( existingTooltip || !property || !this.attribution ) return;
+
+    let html = await new PropertyAttribution(this.object, this.attribution, property).renderTooltip();
+    event.currentTarget.insertAdjacentElement("beforeend", html[0]);
   }
 
   /* -------------------------------------------- */
@@ -847,7 +1015,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onRollSkillCheck(event) {
     event.preventDefault();
     const skill = event.currentTarget.parentElement.dataset.skill;
-    this.actor.rollSkill(skill, {event: event});
+    return this.actor.rollSkill(skill, {event: event});
   }
 
   /* -------------------------------------------- */
@@ -855,13 +1023,13 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Handle rolling a Skill check
-   * @param {Event} event   The originating click event
+   * @param {Event} event   The originating click event, Lofty
    * @private
    */
   _onRollAbilitySave(event) {
     event.preventDefault();
     const save = event.currentTarget.dataset.saves;
-    this.actor.rollSaveSwn(save, {event: event});
+    return this.actor.rollSaveSwn(save, {event: event});
   }
 
   /* -------------------------------------------- */
@@ -874,7 +1042,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onToggleAbilityProficiency(event) {
     event.preventDefault();
     const field = event.currentTarget.previousElementSibling;
-    this.actor.update({[field.name]: 1 - parseInt(field.value)});
+    return this.actor.update({[field.name]: 1 - parseInt(field.value)});
   }
 
   /* -------------------------------------------- */
@@ -891,7 +1059,23 @@ export default class ActorSheet5e extends ActorSheet {
     const filter = li.dataset.filter;
     if ( set.has(filter) ) set.delete(filter);
     else set.add(filter);
-    this.render();
+    return this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle spawning the ProficiencySelector application to configure armor, weapon, and tool proficiencies.
+   * @param {Event} event  The click event which originated the selection
+   * @private
+   */
+  _onProficiencySelector(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+    const label = a.parentElement.querySelector("label");
+    const options = { name: a.dataset.target, title: label.innerText, type: a.dataset.type };
+    if ( options.type === "tool" ) options.sortCategories = true;
+    return new ProficiencySelector(this.actor, options).render(true);
   }
 
   /* -------------------------------------------- */
@@ -907,7 +1091,7 @@ export default class ActorSheet5e extends ActorSheet {
     const label = a.parentElement.querySelector("label");
     const choices = CONFIG.SWNPRETTY[a.dataset.options];
     const options = { name: a.dataset.target, title: label.innerText, choices };
-    new TraitSelector(this.actor, options).render(true)
+    return new TraitSelector(this.actor, options).render(true)
   }
 
   /* -------------------------------------------- */
@@ -915,15 +1099,14 @@ export default class ActorSheet5e extends ActorSheet {
   /** @override */
   _getHeaderButtons() {
     let buttons = super._getHeaderButtons();
-
-    // Add button to revert polymorph
-    if ( !this.actor.isPolymorphed || this.actor.isToken ) return buttons;
-    buttons.unshift({
-      label: 'SWNPRETTY.PolymorphRestoreTransformation',
-      class: "restore-transformation",
-      icon: "fas fa-backward",
-      onclick: ev => this.actor.revertOriginalForm()
-    });
+    if ( this.actor.isPolymorphed ) {
+      buttons.unshift({
+        label: 'SWNPRETTY.PolymorphRestoreTransformation',
+        class: "restore-transformation",
+        icon: "fas fa-backward",
+        onclick: () => this.actor.revertOriginalForm()
+      });
+    }
     return buttons;
   }
 }
