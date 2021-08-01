@@ -33,22 +33,22 @@ export default class Item5e extends Item {
       else if (this.data.type === "tool") return "int";
 
       // Weapons
-      else if (this.data.type === "weapon") {
-        const wt = itemData.weaponType;
-
-        //Weapons using the spellcasting modifier
-        if (["msak", "rsak"].includes(itemData.actionType)) {
-          return actorData.attributes.spellcasting || "int";
-        }
-
-        // Finesse weapons - Str or Dex (PHB pg. 147)
-        else if (itemData.properties.fin === true) {
-          return (actorData.abilities["dex"].mod >= actorData.abilities["str"].mod) ? "dex" : "str";
-        }
-
-        // Ranged weapons - Dex (PH p.194)
-        else if ( ["simpleR"].includes(wt) ) return "dex";
-      }
+      // else if (this.data.type === "weapon") {
+      //   const wt = itemData.weaponType;
+      //
+      //   //Weapons using the spellcasting modifier
+      //   if (["msak", "rsak"].includes(itemData.actionType)) {
+      //     return actorData.attributes.spellcasting || "int";
+      //   }
+      //
+      //   // Finesse weapons - Str or Dex (PHB pg. 147)
+      //   else if (itemData.properties.fin === true) {
+      //     return (actorData.abilities["dex"].mod >= actorData.abilities["str"].mod) ? "dex" : "str";
+      //   }
+      //
+      //   // Ranged weapons - Dex (PH p.194)
+      //   else if ( ["simpleR"].includes(wt) ) return "dex";
+      // }
       return "str";
     }
 
@@ -376,21 +376,21 @@ export default class Item5e extends Item {
     const actorBonus = this.actor.data.data.bonuses?.[itemData.actionType] || {};
     if ( actorBonus.attack ) parts.push(actorBonus.attack);
 
-    // One-time bonus provided by consumed ammunition
-    if ( (itemData.consume?.type === 'ammo') && !!this.actor.items ) {
-      const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
+    // // One-time bonus provided by consumed ammunition
+    // if ( (itemData.consume?.type === 'ammo') && !!this.actor.items ) {
+    //   const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
 
-      if (ammoItemData) {
-        const ammoItemQuantity = ammoItemData.data.quantity;
-        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
-        const ammoItemAttackBonus = ammoItemData.data.attackBonus;
-        const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo")
-        if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
-          parts.push("@ammo");
-          rollData["ammo"] = ammoItemAttackBonus;
-        }
-      }
-    }
+      // if (ammoItemData) {
+      //   const ammoItemQuantity = ammoItemData.data.quantity;
+        // const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
+        // const ammoItemAttackBonus = ammoItemData.data.attackBonus;
+        // const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo")
+        // if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
+        //   parts.push("@ammo");
+        //   rollData["ammo"] = ammoItemAttackBonus;
+        // }
+      // }
+    // }
 
     // Condense the resulting attack bonus formula into a simplified label
     let toHitLabel = simplifyRollFormula(parts.join('+'), rollData).trim();
@@ -795,29 +795,29 @@ export default class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  /**
-   * Prepare chat card data for weapon type items
-   * @private
-   */
-  _weaponChatData(data, labels, props) {
-    props.push(
-      CONFIG.SWNPRETTY.weaponTypes[data.weaponType],
-    );
-  }
+  // /**
+  //  * Prepare chat card data for weapon type items
+  //  * @private
+  //  */
+  // _weaponChatData(data, labels, props) {
+  //   props.push(
+  //     CONFIG.SWNPRETTY.weaponTypes[data.weaponType],
+  //   );
+  // }
 
   /* -------------------------------------------- */
 
-  /**
-   * Prepare chat card data for consumable type items
-   * @private
-   */
-  _consumableChatData(data, labels, props) {
-    props.push(
-      CONFIG.SWNPRETTY.consumableTypes[data.consumableType],
-      data.uses.value + "/" + data.uses.max + " " + game.i18n.localize("SWNPRETTY.Charges")
-    );
-    data.hasCharges = data.uses.value >= 0;
-  }
+  // /**
+  //  * Prepare chat card data for consumable type items
+  //  * @private
+  //  */
+  // _consumableChatData(data, labels, props) {
+  //   props.push(
+  //     CONFIG.SWNPRETTY.consumableTypes[data.consumableType],
+  //     data.uses.value + "/" + data.uses.max + " " + game.i18n.localize("SWNPRETTY.Charges")
+  //   );
+  //   data.hasCharges = data.uses.value >= 0;
+  // }
 
   /* -------------------------------------------- */
 
@@ -1030,13 +1030,13 @@ export default class Item5e extends Item {
     // Handle ammunition damage
     const ammoData = this._ammo?.data;
 
-    // only add the ammunition damage if the ammution is a consumable with type 'ammo'
-    if ( this._ammo && (ammoData.type === "consumable") && (ammoData.data.consumableType === "ammo") ) {
-      parts.push("@ammo");
-      rollData["ammo"] = ammoData.data.damage.parts.map(p => p[0]).join("+");
-      rollConfig.flavor += ` [${this._ammo.name}]`;
-      delete this._ammo;
-    }
+    // // only add the ammunition damage if the ammution is a consumable with type 'ammo'
+    // if ( this._ammo && (ammoData.type === "consumable") && (ammoData.data.consumableType === "ammo") ) {
+    //   parts.push("@ammo");
+    //   rollData["ammo"] = ammoData.data.damage.parts.map(p => p[0]).join("+");
+    //   rollConfig.flavor += ` [${this._ammo.name}]`;
+    //   delete this._ammo;
+    // }
 
     // Scale melee critical hit damage
     if ( itemData.actionType === "mwak" ) {
@@ -1507,9 +1507,9 @@ export default class Item5e extends Item {
       if ( isNPC ) {
         updates["data.proficient"] = true;    // NPCs automatically have equipment proficiency
       } else {
-        const weaponProf = CONFIG.SWNPRETTY.weaponProficienciesMap[data.data?.weaponType]; // Player characters check proficiency
+        // const weaponProf = CONFIG.SWNPRETTY.weaponProficienciesMap[data.data?.weaponType]; // Player characters check proficiency
         const actorWeaponProfs = actorData.data.traits?.weaponProf?.value || [];
-        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
+        // updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
       }
     }
     return updates;

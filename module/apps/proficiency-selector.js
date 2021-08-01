@@ -26,13 +26,13 @@ export default class ProficiencySelector extends TraitSelector {
     this.options.choices = CONFIG.SWNPRETTY[`${this.options.type}Proficiencies`];
     const data = super.getData();
 
-    const pack = game.packs.get(CONFIG.SWNPRETTY.sourcePacks.ITEMS);
+    // const pack = game.packs.get(CONFIG.SWNPRETTY.sourcePacks.ITEMS);
     const ids = CONFIG.SWNPRETTY[`${this.options.type}Ids`];
     const map = CONFIG.SWNPRETTY[`${this.options.type}ProficienciesMap`];
     if ( ids !== undefined ) {
       const typeProperty = (this.options.type !== "armor") ? `${this.options.type}Type` : `armor.type`;
       for ( const [key, id] of Object.entries(ids) ) {
-        const item = await pack.getDocument(id);
+        // const item = await pack.getDocument(id);
         let type = foundry.utils.getProperty(item.data.data, typeProperty);
         if ( map && map[type] ) type = map[type];
         const entry = {

@@ -247,7 +247,7 @@ function cleanActorData(actorData) {
 export const migrateItemData = function(item) {
   const updateData = {};
   _migrateItemAttunement(item, updateData);
-  _migrateItemRarity(item, updateData);
+  // _migrateItemRarity(item, updateData);
   _migrateItemSpellcasting(item, updateData);
   return updateData;
 };
@@ -460,14 +460,14 @@ function _migrateItemAttunement(item, updateData) {
  * @return {object}            The updateData to apply
  * @private
  */
-function _migrateItemRarity(item, updateData) {
-  if ( item.data?.rarity === undefined ) return updateData;
-  const rarity = Object.keys(CONFIG.SWNPRETTY.itemRarity).find(key =>
-    (CONFIG.SWNPRETTY.itemRarity[key].toLowerCase() === item.data.rarity.toLowerCase()) || (key === item.data.rarity)
-  );
-  updateData["data.rarity"] = rarity ?? "";
-  return updateData;
-}
+// function _migrateItemRarity(item, updateData) {
+//   if ( item.data?.rarity === undefined ) return updateData;
+//   const rarity = Object.keys(CONFIG.SWNPRETTY.itemRarity).find(key =>
+//     (CONFIG.SWNPRETTY.itemRarity[key].toLowerCase() === item.data.rarity.toLowerCase()) || (key === item.data.rarity)
+//   );
+//   updateData["data.rarity"] = rarity ?? "";
+//   return updateData;
+// }
 
 /* -------------------------------------------- */
 

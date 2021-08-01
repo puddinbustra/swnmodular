@@ -192,7 +192,8 @@ Hooks.once("ready", function() {
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
   const currentVersion = game.settings.get("swnpretty", "systemMigrationVersion");
-  const NEEDS_MIGRATION_VERSION = "1.4.1";
+  const NEEDS_MIGRATION_VERSION = ".84";
+  const COMPATIBLE_MIGRATION_VERSION = 0.80;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
   if ( !currentVersion && totalDocuments === 0 ) return game.settings.set("swnpretty", "systemMigrationVersion", game.system.data.version);
   const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
