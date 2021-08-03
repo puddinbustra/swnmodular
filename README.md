@@ -11,7 +11,7 @@ If you have any other feedback, be it suggestions or support, send me a message 
 # About
 
 This sheet is for Stars Without Number: Revised edition. 
-This sheet has originally been made for personal use. As such, a couple things - like certain item qualities (like tech level) are not included. Though, these can be included in the item description (If there is demand, I may change these to suit more people). Since this is unofficial, and not directly part of Foundry, to install the system, just download and extract the code. Then, drop it into the 'systems' folder in your Foundry directory. From there, you should be able to update it as you would any other system and it should show up on the systems you have insalled. 
+This sheet has originally been made for personal use. As such, a couple things - like certain item qualities (like tech level) are not included. Though, these can be included in the item description (If there is demand, I may change these to suit more people). Since this is unofficial, and not directly part of Foundry, to install the system, just download and extract the code. Then, drop it into the 'systems' folder in your Foundry directory. From there, you should be able to update it as you would any other system and it should show up on the systems you have installed. 
 
 # Why This Sheet?
 
