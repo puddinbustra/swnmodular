@@ -70,7 +70,7 @@
   flex: 4;
 }
 /* ----------------------------------------- */
-/*  All DnD5e Apps                           */
+/*  All SWN Apps                           */
 /* ----------------------------------------- */
 .swnpretty {
   /* ----------------------------------------- */
@@ -778,6 +778,20 @@
   outline: none;
   box-shadow: 2px 2px 8px #2301a3;
   /*background-color: #435fd7;*/
+}
+.swnpretty.sheet.actor .extras-info{
+  flex: 1 0 25%;
+  font-size: 13px;
+  font-family: "Signika", serif;
+  padding: 4px;
+  margin-top: -38px;
+  resize: none;
+  border: none;
+  max-height: none;
+}
+.swnpretty.sheet.actor .extras-info textarea{
+  /*outline: 2px groove #eeede0;*/
+  border: 1px solid #c9c7b8;
 }
 .swnpretty.sheet.actor .tab textarea:focus{
   /*box-shadow:none;*/
