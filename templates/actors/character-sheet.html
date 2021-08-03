@@ -81,7 +81,7 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.HitDice" }}</h4>
                     <div class="attribute-value multiple no-sub">
-                        <label class="hit-dice">{{data.attributes.level.value}} D6 + {{data.abilities.con.mod}}</span></label>
+                        <label class="hit-dice">{{data.attributes.level.value}} D6 + {{data.abilities.con.mod}}</label>
                     </div>
 <!--                    <footer class="attribute-footer">-->
 <!--                        <a class="rest short-rest">{{ localize "SWNPRETTY.RestS" }}</a>-->
@@ -231,14 +231,25 @@
 
                     <div>
                         <li class="attribute resource">
-                            <h4 class="attribute-name box-title">
-                                <input name="data.resources.{{primary.name}}.label" type="text" value="{{primary.label}}"
+                            <h4 class="attribute-name custom-resource">
+                                <input name="data.details.counters.one" type="text" value="{{data.details.counters.one}}"
                                        placeholder="Resource 1" />
                             </h4>
-
-                            <div class="attribute-value">
-                                <input name="data.attributes.resources.primary.value" type="text" value="{{data.attributes.resources.primary.value}}"
-                                       data-dtype="Number" placeholder= "0"/>
+                            <div class="attribute-value custom-value char-counter">
+                                <input name="data.details.counters.oneval" type="text" value="{{data.details.counters.oneval}}"
+                                       data-dtype="text" placeholder= "0"/>
+                            </div>
+                        </li>
+                    </div>
+                    <div>
+                        <li class="attribute resource">
+                            <h4 class="attribute-name custom-resource">
+                                <input name="data.details.counters.two" type="text" value="{{data.details.counters.two}}"
+                                       placeholder="Resource 1" />
+                            </h4>
+                            <div class="attribute-value custom-value char-counter">
+                                <input name="data.details.counters.twoval" type="text" value="{{data.details.counters.twoval}}"
+                                       data-dtype="text" placeholder= "0"/>
                             </div>
                         </li>
                     </div>
@@ -297,9 +308,13 @@
             {{> "systems/swnpretty/templates/actors/parts/actor-spellbook.html"}}
         </div>
 
-        {{!-- Senses/Effects Tab --}}
+        {{!-- Extras Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
             {{> "systems/swnpretty/templates/actors/parts/actor-traits.html"}}
+            <div class = "flexcol info">
+                <textarea name="data.details.extrasone.value" placeholder="Notes+" class="npc-text-area">{{data.details.extrasone.value}}</textarea>
+                <textarea name="data.details.extrastwo.value" placeholder="Notes++" class="npc-text-area">{{data.details.extrastwo.value}}</textarea>
+            </div>
 <!--            {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}-->
         </div>
 

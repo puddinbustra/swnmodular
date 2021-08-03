@@ -453,14 +453,12 @@ export default class Actor5e extends Actor {
     // const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
-      skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
-      let round = Math.floor;
 
-      skl.value = Math.clamped(Number(skl.value).toNearest(1), -1, 9) ?? -1;
+      skl.value = Math.clamped(Number(skl.value).toNearest(1), -9, 99) ?? -1;
       //Fill in all the 'level' category with -1 as default
-      if (skl.level == null){
-        skl.level = -1;
-      }
+      // if (skl.level == null){
+      //   skl.level = -1;
+      // }
       //Yes I know it's bad, but I'm redoing the skill ability attribute to be a flag because it's convenient
       //I've placed all of the default values to be 'str', so when someone gets a level, it checks if it's 0
       //And if it's not, it adds to the 'other' if the flag is 'str', and changes the flag so it only happens once ever
@@ -1750,12 +1748,12 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
         const actor = game.actors.get(li.data('entityId'));
         return actor.revertOriginalForm();
       },
-      condition: li => {
-        const allowed = game.settings.get("swnpretty", "allowPolymorphing");
-        if ( !allowed && !game.user.isGM ) return false;
-        const actor = game.actors.get(li.data('entityId'));
-        return actor && actor.isPolymorphed;
-      }
+      // condition: li => {
+        // const allowed = game.settings.get("swnpretty", "allowPolymorphing");
+        // if ( !allowed && !game.user.isGM ) return false;
+        // const actor = game.actors.get(li.data('entityId'));
+        // return actor && actor.isPolymorphed;
+      // }
     });
   }
   

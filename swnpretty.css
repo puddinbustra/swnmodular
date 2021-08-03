@@ -1697,6 +1697,13 @@
   margin-top: -5px;
   /*background-color: #6e0000;*/
 }
+.swnpretty.sheet.actor.character .char-counter input{
+  white-space: nowrap;
+  min-width: 130px;
+  /*max-width: 200px;*/
+  /*background-color: #6e0000;*/
+}
+
 .swnpretty.sheet.actor.character ul.skills-list {
   flex: 0 0 212px;
 }

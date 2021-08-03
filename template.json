@@ -92,6 +92,19 @@
           },
           "scars": {
             "value": ""
+          },
+          "extrasone": {
+            "value": ""
+          },
+          "extrastwo": {
+            "value": ""
+          },
+
+          "counters": {
+            "one": "",
+            "oneval": "",
+            "two": "",
+            "twoval": ""
           }
         },
         "traits": {
@@ -134,79 +147,79 @@
         },
         "skills": {
           "acr": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "ani": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "arc": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "ath": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "dec": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "his": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "ins": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "itm": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "inv": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "med": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "nat": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "prc": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "prf": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "per": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "rel": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "slt": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "ste": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "sur": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           },
           "wor": {
-            "value": 0,
+            "value": -1,
             "ability": "str"
           }
         },
@@ -287,7 +300,7 @@
       }
     },
     "htmlFields": ["details.biography.value", "details.biography.public", "details.scars.value",
-    "details.info.value"],
+    "details.info.value","details.extrasone.value","details.extrastwo.value"],
     "character": {
       "templates": ["common", "creature"],
       "attributes": {
@@ -323,13 +336,13 @@
       },
       "resources": {
         "primary": {
-          "value": 0,
+          "value": "0",
           "max": 0,
           "sr": 0,
           "lr": 0
         },
         "secondary": {
-          "value": 0,
+          "value": "0",
           "max": 0,
           "sr": 0,
           "lr": 0
