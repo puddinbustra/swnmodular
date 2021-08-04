@@ -456,10 +456,10 @@ SWNPRETTY.senses = {
  */
 SWNPRETTY.skills = {
   "acr": "SWNPRETTY.SkillAcr",
+  "dec": "SWNPRETTY.SkillDec",
   "ani": "SWNPRETTY.SkillAni",
   "arc": "SWNPRETTY.SkillArc",
   "ath": "SWNPRETTY.SkillAth",
-  "dec": "SWNPRETTY.SkillDec",
   "his": "SWNPRETTY.SkillHis",
   "ins": "SWNPRETTY.SkillIns",
   "itm": "SWNPRETTY.SkillItm",

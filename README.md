@@ -26,7 +26,7 @@ Front page space for notes
 
 # Compatability
 Since this is mostly based off of the 5e character sheet, some of those modules should still work with stuff that hasn't been changed. Stuff like token modules, map modules, and chat modules should work. 
-
+For example, Crash's autohide rolls will work after a few adjustments.
 
 
 # Possible Additions
@@ -35,4 +35,3 @@ Since this is mostly based off of the 5e character sheet, some of those modules 
 - Global modifiers, like melee attack bonus, shock damage, or encumbrance bonus. For both characters and NPCs
 - Compendiums
 - Remove unused files and code
-- Attach experience directly to level, allowing players to easily see how much they need to level up
