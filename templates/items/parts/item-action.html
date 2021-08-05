@@ -25,6 +25,19 @@
     </select>
 </div>
 
+{{!-- Attack Skill by Lofty --}}
+<div class="form-group select">
+    <label> Skill Type </label>
+    <select name="data.attackSkills">
+        {{#select data.attackSkills}}
+        <option value="">{{ localize "SWNPRETTY.Default" }}</option>
+        {{#each config.attackSkills as |ability a|}}
+        <option value="{{a}}">{{ability}}</option>
+        {{/each}}
+        {{/select}}
+    </select>
+</div>
+
 {{!-- Attack Roll Bonus --}}
 {{#if hasAttackRoll }}
 <div class="form-group">

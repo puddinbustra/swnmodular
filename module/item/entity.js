@@ -367,6 +367,30 @@ export default class Item5e extends Item {
     // Ability score modifier
     parts.push(`@mod`);
 
+    // Add fighting skill mod by Lofty. There's probably a more elegant, less spacious solution, but this will have to do
+    // parts.push()
+    const atkSkill = this.data.data.attackSkills;
+    // console.log("This item's attack skill is", this.data);
+    // if(atkSkill){
+    //   console.log("This item's attack skill is", atkSkill);
+    // }
+    // console.log("This actor's stab skill is", this.actor.data.data.skills.rel.total);
+
+    let skillAdd = "";
+    if(atkSkill){
+      if(atkSkill === "stb"){
+        skillAdd = this.actor.data.data.skills.rel.total;
+      }
+      else if(atkSkill === "sht"){
+        skillAdd = this.actor.data.data.skills.prc.total;
+      }
+      else if(atkSkill === "pun"){
+        skillAdd = this.actor.data.data.skills.per.total;
+      }
+    parts.push(Number(skillAdd));
+    }
+
+
     // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
     if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
       parts.push("@prof");

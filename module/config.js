@@ -36,6 +36,12 @@ SWNPRETTY.abilityAbbreviations = {
   "cha": "SWNPRETTY.AbilityChaAbbr"
 };
 
+SWNPRETTY.attackSkills = {
+  "pun": "SWNPRETTY.SkillPer",
+  "sht": "SWNPRETTY.SkillPrc",
+  "stb": "SWNPRETTY.SkillRel"
+};
+
 /* -------------------------------------------- */
 /**
  * The set of saves used within the system, added by Lofty

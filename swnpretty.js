@@ -152,7 +152,8 @@ Hooks.once("setup", function() {
     "damageTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes", "languages",
     "limitedUsePeriods", "movementTypes", "movementUnits", "polymorphSettings", "proficiencyLevels", "senses", "skills",
     "spellComponents", "spellLevels", "spellPreparationModes", "spellScalingModes", "spellSchools", "targetTypes",
-    "timePeriods", "toolProficiencies", "weaponProficiencies", "weaponProperties", "weaponTypes", "equipmentLocation"
+    "timePeriods", "toolProficiencies", "weaponProficiencies", "weaponProperties", "weaponTypes", "equipmentLocation",
+    "attackSkills"
   ];
 
   // Exclude some from sorting where the default order matters
