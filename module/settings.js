@@ -124,7 +124,7 @@ export const registerSystemSettings = function() {
    */
   game.settings.register("swnpretty", "metricWeightUnits", {
     name: "SETTINGS.5eMetricN",
-    hint: "SETTINGS.5eMetricL",
+    hint: "Use metric units",
     scope: "world",
     config: true,
     type: Boolean,

@@ -1570,7 +1570,7 @@
   float: right;
   color: rgba(56, 56, 52, 0.49);
   /*text-shadow: rgba(62, 32, 155, 0.45);*/
-  min-width: 0px;
+  min-width: 0;
   max-width: 90px;
   max-height: 17px;
   line-height: 17px;
@@ -1592,6 +1592,10 @@
 }
 .swnpretty.sheet.actor.character .sheet-header .charlevel .levelInput{
   width: 10px;
+}
+.swnpretty.sheet.actor.npc .sheet-header .charlevel .levelInput{
+  width: 15px;
+  /*height: 40px;*/
 }
 .swnpretty.sheet.actor.character .sheet-header .experience {
   flex: 0 0 32px;
