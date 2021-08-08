@@ -738,64 +738,64 @@ SWNPRETTY.classFeatures = ClassFeatures;
 
 // Configure Optional Character Flags
 SWNPRETTY.characterFlags = {
-  "elvenAccuracy": {
-    name: "SWNPRETTY.FlagsElvenAccuracy",
-    hint: "SWNPRETTY.FlagsElvenAccuracyHint",
-    section: "Racial Traits",
-    type: Boolean
-  },
-  "halflingLucky": {
-    name: "SWNPRETTY.FlagsHalflingLucky",
-    hint: "SWNPRETTY.FlagsHalflingLuckyHint",
-    section: "Racial Traits",
-    type: Boolean
-  },
-  "initiativeAdv": {
-    name: "SWNPRETTY.FlagsInitiativeAdv",
-    hint: "SWNPRETTY.FlagsInitiativeAdvHint",
-    section: "Feats",
-    type: Boolean
-  },
-  "initiativeAlert": {
-    name: "SWNPRETTY.FlagsAlert",
-    hint: "SWNPRETTY.FlagsAlertHint",
-    section: "Feats",
-    type: Boolean
-  },
-  "jackOfAllTrades": {
-    name: "SWNPRETTY.FlagsJOAT",
-    hint: "SWNPRETTY.FlagsJOATHint",
-    section: "Feats",
-    type: Boolean
-  },
+  // "elvenAccuracy": {
+  //   name: "SWNPRETTY.FlagsElvenAccuracy",
+  //   hint: "SWNPRETTY.FlagsElvenAccuracyHint",
+  //   section: "Racial Traits",
+  //   type: Boolean
+  // },
+  // "halflingLucky": {
+  //   name: "SWNPRETTY.FlagsHalflingLucky",
+  //   hint: "SWNPRETTY.FlagsHalflingLuckyHint",
+  //   section: "Racial Traits",
+  //   type: Boolean
+  // },
+  // "initiativeAdv": {
+  //   name: "SWNPRETTY.FlagsInitiativeAdv",
+  //   hint: "SWNPRETTY.FlagsInitiativeAdvHint",
+  //   section: "Feats",
+  //   type: Boolean
+  // },
+  // "initiativeAlert": {
+  //   name: "SWNPRETTY.FlagsAlert",
+  //   hint: "SWNPRETTY.FlagsAlertHint",
+  //   section: "Feats",
+  //   type: Boolean
+  // },
+  // "jackOfAllTrades": {
+  //   name: "SWNPRETTY.FlagsJOAT",
+  //   hint: "SWNPRETTY.FlagsJOATHint",
+  //   section: "Feats",
+  //   type: Boolean
+  // },
 
-  "observantFeat": {
-    name: "SWNPRETTY.FlagsObservant",
-    hint: "SWNPRETTY.FlagsObservantHint",
-    skills: ['prc','inv'],
-    section: "Feats",
-    type: Boolean
-  },
+  // "observantFeat": {
+  //   name: "SWNPRETTY.FlagsObservant",
+  //   hint: "SWNPRETTY.FlagsObservantHint",
+  //   skills: ['prc','inv'],
+  //   section: "Feats",
+  //   type: Boolean
+  // },
 
-  "powerfulBuild": {
-    name: "SWNPRETTY.FlagsPowerfulBuild",
-    hint: "SWNPRETTY.FlagsPowerfulBuildHint",
-    section: "Racial Traits",
-    type: Boolean
-  },
-  "reliableTalent": {
-    name: "SWNPRETTY.FlagsReliableTalent",
-    hint: "SWNPRETTY.FlagsReliableTalentHint",
-    section: "Feats",
-    type: Boolean
-  },
-  "remarkableAthlete": {
-    name: "SWNPRETTY.FlagsRemarkableAthlete",
-    hint: "SWNPRETTY.FlagsRemarkableAthleteHint",
-    abilities: ['str','dex','con'],
-    section: "Feats",
-    type: Boolean
-  },
+  // "powerfulBuild": {
+  //   name: "SWNPRETTY.FlagsPowerfulBuild",
+  //   hint: "SWNPRETTY.FlagsPowerfulBuildHint",
+  //   section: "Racial Traits",
+  //   type: Boolean
+  // },
+  // "reliableTalent": {
+  //   name: "SWNPRETTY.FlagsReliableTalent",
+  //   hint: "SWNPRETTY.FlagsReliableTalentHint",
+  //   section: "Feats",
+  //   type: Boolean
+  // },
+  // "remarkableAthlete": {
+  //   name: "SWNPRETTY.FlagsRemarkableAthlete",
+  //   hint: "SWNPRETTY.FlagsRemarkableAthleteHint",
+  //   abilities: ['str','dex','con'],
+  //   section: "Feats",
+  //   type: Boolean
+  // },
   "weaponCriticalThreshold": {
     name: "SWNPRETTY.FlagsWeaponCritThreshold",
     hint: "SWNPRETTY.FlagsWeaponCritThresholdHint",

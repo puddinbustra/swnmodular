@@ -960,13 +960,13 @@ export default class Item5e extends Item {
       rollConfig.critical = parseInt(flags.spellCriticalThreshold);
     }
 
-    // Elven Accuracy
-    if ( flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod) ) {
-      rollConfig.elvenAccuracy = true;
-    }
+    // // Elven Accuracy
+    // if ( flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod) ) {
+    //   rollConfig.elvenAccuracy = true;
+    // }
 
     // Apply Halfling Lucky
-    if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
+    // if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
 
     // Compose calculated roll options with passed-in roll options
     rollConfig = mergeObject(rollConfig, options)
@@ -1225,8 +1225,8 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710,
       },
       chooseModifier: true,
-      halflingLucky: this.actor.getFlag("swnpretty", "halflingLucky" ) || false,
-      reliableTalent: (this.data.data.proficient >= 1) && this.actor.getFlag("swnpretty", "reliableTalent"),
+      // halflingLucky: this.actor.getFlag("swnpretty", "halflingLucky" ) || false,
+      // reliableTalent: (this.data.data.proficient >= 1) && this.actor.getFlag("swnpretty", "reliableTalent"),
       messageData: {"flags.swnpretty.roll": {type: "tool", itemId: this.id }}
     }, options);
     rollConfig.event = options.event;

@@ -7,9 +7,6 @@
  * @param {number} [options.critical]                  The value of d20 result which represents a critical success
  * @param {number} [options.fumble]                    The value of d20 result which represents a critical failure
  * @param {(number)} [options.targetValue]             Assign a target value against which the result of this roll should be compared
- * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
- * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
- * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
  */
 export default class D20Roll extends Roll {
   constructor(formula, data, options) {
@@ -68,15 +65,15 @@ export default class D20Roll extends Roll {
     const d20 = this.terms[0];
     d20.modifiers = [];
 
-    // Halfling Lucky
-    if ( this.options.halflingLucky ) d20.modifiers.push("r1=1");
-
-    // Reliable Talent
-    if ( this.options.reliableTalent ) d20.modifiers.push("min10");
+    // // Halfling Lucky
+    // if ( this.options.halflingLucky ) d20.modifiers.push("r1=1");
+    //
+    // // Reliable Talent
+    // if ( this.options.reliableTalent ) d20.modifiers.push("min10");
 
     // Handle Advantage or Disadvantage
     if ( this.hasAdvantage ) {
-      d20.number = this.options.elvenAccuracy ? 3 : 2;
+      // d20.number = this.options.elvenAccuracy ? 3 : 2;
       d20.modifiers.push("kh");
       d20.options.advantage = true;
     }
@@ -109,13 +106,13 @@ export default class D20Roll extends Roll {
     if ( this.hasAdvantage ) messageData.flavor += ` (${game.i18n.localize("SWNPRETTY.Advantage")})`;
     else if ( this.hasDisadvantage ) messageData.flavor += ` (${game.i18n.localize("SWNPRETTY.Disadvantage")})`;
 
-    // Add reliable talent to the d20-term flavor text if it applied
-    if ( this.options.reliableTalent ) {
-      const d20 = this.dice[0];
-      const isRT = d20.results.every(r => !r.active || (r.result < 10));
-      const label = `(${game.i18n.localize("SWNPRETTY.FlagsReliableTalent")})`;
-      if ( isRT ) d20.options.flavor = d20.options.flavor ? `${d20.options.flavor} (${label})` : label;
-    }
+    // // Add reliable talent to the d20-term flavor text if it applied
+    // if ( this.options.reliableTalent ) {
+    //   const d20 = this.dice[0];
+    //   const isRT = d20.results.every(r => !r.active || (r.result < 10));
+    //   const label = `(${game.i18n.localize("SWNPRETTY.FlagsReliableTalent")})`;
+    //   if ( isRT ) d20.options.flavor = d20.options.flavor ? `${d20.options.flavor} (${label})` : label;
+    // }
 
     // Record the preferred rollMode
     options.rollMode = options.rollMode ?? this.options.rollMode;

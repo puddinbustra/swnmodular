@@ -940,7 +940,7 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
     }
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("swnpretty", "reliableTalent"));
+    // const reliableTalent = (skl.value >= 1 && this.getFlag("swnpretty", "reliableTalent"));
 
     // Roll and return
     const rollData = foundry.utils.mergeObject(options, {
