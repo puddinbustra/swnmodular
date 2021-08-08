@@ -13,11 +13,11 @@ export const _getInitiativeFormula = function() {
   //Constructive initiative part
   let nd = 1;
   let mods = "";
-  if (actor.getFlag("swnpretty", "halflingLucky")) mods += "r1=1";
-  if (actor.getFlag("swnpretty", "initiativeAdv")) {
-    nd = 2;
-    mods += "kh";
-  }
+  // if (actor.getFlag("swnpretty", "halflingLucky")) mods += "r1=1";
+  // if (actor.getFlag("swnpretty", "initiativeAdv")) {
+  //   nd = 2;
+  //   mods += "kh";
+  // }
 
   // const parts = [`${nd}d8${mods}`, init.mod, (init.prof !== 0) ? init.prof : null, (init.bonus !== 0) ? init.bonus : null];
   const parts = [`${nd}d8${mods}`, init.total];

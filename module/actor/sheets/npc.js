@@ -139,8 +139,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
   }
 
-  // /* -------------------------------------------- */
-  //
+  /* -------------------------------------------- */
+
   // /**
   //  * Handle mouse click events for character sheet actions
   //  * @param {MouseEvent} event    The originating click event
@@ -151,6 +151,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   //   const button = event.currentTarget;
   //   switch( button.dataset.action ) {
   //     case "rollInitiative":
+  //       console.log("rolling npc init");
   //       return this.actor.rollInitiative({createCombatants: true});
   //   }
   // }

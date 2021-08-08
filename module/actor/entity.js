@@ -201,9 +201,9 @@ export default class Actor5e extends Actor {
     data.attributes.base = 10 + data.abilities.dex.mod;
     // console.log("BASE AC ATTEMPT IS", data.attributes.base);
     // Prepare armor class data
-    const {armor, shield} = this._computeArmorClass(data);
-    this.armor = armor || null;
-    this.shield = shield || null;
+    // const {armor, shield} = this._computeArmorClass(data);
+    // this.armor = armor || null;
+    // this.shield = shield || null;
 
     // // Compute owned item attributes which depend on prepared Actor data
     // this.items.forEach(item => {

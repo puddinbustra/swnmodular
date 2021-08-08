@@ -213,19 +213,18 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     const button = event.currentTarget;
     switch( button.dataset.action ) {
-      case "convertCurrency":
-        return Dialog.confirm({
-          title: `${game.i18n.localize("SWNPRETTY.CurrencyConvert")}`,
-          content: `<p>${game.i18n.localize("SWNPRETTY.CurrencyConvertHint")}</p>`,
-          yes: () => this.actor.convertCurrency()
-        });
-      case "rollDeathSave":
-        return this.actor.rollDeathSave({event: event});
+      // case "convertCurrency":
+      //   return Dialog.confirm({
+      //     title: `${game.i18n.localize("SWNPRETTY.CurrencyConvert")}`,
+      //     content: `<p>${game.i18n.localize("SWNPRETTY.CurrencyConvertHint")}</p>`,
+      //     yes: () => this.actor.convertCurrency()
+      //   });
+      // case "rollDeathSave":
+      //   return this.actor.rollDeathSave({event: event});
       case "rollInitiative":
         return this.actor.rollInitiative({createCombatants: true});
     }
   }
-
   /* -------------------------------------------- */
 
   /**
