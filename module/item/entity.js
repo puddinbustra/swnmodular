@@ -1152,7 +1152,7 @@ export default class Item5e extends Item {
     // Define Roll Data
     const rollData = this.getRollData();
     if ( options.spellLevel ) rollData.item.level = options.spellLevel;
-    const title = `${this.name} - ${game.i18n.localize("SWNPRETTY.OtherFormula")}`;
+    // const title = `${this.name} - ${game.i18n.localize("SWNPRETTY.OtherFormula")}`;
 
     // Invoke the roll and submit it to chat
     const roll = new Roll(rollData.item.formula, rollData).roll();

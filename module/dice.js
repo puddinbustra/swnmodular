@@ -88,6 +88,7 @@ function _isUnsupportedTerm(term) {
  * @param {number} [critical]         The value of d20 result which represents a critical success
  * @param {number} [fumble]           The value of d20 result which represents a critical failure
  * @param {number} [targetValue]      Assign a target value against which the result of this roll should be compared
+ * @param {string} [die]          If you don't want to use a d20 roll - by lofty
 
  * @param {boolean} [chooseModifier=false] Choose the ability modifier that should be used when the roll is made
  * @param {boolean} [fastForward=false] Allow fast-forward advantage selection
@@ -109,13 +110,21 @@ function _isUnsupportedTerm(term) {
  */
 export async function d20Roll({
   parts=[], data={}, // Roll creation
-  advantage, disadvantage, fumble=1, critical=20, targetValue, // Roll customization
+  advantage, disadvantage, fumble=1, critical=20, targetValue, die,// Roll customization
   chooseModifier=false, fastForward=false, event, template, title, dialogOptions, // Dialog configuration
   isSave=null, moraleSave=null,chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
   }={}) {
 
+  //I'm updating this to use non-d20s, edit as necessary. -Lofty
+  console.log("this is the formula",die);
+  if(die !== "2d8"){
+    die = "1d20";
+  }
   // Handle input arguments
   const formula = ["1d20"].concat(parts).join(" + ");
+
+  console.log("this is the formula after",formula);
+
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
   if ( chooseModifier && !isFF ) data["mod"] = "@mod";
@@ -133,18 +142,18 @@ export async function d20Roll({
     // reliableTalent
   });
 
-  // Prompt a Dialog to further configure the D20Roll
-  if ( !isFF ) {
-    const configured = await roll.configureDialog({
-      title,
-      chooseModifier,
-      defaultRollMode: defaultRollMode,
-      defaultAction: advantageMode,
-      defaultAbility: data?.item?.ability,
-      template
-    }, dialogOptions);
-    if ( configured === null ) return null;
-  }
+  // // Prompt a Dialog to further configure the D20Roll
+  // if ( !isFF ) {
+  //   const configured = await roll.configureDialog({
+  //     title,
+  //     chooseModifier,
+  //     defaultRollMode: defaultRollMode,
+  //     defaultAction: advantageMode,
+  //     defaultAbility: data?.item?.ability,
+  //     template
+  //   }, dialogOptions);
+  //   if ( configured === null ) return null;
+  // }
 
   // Evaluate the configured roll
   await roll.evaluate({async: true});
@@ -328,17 +337,17 @@ export async function damageRoll({
     powerfulCritical
   });
 
-  // Prompt a Dialog to further configure the DamageRoll
-  if ( !isFF ) {
-    const configured = await roll.configureDialog({
-      title,
-      defaultRollMode: defaultRollMode,
-      defaultCritical: isCritical,
-      template,
-      allowCritical
-    }, dialogOptions);
-    if ( configured === null ) return null;
-  }
+  // // Prompt a Dialog to further configure the DamageRoll
+  // if ( !isFF ) {
+  //   const configured = await roll.configureDialog({
+  //     title,
+  //     defaultRollMode: defaultRollMode,
+  //     defaultCritical: isCritical,
+  //     template,
+  //     allowCritical
+  //   }, dialogOptions);
+  //   if ( configured === null ) return null;
+  // }
 
   // Evaluate the configured roll
   await roll.evaluate({async: true});

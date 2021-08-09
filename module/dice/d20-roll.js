@@ -144,6 +144,7 @@ export default class D20Roll extends Roll {
       rollModes: CONFIG.Dice.rollModes,
       chooseModifier,
       defaultAbility,
+
       abilities: CONFIG.SWNPRETTY.abilities
     });
 

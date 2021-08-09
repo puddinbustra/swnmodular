@@ -910,6 +910,7 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {Object} options      Options which configure how the skill check is rolled
    * @param {int} options         Options which configure how the skill check is rolled
+   * @param {int} attr            Which attribute the skill should roll with
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    * Lofty has renamed this method from rollSkill in order to add another parameter
    */
@@ -948,6 +949,8 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
       data: data,
       title: game.i18n.format("SWNPRETTY.SkillPromptTitle", {skill: CONFIG.SWNPRETTY.skills[skillId]}),
       fastForward: true,
+      die: "2d8",
+      formula:`2d8${skl.value}`,
       // messageData: {"flags.swnpretty.roll": {type: "skill", skillId }}
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
@@ -1106,6 +1109,7 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
     //     "flags.swnpretty.roll": {type: "save", abilityId }
     //   }
     // });
+    //So this part is throwing up a warning, the game wants the speaker to be included inside of the actual arguments, so do that if it becomes a bigger problem
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }

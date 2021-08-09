@@ -62,7 +62,6 @@ export default class DamageRoll extends Roll {
           term.alter(cm, cb);
           term.options.critical = true;
         }
-
       }
 
       // Multiply numeric terms
@@ -82,7 +81,13 @@ export default class DamageRoll extends Roll {
       this.terms.push(new NumericTerm({number: flatBonus}, {flavor: game.i18n.localize("SWNPRETTY.PowerfulCritical")}));
     }
 
+    //By Lofty, add attribute damage to the attack
+    // this.terms.push(new OperatorTerm({operator: "+"}));
+    // this.terms.push(new NumericTerm({number: }));
     // Re-compile the underlying formula
+    //
+    // console.log("this is the attribute needed",this);
+
     this._formula = this.constructor.getFormula(this.terms);
   }
 
