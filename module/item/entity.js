@@ -1051,6 +1051,18 @@ export default class Item5e extends Item {
       parts.push(actorBonus.damage);
     }
 
+    // Add attribute mod to damage -Lofty
+    const attr = this.data.data.ability;
+
+      console.log("yes! undefined yay", this.data.data)
+
+    console.log("this is default-",attr);
+    let bonusDamage = 0;
+        if(attr !== "none"){
+          bonusDamage = this.actor.data.data.abilities[attr].mod;
+          parts.push(bonusDamage);
+    }
+
     // Handle ammunition damage
     const ammoData = this._ammo?.data;
 

@@ -17,7 +17,7 @@
     <label>{{ localize "SWNPRETTY.AbilityModifier" }}</label>
     <select name="data.ability">
         {{#select data.ability}}
-        <option value="">{{ localize "SWNPRETTY.Default" }}</option>
+        <option value="none">{{ localize "SWNPRETTY.Default" }}</option>
         {{#each config.abilities as |ability a|}}
         <option value="{{a}}">{{ability}}</option>
         {{/each}}

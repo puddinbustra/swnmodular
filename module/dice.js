@@ -121,7 +121,7 @@ export async function d20Roll({
     die = "1d20";
   }
   // Handle input arguments
-  const formula = ["1d20"].concat(parts).join(" + ");
+  const formula = [die].concat(parts).join(" + ");
 
   console.log("this is the formula after",formula);
 
