@@ -943,20 +943,22 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
     // Reliable Talent applies to any skill check we have full or better proficiency in
     // const reliableTalent = (skl.value >= 1 && this.getFlag("swnpretty", "reliableTalent"));
 
-    // Roll and return
+    // Roll and return, lofty has changed some
     const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("SWNPRETTY.SkillPromptTitle", {skill: CONFIG.SWNPRETTY.skills[skillId]}),
       fastForward: true,
-      die: "2d8",
-      formula:`2d8${skl.value}`,
+      die: "2d6",
+      formula:`2d6${skl.value}`,
+      critical: 6,
       // messageData: {"flags.swnpretty.roll": {type: "skill", skillId }}
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.swnpretty.roll": {type: "skill", skillId }
       }
     });
+    // console.log("Roll data for rollskill is",rollData);
     // rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
 

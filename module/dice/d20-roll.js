@@ -83,7 +83,8 @@ export default class D20Roll extends Roll {
       d20.modifiers.push("kl");
       d20.options.disadvantage = true;
     }
-    else d20.number = 1;
+    // Lofty changing this so d20 rolls can use multiple dice
+    // else d20.number = 1;
 
     // Assign critical and fumble thresholds
     if ( this.options.critical ) d20.options.critical = this.options.critical;

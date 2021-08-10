@@ -7,7 +7,7 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
  * @param {string} formula                 The original Roll formula
  * @param {Object} data                    Actor or item data against which to parse the roll
  * @param {Object} options                 Formatting options
- * @param {boolean} options.constantFirst   Puts the constants before the dice terms in the resulting formula
+ * @param {boolean} options.constantFirst  Puts the constants before the dice terms in the resulting formula
  *
  * @return {string}                        The resulting simplified formula
  */
@@ -88,7 +88,7 @@ function _isUnsupportedTerm(term) {
  * @param {number} [critical]         The value of d20 result which represents a critical success
  * @param {number} [fumble]           The value of d20 result which represents a critical failure
  * @param {number} [targetValue]      Assign a target value against which the result of this roll should be compared
- * @param {string} [die]          If you don't want to use a d20 roll - by lofty
+ * @param {string} [die]              If you don't want to use a d20 roll - by lofty
 
  * @param {boolean} [chooseModifier=false] Choose the ability modifier that should be used when the roll is made
  * @param {boolean} [fastForward=false] Allow fast-forward advantage selection
@@ -110,20 +110,21 @@ function _isUnsupportedTerm(term) {
  */
 export async function d20Roll({
   parts=[], data={}, // Roll creation
-  advantage, disadvantage, fumble=1, critical=20, targetValue, die,// Roll customization
-  chooseModifier=false, fastForward=false, event, template, title, dialogOptions, // Dialog configuration
+  advantage, disadvantage, fumble=1, critical=20, targetValue, die,chooseModifier=false, // Roll customization
+  fastForward=false, event, template, title, dialogOptions, // Dialog configuration
   isSave=null, moraleSave=null,chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
   }={}) {
 
   //I'm updating this to use non-d20s, edit as necessary. -Lofty
-  console.log("this is the formula",die);
-  if(die !== "2d8"){
+  // console.log("this is the formula (die)",die);
+  if(die !== "2d6"){
     die = "1d20";
   }
   // Handle input arguments
   const formula = [die].concat(parts).join(" + ");
+  // let formula = `${nd}d20${mods}`;
 
-  console.log("this is the formula after",formula);
+
 
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
@@ -136,7 +137,7 @@ export async function d20Roll({
     defaultRollMode,
     critical,
     fumble,
-    targetValue,
+    targetValue
     // elvenAccuracy
     // halflingLucky,
     // reliableTalent
@@ -156,6 +157,9 @@ export async function d20Roll({
   // }
 
   // Evaluate the configured roll
+  // console.log("this is the formula after is dice->d20 roll",formula);
+  // console.log("damage roll data",formula);
+  // console.log("these are the parts is",parts);
   await roll.evaluate({async: true});
 
   //   // Handle disadvantage
@@ -327,6 +331,7 @@ export async function damageRoll({
 
   // Construct the DamageRoll instance
   const formula = parts.join(" + ");
+  // const formula = "2d30";
   const {isCritical, isFF} = _determineCriticalMode({critical, fastForward, event});
   const roll = new CONFIG.Dice.DamageRoll(formula, data, {
     flavor: flavor || title,
@@ -350,6 +355,9 @@ export async function damageRoll({
   // }
 
   // Evaluate the configured roll
+  console.log("damage roll formula is",formula)
+  console.log("damage roll parts are",formula)
+  console.log("damage roll data",formula)
   await roll.evaluate({async: true});
 
   // Create a Chat Message
