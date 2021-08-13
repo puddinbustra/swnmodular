@@ -137,7 +137,7 @@ export const migrateArmorClass = async function(pack) {
       const update = {_id: actor.id};
       const currentAC = src.data.attributes.ac.value;
       const hasArmorEquipped = actor.itemTypes.equipment.some(e =>
-        armor.has(e.data.data.armor?.type) && e.data.data.equipped);
+        armor.has(e.data.data.armor?.type) && e.data.data.carried);
 
       // Perform the normal migration.
       _migrateActorAC(src, update);
@@ -192,7 +192,7 @@ export const migrateActorData = function(actor) {
     // Prepared, Equipped, and Proficient for NPC actors
     if ( actor.type === "npc" ) {
       if (getProperty(itemData.data, "preparation.prepared") === false) itemUpdate["data.preparation.prepared"] = true;
-      if (getProperty(itemData.data, "equipped") === false) itemUpdate["data.equipped"] = true;
+      if (getProperty(itemData.data, "carried") === false) itemUpdate["data.carried"] = true;
       if (getProperty(itemData.data, "proficient") === false) itemUpdate["data.proficient"] = true;
     }
 

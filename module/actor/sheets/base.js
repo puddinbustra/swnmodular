@@ -524,8 +524,8 @@ export default class ActorSheet5e extends ActorSheet {
       }
 
       // Equipment-specific filters
-      if ( filters.has("equipped") ) {
-        if ( data.equipped !== true ) return false;
+      if ( filters.has("carried") ) {
+        if ( data.carried !== true ) return false;
       }
       return true;
     });
@@ -815,7 +815,7 @@ export default class ActorSheet5e extends ActorSheet {
     // Ignore certain statuses
     if ( itemData.data ) {
       // Ignore certain statuses
-      ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
+      ["carried", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
 
       // Downgrade ATTUNED to REQUIRED
       itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.SWNPRETTY.attunementTypes.REQUIRED);

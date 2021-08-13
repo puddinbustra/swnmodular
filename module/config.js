@@ -524,7 +524,7 @@ SWNPRETTY.spellScalingModes = {
  */
 SWNPRETTY.equipmentLocation = {
   "readied": "SWNPRETTY.Readied",
-  "equipped": "SWNPRETTY.Equipped",
+  "carried": "SWNPRETTY.Carried",
   "stored": "SWNPRETTY.Stored",
 };
 

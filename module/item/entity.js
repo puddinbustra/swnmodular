@@ -780,10 +780,10 @@ export default class Item5e extends Item {
     if ( fn ) fn.bind(this)(data, labels, props);
 
     // Equipment properties
-    if ( data.hasOwnProperty("equipped") && !["loot", "tool"].includes(this.data.type) ) {
+    if ( data.hasOwnProperty("carried") && !["loot", "tool"].includes(this.data.type) ) {
       if ( data.attunement === CONFIG.SWNPRETTY.attunementTypes.REQUIRED ) props.push(game.i18n.localize(CONFIG.SWNPRETTY.attunements[CONFIG.SWNPRETTY.attunementTypes.REQUIRED]));
       props.push(
-        game.i18n.localize(data.equipped ? "SWNPRETTY.Equipped" : "SWNPRETTY.Unequipped"),
+        game.i18n.localize(data.carried ? "SWNPRETTY.Carried" : "SWNPRETTY.Unequipped"),
         game.i18n.localize(data.proficient ? "SWNPRETTY.Proficient" : "SWNPRETTY.NotProficient"),
       );
     }
@@ -1497,8 +1497,8 @@ export default class Item5e extends Item {
    */
   _onCreateOwnedEquipment(data, actorData, isNPC) {
     const updates = {};
-    if ( foundry.utils.getProperty(data, "data.equipped") === undefined ) {
-      updates["data.equipped"] = isNPC;  // NPCs automatically equip equipment
+    if ( foundry.utils.getProperty(data, "data.carried") === undefined ) {
+      updates["data.carried"] = isNPC;  // NPCs automatically equip equipment
     }
     if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
       if ( isNPC ) {
@@ -1534,8 +1534,8 @@ export default class Item5e extends Item {
    */
   _onCreateOwnedWeapon(data, actorData, isNPC) {
     const updates = {};
-    if ( foundry.utils.getProperty(data, "data.equipped") === undefined ) {
-      updates["data.equipped"] = isNPC;       // NPCs automatically equip weapons
+    if ( foundry.utils.getProperty(data, "data.carried") === undefined ) {
+      updates["data.carried"] = isNPC;       // NPCs automatically equip weapons
     }
     if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
       if ( isNPC ) {

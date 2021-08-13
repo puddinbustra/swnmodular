@@ -572,7 +572,7 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /** -From Lofty - this is the compute armor class function I can add if it might help, putting it here for convenience
-   * Determine a character's AC value from their equipped armor and shield.
+   * Determine a character's AC value from their carried armor and shield.
    * @param {object} data
    * @param {object} [options]
    * @param {boolean} [options.ignoreFlat]  Should ac.flat be ignored while calculating the AC?
@@ -589,7 +589,7 @@ export default class Actor5e extends Actor {
     const armorTypes = new Set(Object.keys(CONFIG.SWNPRETTY.armorTypes));
     const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
       const armor = equip.data.data.armor;
-      if ( !equip.data.data.equipped || !armorTypes.has(armor?.type) ) return obj;
+      if ( !equip.data.data.carried || !armorTypes.has(armor?.type) ) return obj;
       if ( armor.type === "shield" ) obj.shields.push(equip);
       else obj.armors.push(equip);
       return obj;
@@ -660,11 +660,11 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
     const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
     let weight = actorData.items.reduce((weight, i) => {
       if ( !physicalItems.includes(i.type) ) return weight;
-      //If item is equipped or readied -Lofty
+      //If item is carried or readied -Lofty
       let q = 0;
       let w = 0;
 
-      if (i.data.location === "readied" || i.data.location === "equipped"){
+      if (i.data.location === "readied" || i.data.location === "carried"){
         q += i.data.quantity || 0;
         w += i.data.weight || 0;
       }

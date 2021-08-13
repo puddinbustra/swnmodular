@@ -49,12 +49,13 @@
             <div class="form-group">
                 <label>{{ localize "SWNPRETTY.ItemEquipmentType" }}</label>
                 <select name="data.armor.type">
-                    {{#select data.armor.type}}
-                    <option value=""></option>
-                    {{#each config.equipmentTypes as |name type|}}
-                    <option value="{{type}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
+<!--                    {{#select data.armor.type}}-->
+<!--                    <option value=""></option>-->
+<!--                    {{#each config.equipmentTypes as |name type|}}-->
+<!--                    <option value="{{type}}">{{localize name}}</option>-->
+<!--                    {{/each}}-->
+<!--                    {{/select}}-->
+                    {{selectOptions config.equipmentTypes selected=data.armor.type blank=""}}
                 </select>
             </div>
 

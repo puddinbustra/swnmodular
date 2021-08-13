@@ -173,9 +173,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       else item.toggleTitle = game.i18n.localize("SWNPRETTY.SpellUnprepared");
     }
     else {
-      const isActive = getProperty(item.data, "equipped");
+      const isActive = getProperty(item.data, "carried");
       item.toggleClass = isActive ? "active" : "";
-      item.toggleTitle = game.i18n.localize(isActive ? "SWNPRETTY.Equipped" : "SWNPRETTY.Unequipped");
+      item.toggleTitle = game.i18n.localize(isActive ? "SWNPRETTY.carried" : "SWNPRETTY.Unequipped");
     }
   }
 
@@ -236,7 +236,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    const attr = item.data.type === "spell" ? "data.preparation.prepared" : "data.equipped";
+    const attr = item.data.type === "spell" ? "data.preparation.prepared" : "data.carried";
     return item.update({[attr]: !getProperty(item.data, attr)});
   }
 

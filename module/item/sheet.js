@@ -158,7 +158,7 @@ export default class ItemSheet5e extends ItemSheet {
       return CONFIG.SWNPRETTY.spellPreparationModes[item.data.preparation];
     }
     else if ( ["weapon", "equipment"].includes(item.type) ) {
-      return game.i18n.localize(item.data.equipped ? "SWNPRETTY.Equipped" : "SWNPRETTY.Unequipped");
+      return game.i18n.localize(item.data.carried ? "SWNPRETTY.Carried" : "SWNPRETTY.Unequipped");
     }
     else if ( item.type === "tool" ) {
       return game.i18n.localize(item.data.proficient ? "SWNPRETTY.Proficient" : "SWNPRETTY.NotProficient");
