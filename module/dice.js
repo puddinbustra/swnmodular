@@ -355,9 +355,9 @@ export async function damageRoll({
   // }
 
   // Evaluate the configured roll
-  console.log("damage roll formula is",formula)
-  console.log("damage roll parts are",formula)
-  console.log("damage roll data",formula)
+  // console.log("damage roll formula is",formula)
+  // console.log("damage roll parts are",formula)
+  // console.log("damage roll data",formula)
   await roll.evaluate({async: true});
 
   // Create a Chat Message

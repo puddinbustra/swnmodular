@@ -664,10 +664,11 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
       let q = 0;
       let w = 0;
 
-      if (i.data.location === "readied" || i.data.location === "carried"){
-        q += i.data.quantity || 0;
-        w += i.data.weight || 0;
+      if (i.data.data.location === "readied" || i.data.data.location === "carried"){
+        q += i.data.data.quantity || 0;
+        w += i.data.data.weight || 0;
       }
+      // console.log("This is the items quantity, weight -",q,w,i.data.data.weight);
       return weight + (q * w);
     }, 0);
 
@@ -675,6 +676,7 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
     weight = weight.toNearest(0.1);
     const max = actorData.data.abilities.str.value * CONFIG.SWNPRETTY.encumbrance.strMultiplier;
     const pct = Math.clamped((weight * 100) / max, 0, 100);
+
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
   }
 
@@ -698,9 +700,9 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
       if ( !physicalItems.includes(i.type) ) return weight;
       let q = 0;
       let w = 0;
-      if (i.data.location === "readied"){
-        q += i.data.quantity || 0;
-        w += i.data.weight || 0;
+      if (i.data.data.location === "readied"){
+        q += i.data.data.quantity || 0;
+        w += i.data.data.weight || 0;
       }
       return weight + (q * w);
     }, 0);

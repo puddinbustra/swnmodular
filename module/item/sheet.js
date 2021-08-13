@@ -20,7 +20,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @inheritdoc */
 	static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
+      return foundry.utils.mergeObject(super.defaultOptions, {
       width: 560,
       height: 400,
       classes: ["swnpretty", "sheet", "item"],
@@ -53,7 +53,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.itemProperties = this._getItemProperties(itemData);
     data.isPhysical = itemData.data.hasOwnProperty("quantity");
 
-// Potential consumption targets
+    // Potential consumption targets
     data.abilityConsumptionTargets = this._getItemConsumptionTargets(itemData);
 
     // Action Details

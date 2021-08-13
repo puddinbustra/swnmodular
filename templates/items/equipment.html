@@ -55,11 +55,11 @@
 <!--                    <option value="{{type}}">{{localize name}}</option>-->
 <!--                    {{/each}}-->
 <!--                    {{/select}}-->
-                    {{selectOptions config.equipmentTypes selected=data.armor.type blank=""}}
+<!--                    {{selectOptions config.equipmentTypes selected=data.armor.type blank=""}}-->
                 </select>
             </div>
 
-            {{#unless isMountable}}
+<!--            {{#unless isMountable}}-->
             <div class="form-group">
                 <label>{{localize "SWNPRETTY.Attunement"}}</label>
                 <select name="data.attunement" data-dtype="Number">
@@ -70,27 +70,29 @@
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "SWNPRETTY.ItemEquipmentStatus" }}</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SWNPRETTY.Proficient" }}
-                </label>
-<!--                <label class="checkbox">-->
-<!--                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SWNPRETTY.Equipped" }}-->
-<!--                </label>-->
-                <label class="checkbox">
-                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SWNPRETTY.Identified" }}
-                </label>
-            </div>
-            {{/unless}}
-
-            {{!-- Armor Class --}}
-            <div class="form-group">
-                <label>{{ localize "SWNPRETTY.ArmorClass" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.armor.value" value="{{data.armor.value}}" data-dtype="Number"/>
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SWNPRETTY.Proficient" }}
+                    </label>
+    <!--                <label class="checkbox">-->
+    <!--                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SWNPRETTY.Equipped" }}-->
+    <!--                </label>-->
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SWNPRETTY.Identified" }}
+                    </label>
+                </div>
+    <!--            {{/unless}}-->
+
+                {{!-- Armor Class --}}
+                <div class="form-group">
+                    <label>{{ localize "SWNPRETTY.ArmorClass" }}</label>
+                    <div class="form-fields">
+                       <input type="text" name="data.armor.value" value="{{data.armor.value}}" data-dtype="Number"/>
+                    </div>
                 </div>
             </div>
 
-            {{#unless isMountable}}
+<!--            {{#unless isMountable}}-->
             {{!-- Dexterity Modifier --}}
             <div class="form-group">
                 <label>{{ localize "SWNPRETTY.ItemEquipmentDexMod" }}</label>
@@ -106,22 +108,6 @@
                     <input type="text" name="data.vulnresist" value="{{data.vulnresist}}" placeholder="{{ localize 'SWNPRETTY.None' }}"/>
                 </div>
             </div>
-
-<!--            {{!&#45;&#45; Required Strength &#45;&#45;}}-->
-<!--            <div class="form-group">-->
-<!--                <label>{{ localize "SWNPRETTY.ItemRequiredStr" }}</label>-->
-<!--                <div class="form-fields">-->
-<!--                   <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="{{ localize 'SWNPRETTY.None' }}"/>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            First, SWN doesn't have disadvantage RAW, second it's not yet connected to the right stats, so -->
-<!--            {{!&#45;&#45; Stealth Disadvantage &#45;&#45;}}-->
-<!--            <div class="form-group">-->
-<!--                <label>{{ localize "SWNPRETTY.ItemEquipmentStealthDisav" }}</label>-->
-<!--                <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>-->
-<!--            </div>-->
-<!--            {{/unless}}-->
 
             {{#if isMountable}}
             {{> 'systems/swnpretty/templates/items/parts/item-mountable.html'}}

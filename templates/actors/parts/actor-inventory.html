@@ -104,8 +104,7 @@
 <!--                                {{ item.totalWeight }}-->
 <!--                            </div>-->
 <!--                        {{/if}}-->
-<!--
-                        Name is probably wrong. This is incomplete code to get an accessible equipment location selector-->
+<!--&lt;!&ndash;                        Name is probably wrong. This is incomplete code to get an accessible equipment location selector&ndash;&gt;-->
 <!--                        <select name = "item.data.location">-->
 
 <!--                            {{#select item.data.location}}-->
@@ -133,8 +132,8 @@
                     <div class="item-detail item-weight">
                         {{#if item.totalWeight}}
                             <div class="item-detail">
-<!--                                {{ item.totalWeight }}-->
-                                {{ item.totalWeight }} {{ @root.weightUnit }}
+                                {{ item.totalWeight }}
+<!--                                {{ item.totalWeight }} {{ @root.weightUnit }}-->
                             </div>
                         {{/if}}
                     </div>
@@ -156,16 +155,13 @@
 
             {{#if ../../owner}}
             <div class="item-controls inventory-icons flexrow">
-                {{#unless @root.isVehicle}}
-                <a class="item-control item-toggle {{item.toggleClass}}" title='{{item.toggleTitle}}'><i class="fas fa-shield-alt"></i></a>
-                {{/unless}}
 <!--                This is the equipped button. It doesn't work properly now, but making into a readied/equipped button would be nice -Lofty-->
-<!--                {{#unless section.editableName}}-->
-<!--                <a class="item-control item-edit" title='{{localize "SWNPRETTY.ItemEdit"}}'><i class="fas fa-edit"></i></a>-->
-<!--                {{/unless}}-->
-<!--                {{#unless @root.isVehicle}}-->
-<!--                <a class="item-control"><i class="fas "></i></a>-->
-<!--                {{/unless}}-->
+                {{#unless section.editableName}}
+                <a class="item-control item-edit" title='{{localize "SWNPRETTY.ItemEdit"}}'><i class="fas fa-edit"></i></a>
+                {{/unless}}
+                {{#unless @root.isVehicle}}
+                <a class="item-control"><i class="fas "></i></a>
+                {{/unless}}
                 <a class = "item-delete item-control" title='{{localize "SWNPRETTY.ItemDelete"}}'><i class="fas fa-trash " ></i></a>
             </div>
             {{/if}}
