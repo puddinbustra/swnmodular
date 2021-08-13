@@ -1504,9 +1504,9 @@ export default class Item5e extends Item {
       if ( isNPC ) {
         updates["data.proficient"] = true;  // NPCs automatically have equipment proficiency
       } else {
-        const armorProf = CONFIG.SWNPRETTY.armorProficienciesMap[data.data?.armor?.type]; // Player characters check proficiency
-        const actorArmorProfs = actorData.data.traits?.armorProf?.value || [];
-        updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf);
+        // const armorProf = CONFIG.SWNPRETTY.armorProficienciesMap[data.data?.armor?.type]; // Player characters check proficiency
+        // const actorArmorProfs = actorData.data.traits?.armorProf?.value || [];
+        // updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf);
       }
     }
     return updates;
