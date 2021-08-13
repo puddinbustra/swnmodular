@@ -1,7 +1,7 @@
 import { d20Roll, damageRoll } from "../dice.js";
 import SelectItemsPrompt from "../apps/select-items-prompt.js";
-import ShortRestDialog from "../apps/short-rest.js";
-import LongRestDialog from "../apps/long-rest.js";
+// import ShortRestDialog from "../apps/short-rest.js";
+// import LongRestDialog from "../apps/long-rest.js";
 import {SWNPRETTY} from '../config.js';
 import Item5e from "../item/entity.js";
 
@@ -1326,214 +1326,214 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
 
   /* -------------------------------------------- */
 
-  /**
-   * Cause this Actor to take a Short Rest
-   * During a Short Rest resources and limited item uses may be recovered
-   * @param {boolean} dialog  Present a dialog window which allows for rolling hit dice as part of the Short Rest
-   * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
-   * @param {boolean} autoHD  Automatically spend Hit Dice if you are missing 3 or more hit points
-   * @param {boolean} autoHDThreshold   A number of missing hit points which would trigger an automatic HD roll
-   * @return {Promise}        A Promise which resolves once the short rest workflow has completed
-   */
-  async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
-
-    // Take note of the initial hit points and number of hit dice the Actor has
-    const hp = this.data.data.attributes.hp;
-    const hd0 = this.data.data.attributes.hd;
-    const hp0 = hp.value;
-    let newDay = false;
-
-    // Display a Dialog for rolling hit dice
-    if ( dialog ) {
-      try {
-        newDay = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
-      } catch(err) {
-        return;
-      }
-    }
-
-    // Automatically spend hit dice
-    else if ( autoHD ) {
-      while ( (hp.value + autoHDThreshold) <= hp.max ) {
-        const r = await this.rollHitDie(undefined, {dialog: false});
-        if ( r === null ) break;
-      }
-    }
-
-    // Note the change in HP and HD which occurred
-    const dhd = this.data.data.attributes.hd - hd0;
-    const dhp = this.data.data.attributes.hp.value - hp0;
-
-    // Recover character resources
-    const updateData = {};
-    for ( let [k, r] of Object.entries(this.data.data.resources) ) {
-      if ( r.max && r.sr ) {
-        updateData[`data.resources.${k}.value`] = r.max;
-      }
-    }
-
-    // Recover pact slots.
-    const pact = this.data.data.spells.pact;
-    updateData['data.spells.pact.value'] = pact.override || pact.max;
-    await this.update(updateData);
-
-    // Recover item uses
-    const recovery = newDay ? ["sr", "day"] : ["sr"];
-    const items = this.items.filter(item => item.data.data.uses && recovery.includes(item.data.data.uses.per));
-    const updateItems = items.map(item => {
-      return {
-        _id: item._id,
-        "data.uses.value": item.data.data.uses.max
-      };
-    });
-    await this.updateEmbeddedEntity("OwnedItem", updateItems);
-
-    // Display a Chat Message summarizing the rest effects
-    if ( chat ) {
-
-      // Summarize the rest duration
-      let restFlavor;
-      switch (game.settings.get("swnpretty", "restVariant")) {
-        case 'normal': restFlavor = game.i18n.localize("SWNPRETTY.ShortRestNormal"); break;
-        case 'gritty': restFlavor = game.i18n.localize(newDay ? "SWNPRETTY.ShortRestOvernight" : "SWNPRETTY.ShortRestGritty"); break;
-        case 'epic':  restFlavor = game.i18n.localize("SWNPRETTY.ShortRestEpic"); break;
-      }
-
-      // Summarize the health effects
-      let srMessage = "SWNPRETTY.ShortRestResultShort";
-      if ((dhd !== 0) && (dhp !== 0)) srMessage = "SWNPRETTY.ShortRestResult";
-
-      // Create a chat message
-      ChatMessage.create({
-        user: game.user._id,
-        speaker: {actor: this, alias: this.name},
-        flavor: restFlavor,
-        content: game.i18n.format(srMessage, {name: this.name, dice: -dhd, health: dhp})
-      });
-    }
-
-    // Return data summarizing the rest effects
-    return {
-      dhd: dhd,
-      dhp: dhp,
-      updateData: updateData,
-      updateItems: updateItems,
-      newDay: newDay
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Take a long rest, recovering HP, HD, resources, and spell slots
-   * @param {boolean} dialog  Present a confirmation dialog window whether or not to take a long rest
-   * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
-   * @param {boolean} newDay  Whether the long rest carries over to a new day
-   * @return {Promise}        A Promise which resolves once the long rest workflow has completed
-   */
-  async longRest({dialog=true, chat=true, newDay=true}={}) {
-    const data = this.data.data;
-
-    // Maybe present a confirmation dialog
-    if ( dialog ) {
-      try {
-        newDay = await LongRestDialog.longRestDialog({actor: this});
-      } catch(err) {
-        return;
-      }
-    }
-
-    // Recover hit points to full, and eliminate any existing temporary HP
-    const dhp = data.attributes.hp.max - data.attributes.hp.value;
-    const updateData = {
-      "data.attributes.hp.value": data.attributes.hp.max,
-      "data.attributes.hp.temp": 0,
-      "data.attributes.hp.tempmax": 0
-    };
-
-    // Recover character resources
-    for ( let [k, r] of Object.entries(data.resources) ) {
-      if ( r.max && (r.sr || r.lr) ) {
-        updateData[`data.resources.${k}.value`] = r.max;
-      }
-    }
-
-    // Recover spell slots
-    for ( let [k, v] of Object.entries(data.spells) ) {
-      updateData[`data.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
-    }
-
-    // Recover pact slots.
-    const pact = data.spells.pact;
-    updateData['data.spells.pact.value'] = pact.override || pact.max;
-
-    // Determine the number of hit dice which may be recovered
-    let recoverHD = Math.max(Math.floor(data.details.level / 2), 1);
-    let dhd = 0;
-
-    // Sort classes which can recover HD, assuming players prefer recovering larger HD first.
-    const updateItems = this.items.filter(item => item.data.type === "class").sort((a, b) => {
-      let da = parseInt(a.data.data.hitDice.slice(1)) || 0;
-      let db = parseInt(b.data.data.hitDice.slice(1)) || 0;
-      return db - da;
-    }).reduce((updates, item) => {
-      const d = item.data.data;
-      if ( (recoverHD > 0) && (d.hitDiceUsed > 0) ) {
-        let delta = Math.min(d.hitDiceUsed || 0, recoverHD);
-        recoverHD -= delta;
-        dhd += delta;
-        updates.push({_id: item.id, "data.hitDiceUsed": d.hitDiceUsed - delta});
-      }
-      return updates;
-    }, []);
-
-    // Iterate over owned items, restoring uses per day and recovering Hit Dice
-    const recovery = newDay ? ["sr", "lr", "day"] : ["sr", "lr"];
-    for ( let item of this.items ) {
-      const d = item.data.data;
-      if ( d.uses && recovery.includes(d.uses.per) ) {
-        updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
-      }
-      else if ( d.recharge && d.recharge.value ) {
-        updateItems.push({_id: item.id, "data.recharge.charged": true});
-      }
-    }
-
-    // Perform the updates
-    await this.update(updateData);
-    if ( updateItems.length ) await this.updateEmbeddedEntity("OwnedItem", updateItems);
-
-    // Display a Chat Message summarizing the rest effects
-    let restFlavor;
-    switch (game.settings.get("swnpretty", "restVariant")) {
-      case 'normal': restFlavor = game.i18n.localize(newDay ? "SWNPRETTY.LongRestOvernight" : "SWNPRETTY.LongRestNormal"); break;
-      case 'gritty': restFlavor = game.i18n.localize("SWNPRETTY.LongRestGritty"); break;
-      case 'epic':  restFlavor = game.i18n.localize("SWNPRETTY.LongRestEpic"); break;
-    }
-
-    // Determine the chat message to display
-    if ( chat ) {
-      let lrMessage = "SWNPRETTY.LongRestResultShort";
-      if((dhp !== 0) && (dhd !== 0)) lrMessage = "SWNPRETTY.LongRestResult";
-      else if ((dhp !== 0) && (dhd === 0)) lrMessage = "SWNPRETTY.LongRestResultHitPoints";
-      else if ((dhp === 0) && (dhd !== 0)) lrMessage = "SWNPRETTY.LongRestResultHitDice";
-      ChatMessage.create({
-        user: game.user._id,
-        speaker: {actor: this, alias: this.name},
-        flavor: restFlavor,
-        content: game.i18n.format(lrMessage, {name: this.name, health: dhp, dice: dhd})
-      });
-    }
-
-    // Return data summarizing the rest effects
-    return {
-      dhd: dhd,
-      dhp: dhp,
-      updateData: updateData,
-      updateItems: updateItems,
-      newDay: newDay
-    }
-  }
+  // /**
+  //  * Cause this Actor to take a Short Rest
+  //  * During a Short Rest resources and limited item uses may be recovered
+  //  * @param {boolean} dialog  Present a dialog window which allows for rolling hit dice as part of the Short Rest
+  //  * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
+  //  * @param {boolean} autoHD  Automatically spend Hit Dice if you are missing 3 or more hit points
+  //  * @param {boolean} autoHDThreshold   A number of missing hit points which would trigger an automatic HD roll
+  //  * @return {Promise}        A Promise which resolves once the short rest workflow has completed
+  //  */
+  // async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
+  //
+  //   // Take note of the initial hit points and number of hit dice the Actor has
+  //   const hp = this.data.data.attributes.hp;
+  //   const hd0 = this.data.data.attributes.hd;
+  //   const hp0 = hp.value;
+  //   let newDay = false;
+  //
+  //   // Display a Dialog for rolling hit dice
+  //   if ( dialog ) {
+  //     try {
+  //       newDay = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+  //     } catch(err) {
+  //       return;
+  //     }
+  //   }
+  //
+  //   // Automatically spend hit dice
+  //   else if ( autoHD ) {
+  //     while ( (hp.value + autoHDThreshold) <= hp.max ) {
+  //       const r = await this.rollHitDie(undefined, {dialog: false});
+  //       if ( r === null ) break;
+  //     }
+  //   }
+  //
+  //   // Note the change in HP and HD which occurred
+  //   const dhd = this.data.data.attributes.hd - hd0;
+  //   const dhp = this.data.data.attributes.hp.value - hp0;
+  //
+  //   // Recover character resources
+  //   const updateData = {};
+  //   for ( let [k, r] of Object.entries(this.data.data.resources) ) {
+  //     if ( r.max && r.sr ) {
+  //       updateData[`data.resources.${k}.value`] = r.max;
+  //     }
+  //   }
+  //
+  //   // Recover pact slots.
+  //   const pact = this.data.data.spells.pact;
+  //   updateData['data.spells.pact.value'] = pact.override || pact.max;
+  //   await this.update(updateData);
+  //
+  //   // Recover item uses
+  //   const recovery = newDay ? ["sr", "day"] : ["sr"];
+  //   const items = this.items.filter(item => item.data.data.uses && recovery.includes(item.data.data.uses.per));
+  //   const updateItems = items.map(item => {
+  //     return {
+  //       _id: item._id,
+  //       "data.uses.value": item.data.data.uses.max
+  //     };
+  //   });
+  //   await this.updateEmbeddedEntity("OwnedItem", updateItems);
+  //
+  //   // Display a Chat Message summarizing the rest effects
+  //   if ( chat ) {
+  //
+  //     // Summarize the rest duration
+  //     let restFlavor;
+  //     switch (game.settings.get("swnpretty", "restVariant")) {
+  //       case 'normal': restFlavor = game.i18n.localize("SWNPRETTY.ShortRestNormal"); break;
+  //       case 'gritty': restFlavor = game.i18n.localize(newDay ? "SWNPRETTY.ShortRestOvernight" : "SWNPRETTY.ShortRestGritty"); break;
+  //       case 'epic':  restFlavor = game.i18n.localize("SWNPRETTY.ShortRestEpic"); break;
+  //     }
+  //
+  //     // Summarize the health effects
+  //     let srMessage = "SWNPRETTY.ShortRestResultShort";
+  //     if ((dhd !== 0) && (dhp !== 0)) srMessage = "SWNPRETTY.ShortRestResult";
+  //
+  //     // Create a chat message
+  //     ChatMessage.create({
+  //       user: game.user._id,
+  //       speaker: {actor: this, alias: this.name},
+  //       flavor: restFlavor,
+  //       content: game.i18n.format(srMessage, {name: this.name, dice: -dhd, health: dhp})
+  //     });
+  //   }
+  //
+  //   // Return data summarizing the rest effects
+  //   return {
+  //     dhd: dhd,
+  //     dhp: dhp,
+  //     updateData: updateData,
+  //     updateItems: updateItems,
+  //     newDay: newDay
+  //   }
+  // }
+  //
+  // /* -------------------------------------------- */
+  //
+  // /**
+  //  * Take a long rest, recovering HP, HD, resources, and spell slots
+  //  * @param {boolean} dialog  Present a confirmation dialog window whether or not to take a long rest
+  //  * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
+  //  * @param {boolean} newDay  Whether the long rest carries over to a new day
+  //  * @return {Promise}        A Promise which resolves once the long rest workflow has completed
+  //  */
+  // async longRest({dialog=true, chat=true, newDay=true}={}) {
+  //   const data = this.data.data;
+  //
+  //   // Maybe present a confirmation dialog
+  //   if ( dialog ) {
+  //     try {
+  //       newDay = await LongRestDialog.longRestDialog({actor: this});
+  //     } catch(err) {
+  //       return;
+  //     }
+  //   }
+  //
+  //   // Recover hit points to full, and eliminate any existing temporary HP
+  //   const dhp = data.attributes.hp.max - data.attributes.hp.value;
+  //   const updateData = {
+  //     "data.attributes.hp.value": data.attributes.hp.max,
+  //     "data.attributes.hp.temp": 0,
+  //     "data.attributes.hp.tempmax": 0
+  //   };
+  //
+  //   // Recover character resources
+  //   for ( let [k, r] of Object.entries(data.resources) ) {
+  //     if ( r.max && (r.sr || r.lr) ) {
+  //       updateData[`data.resources.${k}.value`] = r.max;
+  //     }
+  //   }
+  //
+  //   // Recover spell slots
+  //   for ( let [k, v] of Object.entries(data.spells) ) {
+  //     updateData[`data.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
+  //   }
+  //
+  //   // Recover pact slots.
+  //   const pact = data.spells.pact;
+  //   updateData['data.spells.pact.value'] = pact.override || pact.max;
+  //
+  //   // Determine the number of hit dice which may be recovered
+  //   let recoverHD = Math.max(Math.floor(data.details.level / 2), 1);
+  //   let dhd = 0;
+  //
+  //   // Sort classes which can recover HD, assuming players prefer recovering larger HD first.
+  //   const updateItems = this.items.filter(item => item.data.type === "class").sort((a, b) => {
+  //     let da = parseInt(a.data.data.hitDice.slice(1)) || 0;
+  //     let db = parseInt(b.data.data.hitDice.slice(1)) || 0;
+  //     return db - da;
+  //   }).reduce((updates, item) => {
+  //     const d = item.data.data;
+  //     if ( (recoverHD > 0) && (d.hitDiceUsed > 0) ) {
+  //       let delta = Math.min(d.hitDiceUsed || 0, recoverHD);
+  //       recoverHD -= delta;
+  //       dhd += delta;
+  //       updates.push({_id: item.id, "data.hitDiceUsed": d.hitDiceUsed - delta});
+  //     }
+  //     return updates;
+  //   }, []);
+  //
+  //   // Iterate over owned items, restoring uses per day and recovering Hit Dice
+  //   const recovery = newDay ? ["sr", "lr", "day"] : ["sr", "lr"];
+  //   for ( let item of this.items ) {
+  //     const d = item.data.data;
+  //     if ( d.uses && recovery.includes(d.uses.per) ) {
+  //       updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
+  //     }
+  //     else if ( d.recharge && d.recharge.value ) {
+  //       updateItems.push({_id: item.id, "data.recharge.charged": true});
+  //     }
+  //   }
+  //
+  //   // Perform the updates
+  //   await this.update(updateData);
+  //   if ( updateItems.length ) await this.updateEmbeddedEntity("OwnedItem", updateItems);
+  //
+  //   // Display a Chat Message summarizing the rest effects
+  //   // let restFlavor;
+  //   // switch (game.settings.get("swnpretty", "restVariant")) {
+  //   //   case 'normal': restFlavor = game.i18n.localize(newDay ? "SWNPRETTY.LongRestOvernight" : "SWNPRETTY.LongRestNormal"); break;
+  //   //   case 'gritty': restFlavor = game.i18n.localize("SWNPRETTY.LongRestGritty"); break;
+  //   //   case 'epic':  restFlavor = game.i18n.localize("SWNPRETTY.LongRestEpic"); break;
+  //   // }
+  //
+  //   // Determine the chat message to display
+  //   if ( chat ) {
+  //     let lrMessage = "SWNPRETTY.LongRestResultShort";
+  //     if((dhp !== 0) && (dhd !== 0)) lrMessage = "SWNPRETTY.LongRestResult";
+  //     else if ((dhp !== 0) && (dhd === 0)) lrMessage = "SWNPRETTY.LongRestResultHitPoints";
+  //     else if ((dhp === 0) && (dhd !== 0)) lrMessage = "SWNPRETTY.LongRestResultHitDice";
+  //     ChatMessage.create({
+  //       user: game.user._id,
+  //       speaker: {actor: this, alias: this.name},
+  //       flavor: restFlavor,
+  //       content: game.i18n.format(lrMessage, {name: this.name, health: dhp, dice: dhd})
+  //     });
+  //   }
+  //
+  //   // Return data summarizing the rest effects
+  //   return {
+  //     dhd: dhd,
+  //     dhp: dhp,
+  //     updateData: updateData,
+  //     updateItems: updateItems,
+  //     newDay: newDay
+  //   }
+  // }
 
   /* -------------------------------------------- */
 

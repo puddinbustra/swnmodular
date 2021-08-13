@@ -195,8 +195,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     html.find('.item-toggle').click(this._onToggleItem.bind(this));
 
     // Short and Long Rest
-    html.find('.short-rest').click(this._onShortRest.bind(this));
-    html.find('.long-rest').click(this._onLongRest.bind(this));
+    // html.find('.short-rest').click(this._onShortRest.bind(this));
+    // html.find('.long-rest').click(this._onLongRest.bind(this));
 
     // Rollable sheet actions
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
@@ -247,11 +247,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * @param {Event} event   The triggering click event
    * @private
    */
-  async _onShortRest(event) {
-    event.preventDefault();
-    await this._onSubmit(event);
-    return this.actor.shortRest();
-  }
+  // async _onShortRest(event) {
+  //   event.preventDefault();
+  //   await this._onSubmit(event);
+  //   return this.actor.shortRest();
+  // }
 
   /* -------------------------------------------- */
 
@@ -260,11 +260,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * @param {Event} event   The triggering click event
    * @private
    */
-  async _onLongRest(event) {
-    event.preventDefault();
-    await this._onSubmit(event);
-    return this.actor.longRest();
-  }
+  // async _onLongRest(event) {
+  //   event.preventDefault();
+  //   await this._onSubmit(event);
+  //   return this.actor.longRest();
+  // }
 
   /* -------------------------------------------- */
 

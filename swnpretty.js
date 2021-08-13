@@ -29,7 +29,7 @@ import ActorSheet5eCharacter from "./module/actor/sheets/character.js";
 import ActorSheet5eNPC from "./module/actor/sheets/npc.js";
 import ActorSheet5eVehicle from "./module/actor/sheets/vehicle.js";
 import ItemSheet5e from "./module/item/sheet.js";
-import ShortRestDialog from "./module/apps/short-rest.js";
+// import ShortRestDialog from "./module/apps/short-rest.js";
 import TraitSelector from "./module/apps/trait-selector.js";
 import ActorMovementConfig from "./module/apps/movement-config.js";
 import ActorSensesConfig from "./module/apps/senses-config.js";
@@ -57,7 +57,7 @@ Hooks.once("init", function() {
       ActorSheet5eNPC,
       ActorSheet5eVehicle,
       ItemSheet5e,
-      ShortRestDialog,
+      // ShortRestDialog,
       TraitSelector,
       ActorMovementConfig,
       ActorSensesConfig

@@ -11,22 +11,22 @@ export const registerSystemSettings = function() {
     default: ""
   });
 
-  /**
-   * Register resting variants
-   */
-  game.settings.register("swnpretty", "restVariant", {
-    name: "SETTINGS.5eRestN",
-    hint: "SETTINGS.5eRestL",
-    scope: "world",
-    config: true,
-    default: "normal",
-    type: String,
-    choices: {
-      "normal": "SETTINGS.5eRestPHB",
-      "gritty": "SETTINGS.5eRestGritty",
-      "epic": "SETTINGS.5eRestEpic",
-    }
-  });
+  // /**
+  //  * Register resting variants
+  //  */
+  // game.settings.register("swnpretty", "restVariant", {
+  //   name: "SETTINGS.5eRestN",
+  //   hint: "SETTINGS.5eRestL",
+  //   scope: "world",
+  //   config: true,
+  //   default: "normal",
+  //   type: String,
+  //   choices: {
+  //     "normal": "SETTINGS.5eRestPHB",
+  //     "gritty": "SETTINGS.5eRestGritty",
+  //     "epic": "SETTINGS.5eRestEpic",
+  //   }
+  // });
 
   /**
    * Register diagonal movement rule setting
