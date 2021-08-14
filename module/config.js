@@ -1,4 +1,4 @@
-import {ClassFeatures} from "./classFeatures.js"
+// import {ClassFeatures} from "./classFeatures.js"
 
 // Namespace Configuration Values
 export const SWNPRETTY = {};
@@ -734,7 +734,7 @@ SWNPRETTY.CR_EXP_LEVELS = [
 ];
 
 // Character Features Per Class And Level
-SWNPRETTY.classFeatures = ClassFeatures;
+// SWNPRETTY.classFeatures = ClassFeatures;
 
 // Configure Optional Character Flags
 SWNPRETTY.characterFlags = {

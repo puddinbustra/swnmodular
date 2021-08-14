@@ -783,8 +783,8 @@ export default class Item5e extends Item {
     if ( data.hasOwnProperty("carried") && !["loot", "tool"].includes(this.data.type) ) {
       if ( data.attunement === CONFIG.SWNPRETTY.attunementTypes.REQUIRED ) props.push(game.i18n.localize(CONFIG.SWNPRETTY.attunements[CONFIG.SWNPRETTY.attunementTypes.REQUIRED]));
       props.push(
-        game.i18n.localize(data.carried ? "SWNPRETTY.Carried" : "SWNPRETTY.Unequipped"),
-        game.i18n.localize(data.proficient ? "SWNPRETTY.Proficient" : "SWNPRETTY.NotProficient"),
+
+        game.i18n.localize(data.proficient ? "SWNPRETTY.Proficient" : "SWNPRETTY.NotProficient")
       );
     }
 
@@ -1442,15 +1442,15 @@ export default class Item5e extends Item {
     const pc = this.parent.items.get(this.parent.data.data.details.originalClass);
     if ( !pc ) this.parent._assignPrimaryClass();
 
-    // Prompt to add new class features
-    if (options.addFeatures === false) return;
-    this.parent.getClassFeatures({
-      className: this.name,
-      subclassName: this.data.data.subclass,
-      level: this.data.data.levels
-    }).then(features => {
-      return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
-    });
+    // // Prompt to add new class features
+    // if (options.addFeatures === false) return;
+    // this.parent.getClassFeatures({
+    //   className: this.name,
+    //   subclassName: this.data.data.subclass,
+    //   level: this.data.data.levels
+    // }).then(features => {
+    //   return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
+    // });
   }
 
   /* -------------------------------------------- */
@@ -1465,15 +1465,15 @@ export default class Item5e extends Item {
     if ( !isCharacterClass ) return;
 
     // Prompt to add new class features
-    const addFeatures = changed["name"] || (changed.data && ["subclass", "levels"].some(k => k in changed.data));
-    if ( !addFeatures || (options.addFeatures === false) ) return;
-    this.parent.getClassFeatures({
-      className: changed.name || this.name,
-      subclassName: changed.data?.subclass || this.data.data.subclass,
-      level: changed.data?.levels || this.data.data.levels
-    }).then(features => {
-      return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
-    });
+    // const addFeatures = changed["name"] || (changed.data && ["subclass", "levels"].some(k => k in changed.data));
+    // if ( !addFeatures || (options.addFeatures === false) ) return;
+    // this.parent.getClassFeatures({
+    //   className: changed.name || this.name,
+    //   subclassName: changed.data?.subclass || this.data.data.subclass,
+    //   level: changed.data?.levels || this.data.data.levels
+    // }).then(features => {
+    //   return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
+    // });
   }
 
   /* -------------------------------------------- */

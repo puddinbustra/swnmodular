@@ -252,52 +252,52 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-  /**
-   * Return the features which a character is awarded for each class level
-   * @param {string} className        The class name being added
-   * @param {string} subclassName     The subclass of the class being added, if any
-   * @param {number} level            The number of levels in the added class
-   * @param {number} priorLevel       The previous level of the added class
-   * @return {Promise<Item5e[]>}     Array of Item5e entities
-   */
-  static async loadClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
-    className = className.toLowerCase();
-    subclassName = subclassName.slugify();
+  // /**
+  //  * Return the features which a character is awarded for each class level
+  //  * @param {string} className        The class name being added
+  //  * @param {string} subclassName     The subclass of the class being added, if any
+  //  * @param {number} level            The number of levels in the added class
+  //  * @param {number} priorLevel       The previous level of the added class
+  //  * @return {Promise<Item5e[]>}     Array of Item5e entities
+  //  */
+  // static async loadClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
+    // className = className.toLowerCase();
+    // subclassName = subclassName.slugify();
 
     // Get the configuration of features which may be added
-    const clsConfig = CONFIG.SWNPRETTY.classFeatures[className];
-    if (!clsConfig) return [];
+    // const clsConfig = CONFIG.SWNPRETTY.classFeatures[className];
+    // if (!clsConfig) return [];
 
     // Acquire class features
-    let ids = [];
-    for ( let [l, f] of Object.entries(clsConfig.features || {}) ) {
-      l = parseInt(l);
-      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
-    }
+    // let ids = [];
+    // for ( let [l, f] of Object.entries(clsConfig.features || {}) ) {
+    //   l = parseInt(l);
+    //   if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
+    // }
 
     // Acquire subclass features
-    const subConfig = clsConfig.subclasses[subclassName] || {};
-    for ( let [l, f] of Object.entries(subConfig.features || {}) ) {
-      l = parseInt(l);
-      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
-    }
+    // const subConfig = clsConfig.subclasses[subclassName] || {};
+    // for ( let [l, f] of Object.entries(subConfig.features || {}) ) {
+    //   l = parseInt(l);
+    //   if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
+    // }
 
-    // Load item data for all identified features
-    const features = [];
-    for ( let id of ids ) {
-      features.push(await fromUuid(id));
-    }
+    // // Load item data for all identified features
+    // const features = [];
+    // for ( let id of ids ) {
+    //   features.push(await fromUuid(id));
+    // }
 
-    // Class spells should always be prepared
-    for ( const feature of features ) {
-      if ( feature.type === "spell" ) {
-        const preparation = feature.data.data.preparation;
-        preparation.mode = "always";
-        preparation.prepared = true;
-      }
-    }
-    return features;
-  }
+    // // Class spells should always be prepared
+    // for ( const feature of features ) {
+    //   if ( feature.type === "spell" ) {
+    //     const preparation = feature.data.data.preparation;
+    //     preparation.mode = "always";
+    //     preparation.prepared = true;
+    //   }
+    // }
+    // return features;
+  // }
 
   /* -------------------------------------------- */
 

@@ -55,26 +55,26 @@
                 </div>
             </div>
 
-            {{!-- Class Hit Dice --}}
-            <div class="form-group">
-                <label>{{localize "SWNPRETTY.HitDice"}}</label>
-                <div class="form-fields">
-                    <select name="data.hitDice">
-                        {{#select data.hitDice}}
-                        {{#each config.hitDieTypes}}
-                        <option value="{{this}}">{{this}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
+<!--            {{!&#45;&#45; Class Hit Dice &#45;&#45;}}-->
+<!--            <div class="form-group">-->
+<!--                <label>{{localize "SWNPRETTY.HitDice"}}</label>-->
+<!--                <div class="form-fields">-->
+<!--                    <select name="data.hitDice">-->
+<!--                        {{#select data.hitDice}}-->
+<!--                        {{#each config.hitDieTypes}}-->
+<!--                        <option value="{{this}}">{{this}}</option>-->
+<!--                        {{/each}}-->
+<!--                        {{/select}}-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <div class="form-group">
-                <label>{{localize "SWNPRETTY.HitDiceUsed"}}</label>
-                <div class="form-fields">
-                    <input type="text" placeholder="0" name="data.hitDiceUsed" value="{{data.hitDiceUsed}}" data-dtype="Number"/>
-                </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label>{{localize "SWNPRETTY.HitDiceUsed"}}</label>-->
+<!--                <div class="form-fields">-->
+<!--                    <input type="text" placeholder="0" name="data.hitDiceUsed" value="{{data.hitDiceUsed}}" data-dtype="Number"/>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div class="form-group">
                 <label>{{localize 'SWNPRETTY.SpellProgression'}}</label>
@@ -89,30 +89,30 @@
                 </div>
             </div>
 
-            {{!-- Level 1 skills --}}
-            <div class="form-group">
-                <label>{{localize "SWNPRETTY.ClassSkillsNumber"}}</label>
-                <div class="form-fields">
-                    <input type="text" placeholder="0" name="data.skills.number" value="{{data.skills.number}}" data-dtype="Number"/>
-                </div>
-            </div>
+<!--            {{!&#45;&#45; Level 1 skills &#45;&#45;}}-->
+<!--            <div class="form-group">-->
+<!--                <label>{{localize "SWNPRETTY.ClassSkillsNumber"}}</label>-->
+<!--                <div class="form-fields">-->
+<!--                    <input type="text" placeholder="0" name="data.skills.number" value="{{data.skills.number}}" data-dtype="Number"/>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <div class="form-group">
-                <label>
-                    {{localize "SWNPRETTY.ClassSkillsChosen"}}
-                    {{#if editable }}
-                    <a class="trait-selector class-skills" data-target="data.skills" data-options="skills">
-                        <i class="fas fa-edit"></i></a>
-                    {{/if}}
-                </label>
-                <div class="form-fields">
-                    <ul class="traits-list">
-                        {{#each data.skills.value}}
-                            <li class="tag {{this}}">{{lookup ../config.skills this}}</li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label>-->
+<!--                    {{localize "SWNPRETTY.ClassSkillsChosen"}}-->
+<!--                    {{#if editable }}-->
+<!--                    <a class="trait-selector class-skills" data-target="data.skills" data-options="skills">-->
+<!--                        <i class="fas fa-edit"></i></a>-->
+<!--                    {{/if}}-->
+<!--                </label>-->
+<!--                <div class="form-fields">-->
+<!--                    <ul class="traits-list">-->
+<!--                        {{#each data.skills.value}}-->
+<!--                            <li class="tag {{this}}">{{lookup ../config.skills this}}</li>-->
+<!--                        {{/each}}-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </section>
 </form>

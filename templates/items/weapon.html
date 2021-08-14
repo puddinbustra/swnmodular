@@ -73,27 +73,6 @@
                 </select>
             </div>
 
-
-            {{!-- Weapon Status --}}
-            <div class="form-group stacked">
-                <label>{{ localize "SWNPRETTY.ItemWeaponStatus" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SWNPRETTY.Proficient" }}
-                    </label>
-<!--                    <label class="checkbox">-->
-<!--                        <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SWNPRETTY.Equipped" }}-->
-<!--                    </label>-->
-                    <label class="checkbox">
-                        <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SWNPRETTY.Identified" }}
-                    </label>
-                    <label class="checkbox">
-                        <input type="checkbox" name="data.pcondition" {{checked data.pcondition}}/> {{ localize "SWNPRETTY.PoorCondition" }}
-                    </label>
-                </div>
-            </div>
-            {{/unless}}
-
             {{!-- Weapon Properties --}}
             <div class="form-group stacked weapon-properties">
                 <label>{{ localize "SWNPRETTY.ItemWeaponProperties" }}</label>
