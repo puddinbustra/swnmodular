@@ -1,4 +1,10 @@
+
+
+
 <form class="{{cssClass}} flexcol" autocomplete="off">
+
+
+
 
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
@@ -16,7 +22,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{lookup config.equipmentTypes data.armor.type }}
+
                 </li>
                 <li>
                     <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="{{ localize 'SWNPRETTY.Rarity' }}"/>
@@ -32,7 +38,6 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "SWNPRETTY.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "SWNPRETTY.Details" }}</a>
-<!--        <a class="item" data-tab="effects">{{ localize "SWNPRETTY.Effects" }}</a>-->
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -49,17 +54,17 @@
             <div class="form-group">
                 <label>{{ localize "SWNPRETTY.ItemEquipmentType" }}</label>
                 <select name="data.armor.type">
-<!--                    {{#select data.armor.type}}-->
-<!--                    <option value=""></option>-->
-<!--                    {{#each config.equipmentTypes as |name type|}}-->
-<!--                    <option value="{{type}}">{{localize name}}</option>-->
-<!--                    {{/each}}-->
-<!--                    {{/select}}-->
-<!--                    {{selectOptions config.equipmentTypes selected=data.armor.type blank=""}}-->
+                    {{#select data.armor.type}}
+                    <option value=""></option>
+                    {{#each config.equipmentTypes as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                    {{selectOptions config.equipmentTypes selected=data.armor.type blank=""}}
                 </select>
             </div>
 
-<!--            {{#unless isMountable}}-->
+            {{#unless isMountable}}
             <div class="form-group">
                 <label>{{localize "SWNPRETTY.Attunement"}}</label>
                 <select name="data.attunement" data-dtype="Number">
@@ -74,14 +79,11 @@
                     <label class="checkbox">
                         <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SWNPRETTY.Proficient" }}
                     </label>
-    <!--                <label class="checkbox">-->
-    <!--                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SWNPRETTY.Equipped" }}-->
-    <!--                </label>-->
                     <label class="checkbox">
                         <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SWNPRETTY.Identified" }}
                     </label>
                 </div>
-    <!--            {{/unless}}-->
+                {{/unless}}
 
                 {{!-- Armor Class --}}
                 <div class="form-group">
@@ -92,7 +94,7 @@
                 </div>
             </div>
 
-<!--            {{#unless isMountable}}-->
+            {{#unless isMountable}}
             {{!-- Dexterity Modifier --}}
             <div class="form-group">
                 <label>{{ localize "SWNPRETTY.ItemEquipmentDexMod" }}</label>
@@ -100,6 +102,7 @@
                    <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="{{ localize 'SWNPRETTY.Unlimited' }}"/>
                 </div>
             </div>
+            {{/unless}}
 
             {{!-- Vulnerabilities -Lofty --}}
             <div class="form-group">
@@ -133,10 +136,5 @@
             {{!-- Item Action Template --}}
             {{> "systems/swnpretty/templates/items/parts/item-action.html"}}
         </div>
-
-<!--        {{!&#45;&#45; Effects Tab &#45;&#45;}}-->
-<!--        <div class="tab effects flexcol" data-group="primary" data-tab="effects">-->
-<!--            {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}-->
-<!--        </div>-->
     </section>
 </form>
