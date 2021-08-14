@@ -521,6 +521,9 @@
           "amount": null
         }
       },
+      "techLevel": {
+        "value": 0
+      },
       "action": {
         "ability": null,
         "actionType": null,

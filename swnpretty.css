@@ -395,6 +395,8 @@
 .swnpretty.sheet .filter-list .filter-item.active {
   border-bottom: 3px solid #2301a3;
 }
+
+
 .swnpretty.sheet .traits {
   margin: 5px 0 0;
 }
@@ -1322,6 +1324,9 @@
 }
 .swnpretty.sheet.item .sheet-body .item-properties .form-group input {
   text-align: right;
+}
+.swnpretty.sheet.item .sheet-body .tech-level input{
+  max-width: 23px;
 }
 .swnpretty.sheet.item .sheet-body .form-group .mag input {
   min-width: 0px;
