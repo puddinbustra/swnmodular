@@ -2,13 +2,12 @@
 #Installing
 Click 'install system' in Foundry, and then submit this system's manifest: https://raw.githubusercontent.com/puddinbustra/swnpretty/main/system.json
 
-# Contact
-If you have any other feedback, be it suggestions or support, send me a message on discord - lofty#8637, or an email at kvrosevelt@gmail.com. If people are enjoying it, I'll have more reason to add features.
-
 # About
 
 This sheet is for Stars Without Number: Revised edition. 
 Since I homebrew a lot of my own content for my own games, I may not add features I don't use - like item compendiums - unless there is significant interest in me doing so.
+A preview of the sheet:
+![Preview](preview.png?raw=true)
 
 # Why This Sheet?
 
@@ -23,9 +22,12 @@ Front page space for notes
 # Support
 [Buy me a coffee ☕](https://www.buymeacoffee.com/lofty)
 
+# Contact
+If you have any other feedback, be it suggestions or support, send me a message on discord - lofty#8637, or an email at kvrosevelt@gmail.com. If people are enjoying it, I'll have more reason to add features.
+
 # Compatability
-Since this is mostly based off of the 5e character sheet, some of those modules should still work with stuff that hasn't been changed. Stuff like token modules, map modules, and chat modules should work. 
-For example, Crash's autohide rolls will work after a few adjustments.
+Since this is mostly based off of the 5e character sheet, many of the modules compatible with that should require minimal changes to function here. Stuff like token modules, map modules, and chat modules should work. 
+For example, Crash's autohide rolls work after a few adjustments (I can share my changes if needed).
 
 
 # Possible Additions
