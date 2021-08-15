@@ -1,6 +1,7 @@
 
 #Installing
-Click 'install system' in Foundry, and then submit this system's manifest: https://raw.githubusercontent.com/puddinbustra/swnpretty/main/system.json
+This is not the official system for SWN:R, so you will have to manually install this one. To install,
+click 'install system' in Foundry, and then submit this system's manifest: https://raw.githubusercontent.com/puddinbustra/swnpretty/main/system.json
 
 # About
 
@@ -13,7 +14,7 @@ A preview of the sheet:
 
 Pros | Cons
 ------------ | -------------
-Aesthetically pleasing | No ships
+Pretty | No ships
 Most stats are automated (AC, strain, etc) | No compendiums
 Familiar for 5e sheet users
 Front page space for notes
@@ -29,10 +30,15 @@ If you have any other feedback, be it suggestions or support, send me a message 
 Since this is mostly based off of the 5e character sheet, many of the modules compatible with that should require minimal changes to function here. Stuff like token modules, map modules, and chat modules should work. 
 For example, Crash's autohide rolls work after a few adjustments (I can share my changes if needed).
 
-
 # Possible Additions
 - Vehicles
 - Ships
 - Global modifiers, like melee attack bonus, shock damage, or encumbrance bonus. For both characters and NPCs
 - Compendiums (if anyone wants to make and export these themselves, I'll add them to the repo)
 - Remove unused files and code
+
+#Maintaining Code
+As long as I am playing this system, I will be maintaining the sheet, which will be at least all of 2021, and hopefully long after. 
+When I stop playing, how well I maintain the code will depend on whether other people are using it. Major foundry updates 
+will probably break the character sheets, so you may want to wait until the sheet is updated for it before you download the 
+new Foundry version. 
