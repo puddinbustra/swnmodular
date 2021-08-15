@@ -28,7 +28,7 @@ If you have any other feedback, be it suggestions or support, send me a message 
 
 # Compatability
 Since this is mostly based off of the 5e character sheet, many of the modules compatible with that should require minimal changes to function here. Stuff like token modules, map modules, and chat modules should work. 
-For example, Crash's autohide rolls work after a few adjustments (I can share my changes if needed).
+For example, Crash's autohide rolls work after a few adjustments (I can share my changes if anyone wants to use this module).
 
 # Possible Additions
 - Vehicles
