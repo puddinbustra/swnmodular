@@ -23,7 +23,7 @@ Front page space for notes
 [Buy me a coffee ☕](https://www.buymeacoffee.com/lofty)
 
 # Contact
-If you have any other feedback, be it suggestions or support, send me a message on discord - lofty#8637, or an email at kvrosevelt@gmail.com. If people are enjoying it, I'll have more reason to add features.
+If you have any other feedback, be it suggestions or support, send me a message on discord - lofty#8637, or an email at kvrosevelt@gmail.com. If people are enjoying it, I'll be more likely to add more features.
 
 # Compatability
 Since this is mostly based off of the 5e character sheet, many of the modules compatible with that should require minimal changes to function here. Stuff like token modules, map modules, and chat modules should work. 
@@ -34,5 +34,5 @@ For example, Crash's autohide rolls work after a few adjustments (I can share my
 - Vehicles
 - Ships
 - Global modifiers, like melee attack bonus, shock damage, or encumbrance bonus. For both characters and NPCs
-- Compendiums
+- Compendiums (if anyone wants to make and export these themselves, I'll add them to the repo)
 - Remove unused files and code
