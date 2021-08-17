@@ -14,7 +14,7 @@ A preview of the sheet:
 
 Pros | Cons
 ------------ | -------------
-Pretty | No ships
+Pretty | No ships, vehicles
 Most stats are automated (AC, strain, etc) | No compendiums
 Familiar for 5e sheet users
 Front page space for notes

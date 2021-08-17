@@ -474,20 +474,23 @@ export default class Item5e extends Item {
     const recharge = id.recharge || {};       // Recharge mechanic
     const uses = id?.uses ?? {};              // Limited uses
     const isSpell = this.type === "spell";    // Does the item require a spell slot?
-    const requireSpellSlot = isSpell && (id.level > 0) && CONFIG.SWNPRETTY.spellUpcastModes.includes(id.preparation.mode);
+    if(this.type === "spell"){                // Lofty turning off the spell dialog
+      configureDialog = false;
+    }
+    // const requireSpellSlot = isSpell && (id.level > 0) && CONFIG.SWNPRETTY.spellUpcastModes.includes(id.preparation.mode);
 
     // Define follow-up actions resulting from the item usage
     let createMeasuredTemplate = hasArea;       // Trigger a template creation
     let consumeRecharge = !!recharge.value;     // Consume recharge
     let consumeResource = !!resource.target && (resource.type !== "ammo") // Consume a linked (non-ammo) resource
-    let consumeSpellSlot = requireSpellSlot;    // Consume a spell slot
+    // let consumeSpellSlot = requireSpellSlot;    // Consume a spell slot
     let consumeUsage = !!uses.per;              // Consume limited uses
     let consumeQuantity = uses.autoDestroy;     // Consume quantity of the item in lieu of uses
     let consumeSpellLevel = null;               // Consume a specific category of spell slot
-    if ( requireSpellSlot ) consumeSpellLevel = id.preparation.mode === "pact" ? "pact" : `spell${id.level}`;
+    // if ( requireSpellSlot ) consumeSpellLevel = id.preparation.mode === "pact" ? "pact" : `spell${id.level}`;
 
     // Display a configuration dialog to customize the usage
-    const needsConfiguration = createMeasuredTemplate || consumeRecharge || consumeResource || consumeSpellSlot || consumeUsage;
+    const needsConfiguration = createMeasuredTemplate || consumeRecharge || consumeResource || consumeUsage;
     if (configureDialog && needsConfiguration) {
       const configuration = await AbilityUseDialog.create(this);
       if (!configuration) return;
@@ -497,19 +500,19 @@ export default class Item5e extends Item {
       consumeUsage = Boolean(configuration.consumeUse);
       consumeRecharge = Boolean(configuration.consumeRecharge);
       consumeResource = Boolean(configuration.consumeResource);
-      consumeSpellSlot = Boolean(configuration.consumeSlot);
+      // consumeSpellSlot = Boolean(configuration.consumeSlot);
 
       // Handle spell upcasting
-      if ( requireSpellSlot ) {
-        consumeSpellLevel = configuration.level === "pact" ? "pact" : `spell${configuration.level}`;
-        if ( consumeSpellSlot === false ) consumeSpellLevel = null;
-        const upcastLevel = configuration.level === "pact" ? ad.spells.pact.level : parseInt(configuration.level);
-        if (upcastLevel !== id.level) {
-          item = this.clone({"data.level": upcastLevel}, {keepId: true});
-          item.data.update({_id: this.id}); // Retain the original ID (needed until 0.8.2+)
-          item.prepareFinalAttributes(); // Spell save DC, etc...
-        }
-      }
+      // if ( requireSpellSlot ) {
+        // consumeSpellLevel = configuration.level === "pact" ? "pact" : `spell${configuration.level}`;
+        // if ( consumeSpellSlot === false ) consumeSpellLevel = null;
+        // const upcastLevel = configuration.level === "pact" ? ad.spells.pact.level : parseInt(configuration.level);
+        // if (upcastLevel !== id.level) {
+        //   item = this.clone({"data.level": upcastLevel}, {keepId: true});
+        //   item.data.update({_id: this.id}); // Retain the original ID (needed until 0.8.2+)
+        //   item.prepareFinalAttributes(); // Spell save DC, etc...
+        // }
+      // }
     }
 
     // Determine whether the item can be used by testing for resource consumption
