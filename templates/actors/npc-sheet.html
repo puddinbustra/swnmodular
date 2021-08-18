@@ -225,7 +225,14 @@
         {{!-- Senses/Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
             {{> "systems/swnpretty/templates/actors/parts/actor-traits.html"}}
-<!--            {{> "systems/swnpretty/templates/actors/parts/active-effects.html"}}-->
+            <div class = "flexrow">
+                <div class = "flexcol extras-info info">
+                    <textarea name="data.details.extrasone.value" placeholder="Notes+" class="npc-text-area">{{data.details.extrasone.value}}</textarea>
+                </div>
+                <div class = "flexcol extras-info info">
+                    <textarea name="data.details.extrastwo.value" placeholder="Notes++" class="npc-text-area">{{data.details.extrastwo.value}}</textarea>
+                </div>
+            </div>
         </div>
 
         {{!-- Biography Tab --}}

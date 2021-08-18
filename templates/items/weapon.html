@@ -16,8 +16,9 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{lookup config.weaponTypes data.weaponType }}
-<!--                        {{ lookup config.equipmentLocation data.location }}-->
+<!--                    {{ lookup config.weaponTypes data.weaponType }}-->
+<!--                    {{ lookup config.equipmentLocation data.location }}-->
+                    <span> Range:&nbsp; {{data.range.value}}</span>
                 </li>
                 <li>
                     <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="{{ localize 'SWNPRETTY.Rarity' }}"/>
@@ -67,7 +68,7 @@
             <div class="form-group mag">
                 <label>{{localize "SWNPRETTY.Range"}}</label>
                 <div class = "form-fields mag">
-                    <input type="text" name="data.range.value" value="{{data.range.value}}" placeholder="5"/>
+                    <input type="text" name="data.range.value" value="{{data.range.value}}" placeholder="5/5"/>
                 </div>
                 </select>
             </div>
