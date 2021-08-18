@@ -551,6 +551,7 @@ SWNPRETTY.weaponTypes = {
 SWNPRETTY.weaponProperties = {
   // "ada": "SWNPRETTY.WeaponPropertiesAda",
   "amm": "SWNPRETTY.WeaponPropertiesAmm",
+  "bur": "SWNPRETTY.WeaponPropertiesBur",
   // "fin": "SWNPRETTY.WeaponPropertiesFin",
   // "fir": "SWNPRETTY.WeaponPropertiesFir",
   // "foc": "SWNPRETTY.WeaponPropertiesFoc",
@@ -565,7 +566,7 @@ SWNPRETTY.weaponProperties = {
   "ret": "SWNPRETTY.WeaponPropertiesRet",
   "sil": "SWNPRETTY.WeaponPropertiesSil",
   "spc": "SWNPRETTY.WeaponPropertiesSpc",
-  "thr": "SWNPRETTY.WeaponPropertiesThr",
+  // "thr": "SWNPRETTY.WeaponPropertiesThr",
   "two": "SWNPRETTY.WeaponPropertiesTwo",
   "ver": "SWNPRETTY.WeaponPropertiesVer"
 };
