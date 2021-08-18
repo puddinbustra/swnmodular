@@ -93,20 +93,20 @@ export default class Actor5e extends Actor {
     const bonuses = getProperty(data, "bonuses.abilities") || {};
 
     // Retrieve data for polymorphed actors
-    let originalSaves = null;
+    // let originalSaves = null;
     let originalSkills = null;
-    if (this.isPolymorphed) {
-      const transformOptions = this.getFlag('swnpretty', 'transformOptions');
-      const original = game.actors?.get(this.getFlag('swnpretty', 'originalActor'));
-      if (original) {
-        if (transformOptions.mergeSaves) {
-          originalSaves = original.data.data.abilities;
-        }
-        if (transformOptions.mergeSkills) {
-          originalSkills = original.data.data.skills;
-        }
-      }
-    }
+    // if (this.isPolymorphed) {
+    //   const transformOptions = this.getFlag('swnpretty', 'transformOptions');
+    //   const original = game.actors?.get(this.getFlag('swnpretty', 'originalActor'));
+    //   if (original) {
+    //     if (transformOptions.mergeSaves) {
+    //       originalSaves = original.data.data.abilities;
+    //     }
+    //     if (transformOptions.mergeSkills) {
+    //       originalSkills = original.data.data.skills;
+    //     }
+    //   }
+    // }
 
     // Ability modifiers and saves
     const dcBonus = Number.isNumeric(data.bonuses?.spell?.dc) ? parseInt(data.bonuses.spell.dc) : 0;

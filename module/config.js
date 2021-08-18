@@ -112,11 +112,11 @@ SWNPRETTY.attunements = {
 
 
 SWNPRETTY.weaponProficiencies = {
-  "bows": "SWNPRETTY.BowsProf"
+  // "bows": "SWNPRETTY.BowsProf"
 };
 
 SWNPRETTY.toolProficiencies = {
-
+  "bows": "SWNPRETTY.BowsProf",
   "vehicle": "SWNPRETTY.ToolVehicle"
 };
 
@@ -739,85 +739,33 @@ SWNPRETTY.CR_EXP_LEVELS = [
 
 // Configure Optional Character Flags
 SWNPRETTY.characterFlags = {
-  // "elvenAccuracy": {
-  //   name: "SWNPRETTY.FlagsElvenAccuracy",
-  //   hint: "SWNPRETTY.FlagsElvenAccuracyHint",
-  //   section: "Racial Traits",
-  //   type: Boolean
-  // },
-  // "halflingLucky": {
-  //   name: "SWNPRETTY.FlagsHalflingLucky",
-  //   hint: "SWNPRETTY.FlagsHalflingLuckyHint",
-  //   section: "Racial Traits",
-  //   type: Boolean
-  // },
   // "initiativeAdv": {
   //   name: "SWNPRETTY.FlagsInitiativeAdv",
   //   hint: "SWNPRETTY.FlagsInitiativeAdvHint",
   //   section: "Feats",
   //   type: Boolean
   // },
-  // "initiativeAlert": {
-  //   name: "SWNPRETTY.FlagsAlert",
-  //   hint: "SWNPRETTY.FlagsAlertHint",
+  // "weaponCriticalThreshold": {
+  //   name: "SWNPRETTY.FlagsWeaponCritThreshold",
+  //   hint: "SWNPRETTY.FlagsWeaponCritThresholdHint",
   //   section: "Feats",
-  //   type: Boolean
+  //   type: Number,
+  //   placeholder: 20
   // },
-  // "jackOfAllTrades": {
-  //   name: "SWNPRETTY.FlagsJOAT",
-  //   hint: "SWNPRETTY.FlagsJOATHint",
+  // "spellCriticalThreshold": {
+  //   name: "SWNPRETTY.FlagsSpellCritThreshold",
+  //   hint: "SWNPRETTY.FlagsSpellCritThresholdHint",
   //   section: "Feats",
-  //   type: Boolean
+  //   type: Number,
+  //   placeholder: 20
   // },
-
-  // "observantFeat": {
-  //   name: "SWNPRETTY.FlagsObservant",
-  //   hint: "SWNPRETTY.FlagsObservantHint",
-  //   skills: ['prc','inv'],
+  // "meleeCriticalDamageDice": {
+  //   name: "SWNPRETTY.FlagsMeleeCriticalDice",
+  //   hint: "SWNPRETTY.FlagsMeleeCriticalDiceHint",
   //   section: "Feats",
-  //   type: Boolean
+  //   type: Number,
+  //   placeholder: 0
   // },
-
-  // "powerfulBuild": {
-  //   name: "SWNPRETTY.FlagsPowerfulBuild",
-  //   hint: "SWNPRETTY.FlagsPowerfulBuildHint",
-  //   section: "Racial Traits",
-  //   type: Boolean
-  // },
-  // "reliableTalent": {
-  //   name: "SWNPRETTY.FlagsReliableTalent",
-  //   hint: "SWNPRETTY.FlagsReliableTalentHint",
-  //   section: "Feats",
-  //   type: Boolean
-  // },
-  // "remarkableAthlete": {
-  //   name: "SWNPRETTY.FlagsRemarkableAthlete",
-  //   hint: "SWNPRETTY.FlagsRemarkableAthleteHint",
-  //   abilities: ['str','dex','con'],
-  //   section: "Feats",
-  //   type: Boolean
-  // },
-  "weaponCriticalThreshold": {
-    name: "SWNPRETTY.FlagsWeaponCritThreshold",
-    hint: "SWNPRETTY.FlagsWeaponCritThresholdHint",
-    section: "Feats",
-    type: Number,
-    placeholder: 20
-  },
-  "spellCriticalThreshold": {
-    name: "SWNPRETTY.FlagsSpellCritThreshold",
-    hint: "SWNPRETTY.FlagsSpellCritThresholdHint",
-    section: "Feats",
-    type: Number,
-    placeholder: 20
-  },
-  "meleeCriticalDamageDice": {
-    name: "SWNPRETTY.FlagsMeleeCriticalDice",
-    hint: "SWNPRETTY.FlagsMeleeCriticalDiceHint",
-    section: "Feats",
-    type: Number,
-    placeholder: 0
-  },
 };
 
 // Configure allowed status flags

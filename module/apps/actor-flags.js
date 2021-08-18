@@ -83,14 +83,14 @@ export default class ActorSheetFlags extends DocumentSheet {
       {name: "data.bonuses.mwak.damage", label: "SWNPRETTY.BonusMWDamage"},
       {name: "data.bonuses.rwak.attack", label: "SWNPRETTY.BonusRWAttack"},
       {name: "data.bonuses.rwak.damage", label: "SWNPRETTY.BonusRWDamage"},
-      {name: "data.bonuses.msak.attack", label: "SWNPRETTY.BonusMSAttack"},
-      {name: "data.bonuses.msak.damage", label: "SWNPRETTY.BonusMSDamage"},
-      {name: "data.bonuses.rsak.attack", label: "SWNPRETTY.BonusRSAttack"},
-      {name: "data.bonuses.rsak.damage", label: "SWNPRETTY.BonusRSDamage"},
+      // {name: "data.bonuses.msak.attack", label: "SWNPRETTY.BonusMSAttack"},
+      // {name: "data.bonuses.msak.damage", label: "SWNPRETTY.BonusMSDamage"},
+      // {name: "data.bonuses.rsak.attack", label: "SWNPRETTY.BonusRSAttack"},
+      // {name: "data.bonuses.rsak.damage", label: "SWNPRETTY.BonusRSDamage"},
       {name: "data.bonuses.abilities.check", label: "SWNPRETTY.BonusAbilityCheck"},
       {name: "data.bonuses.abilities.save", label: "SWNPRETTY.BonusAbilitySave"},
       {name: "data.bonuses.abilities.skill", label: "SWNPRETTY.BonusAbilitySkill"},
-      {name: "data.bonuses.spell.dc", label: "SWNPRETTY.BonusSpellDC"}
+      // {name: "data.bonuses.spell.dc", label: "SWNPRETTY.BonusSpellDC"}
     ];
     for ( let b of bonuses ) {
       b.value = getProperty(this.object.data._source, b.name) || "";
