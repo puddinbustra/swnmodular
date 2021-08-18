@@ -33,7 +33,7 @@ For example, Crash's autohide rolls work after a few adjustments (I can share my
 # Possible Additions
 - Vehicles
 - Ships
-- Global modifiers, like melee attack bonus, shock damage, or encumbrance bonus. For both characters and NPCs
+- More global and automated modifiers, like shock damage, or encumbrance bonus. For both characters and NPCs
 - Compendiums (if anyone wants to make and export these themselves, I'll add them to the repo)
 - Remove unused files and code
 
