@@ -33,12 +33,11 @@ For example, Crash's autohide rolls work after a few adjustments (I can share my
 # Possible Additions
 - Vehicles
 - Ships
-- More global and automated modifiers, like shock damage, or encumbrance bonus. For both characters and NPCs
+- Automate the 'other' ability modifier, will require making a shown vs final attribute
 - Compendiums (if anyone wants to make and export these themselves, I'll add them to the repo)
-- Remove unused files and code
 
 # Maintaining Code
 As long as I am playing this system, I will be maintaining the sheet, which will be at least all of 2021, and hopefully long after. 
 When I stop playing, how well I maintain the code will depend on whether other people are using it. Major foundry updates 
 will probably break the character sheets, so you may want to wait until the sheet is updated for it before you download the 
-new Foundry version. 
+new Foundry versions. 
