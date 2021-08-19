@@ -342,8 +342,8 @@ SWNPRETTY.movementTypes = {
 SWNPRETTY.movementUnits = {
   "ft": "SWNPRETTY.DistFt",
   "mi": "SWNPRETTY.DistMi",
-  "m": "DND5E.DistM",
-  "km": "DND5E.DistKm"
+  "m": "SWNPRETTY.DistM",
+  "km": "SWNPRETTY.DistKm"
 }
 
 /**

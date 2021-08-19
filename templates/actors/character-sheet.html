@@ -152,12 +152,8 @@
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
                     <div class="ability-modifiers flexrow">
-                        <!-- this is the ability modifier here-->
-                        <span class="ability-mod" title="Modifier" id="att-mod">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-<!--                        I'm taking out this part, since SWN has no save proficiencies with attributes - lofty -->
-<!--                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>-->
-<!--                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SWNPRETTY.Proficiency' }}">{{{ability.icon}}}</a>-->
-<!--                        <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>-->
+                        <input class="ability-mod ability-other" title="Other" name="data.abilities.{{id}}.other" type = "number" value="{{ability.other}}"/>
+                        <span class="ability-mod ability-right" title="Modifier" id="att-mod">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                     </div>
                 </li>
             {{/each}}

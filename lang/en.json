@@ -217,6 +217,8 @@
 "SWNPRETTY.DistAny": "Any",
 "SWNPRETTY.DistFt": "Feet",
 "SWNPRETTY.DistMi": "Miles",
+"SWNPRETTY.DistM": "Meters",
+"SWNPRETTY.DistKm": "Km",
 "SWNPRETTY.DistSelf": "Self",
 "SWNPRETTY.DistTouch": "Touch",
 "SWNPRETTY.Duration": "Duration",

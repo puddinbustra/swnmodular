@@ -735,27 +735,40 @@
   line-height: 32px;
   font-size: 24px;
 }
-.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers {
+.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers{
   height: 24px;
   margin: -8px 0 0;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
-.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod,
-.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
-  flex: 0 0 25%;
+
+.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers .ability-other{
+  border-top: 2px groove #eeede0;
+  border-right: 2px groove #eeede0;
+  margin-right: 20px;
+  max-width: 25px;
+  /*margin-bottom:-20px;*/
+  min-height:24px;
+  max-height:24px;
+  font-weight: bold;
+}
+.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers .ability-right{
+  border-left: 2px groove #eeede0;
+  border-top: 2px groove #eeede0;
+  margin-left: 26px;
+  max-width: 25px;
+  margin-bottom: -5px;
+  min-height:22px;
+  max-height:22px;
+
+}
+.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers{
   height: 22px;
   line-height: 22px;
   font-size: 16px;
-  border-top: 2px groove #eeede0;
-  align-content: center;
-  position: relative;
+
 }
 .swnpretty.sheet.actor li.save-box{
-  background-color: rgba(142, 30, 30, 0.22);;
-}
-
-.swnpretty.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
-  border-left: 2px groove #eeede0;
+  background-color: rgba(142, 30, 30, 0.22);
 }
 .swnpretty.sheet.actor .front-info{
   margin-top: 5px;
@@ -890,51 +903,6 @@
   flex: 0 0 25px;
   /*border: 2px groove orange;*/
 }
-
-/*.swnpretty.sheet.actor .counters {*/
-/*  flex: auto;*/
-/*  padding: 5px 0;*/
-/*  margin: 0;*/
-/*  border-bottom: 2px groove #eeede0;*/
-/*}*/
-
-/*.swnpretty.sheet.actor .counters .counter {*/
-/*  height: 20px;*/
-/*  line-height: 20px;*/
-/*}*/
-/*.swnpretty.sheet.actor .counters .counter h4 {*/
-/*  flex: auto;*/
-/*  margin: 0;*/
-/*  font-size: 13px;*/
-/*  font-weight: bold;*/
-/*  color: #4b4a44;*/
-/*}*/
-/*.swnpretty.sheet.actor .counters .counter .counter-value {*/
-/*  flex: none;*/
-/*  text-align: right;*/
-
-/*.swnpretty.sheet.actor .counters .counter .counter-value > * {*/
-/*  display: inline;*/
-/*}*/
-/*.swnpretty.sheet.actor .counters .counter input[type="text"],*/
-/*.swnpretty.sheet.actor .counters .counter input[type="number"] {*/
-/*  height: 20px;*/
-/*  max-width: 20px;*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*  text-align: left;*/
-/*}*/
-/*.swnpretty.sheet.actor .counters .counter input[type="checkbox"] {*/
-/*  position: relative;*/
-/*  width: 16px;*/
-/*  height: 16px;*/
-/*  margin: 0;*/
-/*  top: 4px;*/
-/*}*/
-
-/*.swnpretty.sheet.actor .counters .counter span.sep {*/
-/*  font-size: 12px;*/
-/*}*/
 .swnpretty.sheet.actor .center-pane {
   height: 100%;
   padding: 0 5px 0 3px;

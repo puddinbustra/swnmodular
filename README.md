@@ -17,7 +17,7 @@ Pros | Cons
 Pretty | No ships, vehicles
 Most stats are automated (AC, strain, etc) | No compendiums
 Familiar for 5e sheet users
-Front page space for notes
+Room everywhere for notes
 
 
 # Support
