@@ -95,9 +95,9 @@ export default class Actor5e extends Actor {
     let originalSkills = null;
 
     //Add 'other' attribute to the main attribute
-    for (let [id, abl] of Object.entries(data.abilities)) {
-        abl.value = abl.input + abl.other;
-      }
+    // for (let [id, abl] of Object.entries(data.abilities)) {
+    //     abl.value = abl.input + abl.other;
+    //   }
 
 
     // Ability modifiers and saves
