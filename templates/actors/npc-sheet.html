@@ -123,7 +123,7 @@
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
                     <div class="ability-modifiers flexrow">
-                        <input class="ability-mod ability-other" title="Other" name="data.abilities.{{id}}.other" type = "number" value="{{ability.other}}"/>
+                        <input class="ability-mod ability-other" title="Other" name="data.abilities.{{id}}.other" type = "number" value="{{ability.other}}" placeholder = "0"/>
                         <span class="ability-mod ability-right" title="Modifier" id="att-mod">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                     </div>
                 </li>
