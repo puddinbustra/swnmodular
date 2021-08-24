@@ -22,7 +22,8 @@
 
             <ul class="summary flexrow">
                 <li>
-
+                    <span> AC:&nbsp; {{data.armor.value}}</span>
+<!--                        {{ lookup config.equipmentTypes data.location }}-->
                 </li>
                 <li>
                     <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="{{ localize 'SWNPRETTY.Rarity' }}"/>
@@ -54,13 +55,13 @@
             <div class="form-group">
                 <label>{{ localize "SWNPRETTY.ItemEquipmentType" }}</label>
                 <select name="data.armor.type">
-                    {{#select data.armor.type}}
-                    <option value=""></option>
+<!--                    {{#select data.armor.type}}-->
+<!--                    <option value=""></option>-->
                     {{#each config.equipmentTypes as |name type|}}
                     <option value="{{type}}">{{localize name}}</option>
                     {{/each}}
-                    {{/select}}
-                    {{selectOptions config.equipmentTypes selected=data.armor.type blank=""}}
+<!--                    {{/select}}-->
+<!--                    {{selectOptions config.equipmentTypes selected=data.armor.type blank=""}}-->
                 </select>
             </div>
 
@@ -74,15 +75,15 @@
 
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
-                <label>{{ localize "SWNPRETTY.ItemEquipmentStatus" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SWNPRETTY.Proficient" }}
-                    </label>
-                    <label class="checkbox">
-                        <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SWNPRETTY.Identified" }}
-                    </label>
-                </div>
+<!--                <label>{{ localize "SWNPRETTY.ItemEquipmentStatus" }}</label>-->
+<!--                <div class="form-fields">-->
+<!--                    <label class="checkbox">-->
+<!--                        <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SWNPRETTY.Proficient" }}-->
+<!--                    </label>-->
+<!--                    <label class="checkbox">-->
+<!--                        <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SWNPRETTY.Identified" }}-->
+<!--                    </label>-->
+<!--                </div>-->
                 {{/unless}}
 
                 {{!-- Armor Class --}}

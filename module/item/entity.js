@@ -783,11 +783,11 @@ export default class Item5e extends Item {
     if ( fn ) fn.bind(this)(data, labels, props);
 
     // Equipment properties
-    if ( data.hasOwnProperty("carried") && !["loot", "tool"].includes(this.data.type) ) {
-      if ( data.attunement === CONFIG.SWNPRETTY.attunementTypes.REQUIRED ) props.push(game.i18n.localize(CONFIG.SWNPRETTY.attunements[CONFIG.SWNPRETTY.attunementTypes.REQUIRED]));
+    if ( data.hasOwnProperty("carried") && ["weapon"].includes(this.data.type) ) {
       props.push(
+          `Mag: ${data.magsize}`
 
-        game.i18n.localize(data.proficient ? "SWNPRETTY.Proficient" : "SWNPRETTY.NotProficient")
+        // game.i18n.localize(data.proficient ? "SWNPRETTY.Proficient" : "SWNPRETTY.NotProficient")
       );
     }
 
@@ -796,7 +796,7 @@ export default class Item5e extends Item {
       props.push(
         labels.activation + (data.activation?.condition ? ` (${data.activation.condition})` : ""),
         labels.target,
-        labels.range,
+        `Range: ${labels.range}`,
         labels.duration
       );
     }
