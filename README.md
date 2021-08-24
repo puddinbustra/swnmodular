@@ -1,5 +1,5 @@
 
-#Installing
+# Installing
 This is not the official system for SWN:R, so you will have to manually install this one. To install,
 click 'install system' in Foundry, and then submit this system's manifest: https://raw.githubusercontent.com/puddinbustra/swnpretty/main/system.json
 
