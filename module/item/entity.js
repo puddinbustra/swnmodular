@@ -793,7 +793,7 @@ export default class Item5e extends Item {
     }
 
     // Ability activation properties
-    if (data.range.value) {
+    if (data.hasOwnProperty("carried") && ["weapon"].includes(this.data.type) && data.range.value) {
       props.push(
           `Range: ${data.range.value}`,
       );
@@ -809,12 +809,9 @@ export default class Item5e extends Item {
       );
     }
     // Add tech level -lofty
-    if (data.techLevel.value) {
+    if (data.hasOwnProperty("techLevel") && data.techLevel.value != null) {
       props.push(
-          labels.activation + (data.activation?.condition ? ` (${data.activation.condition})` : ""),
-          labels.target,
           `TL: ${data.techLevel.value}`,
-          labels.duration
       );
     }
 
