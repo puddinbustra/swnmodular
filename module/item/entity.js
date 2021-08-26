@@ -913,7 +913,13 @@ export default class Item5e extends Item {
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
+
     let title = `${this.name} - ${game.i18n.localize("SWNPRETTY.AttackRoll")}`;
+    //Differentiate title based on shock damage, so that shock damage will show that on attack rolls
+    if(this.data.data.shockDam){
+      console.log("This item has shock and this is",this.data.data.shockDam);
+      title = `${this.name} - ${game.i18n.localize("SWNPRETTY.AttackRoll")} - Shock: ${this.data.data.shockDam}`;
+    }
 
     // get the parts and rollData for this item's attack
     const {parts, rollData} = this.getAttackToHit();
@@ -1057,7 +1063,7 @@ export default class Item5e extends Item {
     // Add attribute mod to damage -Lofty
     const attr = this.data.data.ability;
 
-    console.log("this is default-",attr);
+
     let bonusDamage = 0;
         if(attr !== "none"){
           bonusDamage = this.actor.data.data.abilities[attr].mod;

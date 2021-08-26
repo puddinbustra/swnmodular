@@ -547,7 +547,7 @@
           "parts": [],
           "versatile": ""
         },
-        "formula": "",
+
         "save": {
           "ability": "",
           "dc": null,
@@ -657,7 +657,8 @@
       },
       "scaling": {
         "mode": "none",
-        "formula": null
+
+        "shockDam": null
       }
     },
     "weapon": {
