@@ -33,8 +33,12 @@ For example, Crash's autohide rolls work after a few adjustments (I can share my
 # Possible Additions
 - Vehicles
 - Ships
-- Automate the 'other' ability modifier, will require making a shown vs final attribute
 - Compendiums (if anyone wants to make and export these themselves, I'll add them to the repo)
+
+# Impending Improvements
+- Automate the 'other' ability modifier (will require making a shown vs final attribute)
+- Ammo/resource consumption
+
 
 # Maintaining Code
 As long as I am playing this system, I will be maintaining the sheet, which will be at least all of 2021, and hopefully long after. 
