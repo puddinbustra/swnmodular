@@ -41,6 +41,7 @@
 "SWNPRETTY.AbilityUseChargedHint": "This {type} is charged and ready to use!",
 "SWNPRETTY.AbilityUseRechargeHint": "This {type} is depleted and must be recharged!",
 "SWNPRETTY.AbilityUseNormalHint": "This {type} has {value} of {max} uses per {per} remaining.",
+"SWNPRETTY.AbilityUseConfig": "Use Ability",
 "SWNPRETTY.AbilityUseConsumableChargeHint": "Using this {type} will consume 1 charge of {value} remaining.",
 "SWNPRETTY.AbilityUseConsumableQuantityHint": "Using this {type} will consume 1 quantity of {quantity} remaining",
 "SWNPRETTY.AbilityUseConsumableDestroyHint": "Using this {type} will consume its final charge and it will be destroyed.",

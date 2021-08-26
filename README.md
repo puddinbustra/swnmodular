@@ -34,10 +34,10 @@ For example, Crash's autohide rolls work after a few adjustments (I can share my
 - Vehicles
 - Ships
 - Compendiums (if anyone wants to make and export these themselves, I'll add them to the repo)
+- Ammo/resource consumption for attacks specifically, without activated abilities
 
 # Impending Improvements
 - Automate the 'other' ability modifier (will require making a shown vs final attribute)
-- Ammo/resource consumption
 
 
 # Maintaining Code

@@ -77,7 +77,7 @@
 <div class="form-group input-select">
     <label>{{ localize "SWNPRETTY.Range" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="{{ localize 'SWNPRETTY.Normal' }}"/>
+        <input type="text" name="data.range.ability" value="{{data.range.ability}}" data-dtype="Number" placeholder="{{ localize 'SWNPRETTY.Normal' }}"/>
         <span class="sep">/</span>
         <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{ localize 'SWNPRETTY.Max' }}"/>
         <select name="data.range.units">
@@ -146,7 +146,7 @@
             {{/each}}
             {{/select}}
         </select>
-        <input type="text" name="data.consume.amount" value="{{data.consume.amount}}" data-dtype="Number"/>
+        <input type="text" name="data.consume.amount" value="{{data.consume.amount}}" data-dtype="Number" title="Number Consumed"/>
     </div>
 </div>
 {{/if}}
