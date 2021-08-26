@@ -8,7 +8,7 @@ export default class ActorHitDiceConfig extends DocumentSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["SWNPRETTY", "hd-config", "dialog"],
-            template: "systems/SWNPRETTY/templates/apps/hit-dice-config.html",
+            template: "systems/swnpretty/templates/apps/hit-dice-config.html",
             width: 360,
             height: "auto"
         });

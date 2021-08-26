@@ -26,7 +26,7 @@ export default class ShortRestDialog extends Dialog {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-	    template: "systems/SWNPRETTY/templates/apps/short-rest.html",
+	    template: "systems/swnpretty/templates/apps/short-rest.html",
       classes: ["SWNPRETTY", "dialog"]
     });
   }

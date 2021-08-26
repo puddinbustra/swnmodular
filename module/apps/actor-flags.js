@@ -7,7 +7,7 @@ export default class ActorSheetFlags extends DocumentSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-flags",
 	    classes: ["SWNPRETTY"],
-      template: "systems/SWNPRETTY/templates/apps/actor-flags.html",
+      template: "systems/swnpretty/templates/apps/actor-flags.html",
       width: 500,
       closeOnSubmit: true
     });

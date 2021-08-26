@@ -8,7 +8,7 @@ export default class ActorSensesConfig extends DocumentSheet {
 	static get defaultOptions() {
 	  return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["SWNPRETTY"],
-      template: "systems/SWNPRETTY/templates/apps/senses-config.html",
+      template: "systems/swnpretty/templates/apps/senses-config.html",
       width: 300,
       height: "auto"
     });

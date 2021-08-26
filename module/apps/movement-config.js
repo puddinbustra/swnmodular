@@ -8,7 +8,7 @@ export default class ActorMovementConfig extends DocumentSheet {
 	static get defaultOptions() {
 	  return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["SWNPRETTY"],
-      template: "systems/SWNPRETTY/templates/apps/movement-config.html",
+      template: "systems/swnpretty/templates/apps/movement-config.html",
       width: 300,
       height: "auto"
     });

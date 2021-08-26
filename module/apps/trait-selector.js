@@ -10,7 +10,7 @@ export default class TraitSelector extends DocumentSheet {
 	    id: "trait-selector",
       classes: ["SWNPRETTY", "trait-selector", "subconfig"],
       title: "Actor Trait Selection",
-      template: "systems/SWNPRETTY/templates/apps/trait-selector.html",
+      template: "systems/swnpretty/templates/apps/trait-selector.html",
       width: 320,
       height: "auto",
       choices: {},

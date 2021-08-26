@@ -10,7 +10,7 @@ export default class ActorTypeConfig extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["SWNPRETTY", "actor-type", "trait-selector"],
-      template: "systems/SWNPRETTY/templates/apps/actor-type.html",
+      template: "systems/swnpretty/templates/apps/actor-type.html",
       title: "SWNPRETTY.CreatureTypeTitle",
       width: 280,
       height: "auto",

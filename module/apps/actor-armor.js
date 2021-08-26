@@ -10,7 +10,7 @@ export default class ActorArmorConfig extends DocumentSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-armor-config",
       classes: ["SWNPRETTY", "actor-armor-config"],
-      template: "systems/SWNPRETTY/templates/apps/actor-armor.html",
+      template: "systems/swnpretty/templates/apps/actor-armor.html",
       width: 320,
       height: "auto"
     });

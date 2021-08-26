@@ -37,7 +37,7 @@ export default class PropertyAttribution extends Application {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "property-attribution",
       classes: ["SWNPRETTY", "property-attribution"],
-      template: "systems/SWNPRETTY/templates/apps/property-attribution.html",
+      template: "systems/swnpretty/templates/apps/property-attribution.html",
       width: 320,
       height: "auto"
     });

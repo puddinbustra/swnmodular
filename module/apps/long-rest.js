@@ -13,7 +13,7 @@ export default class LongRestDialog extends Dialog {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      template: "systems/SWNPRETTY/templates/apps/long-rest.html",
+      template: "systems/swnpretty/templates/apps/long-rest.html",
       classes: ["SWNPRETTY", "dialog"]
     });
   }
