@@ -225,10 +225,11 @@ export default class Item5e extends Item {
       // Range Label
       let rng = data.range || {};
       if ( ["none", "touch", "self"].includes(rng.units) ) {
-        rng.value = null;
+        rng.ability = null;
         rng.long = null;
       }
-      labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
+
+      labels.range = [`Ability range:`, rng.ability, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
 
       // Duration Label
       let dur = data.duration || {};
@@ -783,7 +784,7 @@ export default class Item5e extends Item {
     if ( fn ) fn.bind(this)(data, labels, props);
 
     // Equipment properties
-    if ( data.hasOwnProperty("carried") && ["weapon"].includes(this.data.type) ) {
+    if ( data.hasOwnProperty("carried") && ["weapon"].includes(this.data.type) && data.magsize ) {
       props.push(
           `Mag: ${data.magsize}`
 
@@ -792,12 +793,28 @@ export default class Item5e extends Item {
     }
 
     // Ability activation properties
-    if ( data.hasOwnProperty("activation") ) {
+    if (data.range.value) {
+      props.push(
+          `Range: ${data.range.value}`,
+      );
+    }
+
+    // Ability activation properties
+    if ( data.hasOwnProperty("activation") && data.range.ability) {
       props.push(
         labels.activation + (data.activation?.condition ? ` (${data.activation.condition})` : ""),
         labels.target,
-        `Range: ${labels.range}`,
+        `${labels.range}`,
         labels.duration
+      );
+    }
+    // Add tech level -lofty
+    if (data.techLevel.value) {
+      props.push(
+          labels.activation + (data.activation?.condition ? ` (${data.activation.condition})` : ""),
+          labels.target,
+          `TL: ${data.techLevel.value}`,
+          labels.duration
       );
     }
 

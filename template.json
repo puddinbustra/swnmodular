@@ -535,7 +535,7 @@
         }
       },
       "techLevel": {
-        "value": 0
+        "value": ""
       },
       "action": {
         "ability": null,
@@ -668,7 +668,7 @@
       "weaponType": "simpleM",
       "properties": {},
       "proficient": true,
-      "magsize": 0
+      "magsize": null
     }
   }
 }
