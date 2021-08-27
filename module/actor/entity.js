@@ -136,7 +136,7 @@ export default class Actor5e extends Actor {
     }
 
     // Set save bonus -Lofty
-    const level = data.attributes.level.value
+    const level = data.details.level
 
     data.attributes.saves.psave = 16 - level - Math.max((data.abilities.str.mod), (data.abilities.con.mod));
     data.attributes.saves.esave = 16 - level - Math.max((data.abilities.dex.mod), (data.abilities.int.mod));
@@ -652,11 +652,11 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
     const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
     let weight = actorData.items.reduce((weight, i) => {
       if ( !physicalItems.includes(i.type) ) return weight;
-      //If item is carried or readied -Lofty
+      //If item is carried or readied -Lofty -- This is incorrect. Readied Items do not count against stowed encumbrance. - Sorellia.
       let q = 0;
       let w = 0;
 
-      if (i.data.data.location === "readied" || i.data.data.location === "carried"){
+      if (i.data.data.location === "carried"){
         q += i.data.data.quantity || 0;
         w += i.data.data.weight || 0;
       }
