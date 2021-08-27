@@ -52,8 +52,9 @@
             "value": 0
           },
           "ac": {
-            "value": 10,
-            "base": 10
+            "flat": null,
+            "calc": "default",
+            "formula": ""
           },
           "hp": {
             "value": 1,
@@ -230,7 +231,27 @@
             "value": -1,
             "ability": "str"
           },
-          "wor": {
+          "bio": {
+            "value": -1,
+            "ability": "str"
+          },
+          "met": {
+            "value": -1,
+            "ability": "str"
+          },
+          "pre": {
+            "value": -1,
+            "ability": "str"
+          },
+          "tlk": {
+            "value": -1,
+            "ability": "str"
+          },
+          "tel": {
+            "value": -1,
+            "ability": "str"
+          },
+          "tlp": {
             "value": -1,
             "ability": "str"
           }

@@ -176,11 +176,6 @@ export default class ActorSheet5e extends ActorSheet {
     // data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
     data.warnings = this.actor._preparationWarnings;
 
-    // Prepare property attributions
-    this.attribution = {
-      "attributes.ac": this._prepareArmorClassAttribution(actorData.data)
-    };
-
     // Return data to the sheet
     return data
   }
@@ -243,6 +238,30 @@ export default class ActorSheet5e extends ActorSheet {
     if ( !!senses.special ) tags["special"] = senses.special;
     return tags;
   }
+  
+  /* --------------------------------------------- */
+
+  /**
+   * Break down all of the Active Effects affecting a given target property.
+   * @param {string} target  The data property being targeted.
+   * @return {AttributionDescription[]}
+   * @protected
+   */
+  _prepareActiveEffectAttributions(target) {
+    return this.actor.effects.reduce((arr, e) => {
+      let source = e.sourceName;
+      if ( e.data.origin === this.actor.uuid ) source = e.data.label;
+      if ( !source ) return arr;
+      const value = e.data.changes.reduce((n, change) => {
+        if ( (change.key !== target) || !Number.isNumeric(change.value) ) return n;
+        if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
+        return n + Number(change.value);
+      }, 0);
+      if ( !value ) return arr;
+      arr.push({value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD});
+      return arr;
+    }, []);
+  }
 
   /* -------------------------------------------- */
 
@@ -252,79 +271,79 @@ export default class ActorSheet5e extends ActorSheet {
    * @return {AttributionDescription[]}  List of attribution descriptions.
    */
   _prepareArmorClassAttribution(data) {
-    const calc = data.attributes.ac;
+	const ac = data.attributes.ac;
+	const cfg = CONFIG.SWNPRETTY.armorClasses[ac.calc];
+	const attribution = [];
 
+	switch (ac.calc) {
     // Flat
-    if ( calc.flat !== null ) {
-      return [{
-        label: game.i18n.localize("SWNPRETTY.Flat"),
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: calc.flat
-      }];
-    }
-
-    let attribution = [];
-
-    // Equipped Armor
-    if ( this.actor.armor && calc.calc === "default" ) {
-      const armorData = this.actor.armor.data.data.armor;
-      attribution.push({
-        label: this.actor.armor.name,
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: armorData.value
-      });
-      const dex = Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
-      if ( dex !== 0 && armorData.type !== "heavy" ) attribution.push({
-        label: "@abilities.dex.mod",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: dex
-      });
-    }
-
-    // Formula
-    else {
-      const formula = calc.calc === "custom" ? calc.formula : CONFIG.SWNPRETTY.armorClasses[calc.calc]?.formula;
-      let base = calc.base;
-      const dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
-      const rollData = this.actor.getRollData();
-      for ( const [match, term] of formula.matchAll(dataRgx) ) {
-        const value = foundry.utils.getProperty(data, term);
-        if ( (term === "attributes.ac.base") || (value === 0) ) continue;
-        if ( Number.isNumeric(value) ) base -= Number(value);
-        attribution.push({
-          label: match,
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: foundry.utils.getProperty(data, term)
-        });
-      }
-      attribution.unshift({
-        label: game.i18n.localize("SWNPRETTY.PropertyBase"),
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: base
-      });
-    }
-
-    // Shield
-    if ( this.actor.shield && calc.shield !== 0 ) attribution.push({
-      label: this.actor.shield.name,
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: calc.shield
+		case "flat":
+			return [{
+				label: game.i18n.localize("SWNPRETTY.ArmorClassFlat"),
+				mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+				value: ac.flat
+			}];
+			
+		case "natural":
+			attribution.push({
+				label: game.i18n.localize("SWNPRETTY.ArmorClassNatural"),
+				mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+				value: ac.flat
+			});
+			break;
+			
+		case "default":
+			const hasArmor = !!this.actor.armor;
+			attribution.push({
+				label: hasArmor ? this.actor.armor.name : game.i18n.localize("SWNPRETTY.ArmorClassUnarmored"),
+				mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+				value: hasArmor ? this.actor.armor.data.data.armor.value : 10				
+			});
+			console.log(game.i18n.localize("SWNPRETTY.ArmorClassUnarmored"));
+			if (ac.dex !== 0) {
+				attribution.push({
+					label: game.i18n.localize("SWNPRETTY.AbilityDex"),
+					mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+					value: ac.dex
+				});
+			}
+			break;
+			
+		default:
+			const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
+			let base = ac.base;
+			const dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
+			for ( const [match, term] of formula.matchAll(dataRgx) ) {
+				const value = foundry.utils.getProperty(data, term);
+				if ( (term === "attributes.ac.base") || (value === 0) ) continue;
+				if ( Number.isNumeric(value) ) base -= Number(value);
+				attribution.push({
+					label: match,
+					mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+					value: foundry.utils.getProperty(data, term)
+				});
+			}
+			attribution.unshift({
+				label: game.i18n.localize("SWNPRETTY.PropertyBase"),
+				mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+				value: base
+			});
+			break;
+	}
+	
+	if( ac.shield !== 0 ) attribution.push({
+		label: this.actor.shield?.name ?? game.i18n.localize("SWNPRETTY.EquipmentShield"),
+		mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+		value: ac.shield
     });
-
-    // Bonus
-    if ( calc.bonus !== 0 ) attribution.push({
-      label: game.i18n.localize("SWNPRETTY.EquipmentBonus"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: calc.bonus
-    });
-
-    // Cover
-    if ( calc.cover !== 0 ) attribution.push({
+	
+	if ( ac.bonus !== 0 ) attribution.push(...this._prepareActiveEffectAttributions("data.attributes.ac.bonus"));
+	
+	if ( ac.cover !== 0 ) attribution.push({
       label: game.i18n.localize("SWNPRETTY.Cover"),
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: calc.cover
+      value: ac.cover
     });
-
     return attribution;
   }
 
@@ -992,7 +1011,13 @@ export default class ActorSheet5e extends ActorSheet {
     const existingTooltip = event.currentTarget.querySelector("div.tooltip");
     const property = event.currentTarget.dataset.property;
     if ( existingTooltip || !property || !this.attribution ) return;
+	const data = this.actor.data.data;
+    let attributions;
+    switch ( property ) {
+      case "attributes.ac": attributions = this._prepareArmorClassAttribution(data); break;
+    }
 
+    if ( !attributions ) return;
     let html = await new PropertyAttribution(this.object, this.attribution, property).renderTooltip();
     event.currentTarget.insertAdjacentElement("beforeend", html[0]);
   }

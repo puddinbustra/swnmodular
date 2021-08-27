@@ -89,14 +89,14 @@
 <!--                    </footer>-->
                 </li>
 
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.ArmorClass" }}</h4>
-                    <div class="attribute-value">
-                        <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
+                <li class="attribute movement">
+					<h4 class="attribute-name box-title">
+                        {{ localize "SWNPRETTY.ArmorClass" }}
+                        <a class="config-button" data-action="armor" title="{{localize 'SWNPRETTY.ArmorConfig'}}"><i class="fas fa-cog"></i></a>
+                    </h4>
+					<div class="attribute-value attributable" data-property="attributes.ac">
+                        <span>{{data.attributes.ac.value}}</span>
                     </div>
-                    <footer class="attribute-footer">
-                        <span class="spell-dc">{{localize "SWNPRETTY.BaseAC"}}: {{data.attributes.base}}</span>
-                    </footer>
                 </li>
 
                 <li class="attribute movement">
