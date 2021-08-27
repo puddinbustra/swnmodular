@@ -11,11 +11,11 @@
             <aside class="header-exp flexcol">
                 <a class = "feedback" href = "https://github.com/puddinbustra/swnpretty">Sheet Feedback?</a>
                 <div class="charlevel" title="{{multiclassLabels}}">
-<!--                    <label>{{ localize "SWNPRETTY.Level" }} {{data.details.level}}</label>-->
+                    <label>{{ localize "SWNPRETTY.Level" }} {{data.details.level}} {{classLabels}}</label>
 
-                    <label> {{ localize "SWNPRETTY.Level" }} </label>
+                    <!--<label> {{ localize "SWNPRETTY.Level" }} </label>
                     <input class = "levelInput" name = "data.attributes.level.value" type = "number" value = "{{data.attributes.level.value}}" placeholder="0" data-dtype="Number"/>
-                    <span class="levels">{{classLabels}}</span>
+                    <span class="levels">{{classLabels}}</span>-->
                 </div>
 
                 {{#unless disableExperience}}
@@ -39,7 +39,7 @@
                 <!--                    <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="{{ localize 'SWNPRETTY.Race' }}"/>-->
                 <!--                </li>-->
                 <li>
-                    <input type="text" name="data.details.focus" value="{{data.details.focus}}" placeholder="{{ localize 'SWNPRETTY.Class' }}"/>
+                    <input type="text" name="data.details.focus" value="{{data.details.focus}}" placeholder="{{ localize 'SWNPRETTY.Homeworld' }}"/>
                 </li>
                 <!--                <li>-->
                 <!--                    <input class="saves" name="data.abilities.{'str'}.value" type="number" value="{str.value}"/>-->
@@ -81,7 +81,7 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.HitDice" }}</h4>
                     <div class="attribute-value multiple no-sub">
-                        <label class="hit-dice">{{data.attributes.level.value}} D6 + {{data.abilities.con.mod}}</label>
+                        <label class="hit-dice">{{data.details.level}} D6 + {{data.abilities.con.mod}}</label>
                     </div>
 <!--                    <footer class="attribute-footer">-->
 <!--                        <a class="rest short-rest">{{ localize "SWNPRETTY.RestS" }}</a>-->
@@ -89,14 +89,14 @@
 <!--                    </footer>-->
                 </li>
 
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "SWNPRETTY.ArmorClass" }}</h4>
-                    <div class="attribute-value">
-                        <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
+                <li class="attribute movement">
+					<h4 class="attribute-name box-title">
+                        {{ localize "SWNPRETTY.ArmorClass" }}
+                        <a class="config-button" data-action="armor" title="{{localize 'SWNPRETTY.ArmorConfig'}}"><i class="fas fa-cog"></i></a>
+                    </h4>
+					<div class="attribute-value attributable" data-property="attributes.ac">
+                        <span>{{data.attributes.ac.value}}</span>
                     </div>
-                    <footer class="attribute-footer">
-                        <span class="spell-dc">{{localize "SWNPRETTY.BaseAC"}}: {{data.attributes.base}}</span>
-                    </footer>
                 </li>
 
                 <li class="attribute movement">

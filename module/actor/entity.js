@@ -62,7 +62,7 @@ export default class Actor5e extends Actor {
 
   /** @override */
   prepareBaseData() {
-    // this._prepareBaseArmorClass(this.data);
+    this._prepareBaseArmorClass(this.data);
     switch ( this.data.type ) {
       case "character":
         return this._prepareCharacterData(this.data);
@@ -136,7 +136,7 @@ export default class Actor5e extends Actor {
     }
 
     // Set save bonus -Lofty
-    const level = data.attributes.level.value
+    const level = data.details.level
 
     data.attributes.saves.psave = 16 - level - Math.max((data.abilities.str.mod), (data.abilities.con.mod));
     data.attributes.saves.esave = 16 - level - Math.max((data.abilities.dex.mod), (data.abilities.int.mod));
@@ -189,13 +189,11 @@ export default class Actor5e extends Actor {
     // data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
 
-    //Set base AC -lofty
-    data.attributes.base = 10 + data.abilities.dex.mod;
-    // console.log("BASE AC ATTEMPT IS", data.attributes.base);
     // Prepare armor class data
-    // const {armor, shield} = this._computeArmorClass(data);
-    // this.armor = armor || null;
-    // this.shield = shield || null;
+    const ac = this._computeArmorClass(data);
+    this.armor = ac.equippedArmor || null;
+    this.shield = ac.equippedShield || null;
+    if ( ac.warnings ) this._preparationWarnings.push(...ac.warnings);
 
     // // Compute owned item attributes which depend on prepared Actor data
     // this.items.forEach(item => {
@@ -479,6 +477,14 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
+  _prepareBaseArmorClass(actorData) {
+    const ac = actorData.data.attributes.ac;
+    ac.base = 10;
+    ac.shield = ac.bonus = ac.cover = 0;
+    this.armor = null;
+    this.shield = null;
+  }
+
   /**
    * Prepare data related to the spell-casting capabilities of the Actor
    * @private
@@ -571,70 +577,73 @@ export default class Actor5e extends Actor {
    * @return {Number}                       Calculated armor value.
    * @private
    */
-  _computeArmorClass(data, { ignoreFlat=false }={}) {
-    const calc = data.attributes.ac;
-    if ( !ignoreFlat && (calc.flat !== null) ) {
-      calc.value = calc.flat;
-      return {value: calc.flat};
-    }
+  _computeArmorClass(data) {
+    const ac = data.attributes.ac;
+	ac.warnings = [];
+	
+	let cfg = CONFIG.SWNPRETTY.armorClasses[ac.calc];
+	if (!cfg) {
+		ac.calc = "flat";
+		if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
+		cfg = CONFIG.SWNPRETTY.armorClasses.flat;
+	}
 
-    const armorTypes = new Set(Object.keys(CONFIG.SWNPRETTY.armorTypes));
+	// Identify Equipped Items
+    const armorTypes = new Set(Object.keys(CONFIG.SWNPRETTY.equipmentTypes));
     const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
-      const armor = equip.data.data.armor;
-      if ( !equip.data.data.carried || !armorTypes.has(armor?.type) ) return obj;
-      if ( armor.type === "shield" ) obj.shields.push(equip);
-      else obj.armors.push(equip);
-      return obj;
+		const armor = equip.data.data.armor;
+		if (equip.data.data.location !== "readied"|| !armorTypes.has(armor?.type)) return obj;
+		if (armor.type === "shield") obj.shields.push(equip);
+		else obj.armors.push(equip);
+		return obj;
     }, {armors: [], shields: []});
 
-    if ( armors.length ) {
-      if ( armors.length > 1 ) this._preparationWarnings.push("SWNPRETTY.WarnMultipleArmor");
-      const armorData = armors[0].data.data.armor;
-      let ac = armorData.value + Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
-      if ( armorData.type === "heavy" ) ac = armorData.value;
-      if ( (ac > calc.base) && (calc.calc === "default") ) calc.base = ac;
-    }
+	// Determine base AC
+	switch (ac.calc) {
+		
+		case "flat":
+			ac.value = ac.flat;
+			return ac;
+		
+		case "natural":
+			ac.base = ac.flat;
+			break;
+			
+		case "default":
+			if (armors.length) {
+				if (armors.length > 1) ac.warnings.push("SWNPRETTY.WarnMultipleArmor");
+				const armorData = armors[0].data.data.armor;
+				ac.dex = Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
+				ac.base = (armorData.value ?? 0) + ac.dex;
+				ac.equippedArmor = armors[0];
+			} else {
+				ac.dex = data.abilities.dex.mod;
+				ac.base = 10 + ac.dex;
+			}
+			break;
+		
+		default:
+			let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
+			const rollData = this.getRollData();
+			try {
+				const replaced = Roll.replaceFormulaData(formula, rollData);
+				ac.base = Roll.safeEval(replaced);
+			} catch (err) {
+				ac.warnings.push("SWNPRETTY.WarnBadACFormula");
+				const replaced = Roll.replaceFormulaData(CONFIG.SWNPRETTY.armorClasses.default.formula, rollData);
+				ac.base = Roll.safeEval(replaced);
+			}
+			break;	
+	}
 
     if ( shields.length ) {
-      if ( shields.length > 1 ) this._preparationWarnings.push("SWNPRETTY.WarnMultipleShields");
-      const ac = shields[0].data.data.armor.value;
-      if ( ac > calc.shield ) calc.shield = ac;
+      if ( shields.length > 1 ) ac.warnings.push("SWNPRETTY.WarnMultipleShields");
+      ac.shield = shields[0].data.data.armor.value ?? 0;
+      ac.equippedShield = shields[0];
     }
 
-    if ( !armors.length || calc.calc !== "default" ) {
-      let formula = calc.calc === "custom" ? calc.formula : CONFIG.SWNPRETTY.armorClasses[calc.calc]?.formula;
-      const rollData = this.getRollData();
-      let ac;
-      try {
-        const replaced = Roll.replaceFormulaData(formula, rollData);
-        ac = Roll.safeEval(replaced);
-      } catch (err) {
-        this._preparationWarnings.push("SWNPRETTY.WarnBadACFormula");
-        formula = CONFIG.SWNPRETTY.armorClasses.default.formula;
-        const replaced = Roll.replaceFormulaData(formula, rollData);
-        ac = Roll.safeEval(replaced);
-      }
-      calc.base = ac;
-    }
-
-  if ( !armors.length || calc.calc !== "default" ) {
-  let formula = calc.calc === "custom" ? calc.formula : CONFIG.SWNPRETTY.armorClasses[calc.calc]?.formula;
-  const rollData = this.getRollData();
-  let ac;
-  try {
-  const replaced = Roll.replaceFormulaData(formula, rollData);
-  ac = Roll.safeEval(replaced);
-} catch (err) {
-  this._preparationWarnings.push("SWNPRETTY.WarnBadACFormula");
-  formula = CONFIG.SWNPRETTY.armorClasses.default.formula;
-  const replaced = Roll.replaceFormulaData(formula, rollData);
-  ac = Roll.safeEval(replaced);
-}
-calc.base = ac;
-}
-
-calc.value = calc.base + calc.shield + calc.bonus + calc.cover;
-return {value: calc.value, armor: armors[0], shield: shields[0]};
+	ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
+	return ac;
 }
 
   /* -------------------------------------------- */
@@ -652,11 +661,11 @@ return {value: calc.value, armor: armors[0], shield: shields[0]};
     const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
     let weight = actorData.items.reduce((weight, i) => {
       if ( !physicalItems.includes(i.type) ) return weight;
-      //If item is carried or readied -Lofty
+      //If item is carried or readied -Lofty -- This is incorrect. Readied Items do not count against stowed encumbrance. - Sorellia.
       let q = 0;
       let w = 0;
 
-      if (i.data.data.location === "readied" || i.data.data.location === "carried"){
+      if (i.data.data.location === "carried"){
         q += i.data.data.quantity || 0;
         w += i.data.data.weight || 0;
       }

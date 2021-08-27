@@ -520,6 +520,61 @@
   height: 24px;
   margin: 2px;
 }
+/* ----------------------------------------- */
+/*  Property Attribution                     */
+/* ----------------------------------------- */
+.property-attribution {
+  display: none;
+  position: absolute;
+  padding: 3px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  color: #c9c7b8;
+  text-align: left;
+  z-index: 1;
+}
+.property-attribution table {
+  margin: 0;
+  border: 0;
+}
+.property-attribution table tr {
+  background-color: inherit;
+}
+.property-attribution table td {
+  padding: 3px;
+}
+.property-attribution table tr.total > td {
+  font-weight: 600;
+  padding-top: 5px;
+  border-top: 1px solid #7a7971;
+}
+.property-attribution table td.attribution-value {
+  width: 20%;
+  padding-right: 5px;
+  text-align: right;
+  font-weight: 600;
+}
+.property-attribution table td::before {
+  opacity: 0.6;
+}
+.property-attribution table td.mode-1::before {
+  content: "×";
+}
+.property-attribution table td.mode-2::before {
+  content: "+";
+}
+.property-attribution table td.mode-2.negative::before {
+  content: "−";
+  margin-right: -1px;
+}
+.property-attribution table td.mode-3::before {
+  content: "↓";
+}
+.property-attribution table td.mode-4::before {
+  content: "↑";
+}
 .swnpretty.sheet.actor {
   /* ----------------------------------------- */
   /*  Sheet Header                             */
@@ -624,6 +679,14 @@
 }
 .swnpretty.sheet.actor .sheet-header .attributes input.temphp {
   width: 48%;
+}
+.swnpretty.sheet.actor .sheet-header .attributes .attribute .property-attribution {
+  min-width: 150px;
+  top: 50px;
+  font-family: Signika, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1rem;
 }
 /*This targets all the titles of boxes- including in resources, header, and attributes*/
 .swnpretty.sheet.actor h4.box-title {

@@ -252,6 +252,32 @@ SWNPRETTY.equipmentTypes = {
 };
 
 
+/**
+ * Common armor class calculations.
+ * @enum {object}
+ */
+SWNPRETTY.armorClasses = {
+  flat: {
+    label: "Flat",
+    formula: "@attributes.ac.flat"
+  },
+  natural: {
+    label: "Natural Armor",
+    formula: "@attributes.ac.flat"
+  },
+  default: {
+    label: "Equipped Armor",
+    formula: "10 + @abilities.dex.mod"
+  },
+  tele_arm: {
+    label: "Telekinetic Armory",
+    formula: "15 + @abilities.int.mod"
+  },
+  custom: {
+    label: "Custom Formula"
+  }
+};
+
 /* -------------------------------------------- */
 
 /**
@@ -479,7 +505,13 @@ SWNPRETTY.skills = {
   "slt": "SWNPRETTY.SkillSlt",
   "ste": "SWNPRETTY.SkillSte",
   "sur": "SWNPRETTY.SkillSur",
-  "wor": "SWNPRETTY.SkillWor"
+  "wor": "SWNPRETTY.SkillWor",
+  "bio": "SWNPRETTY.SkillBio",
+  "met": "SWNPRETTY.SkillMet",
+  "pre": "SWNPRETTY.SkillPre",
+  "tlk": "SWNPRETTY.SkillTlk",
+  "tel": "SWNPRETTY.SkillTel",
+  "tlp": "SWNPRETTY.SkillTlp"
 };
 
 
