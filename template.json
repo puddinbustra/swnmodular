@@ -460,7 +460,8 @@
       "attributes": {
         "ac": {
           "value": null,
-          "motionless": ""
+          "motionless": "",
+          "npc": null
         },
         "actions": {
           "stations": false,

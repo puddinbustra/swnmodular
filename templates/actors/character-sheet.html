@@ -89,15 +89,17 @@
 <!--                    </footer>-->
                 </li>
 
+                {{#if isCharacter}}
                 <li class="attribute movement">
-					<h4 class="attribute-name box-title">
+                    <h4 class="attribute-name box-title">
                         {{ localize "SWNPRETTY.ArmorClass" }}
                         <a class="config-button" data-action="armor" title="{{localize 'SWNPRETTY.ArmorConfig'}}"><i class="fas fa-cog"></i></a>
                     </h4>
-					<div class="attribute-value attributable" data-property="attributes.ac">
+                    <div class="attribute-value attributable" data-property="attributes.ac">
                         <span>{{data.attributes.ac.value}}</span>
                     </div>
                 </li>
+                {{/if}}
 
                 <li class="attribute movement">
                     <h4 class="attribute-name box-title">
