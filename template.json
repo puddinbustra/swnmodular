@@ -91,7 +91,7 @@
           "saves": {
             "psave": 16,
             "esave": 16,
-            "msave": 99,
+            "msave": 16,
             "morale": 0
           }
         },

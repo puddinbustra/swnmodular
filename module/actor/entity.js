@@ -136,13 +136,19 @@ export default class Actor5e extends Actor {
     }
 
     // Set save bonus -Lofty
-    const level = data.details.level
-
+    let level = null;
+    if(data.details.level){
+       level = data.details.level
+    }
+    //If it's an npc
+    else{
+       level = data.attributes.level.value;
+    }
     data.attributes.saves.psave = 16 - level - Math.max((data.abilities.str.mod), (data.abilities.con.mod));
     data.attributes.saves.esave = 16 - level - Math.max((data.abilities.dex.mod), (data.abilities.int.mod));
     data.attributes.saves.msave = 16 - level - Math.max((data.abilities.wis.mod), (data.abilities.cha.mod));
-    // console.log("The final msave is ", data.attributes.saves.msave, "and wis mod is", data.abilities.wis.mod);
-    // console.log("The higher msave ability score is", Math.max((data.abilities.wis.mod), (data.abilities.cha.mod)));
+    // console.log("The final msave is ", data.attributes.saves.msave, "and level is",level);
+    // console.log("The data.details are", data.attributes.level.value);
 
     // Inventory encumbrance -lofty
     data.attributes.encumbrance = this._computeEncumbrance(actorData);

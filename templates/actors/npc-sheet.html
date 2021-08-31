@@ -165,7 +165,7 @@
                 </div>
                 <div>
                     <li class="attribute resource save-box">
-                        <h4 class="save-click attribute-name box-title rollable" data-saves = "msave"> Mental Save </h4>
+                        <h4 class="save-click attribute-name box-title rollable" data-saves="msave"> Mental Save </h4>
                         <div class="attribute-value">
                             <span name="data.attributes.saves.msave" type="text"> vs {{data.attributes.saves.msave}} </span>
                         </div>
@@ -225,7 +225,7 @@
 
         {{!-- Senses/Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "systems/swnpretty/templates/actors/parts/actor-traits.html"}}
+
             <div class = "flexrow">
                 <div class = "flexcol extras-info info">
                     <textarea name="data.details.extrasone.value" placeholder="Notes+" class="npc-text-area">{{data.details.extrasone.value}}</textarea>
@@ -233,6 +233,9 @@
                 <div class = "flexcol extras-info info">
                     <textarea name="data.details.extrastwo.value" placeholder="Notes++" class="npc-text-area">{{data.details.extrastwo.value}}</textarea>
                 </div>
+            </div>
+            <div class = "extras-list">
+                {{> "systems/swnpretty/templates/actors/parts/actor-traits.html"}}
             </div>
         </div>
 

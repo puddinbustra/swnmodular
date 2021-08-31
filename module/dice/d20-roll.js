@@ -116,6 +116,9 @@ export default class D20Roll extends Roll {
     //   if ( isRT ) d20.options.flavor = d20.options.flavor ? `${d20.options.flavor} (${label})` : label;
     // }
 
+    console.log("messageData:", messageData)
+    console.log("options:", options)
+
     // Record the preferred rollMode
     options.rollMode = options.rollMode ?? this.options.rollMode;
     return super.toMessage(messageData, options);

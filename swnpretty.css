@@ -871,6 +871,11 @@
   /*outline: 2px groove #eeede0;*/
   border: 1px solid #c9c7b8;
 }
+.swnpretty.sheet.actor .extras-list{
+  /*outline: 2px groove #eeede0;*/
+  margin-left: 4px;
+  margin-bottom: 5px;
+}
 .swnpretty.sheet.actor .tab textarea:focus{
   /*box-shadow:none;*/
   outline-color: rgba(39, 41, 132, 0.62);

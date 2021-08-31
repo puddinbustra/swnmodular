@@ -505,13 +505,13 @@ SWNPRETTY.skills = {
   "slt": "SWNPRETTY.SkillSlt",
   "ste": "SWNPRETTY.SkillSte",
   "sur": "SWNPRETTY.SkillSur",
-  "wor": "SWNPRETTY.SkillWor",
-  "bio": "SWNPRETTY.SkillBio",
-  "met": "SWNPRETTY.SkillMet",
-  "pre": "SWNPRETTY.SkillPre",
-  "tlk": "SWNPRETTY.SkillTlk",
-  "tel": "SWNPRETTY.SkillTel",
-  "tlp": "SWNPRETTY.SkillTlp"
+  "wor": "SWNPRETTY.SkillWor"
+  // "bio": "SWNPRETTY.SkillBio",
+  // "met": "SWNPRETTY.SkillMet",
+  // "pre": "SWNPRETTY.SkillPre",
+  // "tlk": "SWNPRETTY.SkillTlk",
+  // "tel": "SWNPRETTY.SkillTel",
+  // "tlp": "SWNPRETTY.SkillTlp"
 };
 
 
