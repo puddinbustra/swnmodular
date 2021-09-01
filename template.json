@@ -159,55 +159,31 @@
           "race": ""
         },
         "skills": {
-          "acr": {
+          "adm": {
             "value": -1,
             "ability": "str"
           },
-          "ani": {
+          "con": {
             "value": -1,
             "ability": "str"
           },
-          "arc": {
+          "exe": {
             "value": -1,
             "ability": "str"
           },
-          "ath": {
+          "fix": {
             "value": -1,
             "ability": "str"
           },
-          "dec": {
+          "hea": {
             "value": -1,
             "ability": "str"
           },
-          "his": {
+          "kno": {
             "value": -1,
             "ability": "str"
           },
-          "ins": {
-            "value": -1,
-            "ability": "str"
-          },
-          "itm": {
-            "value": -1,
-            "ability": "str"
-          },
-          "inv": {
-            "value": -1,
-            "ability": "str"
-          },
-          "med": {
-            "value": -1,
-            "ability": "str"
-          },
-          "nat": {
-            "value": -1,
-            "ability": "str"
-          },
-          "prc": {
-            "value": -1,
-            "ability": "str"
-          },
-          "prf": {
+          "lea": {
             "value": -1,
             "ability": "str"
           },
@@ -215,15 +191,31 @@
             "value": -1,
             "ability": "str"
           },
-          "rel": {
+          "not": {
             "value": -1,
             "ability": "str"
           },
-          "slt": {
+          "pil": {
             "value": -1,
             "ability": "str"
           },
-          "ste": {
+          "pro": {
+            "value": -1,
+            "ability": "str"
+          },
+          "sho": {
+            "value": -1,
+            "ability": "str"
+          },
+          "sne": {
+            "value": -1,
+            "ability": "str"
+          },
+          "pun": {
+            "value": -1,
+            "ability": "str"
+          },
+          "stb": {
             "value": -1,
             "ability": "str"
           },
@@ -231,11 +223,15 @@
             "value": -1,
             "ability": "str"
           },
-          "bio": {
+          "tal": {
             "value": -1,
             "ability": "str"
           },
-          "met": {
+          "trd": {
+            "value": -1,
+            "ability": "str"
+          },
+          "wor": {
             "value": -1,
             "ability": "str"
           },

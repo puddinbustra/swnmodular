@@ -37,9 +37,9 @@ SWNPRETTY.abilityAbbreviations = {
 };
 
 SWNPRETTY.attackSkills = {
-  "pun": "SWNPRETTY.SkillPer",
-  "sht": "SWNPRETTY.SkillPrc",
-  "stb": "SWNPRETTY.SkillRel"
+  "pun": "SWNPRETTY.SkillPun",
+  "sht": "SWNPRETTY.SkillSht",
+  "stb": "SWNPRETTY.SkillStb"
 };
 
 /* -------------------------------------------- */
@@ -487,31 +487,25 @@ SWNPRETTY.senses = {
  * @type {Object}
  */
 SWNPRETTY.skills = {
-  "acr": "SWNPRETTY.SkillAcr",
-  "dec": "SWNPRETTY.SkillDec",
-  "ani": "SWNPRETTY.SkillAni",
-  "arc": "SWNPRETTY.SkillArc",
-  "ath": "SWNPRETTY.SkillAth",
-  "his": "SWNPRETTY.SkillHis",
-  "ins": "SWNPRETTY.SkillIns",
-  "itm": "SWNPRETTY.SkillItm",
-  "inv": "SWNPRETTY.SkillInv",
-  "med": "SWNPRETTY.SkillMed",
-  "nat": "SWNPRETTY.SkillNat",
-  "prc": "SWNPRETTY.SkillPrc",
-  "prf": "SWNPRETTY.SkillPrf",
+  "adm": "SWNPRETTY.SkillAdm",
+  "con": "SWNPRETTY.SkillCon",
+  "exe": "SWNPRETTY.SkillExe",
+  "fix": "SWNPRETTY.SkillFix",
+  "hea": "SWNPRETTY.SkillHea",
+  "kno": "SWNPRETTY.SkillKno",
+  "lea": "SWNPRETTY.SkillLea",
+  "not": "SWNPRETTY.SkillNot",
   "per": "SWNPRETTY.SkillPer",
-  "rel": "SWNPRETTY.SkillRel",
-  "slt": "SWNPRETTY.SkillSlt",
-  "ste": "SWNPRETTY.SkillSte",
+  "pil": "SWNPRETTY.SkillPil",
+  "pro": "SWNPRETTY.SkillPro",
+  "pun": "SWNPRETTY.SkillPun",
+  "sho": "SWNPRETTY.SkillSho",
+  "sne": "SWNPRETTY.SkillSne",
+  "stb": "SWNPRETTY.SkillStb",
   "sur": "SWNPRETTY.SkillSur",
+  "tal": "SWNPRETTY.SkillTal",
+  "trd": "SWNPRETTY.SkillTrd",
   "wor": "SWNPRETTY.SkillWor"
-  // "bio": "SWNPRETTY.SkillBio",
-  // "met": "SWNPRETTY.SkillMet",
-  // "pre": "SWNPRETTY.SkillPre",
-  // "tlk": "SWNPRETTY.SkillTlk",
-  // "tel": "SWNPRETTY.SkillTel",
-  // "tlp": "SWNPRETTY.SkillTlp"
 };
 
 
