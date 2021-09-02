@@ -38,7 +38,7 @@ SWNPRETTY.abilityAbbreviations = {
 
 SWNPRETTY.attackSkills = {
   "pun": "SWNPRETTY.SkillPun",
-  "sht": "SWNPRETTY.SkillSht",
+  "sho": "SWNPRETTY.SkillSho",
   "stb": "SWNPRETTY.SkillStb"
 };
 

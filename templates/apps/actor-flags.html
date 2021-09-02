@@ -2,33 +2,6 @@
     <section class="form-body">
 <!--	    <p class="notes">{{localize 'SWNPRETTY.FlagsInstructions'}}</p>-->
 
-        {{#each flags as |fs section|}}
-        <h3 class="form-header">{{localize section}}</h3>
-        {{#each fs as |flag key|}}
-
-        <div class="form-group">
-            <label>{{localize flag.name}}</label>
-
-            {{#if flag.isCheckbox}}
-            <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked flag.value}}/>
-
-            {{else if flag.isSelect}}
-            <select name="{{key}}" data-dtype="{{flag.type}}">
-                {{#select flag.value}}
-                {{#each flag.choices as |v k|}}
-                <option value="{{k}}">{{localize v}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
-
-            {{else}}
-            <input type="text" name="{{key}}" value="{{flag.value}}" placeholder="{{flag.placeholder}}" data-dtype="{{flag.type}}"/>
-            {{/if}}
-
-            <p class="notes">{{localize flag.hint}}</p>
-        </div>
-        {{/each}}
-        {{/each}}
 
         <h3 class="form-header">{{localize "SWNPRETTY.Bonuses"}}</h3>
         <p class="notes">{{localize "SWNPRETTY.BonusesHint"}}</p>
@@ -37,6 +10,17 @@
             <label>{{localize b.label}}</label>
             <input type="text" name="{{b.name}}" value="{{b.value}}"/>
         </div>
+        {{/each}}
+
+        <h3 class="form-header">{{localize "SWNPRETTY.DiceNumTitle"}}</h3>
+        {{#each data.skills as |skill s|}}
+            <li class="skill flexrow" data-skill="{{s}}">
+                <div class="form-group">
+<!--                    <label>{{localize s.label}}</label>-->
+                    <h4 class="skill-name rollable">{{skill.label}}</h4>
+                    <input type="text" name="data.skills.{{s}}.diceNum" value="{{s.diceNum}}" data-dtype="Number"/>
+                </div>
+            </li>
         {{/each}}
     </section>
 

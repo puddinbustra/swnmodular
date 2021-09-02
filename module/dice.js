@@ -116,10 +116,18 @@ export async function d20Roll({
   }={}) {
 
   //I'm updating this to use non-d20s, edit as necessary. -Lofty
-  // console.log("this is the formula (die)",die);
-  if(die !== "2d6"){
-    die = "1d20";
+  // console.log("die length is ", die.length);
+  console.log("die is",die)
+  // Checks the last digit is a 6. So if it's a 6 sided ie, it will do a d6 roll, otherwise a d20 roll -Lofty
+  //This first if makes sure it's not undefined, like for attack rolls
+  if(die){
+    if(die[(die.length)-1] !== "6"){
+      die = "1d20";
+    }
   }
+  else{
+      die = "1d20";
+    }
   // Handle input arguments
   const formula = [die].concat(parts).join(" + ");
   // let formula = `${nd}d20${mods}`;

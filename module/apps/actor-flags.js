@@ -107,11 +107,11 @@ export default class ActorSheetFlags extends DocumentSheet {
 
     // Unset any flags which are "false"
     let unset = false;
-    const flags = updateData.flags.SWNPRETTY;
+    const flags = updateData.flags.swnpretty;
     for ( let [k, v] of Object.entries(flags) ) {
       if ( [undefined, null, "", false, 0].includes(v) ) {
         delete flags[k];
-        if ( hasProperty(actor.data._source.flags, `SWNPRETTY.${k}`) ) {
+        if ( hasProperty(actor.data._source.flags, `swnpretty.${k}`) ) {
           unset = true;
           flags[`-=${k}`] = null;
         }

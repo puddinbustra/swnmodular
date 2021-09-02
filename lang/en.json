@@ -223,6 +223,7 @@
 "SWNPRETTY.DefaultAbilityCheck": "Default Ability Check",
 "SWNPRETTY.Description": "Description",
 "SWNPRETTY.Details": "Details",
+"SWNPRETTY.DiceNumTitle": "# Dice Per Skill",
 "SWNPRETTY.Dimensions": "Dimensions",
 "SWNPRETTY.Disadvantage": "Disadvantage",
 "SWNPRETTY.DistAny": "Any",
