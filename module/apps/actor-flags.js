@@ -64,8 +64,8 @@ export default class ActorSheetFlags extends DocumentSheet {
       flag.type = v.type.name;
       flag.isCheckbox = v.type === Boolean;
       flag.isSelect = v.hasOwnProperty('choices');
-      flag.value = getProperty(baseData.flags, `SWNPRETTY.${k}`);
-      flags[v.section][`flags.SWNPRETTY.${k}`] = flag;
+      flag.value = getProperty(baseData.flags, `swnpretty.${k}`);
+      flags[v.section][`flags.swnpretty.${k}`] = flag;
     }
     return flags;
   }
@@ -104,10 +104,16 @@ export default class ActorSheetFlags extends DocumentSheet {
   async _updateObject(event, formData) {
     const actor = this.object;
     let updateData = expandObject(formData);
+    console.log("update data is", updateData)
+
 
     // Unset any flags which are "false"
+    // Lofty updating for undefined flag case
     let unset = false;
-    const flags = updateData.flags.swnpretty;
+    let flags = null;
+    if (updateData.flags) {
+     flags = updateData.flags.swnpretty;
+    
     for ( let [k, v] of Object.entries(flags) ) {
       if ( [undefined, null, "", false, 0].includes(v) ) {
         delete flags[k];
@@ -117,7 +123,7 @@ export default class ActorSheetFlags extends DocumentSheet {
         }
       }
     }
-
+    }
     // Clear any bonuses which are whitespace only
     for ( let b of Object.values(updateData.data.bonuses ) ) {
       for ( let [k, v] of Object.entries(b) ) {
