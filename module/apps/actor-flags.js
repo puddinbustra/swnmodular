@@ -29,6 +29,7 @@ export default class ActorSheetFlags extends DocumentSheet {
     data.classes = this._getClasses();
     data.flags = this._getFlags();
     data.bonuses = this._getBonuses();
+    data.skills = this._getSkills();
     return data;
   }
 
@@ -100,11 +101,46 @@ export default class ActorSheetFlags extends DocumentSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Get the skills fields and their localization strings -Lofty
+   * @return {Array<object>}
+   * @private
+   */
+  _getSkills() {
+    const bonuses = [
+      {name: "data.skills.adm.diceNum", label: "SWNPRETTY.SkillAdm"},
+      {name: "data.skills.con.diceNum", label: "SWNPRETTY.SkillCon"},
+      {name: "data.skills.exe.diceNum", label: "SWNPRETTY.SkillExe"},
+      {name: "data.skills.fix.diceNum", label: "SWNPRETTY.SkillFix"},
+      {name: "data.skills.hea.diceNum", label: "SWNPRETTY.SkillHea"},
+      {name: "data.skills.kno.diceNum", label: "SWNPRETTY.SkillKno"},
+      {name: "data.skills.lea.diceNum", label: "SWNPRETTY.SkillLea"},
+      {name: "data.skills.not.diceNum", label: "SWNPRETTY.SkillNot"},
+      {name: "data.skills.per.diceNum", label: "SWNPRETTY.SkillPer"},
+      {name: "data.skills.pro.diceNum", label: "SWNPRETTY.SkillPro"},
+      {name: "data.skills.pun.diceNum", label: "SWNPRETTY.SkillPun"},
+      {name: "data.skills.sho.diceNum", label: "SWNPRETTY.SkillSho"},
+      {name: "data.skills.stb.diceNum", label: "SWNPRETTY.SkillStb"},
+      {name: "data.skills.sur.diceNum", label: "SWNPRETTY.SkillSur"},
+      {name: "data.skills.tal.diceNum", label: "SWNPRETTY.SkillTal"},
+      {name: "data.skills.trd.diceNum", label: "SWNPRETTY.SkillTrd"},
+      {name: "data.skills.wor.diceNum", label: "SWNPRETTY.SkillWor"},
+    ];
+    // console.log("getSkills is ", bonuses)
+
+    //This seems to connect the actual value
+    for ( let b of bonuses ) {
+      b.value = getProperty(this.object.data._source, b.name) || "";
+    }
+    return bonuses;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   async _updateObject(event, formData) {
     const actor = this.object;
     let updateData = expandObject(formData);
-    console.log("update data is", updateData)
 
 
     // Unset any flags which are "false"
@@ -113,7 +149,7 @@ export default class ActorSheetFlags extends DocumentSheet {
     let flags = null;
     if (updateData.flags) {
      flags = updateData.flags.swnpretty;
-    
+
     for ( let [k, v] of Object.entries(flags) ) {
       if ( [undefined, null, "", false, 0].includes(v) ) {
         delete flags[k];

@@ -932,8 +932,6 @@ export default class Actor5e extends Actor {
     const parts = ["@mod"];
     const data = {mod: skl.value + skl.prof + attr};
 
-    console.log("dice num is ",skl.diceNum.concat("d6"));
-
     // Ability test bonus
     if ( bonuses.check ) {
       data["checkBonus"] = bonuses.check;
