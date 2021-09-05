@@ -120,6 +120,8 @@
 "SWNPRETTY.BonusMSDamage": "Melee Psionic Damage Bonus",
 "SWNPRETTY.BonusMWAttack": "Melee Weapon Attack Bonus",
 "SWNPRETTY.BonusMWDamage": "Melee Weapon Damage Bonus",
+"SWNPRETTY.BonusCarried": "Encumbrance - Carried Bonus",
+"SWNPRETTY.BonusReadied": "Encumbrance - Readied Bonus",
 "SWNPRETTY.BonusRSAttack": "Ranged Psionic Attack Bonus",
 "SWNPRETTY.BonusRSDamage": "Ranged Psionic Damage Bonus",
 "SWNPRETTY.BonusRWAttack": "Ranged Weapon Attack Bonus",

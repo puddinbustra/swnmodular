@@ -655,7 +655,7 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Compute the level and percentage of encumbrance for an Actor.
+   * Compute the carried level and percentage of encumbrance for an Actor.
    *
    * @param {Object} actorData      The data object for the Actor being rendered
    * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
@@ -679,10 +679,15 @@ export default class Actor5e extends Actor {
       return weight + (q * w);
     }, 0);
 
+      let carriedBonus = Number(actorData.data.bonuses.encumbrance.bonusCarried);
+
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
-    const max = actorData.data.abilities.str.value * CONFIG.SWNPRETTY.encumbrance.strMultiplier;
-    const pct = Math.clamped((weight * 100) / max, 0, 100);
+
+    let max = (actorData.data.abilities.str.value + carriedBonus);
+    // console.log("carriedbonus is",carriedBonus, actorData.data.abilities.str.value,actorData.data.abilities.str.value + carriedBonus);
+    // console.log("carriedbonus is",typeof carriedBonus,typeof actorData.data.abilities.str.value,typeof (actorData.data.abilities.str.value + carriedBonus));
+    const pct = Math.clamped(((weight * 100) / max), 0, 100);
 
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
   }
@@ -713,10 +718,12 @@ export default class Actor5e extends Actor {
       }
       return weight + (q * w);
     }, 0);
+    let readiedBonus = Number(actorData.data.bonuses.encumbrance.bonusReadied);
 
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
-    const max = Math.floor((actorData.data.abilities.str.value * CONFIG.SWNPRETTY.encumbrance.strMultiplier)/2);
+    const max = Math.floor((actorData.data.abilities.str.value * CONFIG.SWNPRETTY.encumbrance.strMultiplier)/2) + readiedBonus;
+        // + actorData.data.attributes.encumbrance.bonusReadied;
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
   }

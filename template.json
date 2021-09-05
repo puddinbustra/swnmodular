@@ -320,6 +320,10 @@
           }
         },
         "bonuses": {
+          "encumbrance": {
+            "bonusReadied": 0,
+            "bonusCarried": 0
+          },
           "mwak": {
             "attack": "",
             "damage": ""

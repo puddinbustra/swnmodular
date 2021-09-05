@@ -80,6 +80,8 @@ export default class ActorSheetFlags extends DocumentSheet {
    */
   _getBonuses() {
     const bonuses = [
+      {name: "data.bonuses.encumbrance.bonusReadied", label: "SWNPRETTY.BonusReadied"},
+      {name: "data.bonuses.encumbrance.bonusCarried", label: "SWNPRETTY.BonusCarried"},
       {name: "data.bonuses.mwak.attack", label: "SWNPRETTY.BonusMWAttack"},
       {name: "data.bonuses.mwak.damage", label: "SWNPRETTY.BonusMWDamage"},
       {name: "data.bonuses.rwak.attack", label: "SWNPRETTY.BonusRWAttack"},
