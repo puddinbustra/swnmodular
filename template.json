@@ -253,22 +253,6 @@
             "value": -1,
             "ability": "str",
             "diceNum": "2"
-          },
-          "pre": {
-            "value": -1,
-            "ability": "str"
-          },
-          "tlk": {
-            "value": -1,
-            "ability": "str"
-          },
-          "tel": {
-            "value": -1,
-            "ability": "str"
-          },
-          "tlp": {
-            "value": -1,
-            "ability": "str"
           }
         },
         "traits": {
