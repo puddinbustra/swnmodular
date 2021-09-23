@@ -358,7 +358,9 @@ export default class Item5e extends Item {
 
     // Include the item's innate attack bonus as the initial value and label
     if ( itemData.attackBonus ) {
-      parts.push(itemData.attackBonus)
+      if(itemData.attackBonus !== "0"){
+        parts.push(itemData.attackBonus)
+      }
       this.labels.toHit = itemData.attackBonus;
     }
 
@@ -371,31 +373,29 @@ export default class Item5e extends Item {
     // Add fighting skill mod by Lofty. There's probably a more elegant, less spacious solution, but this will have to do
     // parts.push()
     const atkSkill = this.data.data.attackSkills;
-    // console.log("This item's attack skill is", this.data);
-    // if(atkSkill){
-    //   console.log("This item's attack skill is", atkSkill);
-    // }
-    // console.log("This actor's stab skill is", this.actor.data.data.skills.rel.total);
+    console.log("This item's attack skill is", this.data);
+
 
     let skillAdd = "";
     if(atkSkill){
       if(atkSkill === "stb"){
-        skillAdd = this.actor.data.data.skills.rel.total;
+        skillAdd = this.actor.data.data.skills.stb.total;
       }
-      else if(atkSkill === "sht"){
-        skillAdd = this.actor.data.data.skills.prc.total;
+      else if(atkSkill === "sho"){
+        skillAdd = this.actor.data.data.skills.sho.total;
       }
       else if(atkSkill === "pun"){
-        skillAdd = this.actor.data.data.skills.per.total;
+        skillAdd = this.actor.data.data.skills.pun.total;
       }
-    parts.push(Number(skillAdd));
+      // if(skillAdd){
+        parts.push(Number(skillAdd));
+      // }
     }
 
-
-    // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
-    if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
-      parts.push("@prof");
-    }
+    // // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
+    // if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
+    //   parts.push("@prof");
+    // }
 
     // Actor-level global bonus to attack rolls
     const actorBonus = this.actor.data.data.bonuses?.[itemData.actionType] || {};
@@ -420,10 +420,12 @@ export default class Item5e extends Item {
     // Condense the resulting attack bonus formula into a simplified label
     let toHitLabel = simplifyRollFormula(parts.join('+'), rollData).trim();
     if (toHitLabel.charAt(0) !== '-') {
-      toHitLabel = '+ ' + toHitLabel
+      toHitLabel = '+ ' + toHitLabel;
     }
-    this.labels.toHit = toHitLabel;
+    console.log("toHitLabel is", toHitLabel);
+    console.log("rollData,parts", rollData,parts);
 
+    this.labels.toHit = toHitLabel;
     // Update labels and return the prepared roll data
     return {rollData, parts};
   }
