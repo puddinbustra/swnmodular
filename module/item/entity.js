@@ -373,23 +373,33 @@ export default class Item5e extends Item {
     // Add fighting skill mod by Lofty. There's probably a more elegant, less spacious solution, but this will have to do
     // parts.push()
     const atkSkill = this.data.data.attackSkills;
-    console.log("This item's attack skill is", this.data);
+    // console.log("This item's attack skill is", this.actor.data.data.skills);
 
 
-    let skillAdd = "";
+    let skillAdd = 0;
+    let skillVal = 0
     if(atkSkill){
       if(atkSkill === "stb"){
         skillAdd = this.actor.data.data.skills.stb.total;
+        skillVal = this.actor.data.data.skills.stb.value;
       }
       else if(atkSkill === "sho"){
         skillAdd = this.actor.data.data.skills.sho.total;
+        skillVal = this.actor.data.data.skills.sho.value;
       }
       else if(atkSkill === "pun"){
         skillAdd = this.actor.data.data.skills.pun.total;
+        skillVal = this.actor.data.data.skills.pun.value;
       }
-      // if(skillAdd){
-        parts.push(Number(skillAdd));
-      // }
+      console.log("skillAdd is",skillAdd)
+      if(skillVal === -1)
+      {
+        console.log("untrained")
+        skillAdd = skillAdd-1;
+      }
+
+      parts.push(Number(skillAdd));
+
     }
 
     // // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
@@ -422,8 +432,6 @@ export default class Item5e extends Item {
     if (toHitLabel.charAt(0) !== '-') {
       toHitLabel = '+ ' + toHitLabel;
     }
-    console.log("toHitLabel is", toHitLabel);
-    console.log("rollData,parts", rollData,parts);
 
     this.labels.toHit = toHitLabel;
     // Update labels and return the prepared roll data
