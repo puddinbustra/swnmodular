@@ -130,7 +130,7 @@
 "SWNPRETTY.BonusSpellDC": "Global Psionic DC Bonus",
 "SWNPRETTY.BonusTitle": "Configure Actor Bonuses",
 "SWNPRETTY.Bonuses": "Global Bonuses",
-"SWNPRETTY.BonusesHint": "Define global bonuses as formulas which are added to certain rolls. For example: 1d4 + 2",
+"SWNPRETTY.BonusesHint": "Formulas or constant bonuses, not words. For example: 1d4 + 2",
 "SWNPRETTY.BonusesInstructions": "Configure character bonuses which are added to the appropriate dice roll",
 "SWNPRETTY.BowsProf": "Bows",
 "SWNPRETTY.ChallengeRating": "Challenge Rating",

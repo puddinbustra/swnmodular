@@ -956,9 +956,6 @@ export default class Actor5e extends Actor {
       parts.push(...options.parts);
     }
 
-    // Reliable Talent applies to any skill check we have full or better proficiency in
-    // const reliableTalent = (skl.value >= 1 && this.getFlag("swnpretty", "reliableTalent"));
-
     // Roll and return, lofty has changed some
     const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
@@ -967,7 +964,8 @@ export default class Actor5e extends Actor {
       fastForward: true,
       die: skl.diceNum.concat("d6"),
       // die: "2d6",
-      formula:`2d6${skl.value}`,
+      // formula:`2d6${skl.value}`,
+      formula:`2d6${skl.value}dl`,
       critical: 6,
       // messageData: {"flags.swnpretty.roll": {type: "skill", skillId }}
       messageData: {

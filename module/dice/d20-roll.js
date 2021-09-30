@@ -66,12 +66,6 @@ export default class D20Roll extends Roll {
     const d20 = this.terms[0];
     d20.modifiers = [];
 
-    // // Halfling Lucky
-    // if ( this.options.halflingLucky ) d20.modifiers.push("r1=1");
-    //
-    // // Reliable Talent
-    // if ( this.options.reliableTalent ) d20.modifiers.push("min10");
-
     // Handle Advantage or Disadvantage
     if ( this.hasAdvantage ) {
       // d20.number = this.options.elvenAccuracy ? 3 : 2;
@@ -83,8 +77,13 @@ export default class D20Roll extends Roll {
       d20.modifiers.push("kl");
       d20.options.disadvantage = true;
     }
-    // Lofty changing this so d20 rolls can use multiple dice
-    // else d20.number = 1;
+    // Lofty - If it's rolling a skill roll, take the 2 highest. Note this will cause problems with custom formulas.
+  if(d20.faces === 6 && d20.number >2)
+  {
+    console.log("d20 is",d20);
+    d20.modifiers.push("kh2");
+  }
+
 
     // Assign critical and fumble thresholds
     if ( this.options.critical ) d20.options.critical = this.options.critical;
@@ -107,14 +106,6 @@ export default class D20Roll extends Roll {
     messageData.flavor = messageData.flavor || this.options.flavor;
     if ( this.hasAdvantage ) messageData.flavor += ` (${game.i18n.localize("SWNPRETTY.Advantage")})`;
     else if ( this.hasDisadvantage ) messageData.flavor += ` (${game.i18n.localize("SWNPRETTY.Disadvantage")})`;
-
-    // // Add reliable talent to the d20-term flavor text if it applied
-    // if ( this.options.reliableTalent ) {
-    //   const d20 = this.dice[0];
-    //   const isRT = d20.results.every(r => !r.active || (r.result < 10));
-    //   const label = `(${game.i18n.localize("SWNPRETTY.FlagsReliableTalent")})`;
-    //   if ( isRT ) d20.options.flavor = d20.options.flavor ? `${d20.options.flavor} (${label})` : label;
-    // }
 
     console.log("messageData:", messageData)
     console.log("options:", options)

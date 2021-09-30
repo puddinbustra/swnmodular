@@ -92,19 +92,19 @@ function _isUnsupportedTerm(term) {
 
  * @param {boolean} [chooseModifier=false] Choose the ability modifier that should be used when the roll is made
  * @param {boolean} [fastForward=false] Allow fast-forward advantage selection
- * @param {Event} [event]      The triggering event which initiated the roll
- * @param {string} [template]    The HTML template used to render the roll dialog
- * @param {string} [title]       The dice roll UI window title
+ * @param {Event} [event]             The triggering event which initiated the roll
+ * @param {string} [template]         The HTML template used to render the roll dialog
+ * @param {string} [title]            The dice roll UI window title
  * @param {Object} [dialogOptions]    Modal dialog options
  *
- * @param {save} save               Tells if this is a save - Lofty
+ * @param {save} save                 Tells if this is a save - Lofty
  * @param {save} [moraleSave]         Is this a morale save (different dice formula)?- Lofty
  *
  * @param {boolean}[chatMessage=true] Automatically create a Chat Message for the result of this roll
- * @param {object} [messageData={}] Additional data which is applied to the created Chat Message, if any
- * @param {string} [rollMode]       A specific roll mode to apply as the default for the resulting roll
- * @param {object} [speaker]        The ChatMessage speaker to pass when creating the chat
- * @param {string} [flavor]         Flavor text to use in the posted chat message
+ * @param {object} [messageData={}]   Additional data which is applied to the created Chat Message, if any
+ * @param {string} [rollMode]         A specific roll mode to apply as the default for the resulting roll
+ * @param {object} [speaker]          The ChatMessage speaker to pass when creating the chat
+ * @param {string} [flavor]           Flavor text to use in the posted chat message
 
  * @return {Promise<D20Roll|null>} The evaluated D20Roll, or null if the workflow was cancelled
  */
@@ -116,22 +116,29 @@ export async function d20Roll({
   }={}) {
 
   //I'm updating this to use non-d20s, edit as necessary. -Lofty
-  // console.log("die length is ", die.length);
-  console.log("die is",die)
+  //The suffix is to drop the lowest as a result of the roll
+  let suffix = "";
+
   // Checks the last digit is a 6. So if it's a 6 sided ie, it will do a d6 roll, otherwise a d20 roll -Lofty
   //This first if makes sure it's not undefined, like for attack rolls
   if(die){
     if(die[(die.length)-1] !== "6"){
       die = "1d20";
+      critical = 6;
+      suffix = "kh2";
     }
   }
   else{
       die = "1d20";
     }
   // Handle input arguments
-  const formula = [die].concat(parts).join(" + ");
-  // let formula = `${nd}d20${mods}`;
+  let formula = [die].concat(parts).join(" + ");
 
+
+
+  // console.log("formula after concat is ",formula);
+  // console.log("die is ",die);
+  // let formula = `${nd}d20${mods}`;
 
 
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
@@ -146,10 +153,12 @@ export async function d20Roll({
     critical,
     fumble,
     targetValue
-    // elvenAccuracy
-    // halflingLucky,
-    // reliableTalent
   });
+
+  if(suffix === "kh2"){
+    roll.terms[0].modifiers.push("kh2");
+  }
+
 
   // // Prompt a Dialog to further configure the D20Roll
   // if ( !isFF ) {
