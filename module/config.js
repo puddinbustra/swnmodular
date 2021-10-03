@@ -336,6 +336,7 @@ SWNPRETTY.damageTypes = {
   "heat": "SWNPRETTY.DamageHeat",
   "physical": "SWNPRETTY.DamagePhysical",
   "psychic": "SWNPRETTY.DamagePsychic",
+  "shock":"SWNPRETTY.DamageShock"
 };
 
 // Damage Resistance Types
