@@ -95,7 +95,6 @@
                 </div>
             </div>
 
-            {{#unless isMountable}}
             {{!-- Dexterity Modifier --}}
             <div class="form-group">
                 <label>{{ localize "SWNPRETTY.ItemEquipmentDexMod" }}</label>
@@ -103,7 +102,6 @@
                    <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="{{ localize 'SWNPRETTY.Unlimited' }}"/>
                 </div>
             </div>
-            {{/unless}}
 
             {{!-- Vulnerabilities -Lofty --}}
             <div class="form-group">
@@ -113,24 +111,7 @@
                 </div>
             </div>
 
-            {{#if isMountable}}
-            {{> 'systems/swnpretty/templates/items/parts/item-mountable.html'}}
-            <div class="form-group">
-                <label>{{localize 'SWNPRETTY.Speed'}}</label>
-                <div class="form-fields">
-                    <input type="text" name="data.speed.value" value="{{data.speed.value}}"
-                           placeholder="0" data-dtype="Number">
-                    <span class="sep">{{localize 'SWNPRETTY.FeetAbbr'}}</span>
-                    <input type="text" name="data.speed.conditions"
-                           value="{{data.speed.conditions}}">
-                </div>
-            </div>
-            {{/if}}
 
-            <h3 class="form-header">{{ localize "SWNPRETTY.ItemEquipmentUsage" }}</h3>
-
-            {{!-- Item Activation Template --}}
-            {{> "systems/swnpretty/templates/items/parts/item-activation.html"}}
 
             <h3 class="form-header">{{ localize "SWNPRETTY.ItemEquipmentAction" }}</h3>
 
