@@ -115,7 +115,6 @@ export default class ActorSheet5e extends ActorSheet {
       cssClass: isOwner ? "editable" : "locked",
       isCharacter: this.actor.type === "character",
       isNPC: this.actor.type === "npc",
-      isVehicle: this.actor.type === 'vehicle',
       config: CONFIG.SWNPRETTY,
       rollData: this.actor.getRollData.bind(this.actor)
     };

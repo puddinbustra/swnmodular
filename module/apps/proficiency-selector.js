@@ -50,15 +50,7 @@ export default class ProficiencySelector extends TraitSelector {
       }
     }
 
-    if ( this.options.type === "tool" ) {
-      data.choices["vehicle"].children = Object.entries(CONFIG.SWNPRETTY.vehicleTypes).reduce((obj, [key, label]) => {
-        obj[key] = {
-          label: label,
-          chosen: attr ? value.includes(key) : false
-        }
-        return obj;
-      }, {});
-    }
+
 
     if ( this.options.sortCategories ) data.choices = this._sortObject(data.choices);
     for ( const category of Object.values(data.choices) ) {

@@ -67,8 +67,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( sourceMax ) itemData.data.uses.max = sourceMax;
 
     // Vehicles
-    data.isCrewed = itemData.data.activation?.type === 'crew';
-    data.isMountable = this._isItemMountable(itemData);
+
 
     // Prepare Active Effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
@@ -229,8 +228,7 @@ export default class ItemSheet5e extends ItemSheet {
    */
   _isItemMountable(item) {
     const data = item.data;
-    return (item.type === 'weapon' && data.weaponType === 'siege')
-      || (item.type === 'equipment' && data.armor.type === 'vehicle');
+    return (item.type === 'weapon' && data.weaponType === 'siege');
   }
 
   /* -------------------------------------------- */

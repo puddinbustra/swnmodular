@@ -117,7 +117,6 @@ SWNPRETTY.weaponProficiencies = {
 
 SWNPRETTY.toolProficiencies = {
   "bows": "SWNPRETTY.BowsProf",
-  "vehicle": "SWNPRETTY.ToolVehicle"
 };
 
 
@@ -159,7 +158,7 @@ SWNPRETTY.abilityActivationTypes = {
   "special": SWNPRETTY.timePeriods.spec,
   // "legendary": "SWNPRETTY.LegAct",
   // "lair": "SWNPRETTY.LairAct",
-  "crew": "SWNPRETTY.VehicleCrewAction"
+
 };
 
 /* -------------------------------------------- */
@@ -248,7 +247,7 @@ SWNPRETTY.equipmentTypes = {
   "shield": "SWNPRETTY.EquipmentShield",
   "clothing": "SWNPRETTY.EquipmentClothing",
   "trinket": "SWNPRETTY.EquipmentTrinket",
-  "vehicle": "SWNPRETTY.EquipmentVehicle"
+
 };
 
 
@@ -401,7 +400,6 @@ SWNPRETTY.encumbrance = {
   // strMultiplier: 15,
   // vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
   strMultiplier: 1,
-  vehicleWeightMultiplier: 1
 };
 
 /* -------------------------------------------- */

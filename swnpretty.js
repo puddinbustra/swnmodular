@@ -27,7 +27,7 @@ import AbilityUseDialog from "./module/apps/ability-use-dialog.js";
 import ActorSheetFlags from "./module/apps/actor-flags.js";
 import ActorSheet5eCharacter from "./module/actor/sheets/character.js";
 import ActorSheet5eNPC from "./module/actor/sheets/npc.js";
-import ActorSheet5eVehicle from "./module/actor/sheets/vehicle.js";
+
 import ItemSheet5e from "./module/item/sheet.js";
 // import ShortRestDialog from "./module/apps/short-rest.js";
 import TraitSelector from "./module/apps/trait-selector.js";
@@ -55,7 +55,7 @@ Hooks.once("init", function() {
       ActorSheetFlags,
       ActorSheet5eCharacter,
       ActorSheet5eNPC,
-      ActorSheet5eVehicle,
+
       ItemSheet5e,
       // ShortRestDialog,
       TraitSelector,
@@ -119,11 +119,6 @@ Hooks.once("init", function() {
     types: ["npc"],
     makeDefault: true,
     label: "SWNPRETTY.SheetClassNPC"
-  });
-  Actors.registerSheet('swnpretty', ActorSheet5eVehicle, {
-    types: ['vehicle'],
-    makeDefault: true,
-    label: "SWNPRETTY.SheetClassVehicle"
   });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("swnpretty", ItemSheet5e, {

@@ -1442,7 +1442,7 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   async _preCreate(data, options, user) {
     await super._preCreate(data, options, user);
-    if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
+    if ( !this.isEmbedded ) return;
     const actorData = this.parent.data;
     const isNPC = this.parent.type === "npc";
     let updates;

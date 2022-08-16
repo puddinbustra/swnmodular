@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "npc", "vehicle"],
+    "types": ["character", "npc"],
     "templates": {
       "common": {
         "abilities": {
@@ -444,62 +444,6 @@
           "value": 0,
           "initiative": 0
         }
-      }
-    },
-    "vehicle": {
-      "templates": ["common"],
-      "vehicleType": "water",
-      "abilities": {
-        "int": {
-          "value": 0
-        },
-        "wis": {
-          "value": 0
-        },
-        "cha": {
-          "value": 0
-        }
-      },
-      "attributes": {
-        "ac": {
-          "value": null,
-          "motionless": "",
-          "npc": null
-        },
-        "actions": {
-          "stations": false,
-          "value": 0,
-          "thresholds": {
-            "2": null,
-            "1": null,
-            "0": null
-          }
-        },
-        "hp": {
-          "value": null,
-          "max": null,
-          "dt": null,
-          "mt": null
-        },
-        "capacity": {
-          "creature": "",
-          "cargo": 0
-        }
-      },
-      "traits": {
-        "size": "lg",
-        "dimensions": "",
-        "di": {
-          "value": ["poison", "psychic"]
-        },
-        "ci": {
-          "value": ["blinded", "charmed", "deafened", "frightened", "paralyzed", "petrified", "poisoned", "stunned",
-            "unconscious"]
-        }
-      },
-      "cargo": {
-        "crew": [],
-        "passengers": []
       }
     }
   },

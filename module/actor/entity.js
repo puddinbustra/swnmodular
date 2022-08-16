@@ -68,8 +68,6 @@ export default class Actor5e extends Actor {
         return this._prepareCharacterData(this.data);
       case "npc":
         return this._prepareNPCData(this.data);
-      case "vehicle":
-        return this._prepareVehicleData(this.data);
     }
   }
 
@@ -422,15 +420,6 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Prepare vehicle type-specific data
-   * @param actorData
-   * @private
-   */
-  _prepareVehicleData(actorData) {}
-
-  /* -------------------------------------------- */
-
-  /**
    * Prepare skill checks.
    * @param actorData
    * @param bonuses Global bonus data.
@@ -439,7 +428,6 @@ export default class Actor5e extends Actor {
    * @private
    */
   _prepareSkills(actorData, bonuses, checkBonus, originalSkills) {
-    if (actorData.type === 'vehicle') return;
 
     const data = actorData.data;
     // const flags = actorData.flags.swnpretty || {};
@@ -496,7 +484,6 @@ export default class Actor5e extends Actor {
    * @private
    */
   _computeSpellcastingProgression (actorData) {
-    if (actorData.type === 'vehicle') return;
     const ad = actorData.data;
     const spells = ad.spells;
     const isNPC = actorData.type === 'npc';
